@@ -1,0 +1,10 @@
+.env
+.idea
+resources/docs/excel/
+resources/view/mazer/
+vendor/
+composer.lock
+composer.phar
+CODE_OF_CONDUCT.md
+screenshot.png
+node_modules

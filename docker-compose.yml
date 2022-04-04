@@ -1,0 +1,51 @@
+version: "3.9"
+
+networks:
+  net_mailings:
+
+services:
+
+  db_server:
+    build: ./.docker/db/mysql
+    container_name: 'mailings-db'
+    restart: always
+    ports:
+      - '8011:3306'
+    volumes:
+      - ${MYSQL_DATA_DIR-./.docker/db/mysql/data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./.docker/db/mysql/logs/mysql}:/var/log/mysql
+      - ./.docker/db/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: db_mailings
+    networks:
+      - net_mailings
+
+  db_admin:
+    build: .docker/db/phpmyadmin
+    container_name: 'mailings-db-admin'
+    ports:
+      - '8012:80'
+    environment:
+      PMA_HOST: db_server
+      PMA_PORT: 3306
+    volumes:
+      - db_admin_data:/var/www/html
+    networks:
+      - net_mailings
+
+  webserver:
+    build: .docker/webserver
+    container_name: "mailings-webserver"
+    ports:
+      - "8010:80"
+    volumes:
+      - ./www:/var/www/html/
+    networks:
+      - net_mailings
+
+volumes:
+  db_data:
+  db_admin_data:
