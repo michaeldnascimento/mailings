@@ -5,11 +5,41 @@ namespace App\Http\Controller\Admin\Seller\Mailings;
 use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
-use App\Model\Entity\User as EntityUser;
+use App\Model\Entity\Mailing as EntityMailing;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
 class List1 extends Page {
+
+    /**
+     * Método responsável por obter a renderização os mailings do usuário para a página
+     * @param $request $request
+     */
+    public static function getList1ItensUser(Request $request): string
+    {
+
+        //USUÁRIOS
+        $items = '';
+
+        //RESULTADOS DA PÁGINA
+        $results = EntityMailing::getMailingUser('*', null, null, 'id DESC', '');
+
+        //RENDERIZA O ITEM
+        while($obUsers = $results->fetchObject(EntityMailing::class)){
+            $items .=  View::render('admin/adm/users/modules/user/item', [
+                'id' => $obUsers->id,
+                'company' => $obUsers->company,
+                'name' => $obUsers->name,
+                'email' => $obUsers->email,
+                'status_user' => $obUsers->status,
+                'nivel' => $obUsers->nivel
+            ]);
+        }
+
+        //RETORNA OS USUÁRIOS
+        return $items;
+
+    }
 
     /**
      * Método responsável por retornar a renderização da página de login

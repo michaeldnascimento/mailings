@@ -8,3 +8,4 @@ composer.phar
 CODE_OF_CONDUCT.md
 screenshot.png
 node_modules
+package-lock.json
