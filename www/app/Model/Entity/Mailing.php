@@ -16,57 +16,57 @@ class Mailing {
     /*
     * Nome
     */
-    public string $nome;
+    public ?string $nome = null;
 
     /*
      * Fone 1
      */
-    public string $fone1;
+    public ?string $fone1 = null;
 
     /*
      * Fone 2
      */
-    public string $fone2;
+    public ?string $fone2 = null;
 
     /*
     * Doc
     */
-    public string $doc;
+    public ?string $doc = null;
 
     /*
     * Endereco
     */
-    public string $endereco;
+    public ?string $endereco = null;
 
     /*
     * Num
     */
-    public string $num;
+    public ?string $num = null;
 
     /*
     * Compl
     */
-    public string $compl;
+    public ?string $compl = null;
 
     /*
     * Bairro
     */
-    public string $bairro;
+    public ?string $bairro = null;
 
     /*
     * Cidade
     */
-    public string $cidade;
+    public ?string $cidade = null;
 
     /*
     * Tipo
     */
-    public string $tipo;
+    public ?string $tipo = null;
 
     /*
     * Obs
     */
-    public string $obs;
+    public ?string $obs = null;
 
     /*
     * Lista
@@ -76,7 +76,18 @@ class Mailing {
     /*
     * id do mailing salvo
     */
-    public string $id_mailing;
+    public ?string $id_mailing = null;
+
+    /*
+    * qtd mailing salvo
+    */
+    public ?string $qtd = null;
+
+    /*
+    * id user sistema
+    */
+    public ?int $id_user = null;
+
 
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
@@ -110,12 +121,20 @@ class Mailing {
     public function atualizar(): bool
     {
         //ATUALIZA O DEPOIMENTO NO BANCO DE DADOS
-        return (new Database('db_mailings', 'user'))->update('id = '. $this->id, [
-            'name'  => $this->name,
-            'email' => $this->email,
-            'company' => $this->company,
-            'status' => $this->status,
-            'nivel' => $this->nivel
+        return (new Database('db_mailings', 'mailing'))->update('id = '. $this->id, [
+            'nome' => $this->nome,
+            'fone1' => $this->fone1,
+            'fone2' => $this->fone2,
+            'doc' => $this->doc,
+            'endereco' => $this->endereco,
+            'num' => $this->num,
+            'compl' => $this->compl,
+            'bairro' => $this->bairro,
+            'cidade' => $this->cidade,
+            'tipo' => $this->tipo,
+            'obs' => $this->obs,
+            'lista' => $this->lista,
+            'id_user' => $this->id_user
         ]);
     }
 
@@ -131,17 +150,35 @@ class Mailing {
 
 
     /**
-     * Método responsável por retornar um usuário com base no seu ID
+     * Método responsável por retornar a quantidade de mailing
      *
-     * @param integer $id
-     * @return User
+     * @param string $list
+     * @return Mailing
      */
-    public static function getUserById(int $id): User
+    public static function getMailingQtd(string $list): ?Mailing
     {
-        return self::getUsers(
-            '*',
+        return self::getMailing(
+            'count(*) as qtd',
             '',
-            'id = '.$id,
+            'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null) ',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por retornar a quantidade de mailing por usuário
+     *
+     * @param string $list
+     * @return Mailing
+     * @param int $id_user
+     */
+    public static function getMailingQtdUser(string $list, int $id_user): ?Mailing
+    {
+        return self::getMailing(
+            'count(*) as qtd',
+            '',
+            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
             '',
             ''
         )->fetchObject(self::class);
@@ -149,27 +186,46 @@ class Mailing {
 
 
     /**
-     * Método responsavel por retornar um usuário com base em seu e-mail
-     * @param string $email
+     * Método responsável por retornar os mailing do usuário com base no seu ID
+     *
+     * @param string $list
+     * @param int $id_user
      * @return false|mixed|object
      */
-    public static function getUserByEmail(string $email)
+    public static function getMailingUserById(string $list, int $id_user)
     {
-        return self::getUsers(
+        return self::getMailing(
             '*',
             '',
-            'email = "'. $email.'"',
+            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
             '',
             ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por retornar os mailing do usuário com base no seu ID
+     *
+     * @param string $list
+     * @return false|mixed|object
+     */
+    public static function getNewMailing(string $list)
+    {
+        return self::getMailing(
+            '*',
+            '',
+            'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL)",
+            'id DESC',
+            '1'
         )->fetchObject(self::class);
     }
 
     /**
      * Método responsável por retornar depoimentos
      */
-    public static function getUsers(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    public static function getMailing(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
     {
-        return (new Database('db_mailings', 'user'))->select($fields, $join, $where, $order, $limit);
+        return (new Database('db_mailings', 'mailing'))->select($fields, $join, $where, $order, $limit);
     }
 
 }

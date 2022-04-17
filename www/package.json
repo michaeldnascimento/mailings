@@ -23,6 +23,7 @@
     "dayjs": "^1.10.5",
     "dragula": "^3.7.2",
     "feather-icons": "^4.28.0",
+    "jquery": "^3.6.0",
     "laravel-mix": "^6.0.43",
     "nunjucks": "^3.2.3",
     "perfect-scrollbar": "^1.5.1",
