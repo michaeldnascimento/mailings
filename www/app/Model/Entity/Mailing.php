@@ -88,6 +88,15 @@ class Mailing {
     */
     public ?int $id_user = null;
 
+    /*
+    * status do mailing
+    */
+    public ?string $status_mailing = null;
+
+    /*
+    * observação do mailing
+    */
+    public ?string $status_obs_mailing = null;
 
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
@@ -134,7 +143,9 @@ class Mailing {
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,
-            'id_user' => $this->id_user
+            'id_user' => $this->id_user,
+            'status_mailing' => $this->status_mailing,
+            'status_obs_mailing' => $this->status_obs_mailing
         ]);
     }
 
@@ -198,6 +209,23 @@ class Mailing {
             '*',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por retornar os mailing com base no seu ID
+     *
+     * @param int $id
+     * @return false|mixed|object
+     */
+    public static function getMailingById(int $id)
+    {
+        return self::getMailing(
+            '*',
+            '',
+            'id = '. " '$id' " ,
             '',
             ''
         )->fetchObject(self::class);

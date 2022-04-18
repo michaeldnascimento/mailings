@@ -43,9 +43,6 @@ $obRouter->post('/vendedor/mailings/tabula/', [
         'required-admin-login',
     ],
     function($request){
-
-        print_r($_POST);
-        EXIT;
-        return new Response(200, ListMailing::setList($request, 'lista1'));
+        return new Response(200, ListMailing::statusMailing($request, $_POST['id']));
     }
 ]);

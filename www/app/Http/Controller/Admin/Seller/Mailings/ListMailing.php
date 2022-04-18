@@ -144,6 +144,69 @@ class ListMailing extends Page {
         $request->getRouter()->redirect("/vendedor/mailings/$list?status=newMailing");
     }
 
+    /**
+     * Método responsável gerenciar o status do mailing
+     * @param Request $request
+     * @param int $id
+     * @return string
+     */
+    public static function statusMailing(Request $request, int $id): string
+    {
+
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $obMailing = EntityMailing::getMailingById($id);
+
+        //VALIDA A INSTANCIA
+        if(!$obMailing instanceof EntityMailing){
+            $request->getRouter()->redirect("/vendedor/mailings/$obMailing->lista");
+        }
+
+        //POST VARS
+        $postVars = $request->getPostVars();
+
+        //ATUALIZA A INSTANCIA
+        $obMailing->status_mailing = $postVars['status_mailing'] ?? $obMailing->status_mailing;
+        $obMailing->status_obs_mailing = $postVars['status_obs_mailing'] ?? $obMailing->status_obs_mailing;
+        $obMailing->atualizar();
+
+        echo "<pre>";
+        print_r($request);
+        print_r($obMailing);
+
+        exit;
+
+        //REDIRECIONA O USUÁRIO
+        $request->getRouter()->redirect('/usuarios/lista/'.$obUser->id.'/edit?status=updated');
+
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
+        $qtd_mailing_user = EntityMailing::getMailingQtdUser($list, $id_user);
+
+        //VALIDA SE O USUÁRIO JÁ PASSOU DO LIMIT DE MAILING POR USUÁRIO
+        if($qtd_mailing_user->qtd >= 5){
+            $request->getRouter()->redirect("/vendedor/mailings/$list?status=limitExceeded");
+        }
+
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
+        //PEGAR NOVO MAILING VAZIO
+        $obMailing = EntityMailing::getNewMailing($list);
+
+        //VALIDA A INSTANCIA
+        if(!$obMailing instanceof EntityMailing){
+            $request->getRouter()->redirect("/vendedor/mailings/$list");
+        }
+
+        //ATUALIZA A INSTANCIA
+        $obMailing->id_user = $id_user;
+        $obMailing->atualizar();
+
+        //REDIRECIONA O USUÁRIO
+        $request->getRouter()->redirect("/vendedor/mailings/$list?status=newMailing");
+    }
+
 
     /**
      * Método responsável por retornar a mensagem de status
