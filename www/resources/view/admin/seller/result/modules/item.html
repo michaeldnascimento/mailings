@@ -1,0 +1,87 @@
+<tr>
+    <td>{{id}}</td>
+    <td>{{nome}}</td>
+    <td>{{fone1}}</td>
+    <td>{{fone2}}</td>
+    <td>{{doc}}</td>
+    <td>{{endereco}}</td>
+    <td>{{num}}</td>
+    <td>{{compl}}</td>
+    <td>{{bairro}}</td>
+    <td>{{cidade}}</td>
+    <td>{{tipo}}</td>
+    <td>{{obs}}</td>
+    <td>
+        <a type="button" class="btn btn-outline-primary block selectMailing" data-bs-toggle="modal"
+                data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
+            <i class="bi bi-three-dots-vertical"></i>
+        </a>
+    </td>
+</tr>
+
+<!--Disabled Backdrop Modal -->
+<div class="modal fade text-left" id="selectMailing" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel4" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel33">Tabulação </h4>
+                    <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <form action="{{URL}}/vendedor/mailings/tabula" method="post">
+                    <div class="modal-body">
+                        <div class="col-md-12 mb-12">
+                            <h6>Status</h6>
+                            <p>Selecione o status tabulação!</p>
+                            <div class="form-group mb-3">
+                                <select class="choices form-select" name="status_mailing" required>
+                                    <optgroup label="VENDA">
+                                        <option value="VENDA - NOVO CLIENTE"> NOVO CLIENTE </option>
+                                        <option value="VENDA - UPGRADE"> UPGRADE </option>
+                                    </optgroup>
+                                    <optgroup label="LIXEIRA">
+                                        <option valeu="LIXEIRA - TELEFONE NAO ATENDE"> TELEFONE NAO ATENDE </option>
+                                        <option valeu="LIXEIRA - NAO TEM INTERESSE EM NOVA ASSINATURA"> NAO TEM INTERESSE </option>
+                                        <option value="LIXEIRA - PROBLEMAS TECNICOS"> PROBLEMAS TECNICOS </option>
+                                        <option value="LIXEIRA - NAO TEM COBERTURA VIRTUA"> NAO TEM COBERTURA FIBRA </option>
+                                        <option value="LIXEIRA - NAO TEM COBERTURA TV"> CLIENTE NÃO LOCALIZADO </option>
+                                        <option value="LIXEIRA - CLIENTE REPETIDO"> CLIENTE REPETIDO </option>
+                                        <option value="LIXEIRA - CLIENTE JA CONTRATOU O SERVICO"> CLIENTE ATIVO NA BASE </option>
+                                        <option value="LIXEIRA - SENDO ATENDIDO POR OUTRO VENDEDOR"> SENDO ATENDIDO POR OUTRO VENDEDOR </option>
+                                        <option value="LIXEIRA - OUTROS - ESPECIFICAR"> OUTROS - ESPECIFICAR </option>
+                                    </optgroup>
+                                    <optgroup label="OPORTUNIDADE">
+                                        <option value="FOLLOW-UP"> FOLLOW UP - RETORNO AGENDADO </option>
+                                        <option value="OPORTUNIDADE - TRATANDO">TRATANDO </option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-12">
+                            <div class="form-group mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Observação Tabulação</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="status_obs_mailing" rows="10" required></textarea>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="id" id="id_mailing" value="">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary"
+                                data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Fechar</span>
+                        </button>
+                        <button type="submit" class="btn btn-success ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">salvar</span>
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
