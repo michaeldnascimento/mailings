@@ -52,7 +52,7 @@ class ListMailing extends Page {
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
-        $results = EntityMailing::getMailing('*', null, "lista = '$list' AND id_user = $id_user", 'id DESC', '');
+        $results = EntityMailing::getMailing('*', null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '')", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obMailings = $results->fetchObject(EntityMailing::class)){
@@ -133,7 +133,7 @@ class ListMailing extends Page {
 
         //VALIDA A INSTANCIA
         if(!$obMailing instanceof EntityMailing){
-            $request->getRouter()->redirect("/vendedor/mailings/$list");
+            $request->getRouter()->redirect("/vendedor/mailings/$list?status=notMailing");
         }
 
         //ATUALIZA A INSTANCIA
@@ -169,42 +169,9 @@ class ListMailing extends Page {
         $obMailing->status_obs_mailing = $postVars['status_obs_mailing'] ?? $obMailing->status_obs_mailing;
         $obMailing->atualizar();
 
-        echo "<pre>";
-        print_r($request);
-        print_r($obMailing);
-
-        exit;
-
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/usuarios/lista/'.$obUser->id.'/edit?status=updated');
+        $request->getRouter()->redirect("/vendedor/mailings/$obMailing->lista?status=statusUpdate");
 
-        //PEGA ID USUÁRIO NA SESSION
-        $id_user = $_SESSION['mailings']['admin']['user']['id'];
-
-        $qtd_mailing_user = EntityMailing::getMailingQtdUser($list, $id_user);
-
-        //VALIDA SE O USUÁRIO JÁ PASSOU DO LIMIT DE MAILING POR USUÁRIO
-        if($qtd_mailing_user->qtd >= 5){
-            $request->getRouter()->redirect("/vendedor/mailings/$list?status=limitExceeded");
-        }
-
-        //PEGA ID USUÁRIO NA SESSION
-        $id_user = $_SESSION['mailings']['admin']['user']['id'];
-
-        //PEGAR NOVO MAILING VAZIO
-        $obMailing = EntityMailing::getNewMailing($list);
-
-        //VALIDA A INSTANCIA
-        if(!$obMailing instanceof EntityMailing){
-            $request->getRouter()->redirect("/vendedor/mailings/$list");
-        }
-
-        //ATUALIZA A INSTANCIA
-        $obMailing->id_user = $id_user;
-        $obMailing->atualizar();
-
-        //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect("/vendedor/mailings/$list?status=newMailing");
     }
 
 
@@ -232,8 +199,14 @@ class ListMailing extends Page {
             case 'disable':
                 return Alert::getWarning('Atenção :|','Usuário inativo no momento!');
                 break;
+            case 'notMailing':
+                return Alert::getWarning('Atenção :|','Sem mailing disponivel no momento!');
+                break;
             case 'newMailing':
                 return Alert::getSuccess('Sucesso :)','Novo mailing gerado com sucesso.');
+                break;
+            case 'statusUpdate':
+                return Alert::getSuccess('Sucesso :)','Status mailing atualizado com sucesso.');
                 break;
         }
     }

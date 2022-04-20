@@ -5,7 +5,7 @@ include __DIR__ . '/admin/home.php';
 
 //INCLUI AS ROTAS DO VENDEDOR
 include __DIR__ . '/admin/seller/mailings.php';
-include __DIR__ . '/admin/seller/sales.php';
+include __DIR__ . '/admin/seller/result.php';
 
 //INCLUI AS ROTAS ADMINISTRATIVAS
 include __DIR__ . '/admin/adm/input.php';

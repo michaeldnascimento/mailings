@@ -189,7 +189,7 @@ class Mailing {
         return self::getMailing(
             'count(*) as qtd',
             '',
-            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
+            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
             '',
             ''
         )->fetchObject(self::class);
