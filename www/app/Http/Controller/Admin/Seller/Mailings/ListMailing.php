@@ -52,7 +52,7 @@ class ListMailing extends Page {
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
-        $results = EntityMailing::getMailing('*', null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '')", 'id DESC', '');
+        $results = EntityMailing::getMailing('*', null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obMailings = $results->fetchObject(EntityMailing::class)){
@@ -68,7 +68,9 @@ class ListMailing extends Page {
                 'bairro' => $obMailings->bairro,
                 'cidade' => $obMailings->cidade,
                 'tipo' => $obMailings->tipo,
-                'obs' => $obMailings->obs
+                'obs' => $obMailings->obs,
+                'status_mailing' => $obMailings->status_mailing,
+                'status_obs_mailing' => $obMailings->status_obs_mailing
             ]);
         }
 
@@ -147,10 +149,11 @@ class ListMailing extends Page {
     /**
      * Método responsável gerenciar o status do mailing
      * @param Request $request
+     * @param string $list
      * @param int $id
      * @return string
      */
-    public static function statusMailing(Request $request, int $id): string
+    public static function statusMailing(Request $request, string $list, int $id): string
     {
 
         //OBTÉM O MAILING DO BANCO DE DADOS
@@ -167,10 +170,18 @@ class ListMailing extends Page {
         //ATUALIZA A INSTANCIA
         $obMailing->status_mailing = $postVars['status_mailing'] ?? $obMailing->status_mailing;
         $obMailing->status_obs_mailing = $postVars['status_obs_mailing'] ?? $obMailing->status_obs_mailing;
+        $obMailing->status_data_mailing = date('Y-m-d H:m:s');
         $obMailing->atualizar();
 
-        //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect("/vendedor/mailings/$obMailing->lista?status=statusUpdate");
+        //VERIFICA A LISTA QUE FOI FEITA A TABULAÇÃO
+        switch($list) {
+            case '':
+                $request->getRouter()->redirect("/vendedor/mailings/$obMailing->lista?status=statusUpdate");
+                break;
+            case 'follow':
+                $request->getRouter()->redirect("/vendedor/resultados/follow?status=statusUpdate");
+                break;
+        }
 
     }
 

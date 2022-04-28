@@ -37,12 +37,12 @@ $obRouter->get('/vendedor/mailings/lista2', [
 ]);
 
 //TABULAÇÃO MAILING
-$obRouter->post('/vendedor/mailings/tabula/', [
+$obRouter->post('/vendedor/mailings/tabula/?{list}', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
     ],
-    function($request){
-        return new Response(200, ListMailing::statusMailing($request, $_POST['id']));
+    function($request, $list){
+        return new Response(200, ListMailing::statusMailing($request, $list, $_POST['id']));
     }
 ]);

@@ -12,37 +12,11 @@ use App\Session\Login\Home as SessionLogin;
 class ListResult extends Page {
 
     /**
-     * Método responsável por obter a renderização da quantidade de mailings
-     * @param Request $request $request
-     * @param string $list
+     * Método responsável por obter a renderização os status mailing do usuário para a página
+     * @param string $status_mailing
      * @return string
      */
-    public static function getMailingsListQtd(Request $request, string $list): string
-    {
-
-        //QUANTIDADE
-        $qtd_mailing = '';
-
-        //RESULTADOS QUANTIDADE MAILING
-        $qtd_mailing = EntityMailing::getMailingQtd($list);
-
-        //POST VARS
-        $postVars = $request->getPostVars();
-
-        //RECEBE QUANTIDADE
-        $qtd_mailing->qtd = $postVars['qtd'] ?? $qtd_mailing->qtd;
-
-        //RETORNA OS USUÁRIOS
-        return $qtd_mailing->qtd;
-
-    }
-
-    /**
-     * Método responsável por obter a renderização os mailings do usuário para a página
-     * @param string $list
-     * @return string
-     */
-    public static function getMailingsListUser(string $list): string
+    public static function getResultSellerStatusFollow(string $status_mailing): string
     {
 
         //MAILING
@@ -52,23 +26,22 @@ class ListResult extends Page {
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
-        $results = EntityMailing::getMailing('*', null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '')", 'id DESC', '');
+        $results = EntityMailing::getMailing("*, date_format(status_data_mailing, '%d/%m/%Y %Hh%i') as status_data_mailing ", null, "status_mailing LIKE '%$status_mailing%' AND id_user = $id_user", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obMailings = $results->fetchObject(EntityMailing::class)){
-            $items .=  View::render('/admin/seller/mailings/modules/item', [
+
+            $items .=  View::render('/admin/seller/result/modules/item-follow', [
                 'id' => $obMailings->id,
                 'nome' => $obMailings->nome,
                 'fone1' => $obMailings->fone1,
                 'fone2' => $obMailings->fone2,
                 'doc' => $obMailings->doc,
-                'endereco' => $obMailings->endereco,
-                'num' => $obMailings->num,
-                'compl' => $obMailings->compl,
                 'bairro' => $obMailings->bairro,
                 'cidade' => $obMailings->cidade,
-                'tipo' => $obMailings->tipo,
-                'obs' => $obMailings->obs
+                'status_mailing' => $obMailings->status_mailing,
+                'status_data_mailing' => $obMailings->status_data_mailing,
+                'status_obs_mailing' => $obMailings->status_obs_mailing
             ]);
         }
 
@@ -78,30 +51,118 @@ class ListResult extends Page {
     }
 
     /**
-     * Método responsável por retornar a renderização da página de login
+     * Método responsável por obter a renderização os status mailing do usuário para a página
+     * @param string $status_mailing
+     * @return string
+     */
+    public static function getResultSellerStatusMailing(string $status_mailing): string
+    {
+
+        //MAILING
+        $items = '';
+
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
+        //RESULTADOS DA PÁGINA
+        $results = EntityMailing::getMailing("*, date_format(status_data_mailing, '%d/%m/%Y %Hh%i') as status_data_mailing ", null, "status_mailing LIKE '%$status_mailing%' AND id_user = $id_user", 'id DESC', '');
+
+        //RENDERIZA O ITEM
+        while($obMailings = $results->fetchObject(EntityMailing::class)){
+
+            $items .=  View::render('/admin/seller/result/modules/item', [
+                'id' => $obMailings->id,
+                'nome' => $obMailings->nome,
+                'fone1' => $obMailings->fone1,
+                'fone2' => $obMailings->fone2,
+                'doc' => $obMailings->doc,
+                'bairro' => $obMailings->bairro,
+                'cidade' => $obMailings->cidade,
+                'status_mailing' => $obMailings->status_mailing,
+                'status_data_mailing' => $obMailings->status_data_mailing,
+                'status_obs_mailing' => $obMailings->status_obs_mailing
+            ]);
+        }
+
+        //RETORNA OS USUÁRIOS
+        return $items;
+
+    }
+
+    /**
+     * Método responsável por retornar a renderização da página de vendas vendedor
      * @param Request $request
-     * @param string $list
      * @param string|null $errorMessage
      * @return string
      */
-    public static function getList(Request $request, string $list, string $errorMessage = null): string
+    public static function getSales(Request $request, string $errorMessage = null): string
     {
         //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
         $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
 
-
         //CONTEÚDO DA PÁGINA DE MAILINGS
-        $content = View::render("admin/seller/mailings/$list", [
-            'itens_qtd'    => self::getMailingsListQtd($request, $list),
-            'itens_user'    => self::getMailingsListUser($list),
+        $content = View::render("admin/seller/result/sales", [
+            'itens'    => self::getResultSellerStatusMailing('VENDA'),
             'status'   => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
-            'Mailings',
-            "$list",
-            'Lista de mailing 1',
+            'Resultados',
+            "Vendas",
+            'Lista de vendas',
+            $content
+        );
+    }
+
+    /**
+     * Método responsável por retornar a renderização da página de vendas vendedor
+     * @param Request $request
+     * @param string|null $errorMessage
+     * @return string
+     */
+    public static function getSellerResultAll(Request $request, string $errorMessage = null): string
+    {
+        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
+        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
+
+        //CONTEÚDO DA PÁGINA DE MAILINGS
+        $content = View::render("admin/seller/result/geral", [
+            'itens'    => self::getResultSellerStatusMailing(''),
+            'status'   => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Resultados',
+            "Geral",
+            'Lista geral',
+            $content
+        );
+    }
+
+    /**
+     * Método responsável por retornar a renderização da página de vendas vendedor
+     * @param Request $request
+     * @param string|null $errorMessage
+     * @return string
+     */
+    public static function getFollow(Request $request, string $errorMessage = null): string
+    {
+        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
+        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
+
+        //CONTEÚDO DA PÁGINA DE MAILINGS
+        $content = View::render("admin/seller/result/follow", [
+            'itens-follow' => self::getResultSellerStatusFollow('FOLLOW-UP'),
+            'status'   => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Resultados',
+            "Follow-up",
+            'Lista de Follow-up',
             $content
         );
     }

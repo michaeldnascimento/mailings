@@ -10,7 +10,7 @@ $obRouter->get('/vendedor/resultados/vendas', [
         'required-admin-login',
     ],
     function($request){
-        return new Response(200, ListResult::getList($request, 'lista1'));
+        return new Response(200, ListResult::getSales($request));
     }
 ]);
 
@@ -21,7 +21,7 @@ $obRouter->get('/vendedor/resultados/follow', [
         'required-admin-login',
     ],
     function($request){
-        return new Response(200, ListResult::getList($request, 'lista1'));
+        return new Response(200, ListResult::getFollow($request));
     }
 ]);
 
@@ -32,6 +32,6 @@ $obRouter->get('/vendedor/resultados/geral', [
         'required-admin-login',
     ],
     function($request){
-        return new Response(200, ListResult::getList($request, 'lista1'));
+        return new Response(200, ListResult::getSellerResultAll($request));
     }
 ]);

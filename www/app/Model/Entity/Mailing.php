@@ -98,6 +98,11 @@ class Mailing {
     */
     public ?string $status_obs_mailing = null;
 
+    /*
+    * Data Status mailing
+    */
+    public ?string $status_data_mailing = null;
+
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
      * @return bool
@@ -145,7 +150,8 @@ class Mailing {
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
-            'status_obs_mailing' => $this->status_obs_mailing
+            'status_obs_mailing' => $this->status_obs_mailing,
+            'status_data_mailing' => $this->status_data_mailing
         ]);
     }
 
