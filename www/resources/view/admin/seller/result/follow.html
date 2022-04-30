@@ -6,7 +6,7 @@
             Lista Vendas
         </div>
         <div class="card-body">
-            <table class="table" id="table_users">
+            <table class="table" id="table">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -32,34 +32,3 @@
     </div>
 
 </section>
-<!-- Basic Tables end -->
-<script src="{{URL}}/resources/assets/vendors/jquery/jquery.min.js"></script>
-<script src="{{URL}}/resources/assets/vendors/jquery-datatables/jquery.dataTables.min.js"></script>
-<script src="{{URL}}/resources/assets/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js"></script>
-<script src="{{URL}}/resources/assets/vendors/fontawesome/all.min.js"></script>
-<script src="{{URL}}/resources/assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
-<script src="{{URL}}/resources/assets/js/pages/mailing.js"></script>
-
-<script src="{{URL}}/resources/assets/vendors/mask-plugin/jquery.mask.js"></script>
-<script src="{{URL}}/resources/assets/vendors/mask-plugin/mask.js"></script>
-<script>
-    // Jquery Datatable
-    $(document).ready( function () {
-        $('#table_users').DataTable();
-    } );
-</script>
-<script>
-
-    //Esconder divs especificas do select
-    $(document).ready(function() {
-
-        $('#select').on('change', function(){
-
-            let selectValor = '#'+$(this).val();
-            $('#follow').children('div').hide();
-            $('#follow').children(selectValor).show();
-
-        });
-
-    });
-</script>

@@ -40,6 +40,7 @@ class Page {
      */
     private static function getSidebar(): string
     {
+
         //VERIFICA O NIVEL DE ACESSO
         if (SessionNivel::getNivelSession() == 2){
             $valueDisplay = "block";
@@ -47,6 +48,7 @@ class Page {
             $valueDisplay = "none";
         }
 
+        //CARREGA SIDEBAR
         return View::render('admin/layouts/sidebar',[
             'display' => "style=display:$valueDisplay",
         ]);

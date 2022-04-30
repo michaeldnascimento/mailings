@@ -168,14 +168,21 @@ class ListMailing extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //CONVERTENDO A DATA PRO PATÃO US
-        $data_follow = DateTime::createFromFormat('d/m/Y', $postVars['data_follow']);
-        $convertDate = $data_follow->format('Y-m-d');
+
+        //VERIFICA CONVERTENDO A DATA US
+        if ($postVars['data_follow'] != '' AND $postVars['time_follow'] != '') {
+            $data_follow = DateTime::createFromFormat('d/m/Y', $postVars['data_follow']);
+            $convertDate = $data_follow->format('Y-m-d');
+            $postVars['datatime_follow'] = $convertDate . " " . $postVars['time_follow'];
+        }else{
+            $obMailing->datatime_follow = '2010-01-01 00:00:00';
+        }
+
 
         //ATUALIZA A INSTANCIA
         $obMailing->status_mailing = $postVars['status_mailing'] ?? $obMailing->status_mailing;
         $obMailing->status_obs_mailing = $postVars['status_obs_mailing'] ?? $obMailing->status_obs_mailing;
-        $obMailing->datatime_follow = ($convertDate . " " . $postVars['time_follow']) ?? $obMailing->datatime_follow;
+        $obMailing->datatime_follow = $postVars['datatime_follow'] ?? $obMailing->datatime_follow;
         $obMailing->status_data_mailing = date('Y-m-d H:m:s');
         $obMailing->atualizar();
 
