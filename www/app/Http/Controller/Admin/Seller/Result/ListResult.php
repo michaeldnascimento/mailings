@@ -26,7 +26,7 @@ class ListResult extends Page {
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
-        $results = EntityMailing::getMailing("*, date_format(status_data_mailing, '%d/%m/%Y %Hh%i') as status_data_mailing ", null, "status_mailing LIKE '%$status_mailing%' AND id_user = $id_user", 'id DESC', '');
+        $results = EntityMailing::getMailing("*, date_format(status_data_mailing, '%d/%m/%Y %Hh%i') as status_data_mailing, date_format(datatime_follow, '%d/%m/%Y %Hh%i') as datatime_follow", null, "status_mailing LIKE '%$status_mailing%' AND id_user = $id_user", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obMailings = $results->fetchObject(EntityMailing::class)){
@@ -41,7 +41,8 @@ class ListResult extends Page {
                 'cidade' => $obMailings->cidade,
                 'status_mailing' => $obMailings->status_mailing,
                 'status_data_mailing' => $obMailings->status_data_mailing,
-                'status_obs_mailing' => $obMailings->status_obs_mailing
+                'status_obs_mailing' => $obMailings->status_obs_mailing,
+                'datatime_follow' => $obMailings->datatime_follow
             ]);
         }
 

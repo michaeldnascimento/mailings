@@ -6,6 +6,7 @@
     <td>{{doc}}</td>
     <td>{{cidade}}</td>
     <td>{{status_mailing}}</td>
+    <td>{{datatime_follow}}</td>
     <td>{{status_data_mailing}}</td>
     <td>{{status_obs_mailing}}</td>
     <td>
@@ -35,6 +36,9 @@
                             <p>Selecione o status tabulação!</p>
                             <div class="form-group mb-3">
                                 <select class="choices form-select" name="status_mailing" id="select" required>
+                                    <optgroup label="STATUS">
+                                    <option value="" selected> SELECIONE STATUS </option>
+                                    </optgroup>
                                     <optgroup label="VENDA">
                                         <option value="VENDA - NOVO CLIENTE"> NOVO CLIENTE </option>
                                         <option value="VENDA - UPGRADE"> UPGRADE </option>
@@ -61,10 +65,10 @@
                         <div id='FOLLOW-UP'>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status_user">Data - Follow-UP</label>
+                                <label for="data_follow">Data - Follow-UP</label>
                                 <input type="text" class="form-control date" id="status_user"
-                                       name="status_user"
-                                       value="{{status_user}}"
+                                       name="data_follow"
+                                       value="{{data_follow}}"
                                        placeholder="dd/mm/aaaa"
                                        maxlength="10"
                                        pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$"
@@ -74,13 +78,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nivel">Hora</label>
+                                <label for="time_follow">Hora</label>
                                 <input type="text" class="form-control time"
-                                       name="nivel"
-                                       value="{{nivel}}"
+                                       name="time_follow"
+                                       value="{{time_follow}}"
                                        placeholder="00:00"
-                                       id="nivel"
-                                       maxlength="8">
+                                       id="time_follow"
+                                       maxlength="5">
                             </div>
                         </div>
                         </div>

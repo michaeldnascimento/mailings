@@ -103,6 +103,12 @@ class Mailing {
     */
     public ?string $status_data_mailing = null;
 
+    /*
+    * Data e hora follow mailing
+    */
+    public ?string $datatime_follow = null;
+
+
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
      * @return bool
@@ -151,7 +157,8 @@ class Mailing {
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
             'status_obs_mailing' => $this->status_obs_mailing,
-            'status_data_mailing' => $this->status_data_mailing
+            'status_data_mailing' => $this->status_data_mailing,
+            'datatime_follow' => $this->datatime_follow
         ]);
     }
 
