@@ -8,6 +8,7 @@ $obRouter->get('/usuarios/lista', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request){
         return new Response(200, Users::getUsersList($request));
@@ -19,6 +20,7 @@ $obRouter->get('/usuarios/lista/{id}/edit', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request, $id){
         return new Response(200, Users::getEditUser($request, $id));
@@ -29,6 +31,7 @@ $obRouter->get('/usuarios/lista/{id}/edit', [
 $obRouter->post('/usuarios/lista/{id}/edit', [
     'middlewares' => [
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request, $id){
         return new Response(200, Users::setEditUser($request, $id));
@@ -40,6 +43,7 @@ $obRouter->post('/usuarios/lista/{id}/edit', [
 $obRouter->get('/usuarios/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request, $id){
         return new Response(200, Users::getDeleteUser($request, $id));
@@ -50,6 +54,7 @@ $obRouter->get('/usuarios/lista/{id}/delete', [
 $obRouter->post('/usuarios/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request, $id){
         return new Response(200, Users::setDeleteUser($request, $id));

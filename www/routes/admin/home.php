@@ -6,7 +6,6 @@ use \App\Http\Controller\Admin\Home;
 //ROTA HOME
 $obRouter->get('/', [
     'middlewares' => [
-        //'cache'
         'required-admin-login',
     ],
     function($request){

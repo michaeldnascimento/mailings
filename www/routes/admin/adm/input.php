@@ -8,6 +8,7 @@ $obRouter->get('/adm/input/listas', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request){
         return new Response(200, Input\Lists::getLists($request));
@@ -20,6 +21,7 @@ $obRouter->post('/adm/input/listas', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-admin',
     ],
     function($request){
         return new Response(200, Input\Lists::setNewMailingList($request));

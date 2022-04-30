@@ -15,8 +15,8 @@
 
                     <li class="sidebar-item active ">
                         <a href="{{URL}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
+                            <i class="bi bi-house-fill"></i>
+                            <span>Home</span>
                         </a>
                     </li>
 
@@ -24,7 +24,7 @@
 
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-collection-fill"></i>
+                            <i class="bi bi-person-lines-fill"></i>
                             <span>Mailings</span>
                         </a>
                         <ul class="submenu ">
@@ -37,12 +37,12 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  has-sub">
+                    <li class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-collection-fill"></i>
+                            <i class="bi bi-bar-chart-fill"></i>
                             <span>Resultados</span>
                         </a>
-                        <ul class="submenu ">
+                        <ul class="submenu">
                             <li class="submenu-item ">
                                 <a href="{{URL}}/vendedor/resultados/vendas">Vendas</a>
                             </li>
@@ -55,38 +55,11 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-title">Supervisão</li>
+                    <li {{display}} class="sidebar-title">Administrativo</li>
 
-                    <li class="sidebar-item  has-sub">
+                    <li {{display}} class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-1x2-fill"></i>
-                            <span>Layouts</span>
-                        </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="layout-default.html">Default Layout</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="layout-vertical-1-column.html">1 Column</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="layout-vertical-navbar.html">Vertical Navbar</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="layout-rtl.html">RTL Layout</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="layout-horizontal.html">Horizontal Menu</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-title">Administrativo</li>
-
-                    <li
-                            class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-hexagon-fill"></i>
+                            <i class="bi bi-file-earmark-excel-fill"></i>
                             <span>Inputs</span>
                         </a>
                         <ul class="submenu ">
@@ -96,7 +69,7 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  ">
+                    <li {{display}} class="sidebar-item  ">
                         <a href="{{URL}}/usuarios/lista" class='sidebar-link'>
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Usuários</span>
@@ -104,8 +77,8 @@
                     </li>
 
                     <li class="sidebar-item  ">
-                        <a href="login/logout" class='sidebar-link'>
-                            <i class="bi bi-cash"></i>
+                        <a href="{{URL}}/login/logout" class='sidebar-link'>
+                            <i class="bi bi-backspace-fill"></i>
                             <span>Sair</span>
                         </a>
                     </li>

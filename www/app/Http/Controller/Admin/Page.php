@@ -5,6 +5,7 @@ namespace App\Http\Controller\Admin;
 use \App\Utils\View;
 use \App\Db\Pagination;
 use \App\Http\Request;
+use \App\Session\Admin\Nivel as SessionNivel;
 
 class Page {
 
@@ -39,7 +40,16 @@ class Page {
      */
     private static function getSidebar(): string
     {
-        return View::render('admin/layouts/sidebar');
+        //VERIFICA O NIVEL DE ACESSO
+        if (SessionNivel::getNivelSession() == 2){
+            $valueDisplay = "block";
+        }else{
+            $valueDisplay = "none";
+        }
+
+        return View::render('admin/layouts/sidebar',[
+            'display' => "style=display:$valueDisplay",
+        ]);
     }
 
 

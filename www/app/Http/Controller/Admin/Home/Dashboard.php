@@ -53,6 +53,9 @@ class Dashboard extends Page {
             case 'disable':
                 return Alert::getWarning('Atenção :|','Usuário inativo no momento!');
                 break;
+            case 'routeInvalid':
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota!');
+                break;
         }
     }
 
