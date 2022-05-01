@@ -1,5 +1,5 @@
 # ESTRUTURA MVC
-Projeto Gênio Sales, gerenciador de mailing.
+Projeto gerenciador de mailing.
 
 ## Como executar
 
