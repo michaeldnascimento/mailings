@@ -86,14 +86,40 @@ class Users extends Page {
             $request->getRouter()->redirect('/admin/adm/users/list');
         }
 
+        //VERIFICA O STATUS DO USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->status) {
+            case "0": {
+                $disabled = "selected";
+                break;
+            }
+            case "1": {
+                $active = "selected";
+                break;
+            }
+        }
+
+        //VERIFICA O NIVEL DO USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->nivel) {
+            case "1": {
+                $seller = "selected";
+                break;
+            }
+            case "2": {
+                $adm = "selected";
+                break;
+            }
+        }
+
         //CONTEÚDO DO FORMULÁRIO
         $content = View::render('/admin/adm/users/form', [
             'id' => $obUser->id,
             'company' => $obUser->company,
             'name' => $obUser->name,
             'email' => $obUser->email,
-            'status_user' => $obUser->status,
-            'nivel' => $obUser->nivel,
+            'options_status_user' => "<option value='1' $active>ATIVO</option>.
+                                      <option value='0' $disabled>DESATIVAR</option>",
+            'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
+                                      <option value='2' $adm>ADMINISTRADOR</option>",
             'status' => self::getStatus($request)
         ]);
 
