@@ -1,12 +1,8 @@
 <tr>
     <td>{{id}}</td>
     <td>{{nome}}</td>
-    <td>{{fone1}}</td>
-    <td>{{fone2}}</td>
-    <td>{{doc}}</td>
-    <td>{{endereco}}</td>
-    <td>{{num}}</td>
-    <td>{{compl}}</td>
+    <td>{{fone1}} / {{fone2}}</td>
+    <td>{{endereco}} {{num}} {{compl}}</td>
     <td>{{bairro}}</td>
     <td>{{cidade}}</td>
     <td>{{tipo}}</td>
@@ -14,7 +10,7 @@
     <td>{{status_mailing}}</td>
     <td>{{status_obs_mailing}}</td>
     <td>
-        <a type="button" class="btn btn-outline-primary block selectMailing" data-bs-toggle="modal"
+        <a type="button" class="btn btn-primary block selectMailing" data-bs-toggle="modal"
                 data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
             <i class="bi bi-three-dots-vertical"></i>
         </a>
@@ -26,8 +22,9 @@
      aria-labelledby="myModalLabel4" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel33">Tabulação </h4>
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title white" id="myModalLabel160">Tabulação
+                    </h5>
                     <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
                         <i data-feather="x"></i>
@@ -106,9 +103,9 @@
                             <i class="bx bx-x d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Fechar</span>
                         </button>
-                        <button type="submit" class="btn btn-success ml-1">
+                        <button type="submit" class="btn btn-primary ml-1">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">salvar</span>
+                            <span class="d-none d-sm-block">Salvar</span>
                         </button>
                     </div>
                 </form>

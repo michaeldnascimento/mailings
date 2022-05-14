@@ -1,5 +1,6 @@
 .env
-.idea
+.idea/
+.idea/csv-plugin.xml
 resources/docs/excel/
 resources/view/mazer/
 resources/assets/vendors/
@@ -11,3 +12,4 @@ CODE_OF_CONDUCT.md
 screenshot.png
 node_modules
 package-lock.json
+www.zip
