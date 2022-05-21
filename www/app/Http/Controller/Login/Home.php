@@ -40,7 +40,6 @@ class Home extends Page {
 
         //POST VARS
         $postVars = $request->getPostVars();
-        $company  = $postVars['company'] ?? '';
         $email    = $postVars['email'] ?? '';
         $password = $postVars['password'] ?? '';
 
@@ -54,11 +53,6 @@ class Home extends Page {
 
         //VERIFICA A SENHA DO USUÁRIO > verifica a senha passada, e a senha do banco
         if (!password_verify($password, $obUser->password)){
-            $request->getRouter()->redirect('/login?status=invalid');
-        }
-
-        //VERIFICA SE A EMPRESA DO USUARIO ESTÁ CORRETA
-        if ($company != $obUser->company){
             $request->getRouter()->redirect('/login?status=invalid');
         }
 
