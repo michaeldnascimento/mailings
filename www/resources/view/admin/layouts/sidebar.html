@@ -2,7 +2,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
-                        <a href="{{URL}}"><img src="assets/images/logo/logo.png" alt="Gênio" srcset=""></a>
+                        <a href="{{URL}}"><img src="{{URL}}/resources/assets/images/logo/Genio1.png" alt="Gênio" srcset="" style="width: 100%;height: 100%;"></a>
                     </div>
                     <div class="toggler">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -55,6 +55,23 @@
                         </ul>
                     </li>
 
+                    <li class="sidebar-title">Pastas</li>
+
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Empresa 1</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{URL}}/vendedor/mailings/lista1">Mailing 1</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{URL}}/vendedor/mailings/lista2">Mailing 2</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li {{display}} class="sidebar-title">Administrativo</li>
 
                     <li {{display}} class="sidebar-item has-sub">
@@ -73,6 +90,13 @@
                         <a href="{{URL}}/usuarios/lista" class='sidebar-link'>
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Usuários</span>
+                        </a>
+                    </li>
+
+                    <li {{display}} class="sidebar-item  ">
+                        <a href="{{URL}}/empresa/lista" class='sidebar-link'>
+                            <i class="bi bi-building"></i>
+                            <span>Empresa</span>
                         </a>
                     </li>
 
