@@ -1,0 +1,37 @@
+{{status}}
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Dados Usuário</h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="helperText">Empresa</label>
+                        <input type="text" id="helperText" class="form-control" name="company" value="{{company}}" placeholder="Nome Empresa">
+                        <p><small class="text-muted">Nome Empresa</small></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="helperText">Status Empresa</label>
+                        <select class="choices form-select" name="status" id="status" required>
+                            <optgroup label="Situação">
+                                {{options_status_company}}
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
+                    <a href="{{URL}}/empresa/lista/" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>

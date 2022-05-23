@@ -9,54 +9,30 @@ use PDOStatement;
 class Company {
 
     /*
-     * ID do Usuário
+     * ID da EMPRESA
      */
     public int $id;
 
     /*
-    * Número empresa
+    * Nome empresa
     */
     public string $company;
-
-    /*
-     * Nome do Usuário
-     */
-    public string $name;
-
-    /*
-     * E-mail do Usuário
-     */
-    public string $email;
-
-    /*
-    * Senha do Usuário
-    */
-    public string $password;
 
     /*
     * Status User
     */
     public string $status;
 
-    /*
-    * Nivel User
-    */
-    public string $nivel;
-
     /**
-     * Método responsável por cadastrar a instancia atual no banco de dados
+     * Método responsável por cadastrar a instância atual no banco de dados
      * @return bool
      */
     public function cadastrar():bool
     {
         //INSERE A INSTANCIA NO BANCO
-        $this->id = (new Database('db_mailings', 'user'))->insert([
+        $this->id = (new Database('db_mailings', 'company'))->insert([
             'company'  => $this->company,
-            'name' => $this->name,
-            'email' => $this->email,
-            'password'  => $this->password,
-            'status' => $this->status,
-            'nivel' => $this->nivel
+            'status' => $this->status
         ]);
 
         //SUCESSO
@@ -69,35 +45,32 @@ class Company {
     public function atualizar(): bool
     {
         //ATUALIZA O DEPOIMENTO NO BANCO DE DADOS
-        return (new Database('db_mailings', 'user'))->update('id = '. $this->id, [
-            'name'  => $this->name,
-            'email' => $this->email,
+        return (new Database('db_mailings', 'company'))->update('id = '. $this->id, [
             'company' => $this->company,
-            'status' => $this->status,
-            'nivel' => $this->nivel
+            'status' => $this->status
         ]);
     }
 
     /**
-     * Método responsável por excluir um usuário do banco de dados
+     * Método responsável por excluir uma empresa do banco de dados
      * @return boolean
      */
     public function excluir(): bool
     {
         //EXCLUI O DEPOIMENTO DO BANCO DE DADOS
-        return (new Database('usuarios'))->delete('id = '.$this->id);
+        return (new Database('company'))->delete('id = '.$this->id);
     }
 
 
     /**
-     * Método responsável por retornar um usuário com base no seu ID
+     * Método responsável por retornar uma empresa com base no seu ID
      *
      * @param integer $id
      * @return User
      */
-    public static function getUserById(int $id): User
+    public static function getCompanyById(int $id): User
     {
-        return self::getUsers(
+        return self::getCompanies(
             '*',
               '',
             'id = '.$id,
@@ -108,27 +81,11 @@ class Company {
 
 
     /**
-     * Método responsavel por retornar um usuário com base em seu e-mail
-     * @param string $email
-     * @return false|mixed|object
-     */
-    public static function getUserByEmail(string $email)
-    {
-        return self::getUsers(
-            '*',
-            '',
-            'email = "'. $email.'"',
-            '',
-            ''
-        )->fetchObject(self::class);
-    }
-
-    /**
      * Método responsável por retornar depoimentos
      */
-    public static function getUsers(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    public static function getCompanies(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
     {
-        return (new Database('db_mailings', 'user'))->select($fields, $join, $where, $order, $limit);
+        return (new Database('db_mailings', 'company'))->select($fields, $join, $where, $order, $limit);
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 use \App\Http\Response;
-use \App\Http\Controller\Admin\Adm\User\Users;
+use \App\Http\Controller\Admin\Adm\Company\Companies;
 
 //ROTA INPUT LISTA
 $obRouter->get('/empresa/lista', [
@@ -11,11 +11,34 @@ $obRouter->get('/empresa/lista', [
         'required-nivel-admin',
     ],
     function($request){
-        return new Response(200, Users::getUsersList($request));
+        return new Response(200, Companies::getCompaniesList($request));
     }
 ]);
 
-//ROTA DE EDIÇÃO DE UM USUÁRIO
+//ROTA DE EDIÇÃO DE UMA EMPRESA
+$obRouter->get('/empresa/lista/novo', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Companies::getNewCompany($request));
+    }
+]);
+
+//ROTA DE EDIÇÃO DE EMPRESA (POST)
+$obRouter->post('/empresa/lista/novo', [
+    'middlewares' => [
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Companies::setNewCompany($request));
+    }
+]);
+
+//ROTA DE EDIÇÃO DE UMA EMPRESA
 $obRouter->get('/empresa/lista/{id}/edit', [
     'middlewares' => [
         //'cache'
@@ -23,40 +46,28 @@ $obRouter->get('/empresa/lista/{id}/edit', [
         'required-nivel-admin',
     ],
     function($request, $id){
-        return new Response(200, Users::getEditUser($request, $id));
+        return new Response(200, Companies::getEditCompany($request, $id));
     }
 ]);
 
-//ROTA DE EDIÇÃO DE USUÁRIO (POST)
+//ROTA DE EDIÇÃO DE EMPRESA (POST)
 $obRouter->post('/empresa/lista/{id}/edit', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request, $id){
-        return new Response(200, Users::setEditUser($request, $id));
+        return new Response(200, Companies::setEditCompany($request, $id));
     }
 ]);
 
-
-//ROTA DE EXCLUSÃO DE UM NOVO DEPOIMENTO
-$obRouter->get('/empresa/lista/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request, $id){
-        return new Response(200, Users::getDeleteUser($request, $id));
-    }
-]);
-
-//ROTA DE EXCLUSÃO DE UM NOVO DEPOIMENTO (POST)
+//ROTA DE EXCLUSÃO DE EMPRESA (POST)
 $obRouter->post('/empresa/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request, $id){
-        return new Response(200, Users::setDeleteUser($request, $id));
+        return new Response(200, Companies::setDeleteCompany($request, $id));
     }
 ]);

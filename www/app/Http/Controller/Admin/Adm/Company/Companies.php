@@ -12,27 +12,24 @@ use App\Session\Login\Home as SessionLogin;
 class Companies extends Page {
 
     /**
-     * Método responsável por obter a renderização dos itens do usuários para a página
+     * Método responsável por obter a renderização dos itens da empresa para a página
      * @param $request $request
      */
-    public static function getListUsersItems(Request $request): string
+    public static function getListCompaniesItems(Request $request): string
     {
 
         //USUÁRIOS
         $items = '';
 
         //RESULTADOS DA PÁGINA
-        $results = EntityUser::getUsers('*', null, null, 'id DESC', '');
+        $results = EntityCompany::getCompanies('*', null, null, 'id DESC', '');
 
         //RENDERIZA O ITEM
-        while($obUsers = $results->fetchObject(EntityUser::class)){
-            $items .=  View::render('admin/adm/users/modules/user/item', [
-                'id' => $obUsers->id,
-                'company' => $obUsers->company,
-                'name' => $obUsers->name,
-                'email' => $obUsers->email,
-                'status_user' => $obUsers->status,
-                'nivel' => $obUsers->nivel
+        while($obCompanies = $results->fetchObject(EntityCompany::class)){
+            $items .=  View::render('admin/adm/company/modules/companies/item', [
+                'id' => $obCompanies->id,
+                'company' => $obCompanies->company,
+                'status' => $obCompanies->status,
             ]);
         }
 
@@ -42,52 +39,117 @@ class Companies extends Page {
     }
 
     /**
-     * Método responsável por retornar a renderização a view de listagem de usuários
+     * Método responsável por retornar a renderização a view de listagem de empresa
      * @param Request $request
      * @param string|null $errorMessage
      * @return string
      */
-    public static function getUsersList(Request $request, string $errorMessage = null): string
+    public static function getCompaniesList(Request $request, string $errorMessage = null): string
     {
 
         //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
         $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
 
 
-        //CONTEÚDO DA PÁGINA DE USUÁRIOS
-        $content = View::render('admin/adm/users/list', [
-            'itens'       => self::getListUsersItems($request),
+        //CONTEÚDO DA PÁGINA DE EMPRESA
+        $content = View::render('admin/adm/company/list', [
+            'itens'       => self::getListCompaniesItems($request),
             'status'   => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
             'Administrativo',
-            'Usuários',
-            'Lista de Usuários',
+            'Empresa',
+            'Lista de Empresa',
             $content
         );
 
     }
 
     /**
-     * Método responsável por retornar o formulário de edição de um usuário
+     * Método responsável por retornar o formulário de nova empresa
+     * @param Request $request
+     * @return string
+     */
+    public static function getNewCompany(Request $request): string
+    {
+
+        //CONTEÚDO DO FORMULÁRIO
+        $content = View::render('/admin/adm/company/form', [
+            'company' => $obCompany->company,
+            'options_status_company' => "<option value='1'>ATIVO</option>.
+                                      <option value='0'>DESATIVAR</option>",
+            'status' => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Administrativo',
+            'Empresa',
+            'Nova Empresa',
+            $content
+        );
+    }
+
+    /**
+     * Método responsável por nova empresa
+     * @param Request $request
+     * @return string
+     */
+    public static function setNewCompany(Request $request): string
+    {
+        //POST VARS
+        $postVars = $request->getPostVars();
+        $company  = $postVars['company'] ?? '';
+        $status = $postVars['status'] ?? '';
+
+        //VALIDA E-MAIL DO USUÁRIO
+        $obUser = EntityUser::getUserByEmail($email);
+        //VERIFICA SE O USUÁRIO JÁ EXISTE
+        if ($obUser instanceof EntityUser){
+            //REDIRECIONA O USUÁRIO
+            $request->getRouter()->redirect('/login/users/auth-register?status=duplicated');
+        }
+
+
+        //NOVA INSTANCIA DE USUÁRIO
+        $obUser = new EntityUser();
+        $obUser->name = $name;
+        $obUser->email = $email;
+        $obUser->password =  password_hash($password, PASSWORD_DEFAULT);
+        $obUser->status = 0; //status aguardando aprovação
+        $obUser->nivel = 0; //nivel de acesso ao sistema
+        $obUser->cadastrar();
+
+        //VERIFICA SE O USUÁRIO FOI SALVO
+        if ($obUser->id != '') {
+            //REDIRECIONA O USUÁRIO
+            $request->getRouter()->redirect('/login/users/auth-register?status=created');
+        }
+
+        //REDIRECIONA O USUÁRIO ERRO
+        $request->getRouter()->redirect('/login/users/auth-register?status=errorCreated');
+    }
+
+    /**
+     * Método responsável por retornar o formulário de edição de um empresa
      * @param Request $request
      * @param integer $id
      * @return string
      */
-    public static function getEditUser(Request $request, int $id): string
+    public static function getEditCompany(Request $request, int $id): string
     {
         //OBTÉM O USUÁRIO DO BANCO DE DADOS
-        $obUser = EntityUser::getUserById($id);
+        $obCompany = EntityCompany::getCompanyById($id);
 
         //VALIDA A INSTANCIA
-        if(!$obUser instanceof EntityUser){
+        if(!$obCompany instanceof EntityCompany){
             $request->getRouter()->redirect('/admin/adm/users/list');
         }
 
-        //VERIFICA O STATUS DO USUÁRIO E RETORNA NO SELECT
-        switch ($obUser->status) {
+        //VERIFICA O STATUS DO EMPRESA E RETORNA NO SELECT
+        switch ($obCompany->status) {
             case "0": {
                 $disabled = "selected";
                 break;
@@ -98,95 +160,50 @@ class Companies extends Page {
             }
         }
 
-        //VERIFICA O NIVEL DO USUÁRIO E RETORNA NO SELECT
-        switch ($obUser->nivel) {
-            case "1": {
-                $seller = "selected";
-                break;
-            }
-            case "2": {
-                $adm = "selected";
-                break;
-            }
-        }
-
         //CONTEÚDO DO FORMULÁRIO
-        $content = View::render('/admin/adm/users/form', [
-            'id' => $obUser->id,
-            'company' => $obUser->company,
-            'name' => $obUser->name,
-            'email' => $obUser->email,
-            'options_status_user' => "<option value='1' $active>ATIVO</option>.
+        $content = View::render('/admin/adm/company/form', [
+            'id' => $obCompany->id,
+            'company' => $obCompany->company,
+            'options_status_company' => "<option value='1' $active>ATIVO</option>.
                                       <option value='0' $disabled>DESATIVAR</option>",
-            'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
-                                      <option value='2' $adm>ADMINISTRADOR</option>",
             'status' => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
             'Administrativo',
-            'Usuários',
-            'Editar de Usuários',
+            'Empresa',
+            'Editar Empresa',
             $content
         );
     }
 
     /**
-     * Método responsável por grava a ataulização de um usuário
+     * Método responsável por grava a ataulização de um empresa
      * @param Request $request
      * @param integer $id
      * @return string
      */
-    public static function setEditUser(Request $request, int $id): string
+    public static function setEditCompany(Request $request, int $id): string
     {
-        //OBTÉM O USUÁRIO DO BANCO DE DADOS
-        $obUser = EntityUser::getUserById($id);
+        //OBTÉM O EMPRESA DO BANCO DE DADOS
+        $obCompany = EntityCompany::getCompanyById($id);
 
         //VALIDA A INSTANCIA
-        if(!$obUser instanceof EntityUser){
-            $request->getRouter()->redirect('/admin/testimonies');
+        if(!$obCompany instanceof EntityCompany){
+            $request->getRouter()->redirect('/empresa/lista');
         }
 
         //POST VARS
         $postVars = $request->getPostVars();
 
         //ATUALIZA A INSTANCIA
-        $obUser->name = $postVars['name'] ?? $obUser->name;
-        $obUser->email = $postVars['email'] ?? $obUser->email;
-        $obUser->company = $postVars['company'] ?? $obUser->company;
-        $obUser->status = $postVars['status_user'] ?? $obUser->status;
-        $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
-        $obUser->atualizar();
+        $obCompany->company = $postVars['company'] ?? $obCompany->company;
+        $obCompany->status = $postVars['status'] ?? $obCompany->status;
+        $obCompany->atualizar();
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/usuarios/lista/'.$obUser->id.'/edit?status=updated');
-    }
-
-
-    /**
-     * Método responsável por retornar o formulário de exclusão de um depoimento
-     * @param Request $request
-     * @param integer $id
-     * @return string
-     */
-    public static function getDeleteUser(Request $request, int $id): string
-    {
-        //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
-        $obTestimony = EntityUser::getTestimonyById($id);
-
-        //VALIDA A INSTANCIA
-        if(!$obTestimony instanceof EntityUser){
-            $request->getRouter()->redirect('/admin/testimonies');
-        }
-
-        //CONTEÚDO DO FORMULÁRIO
-        $content = View::render('admin/modules/testimonies/delete', [
-            'nome'     => $obTestimony->nome,
-            'mensagem' => $obTestimony->mensagem
-        ]);
-
-        return parent::getPanel('Excluir depoimento > WDEV', $content, 'testimonies');
+        $request->getRouter()->redirect('/empresa/lista/'.$obCompany->id.'/edit?status=updated');
     }
 
 
@@ -196,21 +213,21 @@ class Companies extends Page {
      * @param integer $id
      * @return string
      */
-    public static function setDeleteUser(Request $request, int $id): string
+    public static function setDeleteCompany(Request $request, int $id): string
     {
         //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
-        $obTestimony = EntityTestimony::getTestimonyById($id);
+        $obCompany = EntityCompany::getCompanyById($id);
 
         //VALIDA A INSTANCIA
-        if(!$obTestimony instanceof EntityTestimony){
-            $request->getRouter()->redirect('/admin/testimonies');
+        if(!$obCompany instanceof EntityCompany){
+            $request->getRouter()->redirect('/empresa/lista/');
         }
 
         //EXCLUI O DEPOIMENTO
-        $obTestimony->excluir();
+        $obCompany->excluir();
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/admin/testimonies?status=deleted');
+        $request->getRouter()->redirect('/empresa/lista?status=deleted');
     }
 
 
@@ -233,10 +250,13 @@ class Companies extends Page {
                 return Alert::getError('Erro :(','E-mail ou senha inválido!');
                 break;
             case 'updated':
-                return Alert::getSuccess('Sucesso','Usuário atualizado com sucesso.');
+                return Alert::getSuccess('Sucesso','Empresa atualizado com sucesso.');
+                break;
+            case 'deleted':
+                return Alert::getSuccess('Sucesso','Empresa deletada com sucesso.');
                 break;
             case 'disable':
-                return Alert::getWarning('Atenção :|','Usuário inativo no momento!');
+                return Alert::getWarning('Atenção :|','Empresa inativo no momento!');
                 break;
         }
     }
