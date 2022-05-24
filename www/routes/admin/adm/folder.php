@@ -1,10 +1,28 @@
 <?php
 
 use \App\Http\Response;
-use \App\Http\Controller\Admin\Adm\Company\Companies;
+use \App\Http\Controller\Admin\Adm\Folder\Folders as EntityFolders;
 
+//BUSCA EMPRESAS
+$resultsCompanies = EntityFolders::getListCompaniesRouter();
 
-print_r(Companies::getListCompaniesRouter());
+    while($obCompanies = $resultsCompanies->fetchObject(EntityFolders::class)){
+
+        echo $obCompanies->company;
+
+        //ROTA INPUT LISTA
+        $obRouter->get('/empresa/lista', [
+            'middlewares' => [
+                //'cache'
+                'required-admin-login',
+                'required-nivel-admin',
+            ],
+            function($request){
+                return new Response(200, Companies::getCompaniesList($request));
+            }
+        ]);
+
+    }
 exit;
 
 

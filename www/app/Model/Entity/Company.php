@@ -62,6 +62,22 @@ class Company {
     }
 
     /**
+     * Método responsável por buscar todas as empresas
+     *
+     * @return false|mixed|object
+     */
+    public static function getAllCompanies()
+    {
+        return self::getCompanies(
+            '*',
+            '',
+            '',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
      * Método responsável por verifica o nome da empresa
      *
      * @param string $name
