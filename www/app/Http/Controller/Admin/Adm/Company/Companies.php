@@ -105,31 +105,28 @@ class Companies extends Page {
         $status = $postVars['status'] ?? '';
 
         //VALIDA E-MAIL DO USUÁRIO
-        $obUser = EntityUser::getUserByEmail($email);
+        $obCompany = EntityCompany::getCompanyName($company);
+
         //VERIFICA SE O USUÁRIO JÁ EXISTE
-        if ($obUser instanceof EntityUser){
+        if ($obCompany != ''){
             //REDIRECIONA O USUÁRIO
-            $request->getRouter()->redirect('/login/users/auth-register?status=duplicated');
+            $request->getRouter()->redirect('/empresa/lista?status=duplicated');
         }
 
-
         //NOVA INSTANCIA DE USUÁRIO
-        $obUser = new EntityUser();
-        $obUser->name = $name;
-        $obUser->email = $email;
-        $obUser->password =  password_hash($password, PASSWORD_DEFAULT);
-        $obUser->status = 0; //status aguardando aprovação
-        $obUser->nivel = 0; //nivel de acesso ao sistema
-        $obUser->cadastrar();
+        $obCompany = new EntityCompany();
+        $obCompany->company = $company;
+        $obCompany->status = 1; //status aguardando aprovação
+        $obCompany->cadastrar();
 
         //VERIFICA SE O USUÁRIO FOI SALVO
-        if ($obUser->id != '') {
+        if ($obCompany->id != '') {
             //REDIRECIONA O USUÁRIO
-            $request->getRouter()->redirect('/login/users/auth-register?status=created');
+            $request->getRouter()->redirect('/empresa/lista?status=created');
         }
 
         //REDIRECIONA O USUÁRIO ERRO
-        $request->getRouter()->redirect('/login/users/auth-register?status=errorCreated');
+        $request->getRouter()->redirect('/empresa/lista?status=errorCreated');
     }
 
     /**
@@ -249,6 +246,9 @@ class Companies extends Page {
             case 'invalid':
                 return Alert::getError('Erro :(','E-mail ou senha inválido!');
                 break;
+            case 'created':
+                return Alert::getSuccess('Sucesso','Empresa salva com sucesso.');
+                break;
             case 'updated':
                 return Alert::getSuccess('Sucesso','Empresa atualizado com sucesso.');
                 break;
@@ -257,6 +257,9 @@ class Companies extends Page {
                 break;
             case 'disable':
                 return Alert::getWarning('Atenção :|','Empresa inativo no momento!');
+                break;
+            case 'duplicated':
+                return Alert::getWarning('Atenção :|','Empresa já cadastrada!');
                 break;
         }
     }

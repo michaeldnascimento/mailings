@@ -11,3 +11,4 @@ include __DIR__ . '/admin/seller/result.php';
 include __DIR__ . '/admin/adm/input.php';
 include __DIR__ . '/admin/adm/users.php';
 include __DIR__ . '/admin/adm/company.php';
+include __DIR__ . '/admin/adm/directory.php';

@@ -61,14 +61,31 @@ class Company {
         return (new Database('company'))->delete('id = '.$this->id);
     }
 
+    /**
+     * Método responsável por verifica o nome da empresa
+     *
+     * @param string $name
+     * @return false|mixed|object
+     */
+    public static function getCompanyName(string $name)
+    {
+        return self::getCompanies(
+            '*',
+            '',
+            'company = "'. $name.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
 
     /**
      * Método responsável por retornar uma empresa com base no seu ID
      *
      * @param integer $id
-     * @return User
+     * @return Company
      */
-    public static function getCompanyById(int $id): User
+    public static function getCompanyById(int $id): Company
     {
         return self::getCompanies(
             '*',
