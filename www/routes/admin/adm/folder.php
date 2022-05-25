@@ -1,96 +1,37 @@
 <?php
 
 use \App\Http\Response;
-use \App\Http\Controller\Admin\Adm\Folder\Folders as EntityFolders;
+use \App\Http\Controller\Admin\Adm\Folder\Folders;
 
 //BUSCA EMPRESAS
-$resultsCompanies = EntityFolders::getListCompaniesRouter();
+$resultsCompanies = Folders::getListCompaniesRouter();
 
-    while($obCompanies = $resultsCompanies->fetchObject(EntityFolders::class)){
+while($obCompanies = $resultsCompanies->fetchObject(Folders::class)){
 
-        echo $obCompanies->company;
+    //ID PASTA
+    $folder_id = $obCompanies->id;
 
-        //ROTA INPUT LISTA
-        $obRouter->get('/empresa/lista', [
-            'middlewares' => [
-                //'cache'
-                'required-admin-login',
-                'required-nivel-admin',
-            ],
-            function($request){
-                return new Response(200, Companies::getCompaniesList($request));
-            }
-        ]);
+    //ROTA GET PASTA
+    $obRouter->get("/pasta/$folder_id", [
+        'middlewares' => [
+            //'cache'
+            'required-admin-login',
+            'required-nivel-admin',
+        ],
+        function($request, $folder_id){
+            return new Response(200, Folders::getFoldersList($request, $folder_id));
+        }
+    ]);
 
-    }
-exit;
+    $obRouter->post("/pasta/$folder_id", [
+        'middlewares' => [
+            //'cache'
+            'required-admin-login',
+            'required-nivel-admin',
+        ],
+        function($request, $folder_id){
+            return new Response(200, Folders::setFoldersDownloads($request, $folder_id));
+        }
+    ]);
 
-
-//ROTA INPUT LISTA
-$obRouter->get('/empresa/lista', [
-    'middlewares' => [
-        //'cache'
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request){
-        return new Response(200, Companies::getCompaniesList($request));
-    }
-]);
-
-//ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/empresa/lista/novo', [
-    'middlewares' => [
-        //'cache'
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request){
-        return new Response(200, Companies::getNewCompany($request));
-    }
-]);
-
-//ROTA DE EDIÇÃO DE EMPRESA (POST)
-$obRouter->post('/empresa/lista/novo', [
-    'middlewares' => [
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request){
-        return new Response(200, Companies::setNewCompany($request));
-    }
-]);
-
-//ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/empresa/lista/{id}/edit', [
-    'middlewares' => [
-        //'cache'
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request, $id){
-        return new Response(200, Companies::getEditCompany($request, $id));
-    }
-]);
-
-//ROTA DE EDIÇÃO DE EMPRESA (POST)
-$obRouter->post('/empresa/lista/{id}/edit', [
-    'middlewares' => [
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request, $id){
-        return new Response(200, Companies::setEditCompany($request, $id));
-    }
-]);
-
-//ROTA DE EXCLUSÃO DE EMPRESA (POST)
-$obRouter->post('/empresa/lista/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login',
-        'required-nivel-admin',
-    ],
-    function($request, $id){
-        return new Response(200, Companies::setDeleteCompany($request, $id));
-    }
-]);
+}

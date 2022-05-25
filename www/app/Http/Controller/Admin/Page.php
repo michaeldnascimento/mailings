@@ -6,6 +6,7 @@ use \App\Utils\View;
 use \App\Db\Pagination;
 use \App\Http\Request;
 use \App\Session\Admin\Nivel as SessionNivel;
+use \App\Http\Controller\Admin\Adm\Folder\Folders;
 
 class Page {
 
@@ -48,9 +49,33 @@ class Page {
             $valueDisplay = "none";
         }
 
+        //BUSCA EMPRESAS
+        $resultsCompanies = Folders::getListCompaniesRouter();
+
+        while($obCompanies = $resultsCompanies->fetchObject(Folders::class)) {
+
+            //ID PASTA
+            $folder_id = $obCompanies->id;
+            $folder_company = $obCompanies->company;
+
+            $folders .= "<li class='sidebar-item  has-sub'>
+                        <a href='#' class='sidebar-link'>
+                            <i class='bi bi-person-lines-fill'></i>
+                            <span>$folder_company</span>
+                        </a>
+                        <ul class='submenu'>
+                            <li class='submenu-item'>
+                                <a href='/pasta/$folder_id'>Arquivos</a>
+                            </li>
+                        </ul>
+                    </li>";
+
+        }
+
         //CARREGA SIDEBAR
         return View::render('admin/layouts/sidebar',[
             'display' => "style=display:$valueDisplay",
+            'folders' => $folders,
         ]);
     }
 

@@ -1,0 +1,50 @@
+<tr>
+    <td>{{id}}</td>
+    <td>{{company}}</td>
+    <td>{{status}}</td>
+    <td>
+        <a href="{{URL}}/empresa/lista/{{id}}/edit">
+            <button type="button" class="btn btn-sm btn-primary">Editar</button>
+        </a>
+        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" id_mailing="{{id}}">
+            Excluir
+        </button>
+    </td>
+</tr>
+
+
+
+<!--Danger theme Modal -->
+<div class="modal fade text-left" id="delete" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel120" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+         role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title white" id="myModalLabel120">Remover Empresa
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <form action="{{URL}}/empresa/lista/{{id}}/delete" method="post">
+            <div class="modal-body">
+                Deseja realmente remover essa empresa ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary"
+                        data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Fechar</span>
+                </button>
+                <button type="button" class="btn btn-danger ml-1"
+                        data-bs-dismiss="modal">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Sim</span>
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
