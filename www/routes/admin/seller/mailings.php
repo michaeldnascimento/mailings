@@ -8,6 +8,7 @@ $obRouter->get('/vendedor/mailings/lista1', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListMailing::getList($request, 'lista1'));
@@ -19,6 +20,7 @@ $obRouter->post('/vendedor/mailings/lista1/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListMailing::setList($request, 'lista1'));
@@ -30,6 +32,7 @@ $obRouter->get('/vendedor/mailings/lista2', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListMailing::getList2($request));
@@ -41,6 +44,7 @@ $obRouter->post('/vendedor/mailings/tabula/?{list}', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request, $list){
         return new Response(200, ListMailing::statusMailing($request, $list, $_POST['id']));

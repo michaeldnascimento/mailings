@@ -13,7 +13,7 @@ while($obCompanies = $resultsCompanies->fetchObject(Folders::class)){
         'middlewares' => [
             //'cache'
             'required-admin-login',
-            'required-nivel-admin',
+            'required-nivel-company',
         ],
         function($request, $folder_id){
             return new Response(200, Folders::getFoldersList($request, $folder_id));

@@ -43,10 +43,22 @@ class Page {
     {
 
         //VERIFICA O NIVEL DE ACESSO
+        if (SessionNivel::getNivelSession() == 3){
+            $valueDisplayAdm     = "block";
+            $valueDisplayCompany = "block";
+            $valueDisplaySeller  = "block";
+        }
+
         if (SessionNivel::getNivelSession() == 2){
-            $valueDisplay = "block";
-        }else{
-            $valueDisplay = "none";
+            $valueDisplayAdm     = "none";
+            $valueDisplayCompany = "block";
+            $valueDisplaySeller  = "none";
+        }
+
+        if (SessionNivel::getNivelSession() == 1){
+            $valueDisplayAdm     = "none";
+            $valueDisplayCompany = "none";
+            $valueDisplaySeller  = "block";
         }
 
         //BUSCA EMPRESAS
@@ -58,7 +70,7 @@ class Page {
             $folder_id = $obCompanies->id;
             $folder_company = $obCompanies->company;
 
-            $folders .= "<li class='sidebar-item  has-sub'>
+            $folders .= "<li style='display:$valueDisplayCompany' class='sidebar-item  has-sub'>
                         <a href='#' class='sidebar-link'>
                             <i class='bi bi-person-lines-fill'></i>
                             <span>$folder_company</span>
@@ -74,7 +86,9 @@ class Page {
 
         //CARREGA SIDEBAR
         return View::render('admin/layouts/sidebar',[
-            'display' => "style=display:$valueDisplay",
+            'display_adm' => "style=display:$valueDisplayAdm",
+            'display_company' => "style=display:$valueDisplayCompany",
+            'display_seller' => "style=display:$valueDisplaySeller",
             'folders' => $folders,
         ]);
     }

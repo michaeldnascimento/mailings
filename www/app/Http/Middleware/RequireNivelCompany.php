@@ -7,7 +7,7 @@ use \App\Http\Response;
 use \App\Session\Admin\Nivel as SessionNivel;
 use Closure;
 
-class RequireNivelAdmin {
+class RequireNivelCompany {
 
     /**
      * Método responsável por executar o middleware
@@ -19,7 +19,7 @@ class RequireNivelAdmin {
     {
 
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
-        if(SessionNivel::getNivelSession() != 3){
+        if(SessionNivel::getNivelSession() == 1){
             $request->getRouter()->redirect('/?status=routeInvalid');
         }
 

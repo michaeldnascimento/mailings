@@ -6,6 +6,7 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\User as EntityUser;
+use App\Http\Controller\Admin\Adm\Company\Companies;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
@@ -32,7 +33,8 @@ class Users extends Page {
                 'name' => $obUsers->name,
                 'email' => $obUsers->email,
                 'status_user' => $obUsers->status,
-                'nivel' => $obUsers->nivel
+                'nivel' => $obUsers->nivel,
+                'companies' => $obUsers->companies
             ]);
         }
 
@@ -105,21 +107,45 @@ class Users extends Page {
                 break;
             }
             case "2": {
+                $company = "selected";
+                break;
+            }
+            case "3": {
                 $adm = "selected";
                 break;
             }
         }
 
+        //RETORNA EMPRESA
+        $companies = Companies::getListCompaniesArray($request);
+
+        //CRIA O CAMPO SELECT EMPRESA
+        $select_company = "";
+        foreach ($companies as $key => $col):
+            $obj = (Object)$col;
+
+            //VERIFICA O ID PARA SELECIONAR O OPTION
+            if ($obj->id == $obUser->companies){
+                $check = "selected";
+            }else{
+                $check = '';
+            }
+
+            $select_company .= "<option value='$obj->id' $check>$obj->company</option>";
+        endforeach;
+
         //CONTEÚDO DO FORMULÁRIO
         $content = View::render('/admin/adm/users/form', [
             'id' => $obUser->id,
-            'company' => $obUser->company,
+            'company' => 1,
             'name' => $obUser->name,
             'email' => $obUser->email,
             'options_status_user' => "<option value='1' $active>ATIVO</option>.
                                       <option value='0' $disabled>DESATIVAR</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
-                                      <option value='2' $adm>ADMINISTRADOR</option>",
+                                      <option value='2' $company>EMPRESA</option>.
+                                      <option value='3' $adm>ADMINISTRADOR</option>",
+            'companies' => $select_company,
             'status' => self::getStatus($request)
         ]);
 
@@ -154,9 +180,10 @@ class Users extends Page {
         //ATUALIZA A INSTANCIA
         $obUser->name = $postVars['name'] ?? $obUser->name;
         $obUser->email = $postVars['email'] ?? $obUser->email;
-        $obUser->company = $postVars['company'] ?? $obUser->company;
+        $obUser->company = 1;
         $obUser->status = $postVars['status_user'] ?? $obUser->status;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
+        $obUser->companies = $postVars['companies'] ?? $obUser->companies;
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO

@@ -8,6 +8,7 @@ $obRouter->get('/vendedor/resultados/vendas', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListResult::getSales($request));
@@ -19,6 +20,7 @@ $obRouter->get('/vendedor/resultados/follow', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListResult::getFollow($request));
@@ -30,6 +32,7 @@ $obRouter->get('/vendedor/resultados/geral', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
+        'required-nivel-seller',
     ],
     function($request){
         return new Response(200, ListResult::getSellerResultAll($request));

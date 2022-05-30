@@ -20,9 +20,9 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-title">Vendedor</li>
+                    <li {{display_seller}} class="sidebar-title">Vendedor</li>
 
-                    <li class="sidebar-item  has-sub">
+                    <li {{display_seller}} class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-lines-fill"></i>
                             <span>Mailings</span>
@@ -37,7 +37,7 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item has-sub">
+                    <li {{display_seller}} class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-bar-chart-fill"></i>
                             <span>Resultados</span>
@@ -55,14 +55,14 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-title">Pastas</li>
+                    <li {{display_company}} class="sidebar-title">Pastas</li>
 
                     {{folders}}
 
 
-                    <li {{display}} class="sidebar-title">Administrativo</li>
+                    <li {{display_adm}} class="sidebar-title">Administrativo</li>
 
-                    <li {{display}} class="sidebar-item has-sub">
+                    <li {{display_adm}} class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-file-earmark-excel-fill"></i>
                             <span>Inputs</span>
@@ -77,21 +77,21 @@
                         </ul>
                     </li>
 
-                    <li {{display}} class="sidebar-item  ">
+                    <li {{display_adm}} class="sidebar-item  ">
                         <a href="{{URL}}/usuarios/lista" class='sidebar-link'>
                             <i class="bi bi-person-badge-fill"></i>
                             <span>Usuários</span>
                         </a>
                     </li>
 
-                    <li {{display}} class="sidebar-item  ">
+                    <li {{display_adm}} class="sidebar-item  ">
                         <a href="{{URL}}/empresa/lista" class='sidebar-link'>
                             <i class="bi bi-building"></i>
                             <span>Empresa</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item  ">
+                    <li class="sidebar-item">
                         <a href="{{URL}}/login/logout" class='sidebar-link'>
                             <i class="bi bi-backspace-fill"></i>
                             <span>Sair</span>

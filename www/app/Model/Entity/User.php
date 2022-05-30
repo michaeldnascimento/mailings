@@ -43,6 +43,11 @@ class User {
     */
     public string $nivel;
 
+    /*
+    * ID Companies
+    */
+    public ?int $companies = null;
+
     /**
      * Método responsável por cadastrar a instancia atual no banco de dados
      * @return bool
@@ -56,7 +61,8 @@ class User {
             'email' => $this->email,
             'password'  => $this->password,
             'status' => $this->status,
-            'nivel' => $this->nivel
+            'nivel' => $this->nivel,
+            'companies' => $this->companies
         ]);
 
         //SUCESSO
@@ -74,7 +80,8 @@ class User {
             'email' => $this->email,
             'company' => $this->company,
             'status' => $this->status,
-            'nivel' => $this->nivel
+            'nivel' => $this->nivel,
+            'companies' => $this->companies
         ]);
     }
 
