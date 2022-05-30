@@ -1,35 +1,7 @@
 {{status}}
-<!-- Basic Tables start -->
-<section class="section">
-    <div class="card">
-        <div class="card-header">
-            <div style="text-align: right">
-                <a href="{{URL}}/empresa/lista/novo" style="text-align: right">
-                    <button type="button" class="btn btn-sm btn-success">Nova Empresa</button>
-                </a>
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table" id="table_users">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Empresa</th>
-                    <th>Status</th>
-                    <th style="width: 200px;">Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {{itens}}
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</section>
-<!-- Basic Tables end -->
+<!-- Lista -->
+{{files_list}}
+<!-- Lista -->
 <script src="{{URL}}/resources/assets/vendors/jquery/jquery.min.js"></script>
 <script src="{{URL}}/resources/assets/vendors/jquery-datatables/jquery.dataTables.min.js"></script>
 <script src="{{URL}}/resources/assets/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js"></script>

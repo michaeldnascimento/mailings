@@ -6,6 +6,7 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\Company as EntityCompany;
+use App\Model\Entity\Files as EntityFiles;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
@@ -34,14 +35,15 @@ class Folders extends Page
         $items = '';
 
         //RESULTADOS DA PÁGINA
-        $results = EntityCompany::getCompanies('*', null, null, 'id DESC', '');
+        $results = EntityFiles::getFiles("*, date_format(date_created, '%d/%m/%Y %Hh%i') as date_created ", null, "id_company = $id", 'date_created desc', '');
 
         //RENDERIZA O ITEM
-        while($obCompanies = $results->fetchObject(EntityCompany::class)){
+        while($obFiles = $results->fetchObject(EntityFiles::class)){
             $items .=  View::render('admin/adm/folder/modules/folders/item', [
-                'id' => $obCompanies->id,
-                'company' => $obCompanies->company,
-                'status' => $obCompanies->status,
+                'id' => $obFiles->id,
+                'description' => strtoupper($obFiles->description),
+                'path' => $obFiles->path,
+                'date_created' => $obFiles->date_created,
             ]);
         }
 
@@ -66,7 +68,7 @@ class Folders extends Page
 
         //CONTEÚDO DA PÁGINA DE EMPRESA
         $content = View::render('admin/adm/folder/list', [
-            'itens'       => self::getListFolderItems($request, $id),
+            'files_list' => self::getListFolderItems($request, $id),
             'status'   => self::getStatus($request)
         ]);
 

@@ -231,26 +231,14 @@ class Companies extends Page {
      * Método responsável por obter a renderização dos itens da empresa para a página
      * @param $request $request
      */
-    public static function getListCompaniesArray(Request $request): string
+    public static function getListCompaniesArray(Request $request): array
     {
-
-        //USUÁRIOS
-        $items = '';
 
         //RESULTADOS DA PÁGINA
         $results = EntityCompany::getCompanies('*', null, null, 'id DESC', '');
 
-        //RENDERIZA O ITEM
-        while($obCompanies = $results->fetchObject(EntityCompany::class)){
-            $items .=  View::render('admin/adm/company/modules/companies/item', [
-                'id' => $obCompanies->id,
-                'company' => $obCompanies->company,
-                'status' => $obCompanies->status,
-            ]);
-        }
-
-        //RETORNA OS USUÁRIOS
-        return $items;
+        //RETORNA ITEM EMPRESA
+        return $results->fetchAll();
 
     }
 

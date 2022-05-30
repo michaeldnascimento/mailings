@@ -11,20 +11,19 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form method="post" action="{{URL}}/adm/input/mailings" enctype="multipart/form-data">
+                                    <form method="post" action="{{URL}}/adm/input/empresas" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <h6>Lista Mailings</h6>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <label class="form-label">Empresa</label>
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="inputList" required>
+                                                <select class="form-select" id="basicSelect" name="inputCompany" required>
                                                     <option value="">Selecione a lista</option>
-                                                    <option value="lista1">Lista 1</option>
-                                                    <option value="lista2">Lista 2</option>
+                                                    {{companies}}
                                                 </select>
                                             </fieldset>
                                         </div>
-                                        <div class="col-md-6 mb-4">
-                                            <h6>.CSV</h6>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <label class="form-label">.CSV</label>
                                             <fieldset class="form-group">
                                                 <div class="mb-3">
                                                     <input type="hidden" name="MAX_FILE_SIZE" value="300000">
@@ -32,7 +31,11 @@
                                                 </div>
                                             </fieldset>
                                         </div>
-                                        <div class="col-12 d-flex justify-content-end">
+                                        <div class="form-group col-md-12 mb-4">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Descrição Arquivo</label>
+                                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" style="height: 90px;"></textarea>
+                                        </div>
+                                        <div class="form-group col-12 d-flex justify-content-end mb-4">
                                             <button type="submit" class="btn btn-primary me-2 mb-2">Enviar</button>
                                             <button type="reset"
                                                     class="btn btn-light-secondary me-2 mb-2">Limpar</button>

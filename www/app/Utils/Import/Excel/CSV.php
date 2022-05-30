@@ -24,7 +24,7 @@ class CSV {
         }
 
         //PASTA DE ARQUIVOS
-        $dir = "./resources/docs/excel/";
+        $dir = "./resources/docs/excel/mailings/";
 
         //NOME ORIGINAL DO ARQUIVO
         $originalFilename = basename($inputCSV["name"]);
