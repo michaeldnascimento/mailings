@@ -59,6 +59,7 @@ class User extends Page {
 
         //POST VARS
         $postVars = $request->getPostVars();
+        $company  = 1;
         $name  = $postVars['name'] ?? '';
         $email  = $postVars['email'] ?? '';
         $password = $postVars['password'] ?? '';
@@ -81,6 +82,7 @@ class User extends Page {
 
         //NOVA INSTANCIA DE USUÁRIO
         $obUser = new EntityUser();
+        $obUser->company = $company;
         $obUser->name = $name;
         $obUser->email = $email;
         $obUser->password =  password_hash($password, PASSWORD_DEFAULT);
