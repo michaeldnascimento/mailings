@@ -64,11 +64,20 @@ class Page {
         //BUSCA EMPRESAS
         $resultsCompanies = Folders::getListCompaniesRouter();
 
+        //RECEBE NUMERO EMPRESA NA SESSÃO
+        $companies = $_SESSION['mailings']['admin']['user']['companies'];
+
+
         while($obCompanies = $resultsCompanies->fetchObject(Folders::class)) {
 
             //ID PASTA
             $folder_id = $obCompanies->id;
             $folder_company = $obCompanies->company;
+
+            //VERIFICA EMPRESA USUÁRIO
+            if(SessionNivel::getNivelSession() == 2 AND $companies != $folder_id){
+                $valueDisplayCompany = "none";
+            }
 
             $folders .= "<li style='display:$valueDisplayCompany' class='sidebar-item  has-sub'>
                         <a href='#' class='sidebar-link'>

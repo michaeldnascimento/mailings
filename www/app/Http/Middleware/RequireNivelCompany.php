@@ -23,6 +23,18 @@ class RequireNivelCompany {
             $request->getRouter()->redirect('/?status=routeInvalid');
         }
 
+        //RECEBE NUMERO EMPRESA NA SESSÃO
+        $companies = $_SESSION['mailings']['admin']['user']['companies'];
+
+        //RECEBER A URI E REMOVER STRING
+        $uri_number = (filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_NUMBER_INT));
+
+
+        //VERIFICA EMPRESA USUÁRIO
+        if(SessionNivel::getNivelSession() == 2 AND $companies != $uri_number){
+            $request->getRouter()->redirect('/?status=companyInvalid');
+        }
+
         //CONTINUA A EXECUÇÃO
         return $next($request);
 

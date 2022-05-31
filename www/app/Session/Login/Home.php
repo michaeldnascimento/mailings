@@ -34,7 +34,8 @@ class Home {
             'name'  => $obUser->name,
             'email' => $obUser->email,
             'company' => $obUser->company,
-            'nivel' => $obUser->nivel
+            'nivel' => $obUser->nivel,
+            'companies' => $obUser->companies
         ];
 
         //SUCESSO

@@ -56,6 +56,9 @@ class Dashboard extends Page {
             case 'routeInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota!');
                 break;
+            case 'companyInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota da empresa!');
+                break;
         }
     }
 
