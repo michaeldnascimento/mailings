@@ -121,6 +121,7 @@ class Users extends Page {
 
         //CRIA O CAMPO SELECT EMPRESA
         $select_company = "";
+        $companies_disabled= "";
         foreach ($companies as $key => $col):
             $obj = (Object)$col;
 
@@ -129,6 +130,12 @@ class Users extends Page {
                 $check = "selected";
             }else{
                 $check = '';
+            }
+
+            if ($obUser->nivel != 2){
+                $companies_disabled = "disabled";
+            }else{
+                $companies_disabled = '';
             }
 
             $select_company .= "<option value='$obj->id' $check>$obj->company</option>";
@@ -146,6 +153,7 @@ class Users extends Page {
                                       <option value='2' $company>EMPRESA</option>.
                                       <option value='3' $adm>ADMINISTRADOR</option>",
             'companies' => $select_company,
+            'companies_disabled' => $companies_disabled,
             'status' => self::getStatus($request)
         ]);
 
