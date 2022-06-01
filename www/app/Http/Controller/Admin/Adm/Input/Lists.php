@@ -55,11 +55,11 @@ class Lists extends Page {
         //VERIFICA A VALIDAÇÃO DE SENHA
         if ($resultImport == true){
             //REDIRECIONA O USUÁRIO
-            $request->getRouter()->redirect('/adm/input/listas?status=successImport');
+            $request->getRouter()->redirect('/adm/input/mailings?status=successImport');
         }
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/adm/input/listas?status=errorImport');
+        $request->getRouter()->redirect('/adm/input/mailings?status=errorImport');
 
     }
 

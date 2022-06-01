@@ -125,6 +125,7 @@ class Mailing {
             'num' => $this->num,
             'compl'  => $this->compl,
             'bairro' => $this->bairro,
+            'cidade' => $this->cidade,
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,

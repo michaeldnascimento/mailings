@@ -76,10 +76,12 @@ class Page {
 
             //VERIFICA EMPRESA USUÁRIO
             if(SessionNivel::getNivelSession() == 2 AND $companies != $folder_id){
-                $valueDisplayCompany = "none";
+                $valueDisplayCompanyWhile = "none";
+            }else{
+                $valueDisplayCompanyWhile = "block";
             }
 
-            $folders .= "<li style='display:$valueDisplayCompany' class='sidebar-item  has-sub'>
+            $folders .= "<li style='display:$valueDisplayCompanyWhile' class='sidebar-item  has-sub'>
                         <a href='#' class='sidebar-link'>
                             <i class='bi bi-person-lines-fill'></i>
                             <span>$folder_company</span>

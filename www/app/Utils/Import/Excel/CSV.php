@@ -20,11 +20,11 @@ class CSV {
 
         //VERIFICA SE EXISTE O ARQUIVO
         if ($inputCSV == ''){
-            $request->getRouter()->redirect('/adm/input/listas?status=nullCSV');
+            $request->getRouter()->redirect('/adm/input/mailings?status=nullCSV');
         }
 
         //PASTA DE ARQUIVOS
-        $dir = "./resources/docs/excel/mailings/";
+        $dir = "./resources/docs/excel/";
 
         //NOME ORIGINAL DO ARQUIVO
         $originalFilename = basename($inputCSV["name"]);
@@ -32,7 +32,7 @@ class CSV {
 
         //VERIFICA SE A EXTENSÃO É CSV
         if ($fileExtension != 'csv'){
-            $request->getRouter()->redirect('/adm/input/listas?status=erroExtension');
+            $request->getRouter()->redirect('/adm/input/mailings?status=erroExtension');
         }
 
 
@@ -47,7 +47,7 @@ class CSV {
             $arquivo = fopen("$dir", "r");
 
             $fist = true;
-            while (($linha = fgetcsv($arquivo, 1000, ",")) !== FALSE) {
+            while (($linha = fgetcsv($arquivo, 1000, ";")) !== FALSE) {
 
                 /** Para pular a primeira linha(cabeçaçho) do csv, e se true (primeira vez) executa o "continue;" que pula para a proxima linha do CSV */
                 if ($fist) {
@@ -76,7 +76,7 @@ class CSV {
             fclose($arquivo);
 
         } else {
-            $request->getRouter()->redirect('/adm/input/listas?status=erroMove');
+            $request->getRouter()->redirect('/adm/input/mailings?status=erroMove');
         }
 
         return true;
