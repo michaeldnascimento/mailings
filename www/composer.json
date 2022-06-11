@@ -10,6 +10,7 @@
     "ext-json": "*",
     "firebase/php-jwt": "^5.4",
     "ext-mysqli": "*",
-    "datatables/datatables": "1.10.21"
+    "datatables/datatables": "1.10.21",
+    "ext-ftp": "*"
   }
 }

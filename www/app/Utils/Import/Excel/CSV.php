@@ -47,7 +47,7 @@ class CSV {
             $arquivo = fopen("$dir", "r");
 
             $fist = true;
-            while (($linha = fgetcsv($arquivo, 1000, ";")) !== FALSE) {
+            while (($linha = fgetcsv($arquivo, 0, ";")) !== FALSE) {
 
                 /** Para pular a primeira linha(cabeçaçho) do csv, e se true (primeira vez) executa o "continue;" que pula para a proxima linha do CSV */
                 if ($fist) {

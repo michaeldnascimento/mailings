@@ -59,12 +59,14 @@ class Files extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //RESULTADOS DA PÁGINA
-        $resultImport = Update::importFilesCompany($request, $_FILES["inputCSV"], $postVars['inputCompany'], $postVars['description']);
+        //INPUT ARQUIVO
+        //$resultImport = Update::importFilesCompany($request, $_FILES["inputCSV"], $postVars['inputCompany'], $postVars['description']); //INPUT ARQUIVO CSV
+        //$resultImport = Update::ftp_file_put_contents($_FILES["inputCSV"], $postVars['inputCompany']); //INPUT ARQUIVO CSV VIA FTP
+        $resultImport = Update::importNameFileCompany($request, $postVars["inputCSV"], $postVars['inputCompany'], $postVars['description']); //ENVIANDO APENAS NOME ARQUIVO
 
 
         //VERIFICA A VALIDAÇÃO DE SENHA
-        if ($resultImport == true){
+        if ($resultImport){
             //REDIRECIONA O USUÁRIO
             $request->getRouter()->redirect('/adm/input/empresas?status=successImport');
         }
