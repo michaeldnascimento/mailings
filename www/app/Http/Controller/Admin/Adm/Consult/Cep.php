@@ -5,41 +5,38 @@ namespace App\Http\Controller\Admin\Adm\Consult;
 use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
-use App\Model\Entity\User as EntityUser;
-use App\Http\Controller\Admin\Adm\Company\Companies;
+use App\Model\Entity\Cep as EntityCep;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
 class Cep extends Page {
 
     /**
-     * Método responsável por obter a renderização dos itens do usuários para a página
-     * @param $request $request
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
      */
-    public static function getCepNet(Request $request, string $cep): string
+    public static function getCepNetNascional(string $cep): string
     {
-
-        echo $cep;
-        exit;
 
         //USUÁRIOS
         $items = '';
 
         //RESULTADOS DA PÁGINA
-        $results = EntityUser::getUsers('*', null, null, 'id DESC', '');
+        $results = EntityCep::getCepNetNacional($cep);
+
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+        }
 
         //RENDERIZA O ITEM
-        while($obUsers = $results->fetchObject(EntityUser::class)){
-            $items .=  View::render('admin/adm/consult/modules/net/item', [
-                'id' => $obUsers->id,
-                'company' => $obUsers->company,
-                'name' => $obUsers->name,
-                'email' => $obUsers->email,
-                'status_user' => $obUsers->status,
-                'nivel' => $obUsers->nivel,
-                'companies' => $obUsers->companies
-            ]);
-        }
+        $items .=  View::render('admin/adm/consult/modules/operadoras/net/item', [
+            //RETORNA A MENSAGEM
+            'result' => $msg
+        ]);
+
 
         //RETORNA OS USUÁRIOS
         return $items;
@@ -68,7 +65,7 @@ class Cep extends Page {
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep_post', [
             'cep'           => $cep,
-            'net_list'      => self::getCepNet($request, $cep),
+            'net_list'      => self::getCepNetNascional($cep),
             //'algar_list'    => self::getListCepItems($request, $id),
             //'tim_list'      => self::getListCepItems($request, $id),
             //'vivo_list'     => self::getListCepItems($request, $id),

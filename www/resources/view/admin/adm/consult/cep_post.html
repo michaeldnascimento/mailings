@@ -6,31 +6,30 @@
         </div>
 
         <div class="card-body">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="helpInputTop">CEP:</label>
-                            <small class="text-muted"><i>12345-000</i></small>
-                            <input type="text" class="form-control" name="email" value="{{cep}}" id="helpInputTop">
-                        </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success me-2 mb-2">Consultar</button>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="helpInputTop">CEP:</label>
+                        <small class="text-muted"><i>12345-000</i></small>
+                        <input type="text" class="form-control" name="email" value="{{cep}}" id="helpInputTop" disabled>
                     </div>
                 </div>
-            </form>
+                <div class="col-12 d-flex justify-content-end">
+                    <a href="{{URL}}/consulta/cep" class="btn btn-primary me-2 mb-2">Nova Consulta</a>
+                </div>
+            </div>
         </div>
 
     </div>
 </section>
 
-        <!-- Lista -->
-        {{algar_list}}
-        <!-- Lista -->
 
         <!-- Lista -->
         {{net_list}}
+        <!-- Lista -->
+
+        <!-- Lista -->
+        {{algar_list}}
         <!-- Lista -->
 
         <!-- Lista -->
