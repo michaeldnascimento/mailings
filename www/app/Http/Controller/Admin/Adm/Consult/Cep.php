@@ -16,7 +16,71 @@ class Cep extends Page {
      * @param string $cep
      * @return string
      */
-    public static function getCepNetNascional(string $cep): string
+    public static function getCepVivo(string $cep): string
+    {
+
+        //USUÁRIOS
+        $items = '';
+
+        //RESULTADOS DA PÁGINA
+        $results = EntityCep::getCepVivoSP($cep);
+
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+        }
+
+        //RENDERIZA O ITEM
+        $items .=  View::render('admin/adm/consult/modules/operadoras/vivo/item', [
+            //RETORNA A MENSAGEM
+            'result' => $msg
+        ]);
+
+
+        //RETORNA OS USUÁRIOS
+        return $items;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
+    public static function getCepTim(string $cep): string
+    {
+
+        //USUÁRIOS
+        $items = '';
+
+        //RESULTADOS DA PÁGINA
+        $results = EntityCep::getCepTim1($cep);
+
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+        }
+
+        //RENDERIZA O ITEM
+        $items .=  View::render('admin/adm/consult/modules/operadoras/tim/item', [
+            //RETORNA A MENSAGEM
+            'result' => $msg
+        ]);
+
+
+        //RETORNA OS USUÁRIOS
+        return $items;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
+    public static function getCepNetNacional(string $cep): string
     {
 
         //USUÁRIOS
@@ -65,7 +129,9 @@ class Cep extends Page {
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep_post', [
             'cep'           => $cep,
-            'net_list'      => self::getCepNetNascional($cep),
+            'net_list'      => self::getCepNetNacional($cep),
+            'vivo_list'     => self::getCepVivo($cep),
+            'tim_list'      => self::getCepTim($cep),
             //'algar_list'    => self::getListCepItems($request, $id),
             //'tim_list'      => self::getListCepItems($request, $id),
             //'vivo_list'     => self::getListCepItems($request, $id),

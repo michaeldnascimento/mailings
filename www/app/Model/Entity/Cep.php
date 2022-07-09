@@ -57,6 +57,56 @@ class Cep {
     }
 
     /**
+     * Método responsável por verifica os ceps Tim
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepVivoSP(string $cep)
+    {
+        return self::getCepVivo(
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por retornar depoimentos
+     */
+    public static function getCepVivo(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    {
+        return (new Database('db_mailings', 'cep_vivo_sp'))->select($fields, $join, $where, $order, $limit);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Tim
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepTim1(string $cep)
+    {
+        return self::getCepTim(
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por retornar depoimentos
+     */
+    public static function getCepTim(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    {
+        return (new Database('db_mailings', 'cep_tim'))->select($fields, $join, $where, $order, $limit);
+    }
+
+    /**
      * Método responsável por verifica os ceps net
      *
      * @param string $cep
