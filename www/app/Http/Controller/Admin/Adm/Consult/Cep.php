@@ -16,30 +16,191 @@ class Cep extends Page {
      * @param string $cep
      * @return string
      */
+    public static function getCepAlgar(string $cep): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+        //CONSULTA ALGAR
+        $results = EntityCep::getCepAlgar($cep);
+
+        //MENSAGEM DE RETORNO
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'ALGAR',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
+    public static function getCepOI(string $cep): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+        //CONSULTA OI
+        $resultsOI = EntityCep::getCepOI($cep);
+
+        //CONSULTA OI SP
+        $resultsOISP = EntityCep::getCepOISP($cep);
+
+        //CONSULTA OI SUL
+        $resultsOISul = EntityCep::getCepOISul($cep);
+
+        //MENSAGEM DE RETORNO
+        if (!empty($resultsOI) OR !empty($resultsOISP) OR !empty($resultsOISul)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'OI',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
+    public static function getCepVip(string $cep): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+        //CONSULTA VIP
+        $results = EntityCep::getCepVip($cep);
+
+        //MENSAGEM DE RETORNO
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'VIP',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
+    public static function getCepDesktop(string $cep): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+        //CONSULTA DESKTOP
+        $results = EntityCep::getCepDesktop($cep);
+
+        //MENSAGEM DE RETORNO
+        if (!empty($results)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'DESKTOP',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cep
+     * @return string
+     */
     public static function getCepVivo(string $cep): string
     {
 
         //USUÁRIOS
-        $items = '';
+        $itens = '';
 
-        //RESULTADOS DA PÁGINA
-        $results = EntityCep::getCepVivoSP($cep);
+        //CONSULTA VIVO SP
+        $resultsVivoSP = EntityCep::getCepVivoSP($cep);
 
-        if (!empty($results)){
+        //CONSULTA VIVO NACIONAL
+        $resultsVivoNacional = EntityCep::getCepVivoNacional($cep);
+
+        //MENSAGEM DE RETORNO
+        if (!empty($resultsVivoSP OR !empty($resultsVivoNacional))){
             $msg = 'OK DENTRO KMZ';
+            $color = 'success';
         }else{
             $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
         }
 
         //RENDERIZA O ITEM
-        $items .=  View::render('admin/adm/consult/modules/operadoras/vivo/item', [
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
             //RETORNA A MENSAGEM
-            'result' => $msg
+            'operadora' => 'VIVO',
+            'result' => $msg,
+            'color' => $color
         ]);
 
 
-        //RETORNA OS USUÁRIOS
-        return $items;
+        //RETORNA OS ITENS
+        return $itens;
 
     }
 
@@ -52,26 +213,30 @@ class Cep extends Page {
     {
 
         //USUÁRIOS
-        $items = '';
+        $itens = '';
 
-        //RESULTADOS DA PÁGINA
-        $results = EntityCep::getCepTim1($cep);
+        //RESULTADOS CEP TIM
+        $results = EntityCep::getCepTim($cep);
 
+        //MENSAGEM DE RETORNO
         if (!empty($results)){
             $msg = 'OK DENTRO KMZ';
+            $color = 'success';
         }else{
             $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
         }
 
         //RENDERIZA O ITEM
-        $items .=  View::render('admin/adm/consult/modules/operadoras/tim/item', [
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
             //RETORNA A MENSAGEM
-            'result' => $msg
+            'operadora' => 'TIM',
+            'result' => $msg,
+            'color' => $color
         ]);
 
-
-        //RETORNA OS USUÁRIOS
-        return $items;
+        //RETORNA OS ITENS
+        return $itens;
 
     }
 
@@ -84,26 +249,30 @@ class Cep extends Page {
     {
 
         //USUÁRIOS
-        $items = '';
+        $itens = '';
 
-        //RESULTADOS DA PÁGINA
+        //RESULTADOS CEP NET
         $results = EntityCep::getCepNetNacional($cep);
 
+        //MENSAGEM DE RETORNO
         if (!empty($results)){
             $msg = 'OK DENTRO KMZ';
+            $color = 'success';
         }else{
             $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
         }
 
         //RENDERIZA O ITEM
-        $items .=  View::render('admin/adm/consult/modules/operadoras/net/item', [
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
             //RETORNA A MENSAGEM
-            'result' => $msg
+            'operadora' => 'NET',
+            'result' => $msg,
+            'color' => $color
         ]);
 
-
-        //RETORNA OS USUÁRIOS
-        return $items;
+        //RETORNA OS ITENS
+        return $itens;
 
     }
 
@@ -132,11 +301,11 @@ class Cep extends Page {
             'net_list'      => self::getCepNetNacional($cep),
             'vivo_list'     => self::getCepVivo($cep),
             'tim_list'      => self::getCepTim($cep),
-            //'algar_list'    => self::getListCepItems($request, $id),
-            //'tim_list'      => self::getListCepItems($request, $id),
-            //'vivo_list'     => self::getListCepItems($request, $id),
-            //'desktop_list'  => self::getListCepItems($request),
-            'status'   => self::getStatus($request)
+            'algar_list'    => self::getCepAlgar($cep),
+            'desktop_list'  => self::getCepDesktop($cep),
+            'oi_list'       => self::getCepOI($cep),
+            'vip_list'      => self::getCepVIP($cep),
+            'status'        => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA

@@ -57,28 +57,148 @@ class Cep {
     }
 
     /**
-     * Método responsável por verifica os ceps Tim
+     * Método responsável por verifica os ceps Vip
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepVip(string $cep)
+    {
+        return self::getCep(
+            'cep_vip',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps OI Sul
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepOISul(string $cep)
+    {
+        return self::getCep(
+            'cep_oi_sul',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps OI
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepOISP(string $cep)
+    {
+        return self::getCep(
+            'cep_oi_sp',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+
+    /**
+     * Método responsável por verifica os ceps OI
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepOI(string $cep)
+    {
+        return self::getCep(
+            'cep_oi',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Algar
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepAlgar(string $cep)
+    {
+        return self::getCep(
+            'cep_algar',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Desktop
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepDesktop(string $cep)
+    {
+        return self::getCep(
+            'cep_desktop',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps vivo nacional
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepVivoNacional(string $cep)
+    {
+        return self::getCep(
+            'cep_vivo_nacional',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps vivo SP
      *
      * @param string $cep
      * @return false|mixed|object
      */
     public static function getCepVivoSP(string $cep)
     {
-        return self::getCepVivo(
+        return self::getCep(
+            'cep_vivo_sp',
             '*',
             '',
             'cep = "'. $cep.'"',
             '',
             ''
         )->fetchObject(self::class);
-    }
-
-    /**
-     * Método responsável por retornar depoimentos
-     */
-    public static function getCepVivo(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
-    {
-        return (new Database('db_mailings', 'cep_vivo_sp'))->select($fields, $join, $where, $order, $limit);
     }
 
     /**
@@ -87,23 +207,16 @@ class Cep {
      * @param string $cep
      * @return false|mixed|object
      */
-    public static function getCepTim1(string $cep)
+    public static function getCepTim(string $cep)
     {
-        return self::getCepTim(
+        return self::getCep(
+            'cep_tim',
             '*',
             '',
             'cep = "'. $cep.'"',
             '',
             ''
         )->fetchObject(self::class);
-    }
-
-    /**
-     * Método responsável por retornar depoimentos
-     */
-    public static function getCepTim(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
-    {
-        return (new Database('db_mailings', 'cep_tim'))->select($fields, $join, $where, $order, $limit);
     }
 
     /**
@@ -114,7 +227,8 @@ class Cep {
      */
     public static function getCepNetNacional(string $cep)
     {
-        return self::getCepNet(
+        return self::getCep(
+            'cep_net_nacional',
             '*',
             '',
             'cep = "'. $cep.'"',
@@ -123,12 +237,13 @@ class Cep {
         )->fetchObject(self::class);
     }
 
+
     /**
      * Método responsável por retornar depoimentos
      */
-    public static function getCepNet(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    public static function getCep(string $table, string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
     {
-        return (new Database('db_mailings', 'cep_net_nacional'))->select($fields, $join, $where, $order, $limit);
+        return (new Database('db_mailings', $table))->select($fields, $join, $where, $order, $limit);
     }
 
 }
