@@ -220,7 +220,7 @@ class Cep {
     }
 
     /**
-     * Método responsável por verifica os ceps net
+     * Método responsável por verifica os ceps net nacional
      *
      * @param string $cep
      * @return false|mixed|object
@@ -232,6 +232,24 @@ class Cep {
             '*',
             '',
             'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps net cidades 11
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepNetCidades11(string $cep)
+    {
+        return self::getCep(
+            'cep_net_cidades_11',
+            '*',
+            '',
+            '(faixa_1 <= '. $cep.' AND faixa_2 >= '. $cep.')',
             '',
             ''
         )->fetchObject(self::class);

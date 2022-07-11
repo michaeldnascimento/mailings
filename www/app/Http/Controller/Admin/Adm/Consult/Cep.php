@@ -245,17 +245,23 @@ class Cep extends Page {
      * @param string $cep
      * @return string
      */
-    public static function getCepNetNacional(string $cep): string
+    public static function getCepNet(string $cep): string
     {
 
         //USUÁRIOS
         $itens = '';
 
-        //RESULTADOS CEP NET
-        $results = EntityCep::getCepNetNacional($cep);
+        //RESULTADOS CEP NET NACIONAL
+        $resultsNacional = EntityCep::getCepNetNacional($cep);
+
+        //REMOVE OS 3 ULTIMOS NÚMEROS
+        $cepSubstr = substr($cep, 0, -3);
+
+        //RESULTADOS CEP NET CIDADE 011
+        $resultsCidades11 = EntityCep::getCepNetCidades11($cepSubstr);
 
         //MENSAGEM DE RETORNO
-        if (!empty($results)){
+        if (!empty($resultsNacional) OR !empty($resultsCidades11)){
             $msg = 'OK DENTRO KMZ';
             $color = 'success';
         }else{
@@ -292,13 +298,13 @@ class Cep extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //GET CEP
-        $cep = $postVars['cep'];
+        //GET CEP E REMOVE STRINGS
+        $cep = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postVars['cep']);
 
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep_post', [
             'cep'           => $cep,
-            'net_list'      => self::getCepNetNacional($cep),
+            'net_list'      => self::getCepNet($cep),
             'vivo_list'     => self::getCepVivo($cep),
             'tim_list'      => self::getCepTim($cep),
             'algar_list'    => self::getCepAlgar($cep),
