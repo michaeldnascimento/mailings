@@ -41,7 +41,8 @@ MiddlewareQueue::setMap([
     'required-admin-login'   => \App\Http\Middleware\RequireAdminLogin::class,
     'required-nivel-seller'  => \App\Http\Middleware\RequireNivelSeller::class,
     'required-nivel-company' => \App\Http\Middleware\RequireNivelCompany::class,
-    'required-nivel-admin'   => \App\Http\Middleware\RequireNivelAdmin::class
+    'required-nivel-admin'   => \App\Http\Middleware\RequireNivelAdmin::class,
+    'required-nivel-cep'     => \App\Http\Middleware\RequireNivelCep::class,
     //'api'                   => \App\Http\Middleware\Api::class,
     //'user-basic-auth'       => \App\Http\Middleware\UserBasicAuth::class,
     //'jwt-auth'              => \App\Http\Middleware\JWTAuth::class,

@@ -8,7 +8,7 @@ $obRouter->get('/consulta/cep/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-admin',
+        'required-nivel-cep',
     ],
     function($request){
         return new Response(200, Cep::getCepPage($request));
@@ -20,7 +20,7 @@ $obRouter->post('/consulta/cep/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-admin',
+        'required-nivel-cep',
     ],
     function($request){
         return new Response(200, Cep::getCep($request));

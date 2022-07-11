@@ -100,6 +100,18 @@ class Users extends Page {
             }
         }
 
+        //VERIFICA O STATUS DO CEP USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->cep) {
+            case "0": {
+                $disabledCep = "selected";
+                break;
+            }
+            case "1": {
+                $activeCep = "selected";
+                break;
+            }
+        }
+
         //VERIFICA O NIVEL DO USUÁRIO E RETORNA NO SELECT
         switch ($obUser->nivel) {
             case "1": {
@@ -149,6 +161,8 @@ class Users extends Page {
             'email' => $obUser->email,
             'options_status_user' => "<option value='1' $active>ATIVO</option>.
                                       <option value='0' $disabled>DESATIVAR</option>",
+            'options_cep_user'    => "<option value='1' $activeCep>SIM</option>.
+                                      <option value='0' $disabledCep>NÃO</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
                                       <option value='2' $company>EMPRESA</option>.
                                       <option value='3' $adm>ADMINISTRADOR</option>",
@@ -190,6 +204,7 @@ class Users extends Page {
         $obUser->email = $postVars['email'] ?? $obUser->email;
         $obUser->company = 1;
         $obUser->status = $postVars['status_user'] ?? $obUser->status;
+        $obUser->cep = $postVars['cep'] ?? $obUser->cep;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
         $obUser->atualizar();

@@ -59,6 +59,9 @@ class Dashboard extends Page {
             case 'companyInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota da empresa!');
                 break;
+            case 'cepInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota CEP!');
+                break;
         }
     }
 

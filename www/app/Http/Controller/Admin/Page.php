@@ -61,6 +61,16 @@ class Page {
             $valueDisplaySeller  = "block";
         }
 
+        //RECEBE SESSÃO CEP
+        $cep = $_SESSION['mailings']['admin']['user']['cep'];
+
+        //DISPLAY CEP
+        if ($cep == 1){
+            $valueDisplayCep  = "block";
+        }else{
+            $valueDisplayCep  = "none";
+        }
+
         //BUSCA EMPRESAS
         $resultsCompanies = Folders::getListCompaniesRouter();
 
@@ -100,6 +110,7 @@ class Page {
             'display_adm' => "style=display:$valueDisplayAdm",
             'display_company' => "style=display:$valueDisplayCompany",
             'display_seller' => "style=display:$valueDisplaySeller",
+            'display_cep' => "style=display:$valueDisplayCep",
             'folders' => $folders,
         ]);
     }

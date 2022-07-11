@@ -39,6 +39,11 @@ class User {
     public string $status;
 
     /*
+    * Status User CEP
+    */
+    public ?string $cep = null;
+
+    /*
     * Nivel User
     */
     public string $nivel;
@@ -61,6 +66,7 @@ class User {
             'email' => $this->email,
             'password'  => $this->password,
             'status' => $this->status,
+            'cep' => $this->cep,
             'nivel' => $this->nivel,
             'companies' => $this->companies
         ]);
@@ -80,6 +86,7 @@ class User {
             'email' => $this->email,
             'company' => $this->company,
             'status' => $this->status,
+            'cep' => $this->cep,
             'nivel' => $this->nivel,
             'companies' => $this->companies
         ]);
