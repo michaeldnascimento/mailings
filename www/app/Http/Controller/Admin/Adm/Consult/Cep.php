@@ -254,14 +254,17 @@ class Cep extends Page {
         //RESULTADOS CEP NET NACIONAL
         $resultsNacional = EntityCep::getCepNetNacional($cep);
 
+        //RESULTADOS CEP NET SP
+        $resultsSP = EntityCep::getCepNetSP($cep);
+
         //REMOVE OS 3 ULTIMOS NÚMEROS
-        $cepSubstr = substr($cep, 0, -3);
+        //$cepSubstr = substr($cep, 0, -3);
 
         //RESULTADOS CEP NET CIDADE 011
-        $resultsCidades11 = EntityCep::getCepNetCidades11($cepSubstr);
+        //$resultsCidades11 = EntityCep::getCepNetCidades11($cepSubstr);
 
         //MENSAGEM DE RETORNO
-        if (!empty($resultsNacional) OR !empty($resultsCidades11)){
+        if (!empty($resultsNacional) OR !empty($resultsSP)){
             $msg = 'OK DENTRO KMZ';
             $color = 'success';
         }else{

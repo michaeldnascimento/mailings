@@ -238,6 +238,24 @@ class Cep {
     }
 
     /**
+     * Método responsável por verifica os ceps net SP
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepNetSP(string $cep)
+    {
+        return self::getCep(
+            'cep_net_sp',
+            '*',
+            '',
+            'cep = "'. $cep.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
      * Método responsável por verifica os ceps net cidades 11
      *
      * @param string $cep

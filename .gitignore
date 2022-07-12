@@ -1,2 +1,5 @@
 .docker/db/mysql/data
 .docker/db/mysql/logsgit c
+.env
+.idea/
+.git
