@@ -8,9 +8,10 @@
   "require": {
     "ext-pdo": "*",
     "ext-json": "*",
-    "firebase/php-jwt": "^5.4",
+    "firebase/php-jwt": "^v5.5.1",
     "ext-mysqli": "*",
     "datatables/datatables": "1.10.21",
-    "ext-ftp": "*"
+    "ext-ftp": "*",
+    "ext-curl": "*"
   }
 }

@@ -148,6 +148,24 @@ class Cep {
     }
 
     /**
+     * Método responsável por verifica os ceps Algar cidades
+     *
+     * @param string $cep
+     * @return false|mixed|object
+     */
+    public static function getCepAlgarCidades(string $cidade)
+    {
+        return self::getCep(
+            'cep_algar_cidades',
+            '*',
+            '',
+            'cidade = "'. $cidade.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
      * Método responsável por verifica os ceps Desktop
      *
      * @param string $cep

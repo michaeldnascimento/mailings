@@ -6,6 +6,7 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\Cep as EntityCep;
+use App\WebService\ViaCep;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
@@ -14,19 +15,24 @@ class Cep extends Page {
     /**
      * Método responsável por obter e renderização o resultado do cep
      * @param string $cep
+     * @param string $cidade
      * @return string
      */
-    public static function getCepAlgar(string $cep): string
+    public static function getCepAlgar(string $cep, string $cidade): string
     {
 
         //USUÁRIOS
         $itens = '';
 
         //CONSULTA ALGAR
-        $results = EntityCep::getCepAlgar($cep);
+        $resultsCep = EntityCep::getCepAlgar($cep);
+
+        //CONSULTA ALGAR CIDADES
+        $resultsCidades = EntityCep::getCepAlgarCidades($cidade);
+
 
         //MENSAGEM DE RETORNO
-        if (!empty($results)){
+        if (!empty($resultsCep) OR !empty($resultsCidades)){
             $msg = 'OK DENTRO KMZ';
             $color = 'success';
         }else{
@@ -301,8 +307,19 @@ class Cep extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
+
         //GET CEP E REMOVE STRINGS
         $cep = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postVars['cep']);
+
+
+        //CONSULTA SE O CEP EXITE NO VIA CEP
+        $address = ViaCep::consultViaCep($cep);
+
+        //VALIDA A INSTANCIA
+        if(empty($address)){
+            $request->getRouter()->redirect('/consulta/cep?status=notFoundCep');
+        }
+
 
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep_post', [
@@ -310,7 +327,7 @@ class Cep extends Page {
             'net_list'      => self::getCepNet($cep),
             'vivo_list'     => self::getCepVivo($cep),
             'tim_list'      => self::getCepTim($cep),
-            'algar_list'    => self::getCepAlgar($cep),
+            'algar_list'    => self::getCepAlgar($cep, $address['localidade']),
             'desktop_list'  => self::getCepDesktop($cep),
             'oi_list'       => self::getCepOI($cep),
             'vip_list'      => self::getCepVIP($cep),
@@ -338,6 +355,7 @@ class Cep extends Page {
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep', [
             'cep'           => '',
+            'status'        => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
@@ -365,8 +383,8 @@ class Cep extends Page {
 
         //MENSAGEM DE STATUS
         switch ($queryParams['status']) {
-            case 'invalid':
-                return Alert::getError('Erro :(','E-mail ou senha inválido!');
+            case 'notFoundCep':
+                return Alert::getError('Erro :(','Cep não encontrado!');
                 break;
             case 'updated':
                 return Alert::getSuccess('Sucesso','Usuário atualizado com sucesso.');
