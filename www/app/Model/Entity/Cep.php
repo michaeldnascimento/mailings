@@ -14,6 +14,11 @@ class Cep {
      */
     public string $cep;
 
+    /*
+     * CIDADE
+     */
+    public string $cidade;
+
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
      * @return bool
@@ -54,6 +59,60 @@ class Cep {
     {
         //EXCLUI O DEPOIMENTO DO BANCO DE DADOS
         return (new Database('files'))->delete('id = '.$this->id);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Algar cidades
+     *
+     * @param string $cidade
+     * @return false|mixed|object
+     */
+    public static function getCepVeroCidades(string $cidade)
+    {
+        return self::getCep(
+            'cep_vero_cidades',
+            '*',
+            '',
+            'cidades = "'. $cidade.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Algar cidades
+     *
+     * @param string $cidade
+     * @return false|mixed|object
+     */
+    public static function getCepWebbyCidades(string $cidade)
+    {
+        return self::getCep(
+            'cep_webby_cidades',
+            '*',
+            '',
+            'cidades = "'. $cidade.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por verifica os ceps Algar cidades
+     *
+     * @param string $cidade
+     * @return false|mixed|object
+     */
+    public static function getCepNeoredeCidades(string $cidade)
+    {
+        return self::getCep(
+            'cep_neorede_cidades',
+            '*',
+            '',
+            'cidades = "'. $cidade.'"',
+            '',
+            ''
+        )->fetchObject(self::class);
     }
 
     /**

@@ -14,6 +14,123 @@ class Cep extends Page {
 
     /**
      * Método responsável por obter e renderização o resultado do cep
+     * @param string $cidade
+     * @return string
+     */
+    public static function getCepVero(string $cidade): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+
+        //CONSULTA NOROESTE CIDADES
+        $resultsCidades = EntityCep::getCepVeroCidades($cidade);
+
+
+        //MENSAGEM DE RETORNO
+        if (!empty($resultsCidades)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'VERO',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cidade
+     * @return string
+     */
+    public static function getCepWebby(string $cidade): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+
+        //CONSULTA NOROESTE CIDADES
+        $resultsCidades = EntityCep::getCepWebbyCidades($cidade);
+
+
+        //MENSAGEM DE RETORNO
+        if (!empty($resultsCidades)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'WEBBY',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
+     * @param string $cidade
+     * @return string
+     */
+    public static function getCepNeorede(string $cidade): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+
+        //CONSULTA NOROESTE CIDADES
+        $resultsCidades = EntityCep::getCepNeoredeCidades($cidade);
+
+
+        //MENSAGEM DE RETORNO
+        if (!empty($resultsCidades)){
+            $msg = 'OK DENTRO KMZ';
+            $color = 'success';
+        }else{
+            $msg = 'NÃO ENCONTRADO KMZ';
+            $color = 'danger';
+        }
+
+        //RENDERIZA O ITEM
+        $itens .=  View::render('admin/adm/consult/modules/operadoras/item', [
+            //RETORNA A MENSAGEM
+            'operadora' => 'NEOREDE',
+            'result' => $msg,
+            'color' => $color
+        ]);
+
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
+
+    /**
+     * Método responsável por obter e renderização o resultado do cep
      * @param string $cep
      * @param string $cidade
      * @return string
@@ -331,6 +448,9 @@ class Cep extends Page {
             'desktop_list'  => self::getCepDesktop($cep),
             'oi_list'       => self::getCepOI($cep),
             'vip_list'      => self::getCepVIP($cep),
+            'neorede_list'  => self::getCepNeorede($address['localidade']),
+            'webby_list'    => self::getCepWebby($address['localidade']),
+            'vero_list'     => self::getCepVero($address['localidade']),
             'status'        => self::getStatus($request)
         ]);
 
