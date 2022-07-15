@@ -6,7 +6,7 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\Cep as EntityCep;
-use App\WebService\ViaCep;
+use App\Utils\WebService\ViaCep;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 

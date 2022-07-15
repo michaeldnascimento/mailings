@@ -1,6 +1,6 @@
 <?php
 
-namespace App\WebService;
+namespace App\Utils\WebService;
 
 class ViaCep{
 
