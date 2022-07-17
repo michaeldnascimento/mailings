@@ -61,6 +61,12 @@ class Page {
             $valueDisplaySeller  = "block";
         }
 
+        if (SessionNivel::getNivelSession() == 0 OR SessionNivel::getNivelSession() == null){
+            $valueDisplayAdm     = "none";
+            $valueDisplayCompany = "none";
+            $valueDisplaySeller  = "none";
+        }
+
         //RECEBE SESSÃO CEP
         $cep = $_SESSION['mailings']['admin']['user']['cep'];
 
@@ -85,7 +91,7 @@ class Page {
             $folder_company = $obCompanies->company;
 
             //VERIFICA EMPRESA USUÁRIO
-            if(SessionNivel::getNivelSession() == 2 AND $companies != $folder_id){
+            if((SessionNivel::getNivelSession() == 2 OR SessionNivel::getNivelSession() == 0 OR SessionNivel::getNivelSession() == null) AND ($companies != $folder_id)){
                 $valueDisplayCompanyWhile = "none";
             }else{
                 $valueDisplayCompanyWhile = "block";

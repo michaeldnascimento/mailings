@@ -18,10 +18,6 @@ class RequireNivelCep {
     public function handle(Request $request, Closure $next): Response
     {
 
-        //VERIFICA SE O USUÁRIO ESTÁ LOGADO
-        if(SessionNivel::getNivelSession() == 1){
-            $request->getRouter()->redirect('/?status=routeInvalid');
-        }
 
         //RECEBE CEP DA SESSÃO
         $cep = $_SESSION['mailings']['admin']['user']['cep'];

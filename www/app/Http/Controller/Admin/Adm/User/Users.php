@@ -199,6 +199,11 @@ class Users extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
+        if ($postVars['nivel'] == 0 OR $postVars['nivel'] == 1 OR $postVars['nivel'] == 3){
+            $postVars['companies'] = null;
+            $obUser->companies = null;
+        }
+
         //ATUALIZA A INSTANCIA
         $obUser->name = $postVars['name'] ?? $obUser->name;
         $obUser->email = $postVars['email'] ?? $obUser->email;

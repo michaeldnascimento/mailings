@@ -19,7 +19,7 @@ class RequireNivelSeller {
     {
 
         //VERIFICA SE O USUÁRIO ESTÁ LOGADO
-        if(SessionNivel::getNivelSession() == 2){
+        if(SessionNivel::getNivelSession() == 2 OR SessionNivel::getNivelSession() == 0 OR SessionNivel::getNivelSession() == null){
             $request->getRouter()->redirect('/?status=routeInvalid');
         }
 

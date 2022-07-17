@@ -23,7 +23,7 @@
                         <label for="helpInputTop">Empresa</label>
                         <select class="choices form-select" name="companies" {{companies_disabled}}>
                             <optgroup label="Empresas">
-                                <option value=""> SELECIONE</option>
+                                <option value="0"> SEM EMPRESA</option>
                                 {{companies}}
                             </optgroup>
                         </select>
@@ -31,9 +31,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                    <label for="helperText">Status Usuário</label>
+                    <label for="helpInputTop">Status Usuário</label>
                         <select class="choices form-select" name="status_user" id="status_user" required>
-                            <optgroup label="Situação">\
+                            <optgroup label="Situação">
                                 {{options_status_user}}
                             </optgroup>
                         </select>
@@ -42,7 +42,7 @@
                         <label for="helpInputTop">Nível Acesso</label>
                         <select class="choices form-select" name="nivel" id="nivel" required>
                             <optgroup label="Nível">
-                                <option value=""> SELECIONE </option>
+                                <option value="0"> SEM NÍVEL </option>
                                 {{options_nivel_user}}
                             </optgroup>
                         </select>
@@ -51,7 +51,7 @@
                         <label for="helpInputTop">Acesso CEP</label>
                         <select class="choices form-select" name="cep" id="cep" required>
                             <optgroup label="Nível">
-                                <option value=""> SELECIONE </option>
+                                <option value="0"> SEM ACESSO CEP  </option>
                                 {{options_cep_user}}
                             </optgroup>
                         </select>

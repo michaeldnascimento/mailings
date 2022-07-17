@@ -18,6 +18,15 @@
                         </a>
                     </li>
 
+                    <li {{display_cep}} class="sidebar-title">Operadora</li>
+
+                    <li {{display_cep}} class="sidebar-item">
+                        <a href="{{URL}}/consulta/cep" class='sidebar-link'>
+                            <i class="bi bi-map-fill"></i>
+                            <span>Consulta CEP</span>
+                        </a>
+                    </li>
+
                     <li {{display_seller}} class="sidebar-title">Vendedor</li>
 
                     <li {{display_seller}} class="sidebar-item  has-sub">
@@ -56,13 +65,6 @@
                     <li {{display_company}} class="sidebar-title">Pastas</li>
 
                     {{folders}}
-
-                    <li {{display_cep}} class="sidebar-item">
-                        <a href="{{URL}}/consulta/cep" class='sidebar-link'>
-                            <i class="bi bi-map-fill"></i>
-                            <span>Consulta CEP</span>
-                        </a>
-                    </li>
 
                     <li {{display_adm}} class="sidebar-title">Administrativo</li>
 
