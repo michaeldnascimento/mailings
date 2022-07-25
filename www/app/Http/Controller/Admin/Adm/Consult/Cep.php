@@ -437,6 +437,8 @@ class Cep extends Page {
             $request->getRouter()->redirect('/consulta/cep?status=notFoundCep');
         }
 
+        //REMOVE CEP QUE COMEÇA COM 0 A ESQUERDA
+        $cep = ltrim($cep, "0");
 
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/consult/cep_post', [
