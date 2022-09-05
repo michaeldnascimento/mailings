@@ -68,6 +68,9 @@ class ListMailing extends Page {
                 'compl' => $obMailings->compl,
                 'bairro' => $obMailings->bairro,
                 'cidade' => $obMailings->cidade,
+                'proposta' => $obMailings->proposta,
+                'email' => $obMailings->email,
+                'hp' => $obMailings->hp,
                 'tipo' => $obMailings->tipo,
                 'obs' => $obMailings->obs,
                 'status_mailing' => $obMailings->status_mailing,
@@ -104,7 +107,7 @@ class ListMailing extends Page {
         return parent::getPage(
             'Mailings',
             "$list",
-            'Lista de mailing 1',
+            'Lista de mailing',
             $content
         );
     }

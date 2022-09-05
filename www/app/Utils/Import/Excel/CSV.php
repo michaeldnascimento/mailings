@@ -47,7 +47,7 @@ class CSV {
             $arquivo = fopen("$dir", "r");
 
             $fist = true;
-            while (($linha = fgetcsv($arquivo, 0, ";")) !== FALSE) {
+            while (($linha = fgetcsv($arquivo, 0, ",")) !== FALSE) {
 
                 /** Para pular a primeira linha(cabeçaçho) do csv, e se true (primeira vez) executa o "continue;" que pula para a proxima linha do CSV */
                 if ($fist) {
@@ -65,8 +65,11 @@ class CSV {
                 $obMailing->compl = $linha[6];
                 $obMailing->bairro = $linha[7];
                 $obMailing->cidade = $linha[8];
-                $obMailing->tipo = $linha[9];
-                $obMailing->obs = $linha[10];
+                $obMailing->proposta = $linha[9];
+                $obMailing->email = $linha[10];
+                $obMailing->hp = $linha[11];
+                $obMailing->tipo = $linha[12];
+                $obMailing->obs = $linha[13];
                 $obMailing->lista = $lista;
                 $obMailing->id_mailing = $id;
                 $obMailing->cadastrar();

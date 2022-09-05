@@ -59,6 +59,21 @@ class Mailing {
     public ?string $cidade = null;
 
     /*
+    * Proposta
+    */
+    public ?string $proposta = null;
+
+    /*
+    * Email
+    */
+    public ?string $email = null;
+
+    /*
+    * HP
+    */
+    public ?string $hp = null;
+
+    /*
     * Tipo
     */
     public ?string $tipo = null;
@@ -118,6 +133,7 @@ class Mailing {
         //INSERE A INSTANCIA NO BANCO
         $this->id = (new Database('db_mailings', 'mailing'))->insert([
             'nome'  => $this->nome,
+            'email' => $this->email,
             'fone1' => $this->fone1,
             'fone2' => $this->fone2,
             'doc'  => $this->doc,
@@ -126,6 +142,8 @@ class Mailing {
             'compl'  => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
+            'proposta' => $this->proposta,
+            'hp' => $this->hp,
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,
@@ -152,6 +170,9 @@ class Mailing {
             'compl' => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
+            'proposta' => $this->proposta,
+            'email' => $this->email,
+            'hp' => $this->hp,
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,

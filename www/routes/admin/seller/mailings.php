@@ -35,7 +35,19 @@ $obRouter->get('/vendedor/mailings/lista2', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListMailing::getList2($request));
+        return new Response(200, ListMailing::getList($request, 'lista2'));
+    }
+]);
+
+//ROTA LISTA 2 MAILING
+$obRouter->post('/vendedor/mailings/lista2/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request){
+        return new Response(200, ListMailing::setList($request, 'lista2'));
     }
 ]);
 
