@@ -1,22 +1,22 @@
 <?php
 
 use \App\Http\Response;
-use \App\Http\Controller\Admin\Adm\Company\Companies;
+use \App\Http\Controller\Admin\Adm\Mailing\ManagerMailings;
 
 //ROTA INPUT LISTA
-$obRouter->get('/adm/empresa/lista', [
+$obRouter->get('/adm/mailings/lista', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request){
-        return new Response(200, Companies::getCompaniesList($request));
+        return new Response(200, ManagerMailings::getManagerMailingsList($request));
     }
 ]);
 
 //ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/adm/empresa/lista/novo', [
+$obRouter->get('/empresa/lista/novo', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -28,7 +28,7 @@ $obRouter->get('/adm/empresa/lista/novo', [
 ]);
 
 //ROTA DE EDIÇÃO DE EMPRESA (POST)
-$obRouter->post('/adm/empresa/lista/novo', [
+$obRouter->post('/empresa/lista/novo', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
@@ -39,7 +39,7 @@ $obRouter->post('/adm/empresa/lista/novo', [
 ]);
 
 //ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/adm/empresa/lista/{id}/edit', [
+$obRouter->get('/empresa/lista/{id}/edit', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -51,7 +51,7 @@ $obRouter->get('/adm/empresa/lista/{id}/edit', [
 ]);
 
 //ROTA DE EDIÇÃO DE EMPRESA (POST)
-$obRouter->post('/adm/empresa/lista/{id}/edit', [
+$obRouter->post('/empresa/lista/{id}/edit', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
@@ -62,7 +62,7 @@ $obRouter->post('/adm/empresa/lista/{id}/edit', [
 ]);
 
 //ROTA DE EXCLUSÃO DE EMPRESA (POST)
-$obRouter->post('/adm/empresa/lista/{id}/delete', [
+$obRouter->post('/empresa/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',

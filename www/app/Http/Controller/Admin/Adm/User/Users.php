@@ -193,7 +193,7 @@ class Users extends Page {
 
         //VALIDA A INSTANCIA
         if(!$obUser instanceof EntityUser){
-            $request->getRouter()->redirect('/admin/testimonies');
+            $request->getRouter()->redirect('/adm/usuarios/lista/');
         }
 
         //POST VARS
@@ -215,7 +215,7 @@ class Users extends Page {
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/usuarios/lista/'.$obUser->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/adm/usuarios/lista/'.$obUser->id.'/edit?status=updated');
     }
 
 

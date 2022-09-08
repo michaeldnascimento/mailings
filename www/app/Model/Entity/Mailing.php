@@ -208,6 +208,7 @@ class Mailing {
             '',
             'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null) ',
             '',
+            '',
             ''
         )->fetchObject(self::class);
     }
@@ -225,6 +226,7 @@ class Mailing {
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
+            '',
             '',
             ''
         )->fetchObject(self::class);
@@ -245,6 +247,7 @@ class Mailing {
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
             '',
+            '',
             ''
         )->fetchObject(self::class);
     }
@@ -261,6 +264,7 @@ class Mailing {
             '*',
             '',
             'id = '. " '$id' " ,
+            '',
             '',
             ''
         )->fetchObject(self::class);
@@ -279,6 +283,7 @@ class Mailing {
             '',
             'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL)",
             'id DESC',
+            '',
             '1'
         )->fetchObject(self::class);
     }
@@ -286,9 +291,9 @@ class Mailing {
     /**
      * Método responsável por retornar depoimentos
      */
-    public static function getMailing(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+    public static function getMailing(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
     {
-        return (new Database('db_mailings', 'mailing'))->select($fields, $join, $where, $order, $limit);
+        return (new Database('db_mailings', 'mailing'))->select($fields, $join, $where, $order, $group, $limit);
     }
 
 }

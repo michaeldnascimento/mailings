@@ -4,7 +4,7 @@ use \App\Http\Response;
 use \App\Http\Controller\Admin\Adm\User\Users;
 
 //ROTA INPUT LISTA
-$obRouter->get('/usuarios/lista', [
+$obRouter->get('/adm/usuarios/lista', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -16,7 +16,7 @@ $obRouter->get('/usuarios/lista', [
 ]);
 
 //ROTA DE EDIÇÃO DE UM USUÁRIO
-$obRouter->get('/usuarios/lista/{id}/edit', [
+$obRouter->get('/adm/usuarios/lista/{id}/edit', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -28,7 +28,7 @@ $obRouter->get('/usuarios/lista/{id}/edit', [
 ]);
 
 //ROTA DE EDIÇÃO DE USUÁRIO (POST)
-$obRouter->post('/usuarios/lista/{id}/edit', [
+$obRouter->post('/adm/usuarios/lista/{id}/edit', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
@@ -40,7 +40,7 @@ $obRouter->post('/usuarios/lista/{id}/edit', [
 
 
 //ROTA DE EXCLUSÃO DE UM NOVO DEPOIMENTO
-$obRouter->get('/usuarios/lista/{id}/delete', [
+$obRouter->get('/adm/usuarios/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
@@ -51,7 +51,7 @@ $obRouter->get('/usuarios/lista/{id}/delete', [
 ]);
 
 //ROTA DE EXCLUSÃO DE UM NOVO DEPOIMENTO (POST)
-$obRouter->post('/usuarios/lista/{id}/delete', [
+$obRouter->post('/adm/usuarios/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',

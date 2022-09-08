@@ -138,23 +138,25 @@ class Database{
    * Método responsável por executar uma consulta no banco
    * @param string|null $where
    * @param string|null $order
+   * @param string|null $group
    * @param string|null $limit
    * @param string|null $fields
    * @param string|null $join
    * @return PDOStatement
    */
-  public function select(string $fields = null, string $join = null, string $where = null, string $order = null, string $limit = null): PDOStatement
+  public function select(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
   {
 
       //DADOS DA QUERY
       $join  = strlen($join) ? 'INNER JOIN '.$join : '';
       $where = strlen($where) ? 'WHERE '.$where : '';
       $order = strlen($order) ? 'ORDER BY '.$order : '';
+      $group = strlen($group) ? 'GROUP BY '.$group : '';
       $limit = strlen($limit) ? 'LIMIT '.$limit : '';
 
       //MONTA A QUERY
       //$this->setQuery('SELECT '.$fields.' FROM '.$this->table.' '.$where.' '.$order.' '.$limit);
-      $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$join.' '.$where.' '.$order.' '.$limit;
+      $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$join.' '.$where.' '.$order.' '.$group.' '.$limit;
 
     //EXECUTA A QUERY
     return $this->execute($query);

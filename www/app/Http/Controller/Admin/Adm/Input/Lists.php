@@ -12,6 +12,38 @@ use App\Session\Login\Home as SessionLogin;
 
 class Lists extends Page {
 
+
+    /**
+     * Método responsável por obter a renderização os status mailing do usuário para a página
+     * @param Request $request
+     * @return string
+     */
+    public static function getListsMailings(Request $request): string
+    {
+
+        //MAILING
+        $items = '';
+
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
+        //RESULTADOS DA PÁGINA
+        $results = EntityMailing::getMailing("*, date_format(status_data_mailing, '%d/%m/%Y %Hh%i') as status_data_mailing ", null, "status_mailing LIKE '%$status_mailing%' AND id_user = $id_user", 'id DESC', '');
+
+        //RENDERIZA O ITEM
+        while($obMailings = $results->fetchObject(EntityMailing::class)){
+
+            $items .=  View::render('/admin/seller/result/modules/item', [
+                'nome' => $obMailings->nome,
+                'fone1' => $obMailings->fone1,
+            ]);
+        }
+
+        //RETORNA OS USUÁRIOS
+        return $items;
+
+    }
+
     /**
      * Método responsável por retornar a renderização da página de login
      * @param Request $request
