@@ -12,10 +12,11 @@ class CSV {
      * Método responsável por importar csv
      * @param Request $request
      * @param array $inputCSV
+     * @param string $nome_mailing
      * @param string $lista
      * @return string|bool
      */
-    public function importCSVMailings(Request $request, array $inputCSV, string $lista): bool
+    public function importCSVMailings(Request $request, array $inputCSV, string $nome_mailing, string $lista): bool
     {
 
         //VERIFICA SE EXISTE O ARQUIVO
@@ -38,7 +39,7 @@ class CSV {
 
         //DEFINE O NOME DO ARQUIVO ENVIADO ex: nome_dia-mes-ano_hora-minuto-segundo.csv
         $dir = $dir.basename($originalFilename, ".".$fileExtension)."_".date('d-m-Y_H-i-s').".".$fileExtension;
-        $id  = basename($originalFilename)."_".date('d-m-Y_H-i-s');
+        $id = crc32(date('d-m-Y_H-i-s'));
 
         //move o arquivo para a pasta /csv
         if(move_uploaded_file($inputCSV["tmp_name"], $dir)) {
@@ -71,6 +72,7 @@ class CSV {
                 $obMailing->tipo = $linha[12];
                 $obMailing->obs = $linha[13];
                 $obMailing->lista = $lista;
+                $obMailing->nome_mailing = $nome_mailing;
                 $obMailing->id_mailing = $id;
                 $obMailing->cadastrar();
 

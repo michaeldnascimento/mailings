@@ -89,6 +89,11 @@ class Mailing {
     public string $lista;
 
     /*
+     * Nome mailing
+     */
+    public string $nome_mailing;
+
+    /*
     * id do mailing salvo
     */
     public ?string $id_mailing = null;
@@ -147,6 +152,7 @@ class Mailing {
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,
+            'nome_mailing' => $this->nome_mailing,
             'id_mailing' => $this->id_mailing
         ]);
 

@@ -81,7 +81,7 @@ class Lists extends Page {
         $postVars = $request->getPostVars();
 
         //RESULTADOS DA PÁGINA
-        $resultImport = CSV::importCSVMailings($request, $_FILES["inputCSV"], $postVars['inputList']);
+        $resultImport = CSV::importCSVMailings($request, $_FILES["inputCSV"], $postVars['nomeMailing'], $postVars['inputList']);
 
 
         //VERIFICA A VALIDAÇÃO DE SENHA
