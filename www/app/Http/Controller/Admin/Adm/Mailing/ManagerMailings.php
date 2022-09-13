@@ -22,7 +22,7 @@ class ManagerMailings extends Page {
         $items = '';
 
         //RESULTADOS DA PÁGINA
-        $results = EntityMailing::getMailing('id_mailing, status_lista, lista, COUNT(*) as qtd', '', '', '', 'id_mailing', '');
+        $results = EntityMailing::getMailing('id_mailing, nome_mailing, status_lista, lista, COUNT(*) as qtd', '', '', '', 'id_mailing', '');
 
         //$stringSql = "SELECT id_mailing, status_mailing, lista_sistema, COUNT(*) as qtde FROM clientes WHERE id_mailing <> '' GROUP BY id_mailing";
 
@@ -30,6 +30,7 @@ class ManagerMailings extends Page {
         while($obMailings = $results->fetchObject(EntityMailing::class)){
             $items .=  View::render('admin/adm/mailing/modules/mailings/item', [
                 'id_mailing' => $obMailings->id_mailing,
+                'nome_mailing' => $obMailings->nome_mailing,
                 'lista' => $obMailings->lista,
                 'status_lista' => $obMailings->status_lista,
                 'qtd' => $obMailings->qtd,

@@ -91,7 +91,7 @@ class Mailing {
     /*
      * Nome mailing
      */
-    public string $nome_mailing;
+    public ?string $nome_mailing = null;
 
     /*
     * id do mailing salvo
