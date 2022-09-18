@@ -5,12 +5,9 @@
     <td>{{status_lista}}</td>
     <td>{{qtd}}</td>
     <td>
-        <a href="{{URL}}/adm/mailings/lista/{{id}}/edit">
-            <button type="button" class="btn btn-sm btn-primary">Editar</button>
+        <a href="{{URL}}/adm/mailings/lista/{{id_mailing}}/status">
+            <button type="button" class="btn btn-sm btn-{{btn_status_color}}">{{btn_status}}</button>
         </a>
-        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" id_mailing="{{id}}">
-            Excluir
-        </button>
     </td>
 </tr>
 

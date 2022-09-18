@@ -28,12 +28,28 @@ class ManagerMailings extends Page {
 
         //RENDERIZA O ITEM
         while($obMailings = $results->fetchObject(EntityMailing::class)){
+
+            if ($obMailings->status_lista == 1){
+                $name_status = 'ATIVO';
+                $name_status = 'ATIVO';
+                $btn_status = 'DESATIVAR';
+                $btn_status_color = 'danger';
+            }
+
+            if ($obMailings->status_lista == 0){
+                $name_status = 'DESATIVADO';
+                $btn_status = 'ATIVAR';
+                $btn_status_color = 'success';
+            }
+
             $items .=  View::render('admin/adm/mailing/modules/mailings/item', [
                 'id_mailing' => $obMailings->id_mailing,
                 'nome_mailing' => $obMailings->nome_mailing,
                 'lista' => $obMailings->lista,
-                'status_lista' => $obMailings->status_lista,
+                'status_lista' => $name_status,
                 'qtd' => $obMailings->qtd,
+                'btn_status' => $btn_status,
+                'btn_status_color' => $btn_status_color
             ]);
         }
 
@@ -70,6 +86,37 @@ class ManagerMailings extends Page {
         );
 
     }
+
+    /**
+     * Método responsável alterar status mailing
+     * @param Request $request
+     * @param integer $id_mailing
+     * @return string
+     */
+    public static function setManagerStatus(Request $request, int $id_mailing): string
+    {
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $results = EntityMailing::getMailing('id, id_mailing, nome_mailing, status_lista, lista', '', "id_mailing = $id_mailing", '', '', '');
+
+        //RENDERIZA O ITEM
+        while($obMailing = $results->fetchObject(EntityMailing::class)) {
+
+            if ($obMailing->status_lista == 1){
+                $status_lista = 0;
+            }
+
+            if ($obMailing->status_lista == 0){
+                $status_lista = 1;
+            }
+
+            //ATUALIZA A STATUS  MAILING
+            EntityMailing::setStatusMailingById($id_mailing, $status_lista);
+        }
+
+        //REDIRECIONA O USUÁRIO
+        $request->getRouter()->redirect('/adm/mailings/lista/?status=updated');
+    }
+
 
     /**
      * Método responsável por retornar o formulário de nova empresa

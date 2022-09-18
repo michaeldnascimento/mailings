@@ -15,15 +15,15 @@ $obRouter->get('/adm/mailings/lista', [
     }
 ]);
 
-//ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/empresa/lista/novo', [
+//ROTA DE PARA ALTERAR STATUS MAILING
+$obRouter->get('/adm/mailings/lista/{id_mailing}/status', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-admin',
     ],
-    function($request){
-        return new Response(200, Companies::getNewCompany($request));
+    function($request, $id_mailing){
+        return new Response(200, ManagerMailings::setManagerStatus($request, $id_mailing));
     }
 ]);
 

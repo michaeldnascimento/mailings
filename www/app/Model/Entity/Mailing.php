@@ -88,6 +88,11 @@ class Mailing {
     */
     public string $lista;
 
+    /**
+     * Status lista
+     */
+    public ?int $status_lista = null;
+
     /*
      * Nome mailing
      */
@@ -152,6 +157,7 @@ class Mailing {
             'tipo' => $this->tipo,
             'obs' => $this->obs,
             'lista' => $this->lista,
+            'status_lista' => $this->status_lista,
             'nome_mailing' => $this->nome_mailing,
             'id_mailing' => $this->id_mailing
         ]);
@@ -200,6 +206,20 @@ class Mailing {
         return (new Database('usuarios'))->delete('id = '.$this->id);
     }
 
+    /**
+     * Método responsável por retornar os status mailing com base no seu ID
+     *
+     * @param int $id_mailing
+     * @param int $status_lista
+     * @return bool|false
+     */
+    public static function setStatusMailingById(int $id_mailing, int $status_lista): bool
+    {
+        //ATUALIZA O STATUS MAILING NO BANCO DE DADOS
+        return (new Database('db_mailings', 'mailing'))->update('id_mailing = '.$id_mailing, [
+            'status_lista' => $status_lista,
+        ]);
+    }
 
     /**
      * Método responsável por retornar a quantidade de mailing
@@ -212,7 +232,7 @@ class Mailing {
         return self::getMailing(
             'count(*) as qtd',
             '',
-            'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null) ',
+            'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
             '',
             '',
             ''
@@ -287,7 +307,7 @@ class Mailing {
         return self::getMailing(
             '*',
             '',
-            'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL)",
+            'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL AND status_lista = 1)",
             'id DESC',
             '',
             '1'

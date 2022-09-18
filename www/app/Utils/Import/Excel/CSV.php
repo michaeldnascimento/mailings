@@ -72,6 +72,7 @@ class CSV {
                 $obMailing->tipo = $linha[12];
                 $obMailing->obs = $linha[13];
                 $obMailing->lista = $lista;
+                $obMailing->status_lista = 1;
                 $obMailing->nome_mailing = $nome_mailing;
                 $obMailing->id_mailing = $id;
                 $obMailing->cadastrar();
