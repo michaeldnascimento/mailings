@@ -90,7 +90,7 @@ class ManagerMailings extends Page {
     /**
      * Método responsável alterar status mailing
      * @param Request $request
-     * @param integer $id_mailing
+     * @param int $id_mailing
      * @return string
      */
     public static function setManagerStatus(Request $request, int $id_mailing): string

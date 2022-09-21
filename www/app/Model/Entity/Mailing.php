@@ -101,7 +101,7 @@ class Mailing {
     /*
     * id do mailing salvo
     */
-    public ?string $id_mailing = null;
+    public ?int $id_mailing = null;
 
     /*
     * qtd mailing salvo
