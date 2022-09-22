@@ -13,6 +13,9 @@ include __DIR__ . '/routes/admin.php';
 //INCLUI AS ROTAS DE LOGIN
 include __DIR__ . '/routes/login.php';
 
+//INCLUI AS ROTAS DE API
+include __DIR__ . '/routes/api.php';
+
 //IMPRIME O RESPONSE DA ROTA
 $obRouter->run()
          ->sendResponse();

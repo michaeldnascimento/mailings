@@ -43,10 +43,10 @@ MiddlewareQueue::setMap([
     'required-nivel-company' => \App\Http\Middleware\RequireNivelCompany::class,
     'required-nivel-admin'   => \App\Http\Middleware\RequireNivelAdmin::class,
     'required-nivel-cep'     => \App\Http\Middleware\RequireNivelCep::class,
-    'required-nivel-client'     => \App\Http\Middleware\RequireNivelClient::class,
-    //'api'                   => \App\Http\Middleware\Api::class,
-    //'user-basic-auth'       => \App\Http\Middleware\UserBasicAuth::class,
-    //'jwt-auth'              => \App\Http\Middleware\JWTAuth::class,
+    'required-nivel-client'  => \App\Http\Middleware\RequireNivelClient::class,
+    'api'                    => \App\Http\Middleware\Api::class,
+    //'user-basic-auth'        => \App\Http\Middleware\UserBasicAuth::class,
+    //'jwt-auth'               => \App\Http\Middleware\JWTAuth::class,
     //'cache'              => \App\Http\Middleware\Cache::class
 ]);
 
