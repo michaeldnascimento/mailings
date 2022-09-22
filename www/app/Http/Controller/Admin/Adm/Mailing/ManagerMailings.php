@@ -31,7 +31,6 @@ class ManagerMailings extends Page {
 
             if ($obMailings->status_lista == 1){
                 $name_status = 'ATIVO';
-                $name_status = 'ATIVO';
                 $btn_status = 'DESATIVAR';
                 $btn_status_color = 'danger';
             }
