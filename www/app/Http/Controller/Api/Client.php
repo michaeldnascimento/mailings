@@ -73,10 +73,11 @@ class Client extends Api{
         //CLIENTE
         $items = [];
 
-        //VALIDA O CPF/CNPJ
-        if (!is_numeric($cpf_cnpj)){
-            throw new Exception("O ID ".$cpf_cnpj." não é válido.", 400);
-        }
+        //GET CPF/CNPJ E REMOVE STRINGS
+        $cpf_cnpj = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $cpf_cnpj);
+
+        //REMOVE CPF/CNPJ QUE COMEÇA COM 0 A ESQUERDA
+        $cpf_cnpj = ltrim($cpf_cnpj, "0");
 
         //RESULTADOS CPF/CNPJ
         $results = EntityClient::getClient('*', null, "cpf_cnpj = $cpf_cnpj", '', '', '');
