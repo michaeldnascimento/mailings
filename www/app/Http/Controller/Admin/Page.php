@@ -77,6 +77,16 @@ class Page {
             $valueDisplayCep  = "none";
         }
 
+        //RECEBE SESSÃO CLIENT
+        $client = $_SESSION['mailings']['admin']['user']['client'];
+
+        //DISPLAY CEP
+        if ($client == 1){
+            $valueDisplayClient  = "block";
+        }else{
+            $valueDisplayClient  = "none";
+        }
+
         //BUSCA EMPRESAS
         $resultsCompanies = Folders::getListCompaniesRouter();
 
@@ -117,6 +127,7 @@ class Page {
             'display_company' => "style=display:$valueDisplayCompany",
             'display_seller' => "style=display:$valueDisplaySeller",
             'display_cep' => "style=display:$valueDisplayCep",
+            'display_client' => "style=display:$valueDisplayClient",
             'folders' => $folders,
         ]);
     }

@@ -33,7 +33,7 @@ $obRouter->get('/consulta/cliente/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-cep',
+        'required-nivel-client',
     ],
     function($request){
         return new Response(200, Client::getClientPage($request));
@@ -45,7 +45,7 @@ $obRouter->post('/consulta/cliente/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-cep',
+        'required-nivel-client',
     ],
     function($request){
         return new Response(200, Client::getClient($request));

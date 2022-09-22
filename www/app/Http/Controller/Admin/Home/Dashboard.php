@@ -62,6 +62,9 @@ class Dashboard extends Page {
             case 'cepInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CEP!');
                 break;
+            case 'clientInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota CLIENTE!');
+                break;
         }
     }
 

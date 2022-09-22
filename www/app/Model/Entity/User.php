@@ -44,6 +44,11 @@ class User {
     public ?string $cep = null;
 
     /*
+    * Status User CLIENTE
+    */
+    public ?string $client = null;
+
+    /*
     * Nivel User
     */
     public string $nivel;
@@ -67,6 +72,7 @@ class User {
             'password'  => $this->password,
             'status' => $this->status,
             'cep' => $this->cep,
+            'client' => $this->client,
             'nivel' => $this->nivel,
             'companies' => $this->companies
         ]);
@@ -87,6 +93,7 @@ class User {
             'company' => $this->company,
             'status' => $this->status,
             'cep' => $this->cep,
+            'client' => $this->client,
             'nivel' => $this->nivel,
             'companies' => $this->companies
         ]);

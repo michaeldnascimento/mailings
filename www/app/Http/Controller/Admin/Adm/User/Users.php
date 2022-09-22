@@ -112,6 +112,18 @@ class Users extends Page {
             }
         }
 
+        //VERIFICA O STATUS DO CLIENTE USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->client) {
+            case "0": {
+                $disabledClient = "selected";
+                break;
+            }
+            case "1": {
+                $activeClient = "selected";
+                break;
+            }
+        }
+
         //VERIFICA O NIVEL DO USUÁRIO E RETORNA NO SELECT
         switch ($obUser->nivel) {
             case "1": {
@@ -163,6 +175,8 @@ class Users extends Page {
                                       <option value='0' $disabled>DESATIVAR</option>",
             'options_cep_user'    => "<option value='1' $activeCep>SIM</option>.
                                       <option value='0' $disabledCep>NÃO</option>",
+            'options_client_user' => "<option value='1' $activeClient>SIM</option>.
+                                      <option value='0' $disabledClient>NÃO</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
                                       <option value='2' $company>EMPRESA</option>.
                                       <option value='3' $adm>ADMINISTRADOR</option>",
@@ -210,6 +224,7 @@ class Users extends Page {
         $obUser->company = 1;
         $obUser->status = $postVars['status_user'] ?? $obUser->status;
         $obUser->cep = $postVars['cep'] ?? $obUser->cep;
+        $obUser->client = $postVars['client'] ?? $obUser->client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
         $obUser->atualizar();

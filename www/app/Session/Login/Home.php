@@ -36,7 +36,8 @@ class Home {
             'company' => $obUser->company,
             'nivel' => $obUser->nivel,
             'companies' => $obUser->companies,
-            'cep'   => $obUser->cep
+            'cep'   => $obUser->cep,
+            'client' => $obUser->client
         ];
 
         //SUCESSO
