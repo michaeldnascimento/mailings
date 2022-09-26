@@ -237,6 +237,9 @@ class User extends Page {
         $obUser->company = $user->company;
         $obUser->status = $user->status;
         $obUser->nivel = $user->nivel;
+        $obUser->cep = $user->cep;
+        $obUser->client = $user->client;
+        $obUser->companies = $user->companies;
         $obUser->password = password_hash($password, PASSWORD_DEFAULT);
         $obUser->atualizar();
 

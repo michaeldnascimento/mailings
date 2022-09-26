@@ -31,17 +31,28 @@ class Client extends Page {
 
             $itens .=  View::render('admin/adm/consult/modules/client/item', [
                 'id' => $obClient->id,
-                'cpf_cnpj' => $obClient->cpf_cnpj,
                 'nome_cliente' => $obClient->nome_cliente,
-                'cep' => $obClient->cep,
+                'cpf_cnpj' => $obClient->cpf_cnpj,
+                'tipo_cliente' => $obClient->tipo_cliente,
+                'endereco' => $obClient->endereco,
                 'numero' => $obClient->numero,
+                'complemento' => $obClient->complemento,
+                'cep' => $obClient->cep,
+                'tipo_edificacao' => $obClient->tipo_edificacao,
+                'bairro' => $obClient->bairro,
+                'cidade' => $obClient->cidade,
+                'uf' => $obClient->uf,
+                'cod_hp' => $obClient->cod_hp,
                 'fone_cel' => $obClient->fone_cel,
                 'fone_fixo' => $obClient->fone_fixo,
                 'email' => $obClient->email,
-                'cidade' => $obClient->cidade,
-                'uf' => $obClient->uf,
-                'tipo_cliente' => $obClient->tipo_cliente,
                 'origem' => $obClient->origem,
+                'operadora_atual' => $obClient->operadora_atual,
+                'cod_contrato' => $obClient->cod_contrato,
+                'data_higienizacao' => $obClient->data_higienizacao,
+                'tec_banda_larga' => $obClient->tec_banda_larga,
+                'correlacoes_adic' => $obClient->correlacoes_adic,
+                'comentario' => $obClient->comentario,
                 'color' => 'primary'
             ]);
         }
