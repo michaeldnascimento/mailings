@@ -10,14 +10,9 @@ use PDOStatement;
 class Client {
 
     /*
-     * CPF/CNPJ
+     * ID
      */
     public int $id;
-
-    /*
-     * CPF/CNPJ
-     */
-    public string $cpf_cnpj;
 
     /*
     * Nome Cliente
@@ -25,9 +20,19 @@ class Client {
     public ?string $nome_cliente = null;
 
     /*
-    * CEP
+     * CPF/CNPJ
+     */
+    public string $cpf_cnpj;
+
+    /*
+    * Tipo cliente
     */
-    public ?string $cep = null;
+    public ?string $tipo_cliente = null;
+
+    /*
+    * Endereco
+    */
+    public ?string $endereco = null;
 
     /*
     * numero
@@ -35,19 +40,24 @@ class Client {
     public ?string $numero = null;
 
     /*
-    * Fone celular
+    * Complemento
     */
-    public ?string $fone_cel = null;
+    public ?string $complemento = null;
 
     /*
-    * Fone Fixo
+    * CEP
     */
-    public ?string $fone_fixo = null;
+    public ?string $cep = null;
 
     /*
-    * E-mail
+    * Tipo Edificação
     */
-    public ?string $email = null;
+    public ?string $tipo_edificacao = null;
+
+    /*
+    * Bairro
+    */
+    public ?string $bairro = null;
 
     /*
     * Cidade
@@ -60,14 +70,59 @@ class Client {
     public ?string $uf = null;
 
     /*
-    * Tipo cliente
+    * Codigo HP NET
     */
-    public ?string $tipo_cliente = null;
+    public ?string $cod_hp = null;
+
+    /*
+    * Fone Fixo
+    */
+    public ?string $fone_fixo = null;
+
+    /*
+    * Fone celular
+    */
+    public ?string $fone_cel = null;
+
+    /*
+    * E-mail
+    */
+    public ?string $email = null;
 
     /*
     * ORIGEM
     */
     public ?string $origem = null;
+
+    /*
+    * Operadora Atual
+    */
+    public ?string $operadora_atual = null;
+
+    /*
+    * Codigo Contrato
+    */
+    public ?string $cod_contrato = null;
+
+    /*
+    * Data Higienização
+    */
+    public ?string $data_higienizacao = null;
+
+    /*
+    * tecnologia banda larga
+    */
+    public ?string $tec_banda_larga = null;
+
+    /*
+    * Correlacões adicionais
+    */
+    public ?string $correlacoes_adic = null;
+
+    /*
+    * Comentario
+    */
+    public ?string $comentario = null;
 
 
     /**
