@@ -33,20 +33,10 @@ $obRouter->get('/login/users/auth-forgot-password', [
     }
 ]);
 
-//ROTA DE CADASTRO DE UM NOVO USUÁRIO (POST)
-$obRouter->post('/login/users/new', [
-    'middlewares' => [
-        'required-login',
-    ],
-    function($request){
-        return new Response(200, Login\User::setNewUser($request));
-    }
-]);
-
 //ROTA DE RECUPERAÇÃO DE SENHA
-$obRouter->post('/login/users/recover', [
+$obRouter->post('/login/users/auth-forgot-password', [
     'middlewares' => [
-        //'required-login',
+        'required-admin-logout',
     ],
     function($request){
         return new Response(200, Login\User::recoverPassword($request));
@@ -54,9 +44,9 @@ $obRouter->post('/login/users/recover', [
 ]);
 
 //ROTA DE RECUPERAÇÃO DE SENHA
-$obRouter->get('/login/users/recover/{token}/{email}', [
+$obRouter->get('/login/users/auth-forgot-password/{token}/{email}', [
     'middlewares' => [
-        //'required-login',
+        'required-admin-logout',
     ],
     function($request, $token, $email){
         return new Response(200, Login\User::recoverTokenValidation($request, $token, $email));
@@ -64,9 +54,9 @@ $obRouter->get('/login/users/recover/{token}/{email}', [
 ]);
 
 //ROTA DE CADASTRO DE UMA NOVA SENHA (POST)
-$obRouter->post('/login/users/newPass', [
+$obRouter->post('/login/users/auth-forgot-password/{token}/{email}', [
     'middlewares' => [
-        //'required-login',
+        'required-admin-logout',
     ],
     function($request){
         return new Response(200, Login\User::setNewPassword($request));

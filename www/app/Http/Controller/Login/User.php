@@ -5,8 +5,8 @@ namespace App\Http\Controller\Login;
 use App\Http\Request;
 use App\Utils\View;
 use App\Model\Entity\User as EntityUser;
-//use \App\Model\Entity\Recover as EntityRecover;
-//use \App\Model\Entity\Email as EntityEmail;
+use \App\Model\Entity\Recover as EntityRecover;
+use \App\Model\Entity\Email as EntityEmail;
 
 class User extends Page {
 
@@ -104,14 +104,14 @@ class User extends Page {
     /**
      * Método responsável por recuperar a senha do usuário
      * @param Request $request
-     * @return string
+     * @return void
      */
-    public static function recoverPassword($request)
+    public static function recoverPassword(Request $request): void
     {
 
         //POST VARS
         $postVars = $request->getPostVars();
-        $email = isset($postVars['resetEmail']) ? $postVars['resetEmail'] : '';
+        $email = $postVars['resetEmail'] ?? '';
 
         //VALIDA E-MAIL DO USUÁRIO
         $obRecover = EntityUser::getUserByEmail($email);
@@ -135,7 +135,7 @@ class User extends Page {
 
         //ENVIAR E-MAIL COM O RESET SENHA
         $entityEmail = new EntityEmail();
-        $sendEmail = $entityEmail->emailPasswordRecover($obRecover);
+        $sendEmail = $entityEmail->emailPasswordRecover((array)$obRecover);
 
         //VERIFICA SE O E-MAIL FOI ENVIADO
         if ($sendEmail == ''){
@@ -154,13 +154,13 @@ class User extends Page {
      * @param string $email
      * @return string
      */
-    public static function recoverTokenValidation($request, $token, $email)
+    public static function recoverTokenValidation(Request $request, string $token, string $email)
     {
         //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
         $obToken = EntityRecover::tokenValidation($token);
 
         //VERIFICA SE O TOKEN NÃO SOFREU ALTERAÇÕES
-        if ($token != $obToken['token']){
+        if ($token != $obToken->token){
             $request->getRouter()->redirect('/login?status=changedToken');
         }
 
@@ -174,10 +174,10 @@ class User extends Page {
         }
 
         //CONTEÚDO DA PÁGINA DE LOGIN
-        $content = View::render('login/recover', [
+        $content = View::render('login/auth-recover-password', [
             'token'    => $token,
             'email'    => $email,
-            //'status'   => self::getStatus($request)
+            'status'   => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
@@ -189,35 +189,35 @@ class User extends Page {
      * @param Request $request
      * @return string
      */
-    public static function setNewPassword($request)
+    public static function setNewPassword(Request $request): string
     {
 
         //POST VARS
         $postVars = $request->getPostVars();
-        $token = isset($postVars['token']) ? $postVars['token'] : '';
-        $login = isset($postVars['login']) ? $postVars['login'] : '';
-        $senha = isset($postVars['senha']) ? $postVars['senha'] : '';
-        $confirmaSenha = isset($postVars['confirmaSenha']) ? $postVars['confirmaSenha'] : '';
+        $token = $postVars['token'] ?? '';
+        $login = $postVars['email'] ?? '';
+        $password = $postVars['password'] ?? '';
+        $confirmPassword = $postVars['confirmPassword'] ?? '';
 
         //VERIFICA A VALIDAÇÃO DE SENHA
-        if ($senha != $confirmaSenha) {
+        if ($password != $confirmPassword) {
             //REDIRECIONA O USUÁRIO
-            $request->getRouter()->redirect('/login?status=confirmation');
+            $request->getRouter()->redirect("/login/users/auth-forgot-password/$token/$login?status=errorConfirmationPassword");
         }
 
-        //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
+        //OBTÉM O TOKEN DO BANCO
         $obToken = EntityRecover::tokenValidation($token);
 
         //VERIFICA SE O TOKEN NÃO SOFREU ALTERAÇÕES
-        if ($token != $obToken['token']) {
+        if ($token != $obToken->token) {
             $request->getRouter()->redirect('/login?status=changedToken');
         }
 
         //NOVA INSTANCIA DE RECOVER -
         $obRecover = new EntityRecover();
-        $obRecover->id = $obToken['id'];
-        $obRecover->login = $obToken['login'];
-        $obRecover->token = $obToken['token'];
+        $obRecover->id = $obToken->id;
+        $obRecover->login = $obToken->login;
+        $obRecover->token = $obToken->token;
         $obRecover->status = 0;
         $obRecover->atualizar();
 
@@ -231,10 +231,13 @@ class User extends Page {
 
         //ATUALIZA A INSTANCIA
         $obUser = new EntityUser();
-        $obUser->id = $user['id'];
-        $obUser->nome = $user['nome'];
-        $obUser->email = $user['email'];
-        $obUser->senha = password_hash($senha, PASSWORD_DEFAULT);
+        $obUser->id = $user->id;
+        $obUser->name = $user->name;
+        $obUser->email = $user->email;
+        $obUser->company = $user->company;
+        $obUser->status = $user->status;
+        $obUser->nivel = $user->nivel;
+        $obUser->password = password_hash($password, PASSWORD_DEFAULT);
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO

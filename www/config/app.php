@@ -29,6 +29,16 @@ Database::config(
 //DEFINE A CONSTANTE DE URL
 define('URL', getenv('URL'));
 
+//DEFINE OS DADOS DE ENVIO E-MAIL
+define("MAIL", [
+    "host" => "smtp.titan.email",
+    "port" => "587",
+    "username" => "contato@geniosales.net.br",
+    "password" => "kL7FX7R5FA",
+    "from_name" => "Genio Sales",
+    "from_email" => "contato@geniosales.net.br"
+]);
+
 //DEFINE O VALOR PADRÃO DAS VARIAVEIS
 View::init([
     'URL' => URL

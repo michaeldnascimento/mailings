@@ -113,6 +113,42 @@ class Home extends Page {
             case 'disable':
                 return Alert::getWarning('Atenção :|','Usuário inativo no momento!');
                 break;
+            case 'created':
+                return Alert::getSuccess('Sucesso :)','Usuário criado com sucesso! Por favor aguarde liberação de acesso');
+                break;
+            case 'errorCreated':
+                return Alert::getError('Erro :(','Não foi possivel criar seu usuário, tente novamente mais tarde!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Sucesso','Usuário atualizado com sucesso!');
+                break;
+            case 'deleted':
+                return Alert::getSuccess('','Usuário excluído com sucesso!');
+                break;
+            case 'duplicated':
+                return Alert::getError('Error!','E-mail já está cadastrado, caso não lembre do acesso clique em esqueceu a senha.');
+                break;
+            case 'send':
+                return Alert::getSuccess('','E-mail de recuperação foi enviado com Sucesso!');
+                break;
+            case 'updateSuccess':
+                return Alert::getSuccess('','Senha atualizada com sucesso!');
+                break;
+            case 'confirmation':
+                return Alert::getError('','Senha e confirmação de senha são diferentes, tente novamente!');
+                break;
+            case 'errorConfirmationPassword':
+                return Alert::getWarning('Atenção :|','Confirmade senha diferente do campo senha!');
+                break;
+            case 'notFound':
+                return Alert::getError('Error :(','O E-mail não foi localizado!');
+                break;
+            case 'changedToken':
+                return Alert::getError('','Este link será desativado! O link enviado parece ter sofrido alguma alteração, por isso não é possível fazer a verificação. Por favor solicite novamente a recuperação da senha.');
+                break;
+            case 'errorEmail':
+                return Alert::getError('','Erro ao enviar o e-mail');
+                break;
         }
     }
 

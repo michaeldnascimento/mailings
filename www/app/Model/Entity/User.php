@@ -90,6 +90,7 @@ class User {
         return (new Database('db_mailings', 'user'))->update('id = '. $this->id, [
             'name'  => $this->name,
             'email' => $this->email,
+            'password'  => $this->password,
             'company' => $this->company,
             'status' => $this->status,
             'cep' => $this->cep,

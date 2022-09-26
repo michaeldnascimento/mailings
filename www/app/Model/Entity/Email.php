@@ -2,11 +2,8 @@
 
 namespace App\Model\Entity;
 
-use \App\Db\Database;
 use \App\Utils\Email\TinyMinify;
-use \PDO;
-use PDOException;
-use PDOStatement;
+use \App\Utils\Email\Email as SendEmail;
 
 
 class Email
@@ -25,13 +22,13 @@ class Email
 
     /**
      * Método responsável por gravar o e-mail no banco de disparo
-     * @param array $valeu dados
+     * @param array $valeu
      * @return bool
      */
-    public function emailPasswordRecover($valeu)
+    public function emailPasswordRecover(array $valeu): bool
     {
 
-        $msn = "
+        $body = "
             <!DOCTYPE html>
             <html lang='pt-br'>
             
@@ -48,12 +45,9 @@ class Email
                         <td>
                             <table align='center' style='width:100%;border-collapse:collapse;max-width:600px !important;'>
                                 <tr>
-                                    <td valign='top'> <img align='center' src='https://intranet.fm.usp.br/nefroz/resources/css/img/topo.png' width='600' alt='img-top'/></td>
-                                </tr>
-                                <tr>
                                     <td valign='top' style='padding:0 9px 0 9px;' width='600'>
                                         <h1 style='text-align:justify;display:block;margin:0;font-size:26px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:normal;color:#009e9b;font-family:georgia,times,times new roman,serif;'>
-                                                Foi solicitado a redefinição de senha para o seu acesso no Nefroz
+                                                Foi solicitado a redefinição de senha para o seu acesso no Gênio Sales
                                         </h1>
                                                 
                                         <p style='text-align:justify;margin:8px 0;'>
@@ -64,30 +58,27 @@ class Email
                                                 </p>           
                                                 
                                                 <p>Para continuar e fazer a redefinição de senha, 
-                                                    <a href='https://intranet.fm.usp.br/nefroz/login/users/recover/$valeu->token/$valeu->login'>Clique Aqui.</a>
+                                                    <a href='https://geniosales.net.br/login/users/auth-forgot-password/$valeu[token]/$valeu[login]'>Clique Aqui.</a>
                                                 </p>
                                                 <br />
                                                 
                                                 <p>ou acesse diretamente no link:</p>
-                                                https://intranet.fm.usp.br/nefroz/login/users/recover/$valeu->token/$valeu->login
+                                                http://localhost:8010/login/users/auth-forgot-password/$valeu[token]/$valeu[login]
                                                 <br />
                                                 
-                                                <p>Enviado em: $valeu->date_recover</p>
+                                                <p>Enviado em: $valeu[date_recover]</p>
                                                 <br />
                                                 
                                                 <p>
-                                                  <p>Caso tenha dúvidas, envie um email para sistemas.nti@fm.usp.br</p>
+                                                  <p>Caso tenha dúvidas, envie um email para contato@geniosales.net.br</p>
                                                 </p>
                                                 <p>
                                                     Atenciosamente, <br />
-                                                    NTI - FMUSP
+                                                    Gênio Sales
                                                 </p>
                                             </span>
                                         </p>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td valign='top'> <img align='center' src='https://intranet.fm.usp.br/nefroz/resources/css/img/rodape.png' width='600' alt='img-botton'/></td>
                                 </tr>
                             </table>
                         </td>
@@ -98,25 +89,22 @@ class Email
         ";
 
         //minificar o html
-        $mensagemMini = TinyMinify::html($msn);
+        $bodyMini = TinyMinify::html($body);
 
-        //echo $mensagemMini;
-        //exit;
+        //echo $bodyMini;
+        //exit();
 
-        //INSERE A INSTANCIA NO BANCO
-        $this->id = (new Database('central', 'CNTEMAIL'))->insert([
-            'de' => 'no-reply@sistemas.fm.usp.br',
-            'para' => $valeu->login,
-            'assunto' => 'Redefinição de Senha Nefroz',
-            'delogin' => 'Nefroz',
-            'codmotivo' => 681,
-            'enviado' => 'n',
-            'mensagem' => $mensagemMini,
-            'datahora' => date('Y-m-d H:i:s')
-        ]);
+        $to      = $valeu['login'];
+        $subject = 'Solicitação - nova senha';
 
-        //SUCESSO
-        return $this->id;
+        $email = new SendEmail;
+        $returnEmail = $email->add($subject, $bodyMini, $to)->send();
+
+        if (empty($returnEmail)){
+            return false;
+        }
+
+        return true;
 
     }
 
