@@ -5,7 +5,7 @@ namespace App\Http\Controller\Api;
 use \App\Db\Pagination;
 use \App\Http\Request;
 use \App\Model\Entity\Mailing as EntityMailing;
-use \App\Model\Entity\Desktop as EntityDesktop;
+use \App\Model\Entity\MailingDesktop as EntityDesktop;
 use \Exception;
 
 class Mailing extends Api{
