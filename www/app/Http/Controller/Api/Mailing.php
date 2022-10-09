@@ -5,6 +5,7 @@ namespace App\Http\Controller\Api;
 use \App\Db\Pagination;
 use \App\Http\Request;
 use \App\Model\Entity\Mailing as EntityMailing;
+use \App\Model\Entity\Desktop as EntityDesktop;
 use \Exception;
 
 class Mailing extends Api{
@@ -45,73 +46,72 @@ class Mailing extends Api{
 
 
     /**
-     * Método responsável por cadastrar um novo mailing
+     * Método responsável por cadastrar um novo mailing desktop
      * @param Request $request
      * @throws Exception
      * @return array
      */
-    public static function setNewMailing(Request $request): array
+    public static function setNewMailingDesktop(Request $request): array
     {
 
         //POST PARAMS
         $postParams = $request->getQueryParams();
 
         //VALIDA OS CAMPOS OBRIGATÓRIOS
-        if (!isset($postParams['doc']) OR !isset($postParams['fone1'])){
+        if (!isset($postParams['cpf']) OR !isset($postParams['fone1'])){
             throw new Exception("Os campos 'doc' e 'fone' são obrigatórios.", 400);
         }
 
         //OBTÉM O MAILING DO BANCO DE DADOS
-        $obMailing = EntityMailing::getMailingByDoc($postParams['doc']);
+        $obDesktop = EntityDesktop::getMailingByCpf($postParams['cpf']);
 
         //VALIDA A INSTANCIA SE O MAILING EXISTIR
-        if($obMailing instanceof EntityMailing){
+        if($obDesktop instanceof EntityDesktop){
             throw new Exception("Esse mailing já existe", 400);
         }
 
+        //NOVO MAILING DESKTOP
+        $obDesktop = new EntityDesktop();
+        $obDesktop->ordens = $postParams['ordens'];
+        $obDesktop->pendencia = $postParams['pendencia'];
+        $obDesktop->cliente = $postParams['cliente'];
+        $obDesktop->status_spc = $postParams['status_spc'];
+        $obDesktop->cpf =   $postParams['cpf'];
+        $obDesktop->rg =   $postParams['rg'];
+        $obDesktop->data_nasc =   $postParams['data_nasc'];
+        $obDesktop->email = $postParams['email'];
+        $obDesktop->fone1 = $postParams['fone1'];
+        $obDesktop->fone2 = $postParams['fone2'];
+        $obDesktop->criado_por = $postParams['criado_por'];
+        $obDesktop->data_cad = $postParams['data_cad'];
+        $obDesktop->logradouro = $postParams['logradouro'];
+        $obDesktop->num = $postParams['num'];
+        $obDesktop->bairro = $postParams['bairro'];
+        $obDesktop->cidade = $postParams['cidade'];
+        $obDesktop->estado = $postParams['estado'];
+        $obDesktop->cep = $postParams['cep'];
+        $obDesktop->compl = $postParams['compl'];
+        $obDesktop->plano = $postParams['plano'];
+        $obDesktop->contrato = $postParams['contrato'];
+        $obDesktop->status = $postParams['status'];
+        $obDesktop->vendedor = $postParams['vendedor'];
+        $obDesktop->mensalidade = $postParams['mensalidade'];
+        $obDesktop->tipo_contrato = $postParams['tipo_contrato'];
+        $obDesktop->n_protocolo = $postParams['n_protocolo'];
+        $obDesktop->status_protocolo = $postParams['status_protocolo'];
+        $obDesktop->data_protocolo = $postParams['data_protocolo'];
+        $obDesktop->obs_protocolo = $postParams['obs_protocolo'];
+        $obDesktop->lista = $postParams['lista'];
+        $obDesktop->id_mailing = $postParams['id_mailing'];
+        $obDesktop->nome_mailing = $postParams['nome_mailing'];
+        $obDesktop->status_lista = 1;
+        $obDesktop->cadastrar();
 
-        //NOVO MAILING
-        $obMailing = new EntityMailing();
-        $obMailing->ordens = $postParams['ordens'];
-        $obMailing->pendencia = $postParams['pendencia'];
-        $obMailing->nome = $postParams['nome'];
-        $obMailing->status_spc = $postParams['status_spc'];
-        $obMailing->doc =   $postParams['doc'];
-        $obMailing->rg =   $postParams['rg'];
-        $obMailing->data_nasc =   $postParams['data_nasc'];
-        $obMailing->email = $postParams['email'];
-        $obMailing->fone1 = $postParams['fone1'];
-        $obMailing->fone2 = $postParams['fone2'];
-        $obMailing->criado_por = $postParams['criado_por'];
-        $obMailing->data_cad = $postParams['data_cad'];
-        $obMailing->endereco = $postParams['endereco'];
-        $obMailing->num = $postParams['num'];
-        $obMailing->bairro = $postParams['bairro'];
-        $obMailing->cidade = $postParams['cidade'];
-        $obMailing->estado = $postParams['estado'];
-        $obMailing->cep = $postParams['cep'];
-        $obMailing->compl = $postParams['compl'];
-        $obMailing->plano = $postParams['plano'];
-        $obMailing->contrato = $postParams['contrato'];
-        $obMailing->status = $postParams['status'];
-        $obMailing->vendedor = $postParams['vendedor'];
-        $obMailing->mensalidade = $postParams['mensalidade'];
-        $obMailing->tipo_contrato = $postParams['tipo_contrato'];
-        $obMailing->n_protocolo = $postParams['n_protocolo'];
-        $obMailing->status_protocolo = $postParams['status_protocolo'];
-        $obMailing->data_protocolo = $postParams['data_protocolo'];
-        $obMailing->obs_protocolo = $postParams['obs_protocolo'];
-        $obMailing->lista = $postParams['lista'];
-        $obMailing->id_mailing = $postParams['id_mailing'];
-        $obMailing->nome_mailing = $postParams['nome_mailing'];
-        $obMailing->status_lista = 1;
-        $obMailing->cadastrar();
-
-        //RETORNA OS DETALHES DO DEPOIMENTO CADASTRADO
+        //RETORNA OS DETALHES DO MAILING CADASTRADO
         return [
-            'id'       => (int)$obMailing->id,
-            'nome'     => $obMailing->nome,
-            'doc'      => $obMailing->doc
+            'id'       => (int)$obDesktop->id,
+            'cliente'  => $obDesktop->cliente,
+            'cpf'      => $obDesktop->cpf
         ];
     }
 

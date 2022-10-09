@@ -3,14 +3,14 @@
 use \App\Http\Response;
 use \App\Http\Controller\Api\Mailing;
 
-//ROTA DE CADASTRO DE DEPOIMENTO
-$obRouter->post('/api/v1/mailing/', [
+//ROTA DE CADASTRO DE MAILING DESKTOP
+$obRouter->post('/api/v1/mailing/desktop/', [
     'middlewares' => [
         'api',
         //'user-basic-auth'
     ],
     function($request){
-        return new Response(201, Mailing::setNewMailing($request), 'application/json');
+        return new Response(201, Mailing::setNewMailingDesktop($request), 'application/json');
     }
 ]);
 
