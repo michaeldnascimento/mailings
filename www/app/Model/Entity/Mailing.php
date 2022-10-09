@@ -5,133 +5,9 @@ namespace App\Model\Entity;
 use \App\Db\Database;
 use \PDO;
 use PDOStatement;
+use \App\Model\Entity\Property\Mailing as ClassMailing;
 
-class Mailing {
-
-    /*
-     * ID do Mailing
-     */
-    public int $id;
-
-    /*
-    * Nome
-    */
-    public ?string $nome = null;
-
-    /*
-     * Fone 1
-     */
-    public ?string $fone1 = null;
-
-    /*
-     * Fone 2
-     */
-    public ?string $fone2 = null;
-
-    /*
-    * Doc
-    */
-    public ?string $doc = null;
-
-    /*
-    * Endereco
-    */
-    public ?string $endereco = null;
-
-    /*
-    * Num
-    */
-    public ?string $num = null;
-
-    /*
-    * Compl
-    */
-    public ?string $compl = null;
-
-    /*
-    * Bairro
-    */
-    public ?string $bairro = null;
-
-    /*
-    * Cidade
-    */
-    public ?string $cidade = null;
-
-    /*
-    * Proposta
-    */
-    public ?string $proposta = null;
-
-    /*
-    * Email
-    */
-    public ?string $email = null;
-
-    /*
-    * HP
-    */
-    public ?string $hp = null;
-
-    /*
-    * Tipo
-    */
-    public ?string $tipo = null;
-
-    /*
-    * Obs
-    */
-    public ?string $obs = null;
-
-    /*
-    * Lista
-    */
-    public string $lista;
-
-    /**
-     * Status lista
-     */
-    public ?int $status_lista = null;
-
-    /*
-     * Nome mailing
-     */
-    public ?string $nome_mailing = null;
-
-    /*
-    * id do mailing salvo
-    */
-    public ?int $id_mailing = null;
-
-    /*
-    * qtd mailing salvo
-    */
-    public ?string $qtd = null;
-
-    /*
-    * id user sistema
-    */
-    public ?int $id_user = null;
-
-    /*
-    * status do mailing
-    */
-    public ?string $status_mailing = null;
-
-    /*
-    * observação do mailing
-    */
-    public ?string $status_obs_mailing = null;
-
-    /*
-    * Data Status mailing
-    */
-    public ?string $status_data_mailing = null;
-
-    /*
-    * Data e hora follow mailing
-    */
-    public ?string $datatime_follow = null;
+class Mailing extends ClassMailing {
 
 
     /**
@@ -142,24 +18,45 @@ class Mailing {
     {
         //INSERE A INSTANCIA NO BANCO
         $this->id = (new Database('db_mailings', 'mailing'))->insert([
+            'ordens' => $this->ordens,
+            'pendencia' => $this->pendencia,
             'nome'  => $this->nome,
-            'email' => $this->email,
+            'status_spc'  => $this->status_spc,
+            'doc' => $this->doc,
+            'rg'  => $this->rg,
+            'data_nasc'  => $this->data_nasc,
             'fone1' => $this->fone1,
             'fone2' => $this->fone2,
-            'doc'  => $this->doc,
+            'email' => $this->email,
+            'cep' => $this->cep,
             'endereco' => $this->endereco,
             'num' => $this->num,
             'compl'  => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
+            'estado' => $this->estado,
             'proposta' => $this->proposta,
             'hp' => $this->hp,
             'tipo' => $this->tipo,
+            'criado_por' => $this->criado_por,
+            'data_cad' => $this->data_cad,
+            'plano' => $this->plano,
+            'contrato' => $this->contrato,
+            'status' => $this->status,
+            'vendedor' => $this->vendedor,
+            'mensalidade' => $this->mensalidade,
+            'tipo_contrato' => $this->tipo_contrato,
+            'n_protocolo' => $this->n_protocolo,
+            'status_protocolo' => $this->status_protocolo,
+            'data_protocolo' => $this->data_protocolo,
+            'obs_protocolo' => $this->obs_protocolo,
             'obs' => $this->obs,
             'lista' => $this->lista,
             'status_lista' => $this->status_lista,
+            'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
-            'id_mailing' => $this->id_mailing
+            'status_data_mailing' => $this->status_data_mailing,
+            'status_obs_mailing' => $this->status_obs_mailing
         ]);
 
         //SUCESSO
@@ -176,7 +73,6 @@ class Mailing {
             'nome' => $this->nome,
             'fone1' => $this->fone1,
             'fone2' => $this->fone2,
-            'doc' => $this->doc,
             'endereco' => $this->endereco,
             'num' => $this->num,
             'compl' => $this->compl,
@@ -252,6 +148,24 @@ class Mailing {
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
+            '',
+            '',
+            ''
+        )->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por consultar o mailing com base no seu DOC
+     *
+     * @param string $doc
+     * @return false|mixed|object
+     */
+    public static function getMailingByDoc(string $doc)
+    {
+        return self::getMailing(
+            '*',
+            '',
+            'doc = '. " '$doc' ",
             '',
             '',
             ''
