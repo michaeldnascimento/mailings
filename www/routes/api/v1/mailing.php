@@ -14,6 +14,39 @@ $obRouter->post('/api/v1/mailing/desktop/', [
     }
 ]);
 
+//ROTA DE CADASTRO DE MAILING CLARO
+$obRouter->post('/api/v1/mailing/claro/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingClaro($request), 'application/json');
+    }
+]);
+
+//ROTA DE CADASTRO DE MAILING CLARO
+$obRouter->post('/api/v1/mailing/net/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingNet($request), 'application/json');
+    }
+]);
+
+//ROTA DE CADASTRO DE MAILING CLARO
+$obRouter->post('/api/v1/mailing/algar/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingAlgar($request), 'application/json');
+    }
+]);
+
 //ROTA DE ATUALIZAÇÃO DE DEPOIMENTO
 $obRouter->put('/api/v1/testimonies/{id}', [
     'middlewares' => [

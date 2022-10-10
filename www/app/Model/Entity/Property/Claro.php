@@ -2,7 +2,6 @@
 
 namespace App\Model\Entity\Property;
 
-
 class Claro
 {
 
