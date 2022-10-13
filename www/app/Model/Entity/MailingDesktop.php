@@ -66,18 +66,38 @@ class MailingDesktop extends ClassDesktop {
     {
         //ATUALIZA O DEPOIMENTO NO BANCO DE DADOS
         return (new Database('db_mailings', 'mailing_desktop'))->update('id = '. $this->id, [
-            'nome' => $this->cliente,
+            'ordens' => $this->ordens,
+            'pendencia' => $this->pendencia,
+            'cliente'  => $this->cliente,
+            'status_spc'  => $this->status_spc,
+            'cpf' => $this->cpf,
+            'rg'  => $this->rg,
+            'data_nasc'  => $this->data_nasc,
             'fone1' => $this->fone1,
             'fone2' => $this->fone2,
-            'endereco' => $this->logradouro,
+            'email' => $this->email,
+            'cep' => $this->cep,
+            'logradouro' => $this->logradouro,
             'num' => $this->num,
-            'compl' => $this->compl,
+            'compl'  => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
-            'proposta' => $this->proposta,
-            'email' => $this->email,
-            'hp' => $this->hp,
-            'tipo' => $this->tipo,
+            'estado' => $this->estado,
+            'criado_por' => $this->criado_por,
+            'data_cad' => $this->data_cad,
+            'plano' => $this->plano,
+            'contrato' => $this->contrato,
+            'status' => $this->status,
+            'vendedor' => $this->vendedor,
+            'mensalidade' => $this->mensalidade,
+            'tipo_contrato' => $this->tipo_contrato,
+            'n_protocolo' => $this->n_protocolo,
+            'status_protocolo' => $this->status_protocolo,
+            'data_protocolo' => $this->data_protocolo,
+            'obs_protocolo' => $this->obs_protocolo,
+            'status_lista' => $this->status_lista,
+            'id_mailing' => $this->id_mailing,
+            'nome_mailing' => $this->nome_mailing,
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
@@ -116,9 +136,9 @@ class MailingDesktop extends ClassDesktop {
      * Método responsável por retornar a quantidade de mailing
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassDesktop
      */
-    public static function getMailingQtd(string $list): ?Mailing
+    public static function getMailingQtd(string $list): ?ClassDesktop
     {
         return self::getMailingDesktop(
             'count(*) as qtd',
@@ -134,10 +154,10 @@ class MailingDesktop extends ClassDesktop {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassDesktop
      * @param int $id_user
      */
-    public static function getMailingQtdUser(string $list, int $id_user): ?Mailing
+    public static function getMailingQtdUser(string $list, int $id_user): ?ClassDesktop
     {
         return self::getMailingDesktop(
             'count(*) as qtd',

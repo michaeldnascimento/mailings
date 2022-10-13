@@ -347,46 +347,5 @@ class Mailing extends Api{
     }
 
 
-    /**
-     * Método responsável por atualizar um depoimento
-     * @param Request $request
-     * @param integer $id
-     * @throws Exception
-     * @return array
-     */
-    public static function setEditTestimony(Request $request, int $id): array
-    {
-
-        //POST VARS
-        $postVars = $request->getPostVars();
-
-        //VALIDA OS CAMPOS OBRIGATÓRIOS
-        if (!isset($postVars['nome']) OR !isset($postVars['mensagem'])){
-            throw new Exception("Os campos 'nome' e 'mensagem' são obrigatórios.", 400);
-        }
-
-        //BUSCAR O DEPOIMENTO NO BANCO
-        $obTestimony = EntityTestimony::getTestimonyById($id);
-
-        //VALIDA A INSTANCIA
-        if(!$obTestimony instanceof EntityTestimony){
-            throw new Exception("O depoimento ".$id." não foi encontrado.", 404);
-        }
-
-
-        //ATUALIZA O DEPOIMENTO
-        $obTestimony->nome = $postVars['nome'];
-        $obTestimony->mensagem = $postVars['mensagem'];
-        $obTestimony->atualizar();
-
-        //RETORNA OS DETALHES DO DEPOIMENTO ATUALIZADO
-        return [
-            'id'       => (int)$obTestimony->id,
-            'nome'     => $obTestimony->nome,
-            'mensagem' => $obTestimony->mensagem,
-            'data'     => $obTestimony->data
-        ];
-    }
-
 
 }

@@ -3,9 +3,9 @@
 namespace App\Model\Entity;
 
 use \App\Db\Database;
+use App\Model\Entity\Property\Net as ClassNet;
 use \PDO;
 use PDOStatement;
-use \App\Model\Entity\Property\Net as ClassNet;
 
 class MailingNet extends ClassNet {
 
@@ -122,9 +122,9 @@ class MailingNet extends ClassNet {
      * Método responsável por retornar a quantidade de mailing
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassNet
      */
-    public static function getMailingQtd(string $list): ?Mailing
+    public static function getMailingQtd(string $list): ?ClassNet
     {
         return self::getMailingDesktop(
             'count(*) as qtd',
@@ -140,10 +140,10 @@ class MailingNet extends ClassNet {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassNet
      * @param int $id_user
      */
-    public static function getMailingQtdUser(string $list, int $id_user): ?Mailing
+    public static function getMailingQtdUser(string $list, int $id_user): ?ClassNet
     {
         return self::getMailingDesktop(
             'count(*) as qtd',

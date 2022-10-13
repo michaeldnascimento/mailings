@@ -1,0 +1,115 @@
+<tr>
+    <td>{{contrato}}</td>
+    <td>{{ordens}}</td>
+    <td>{{cliente}}<br> {{email}}</td>
+    <td>{{cpf}}</td>
+    <td>{{fone1}}<br> {{fone2}}</td>
+    <td>{{logradouro}}<br> {{num}}<br> {{compl}}</td>
+    <td>{{bairro}}<br> {{cidade}}<br> {{estado}} </td>
+    <td>{{tipo_contrato}}</td>
+    <td>{{plano}}</td>
+    <td>{{status_mailing}}</td>
+    <td>{{status_obs_mailing}}</td>
+    <td>
+        <a type="button" class="btn btn-primary block selectMailing" data-bs-toggle="modal"
+                data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
+            <i class="bi bi-three-dots-vertical"></i>
+        </a>
+    </td>
+</tr>
+
+<!--Disabled Backdrop Modal -->
+<div class="modal fade text-left" id="selectMailing" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel4" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title white" id="myModalLabel160">Tabulação
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <form action="{{URL}}/vendedor/desktop/tabula" method="post">
+                    <div class="modal-body">
+                        <div class="col-md-12 mb-12">
+                            <h6>Status</h6>
+                            <p>Selecione o status tabulação!</p>
+                            <div class="form-group mb-3">
+                                <select class="choices form-select" name="status_mailing" id="select" required>
+                                    <optgroup label="VENDA">
+                                        <option value="VENDA - NOVO CLIENTE"> NOVO CLIENTE </option>
+                                        <option value="VENDA - UPGRADE"> UPGRADE </option>
+                                    </optgroup>
+                                    <optgroup label="LIXEIRA">
+                                        <option valeu="LIXEIRA - TELEFONE NAO ATENDE"> TELEFONE NAO ATENDE </option>
+                                        <option valeu="LIXEIRA - NAO TEM INTERESSE EM NOVA ASSINATURA"> NAO TEM INTERESSE </option>
+                                        <option value="LIXEIRA - PROBLEMAS TECNICOS"> PROBLEMAS TECNICOS </option>
+                                        <option value="LIXEIRA - NAO TEM COBERTURA VIRTUA"> NAO TEM COBERTURA FIBRA </option>
+                                        <option value="LIXEIRA - NAO TEM COBERTURA TV"> CLIENTE NÃO LOCALIZADO </option>
+                                        <option value="LIXEIRA - CLIENTE REPETIDO"> CLIENTE REPETIDO </option>
+                                        <option value="LIXEIRA - CLIENTE JA CONTRATOU O SERVICO"> CLIENTE ATIVO NA BASE </option>
+                                        <option value="LIXEIRA - SENDO ATENDIDO POR OUTRO VENDEDOR"> SENDO ATENDIDO POR OUTRO VENDEDOR </option>
+                                        <option value="LIXEIRA - OUTROS - ESPECIFICAR"> OUTROS - ESPECIFICAR </option>
+                                    </optgroup>
+                                    <optgroup label="OPORTUNIDADE">
+                                        <option value="FOLLOW-UP"> FOLLOW UP - RETORNO AGENDADO </option>
+                                        <option value="OPORTUNIDADE - TRATANDO">TRATANDO </option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="follow">
+                            <div id='FOLLOW-UP'>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="data_follow">Data - Follow-UP</label>
+                                        <input type="text" class="form-control date" id="status_user"
+                                               name="data_follow"
+                                               value="{{data_follow}}"
+                                               placeholder="dd/mm/aaaa"
+                                               maxlength="10"
+                                               pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$"
+                                               min="2018-01-01"
+                                               max="2025-12-31">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="time_follow">Hora</label>
+                                        <input type="text" class="form-control time"
+                                               name="time_follow"
+                                               value="{{time_follow}}"
+                                               placeholder="00:00"
+                                               id="time_follow"
+                                               maxlength="5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-12">
+                            <div class="form-group mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Observação Tabulação</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="status_obs_mailing" rows="10" required></textarea>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="id" id="id_mailing" value="">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary"
+                                data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Fechar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Salvar</span>
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
