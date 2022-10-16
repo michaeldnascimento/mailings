@@ -77,13 +77,9 @@ class MailingClaro extends ClassClaro {
             'fone2' => $this->fone2,
             'endereco' => $this->endereco,
             'num' => $this->num,
-            'compl' => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
-            'proposta' => $this->proposta,
             'email' => $this->email,
-            'hp' => $this->hp,
-            'tipo' => $this->tipo,
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
@@ -122,11 +118,11 @@ class MailingClaro extends ClassClaro {
      * Método responsável por retornar a quantidade de mailing
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassClaro|null
      */
-    public static function getMailingQtd(string $list): ?Mailing
+    public static function getMailingQtd(string $list): ?ClassClaro
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
@@ -140,12 +136,12 @@ class MailingClaro extends ClassClaro {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return Mailing
      * @param int $id_user
+     * @return ClassClaro|null
      */
-    public static function getMailingQtdUser(string $list, int $id_user): ?Mailing
+    public static function getMailingQtdUser(string $list, int $id_user): ?ClassClaro
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
@@ -163,7 +159,7 @@ class MailingClaro extends ClassClaro {
      */
     public static function getMailingByCpf(string $cpf)
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             '*',
             '',
             'cpf = '. " '$cpf' ",
@@ -183,7 +179,7 @@ class MailingClaro extends ClassClaro {
      */
     public static function getMailingUserById(string $list, int $id_user)
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             '*',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
@@ -201,7 +197,7 @@ class MailingClaro extends ClassClaro {
      */
     public static function getMailingById(int $id)
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             '*',
             '',
             'id = '. " '$id' " ,
@@ -219,7 +215,7 @@ class MailingClaro extends ClassClaro {
      */
     public static function getNewMailing(string $list)
     {
-        return self::getMailingDesktop(
+        return self::getMailingClaro(
             '*',
             '',
             'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL AND status_lista = 1)",
@@ -232,7 +228,7 @@ class MailingClaro extends ClassClaro {
     /**
      * Método responsável por retornar mailing
      */
-    public static function getMailingDesktop(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
+    public static function getMailingClaro(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
     {
         return (new Database('db_mailings', 'mailing_claro'))->select($fields, $join, $where, $order, $group, $limit);
     }

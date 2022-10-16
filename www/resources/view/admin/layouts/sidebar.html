@@ -72,11 +72,17 @@
                             <span>Claro</span>
                         </a>
                         <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/claro/lista1">Lista 1</a>
+                            <li {{display_seller_claro_cancelado}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/claro/cancelado">Cancelado</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/claro/lista2">Lista 2</a>
+                            <li {{display_seller_claro_desabilitado}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/claro/desabilitado">Desabilitado</a>
+                            </li>
+                            <li {{display_seller_claro_proposta}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/claro/proposta">Proposta</a>
+                            </li>
+                            <li {{display_seller_claro_instalacao} class="submenu-item">
+                                <a href="{{URL}}/vendedor/claro/pendente-instalacao">Pendente Instalação</a>
                             </li>
                         </ul>
                     </li>

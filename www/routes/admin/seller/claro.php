@@ -1,64 +1,113 @@
 <?php
 
 use \App\Http\Response;
-use \App\Http\Controller\Admin\Seller\Desktop\ListDesktop;
+use App\Http\Controller\Admin\Seller\Claro\ListClaro;
 
-//ROTA LISTA 1 MAILING
-$obRouter->get('/vendedor/desktop/lista1', [
+//ROTA CANCELADOMAILING
+$obRouter->get('/vendedor/claro/cancelado/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListDesktop::getList($request, 'lista1'));
+        return new Response(200, ListClaro::getListClaro($request, 'cancelado'));
     }
 ]);
 
-//ROTA LISTA 1 MAILING
-$obRouter->post('/vendedor/desktop/lista1/', [
+//ROTA CANCELADO MAILING
+$obRouter->post('/vendedor/claro/cancelado/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListDesktop::setList($request, 'lista1'));
+        return new Response(200, ListClaro::setListClaro($request, 'cancelado'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
-$obRouter->get('/vendedor/desktop/lista2', [
+//ROTA MAILING DESABILITADO
+$obRouter->get('/vendedor/claro/desabilitado/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListDesktop::getList($request, 'lista2'));
+        return new Response(200, ListClaro::getListClaro($request, 'desabilitado'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
-$obRouter->post('/vendedor/desktop/lista2/', [
+//ROTA MAILING DESABILITADO
+$obRouter->post('/vendedor/claro/desabilitado/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListDesktop::setList($request, 'lista2'));
+        return new Response(200, ListClaro::setListClaro($request, 'desabilitado'));
     }
 ]);
+
+//ROTA MAILING PROPOSTA
+$obRouter->get('/vendedor/claro/proposta/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request){
+        return new Response(200, ListClaro::getListClaro($request, 'proposta'));
+    }
+]);
+
+//ROTA MAILING PROPOSTA
+$obRouter->post('/vendedor/claro/proposta/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request){
+        return new Response(200, ListClaro::setListClaro($request, 'proposta'));
+    }
+]);
+
+//ROTA MAILING PEDENTE INSTALAÇÃO
+$obRouter->get('/vendedor/claro/pendente-instalacao/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request){
+        return new Response(200, ListClaro::getListClaro($request, 'pendente-instalacao'));
+    }
+]);
+
+//ROTA MAILING PEDENTE INSTALAÇÃO
+$obRouter->post('/vendedor/claro/pendente-instalacao/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request){
+        return new Response(200, ListClaro::setListClaro($request, 'pendente-instalacao'));
+    }
+]);
+
 
 //TABULAÇÃO MAILING
-$obRouter->post('/vendedor/desktop/tabula/?{list}', [
+$obRouter->post('/vendedor/claro/tabula/?{list}', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request, $list){
-        return new Response(200, ListDesktop::statusMailing($request, $list, $_POST['id']));
+        return new Response(200, ListClaro::statusMailing($request, $list, $_POST['id']));
     }
 ]);

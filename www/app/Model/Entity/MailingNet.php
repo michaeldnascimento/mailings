@@ -77,13 +77,9 @@ class MailingNet extends ClassNet {
             'fone2' => $this->fone2,
             'endereco' => $this->endereco,
             'num' => $this->num,
-            'compl' => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
-            'proposta' => $this->proposta,
             'email' => $this->email,
-            'hp' => $this->hp,
-            'tipo' => $this->tipo,
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
@@ -126,7 +122,7 @@ class MailingNet extends ClassNet {
      */
     public static function getMailingQtd(string $list): ?ClassNet
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
@@ -145,7 +141,7 @@ class MailingNet extends ClassNet {
      */
     public static function getMailingQtdUser(string $list, int $id_user): ?ClassNet
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
@@ -163,7 +159,7 @@ class MailingNet extends ClassNet {
      */
     public static function getMailingByCpf(string $cpf)
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             '*',
             '',
             'cpf = '. " '$cpf' ",
@@ -183,7 +179,7 @@ class MailingNet extends ClassNet {
      */
     public static function getMailingUserById(string $list, int $id_user)
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             '*',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
@@ -201,7 +197,7 @@ class MailingNet extends ClassNet {
      */
     public static function getMailingById(int $id)
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             '*',
             '',
             'id = '. " '$id' " ,
@@ -219,7 +215,7 @@ class MailingNet extends ClassNet {
      */
     public static function getNewMailing(string $list)
     {
-        return self::getMailingDesktop(
+        return self::getMailingNet(
             '*',
             '',
             'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL AND status_lista = 1)",
@@ -232,7 +228,7 @@ class MailingNet extends ClassNet {
     /**
      * Método responsável por retornar mailing
      */
-    public static function getMailingDesktop(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
+    public static function getMailingNet(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
     {
         return (new Database('db_mailings', 'mailing_net'))->select($fields, $join, $where, $order, $group, $limit);
     }

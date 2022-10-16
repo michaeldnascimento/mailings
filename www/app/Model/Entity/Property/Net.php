@@ -77,11 +77,6 @@ class Net
     public ?string $num = null;
 
     /*
-    * Compl
-    */
-    public ?string $compl = null;
-
-    /*
     * Bairro
     */
     public ?string $bairro = null;

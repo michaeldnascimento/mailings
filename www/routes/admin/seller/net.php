@@ -11,7 +11,7 @@ $obRouter->get('/vendedor/net/cancelado/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::getListCancelado($request, 'cancelado'));
+        return new Response(200, ListNet::getListNet($request, 'cancelado'));
     }
 ]);
 
@@ -23,7 +23,7 @@ $obRouter->post('/vendedor/net/cancelado/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::setListCancelado($request, 'cancelado'));
+        return new Response(200, ListNet::setListNet($request, 'cancelado'));
     }
 ]);
 
@@ -35,7 +35,7 @@ $obRouter->get('/vendedor/net/desabilitado/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::getListDesabilitado($request, 'desabilitado'));
+        return new Response(200, ListNet::getListNet($request, 'desabilitado'));
     }
 ]);
 
@@ -47,7 +47,7 @@ $obRouter->post('/vendedor/net/desabilitado/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::setListDesabilitado($request, 'desabilitado'));
+        return new Response(200, ListNet::setListNet($request, 'desabilitado'));
     }
 ]);
 
@@ -59,7 +59,7 @@ $obRouter->get('/vendedor/net/proposta/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::getListProposta($request, 'proposta'));
+        return new Response(200, ListNet::getListNet($request, 'proposta'));
     }
 ]);
 
@@ -71,31 +71,31 @@ $obRouter->post('/vendedor/net/proposta/', [
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::setListProposta($request, 'proposta'));
+        return new Response(200, ListNet::setListNet($request, 'proposta'));
     }
 ]);
 
 //ROTA MAILING PEDENTE INSTALAÇÃO
-$obRouter->get('/vendedor/net/pedente-instalacao/', [
+$obRouter->get('/vendedor/net/pendente-instalacao/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::getListPedenteInstalacao($request, 'lista2'));
+        return new Response(200, ListNet::getListNet($request, 'pendente-instalacao'));
     }
 ]);
 
 //ROTA MAILING PEDENTE INSTALAÇÃO
-$obRouter->post('/vendedor/net/pedente-instalacao/', [
+$obRouter->post('/vendedor/net/pendente-instalacao/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
     ],
     function($request){
-        return new Response(200, ListNet::setListPedenteInstalacao($request, 'lista2'));
+        return new Response(200, ListNet::setListNet($request, 'pendente-instalacao'));
     }
 ]);
 

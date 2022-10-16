@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controller\Admin\Seller\Net;
+namespace App\Http\Controller\Admin\Seller\Claro;
 
 use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
-use App\Model\Entity\MailingNet as EntityNet;
+use App\Model\Entity\MailingClaro as EntityClaro;
 use App\Utils\View;
 use DateTime;
 
-class ListNet extends Page {
+class ListClaro extends Page {
 
     /**
      * Método responsável por obter a renderização da quantidade de mailings
@@ -24,7 +24,7 @@ class ListNet extends Page {
         $qtd_mailing = '';
 
         //RESULTADOS QUANTIDADE MAILING
-        $qtd_mailing = EntityNet::getMailingQtd($list);
+        $qtd_mailing = EntityClaro::getMailingQtd($list);
 
         //POST VARS
         $postVars = $request->getPostVars();
@@ -52,34 +52,32 @@ class ListNet extends Page {
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
-        $results = EntityNet::getMailingNet("*, DATE_FORMAT(data_status_venda, '%d/%m/%Y') as data_status_venda, DATE_FORMAT(data_instalado, '%d/%m/%Y') as data_instalado, DATE_FORMAT(data_cancelamento, '%d/%m/%Y') as data_cancelamento", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
+        $results = EntityClaro::getMailingClaro("*, DATE_FORMAT(data_cancelamento, '%d/%m/%Y') as data_cancelamento", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
 
         //RENDERIZA O ITEM
-        while($obNet = $results->fetchObject(EntityNet::class)){
-            $items .=  View::render('/admin/seller/net/modules/item', [
-                'id' => $obNet->id,
-                'num_protocolo' => $obNet->num_protocolo,
-                'num_pedido_proposta' => $obNet->num_pedido_proposta,
-                'contrato' => $obNet->contrato,
-                'nome_cliente' => $obNet->nome_cliente,
-                'email' => $obNet->email,
-                'cpf' => $obNet->cpf,
-                'fone' => $obNet->fone,
-                'fone1' => $obNet->fone1,
-                'fone2' => $obNet->fone2,
-                'endereco' => $obNet->endereco,
-                'num' => $obNet->num,
-                'compl' => $obNet->compl,
-                'bairro' => $obNet->bairro,
-                'cidade' => $obNet->cidade,
-                'uf' => $obNet->uf,
-                'tipo_pessoa' => $obNet->tipo_pessoa,
-                'data_status_venda' => $obNet->data_status_venda,
-                'data_instalado' => $obNet->data_instalado,
-                'data_cancelamento' => $obNet->data_cancelamento,
-                'motivo_cancelamento' => $obNet->motivo_cancelamento,
-                'status_mailing' => $obNet->status_mailing,
-                'status_obs_mailing' => $obNet->status_obs_mailing
+        while($obClaro = $results->fetchObject(EntityClaro::class)){
+            $items .=  View::render('/admin/seller/claro/modules/item', [
+                'id' => $obClaro->id,
+                'num_protocolo' => $obClaro->num_protocolo,
+                'num_pedido_proposta' => $obClaro->num_pedido_proposta,
+                'contrato' => $obClaro->contrato,
+                'nome_cliente' => $obClaro->nome_cliente,
+                'email' => $obClaro->email,
+                'cpf' => $obClaro->cpf,
+                'fone' => $obClaro->fone,
+                'fone1' => $obClaro->fone1,
+                'fone2' => $obClaro->fone2,
+                'endereco' => $obClaro->endereco,
+                'num' => $obClaro->num,
+                'compl' => $obClaro->compl,
+                'bairro' => $obClaro->bairro,
+                'cidade' => $obClaro->cidade,
+                'uf' => $obClaro->uf,
+                'tipo_pessoa' => $obClaro->tipo_pessoa,
+                'data_cancelamento' => $obClaro->data_cancelamento,
+                'motivo_cancelamento' => $obClaro->motivo_cancelamento,
+                'status_mailing' => $obClaro->status_mailing,
+                'status_obs_mailing' => $obClaro->status_obs_mailing
             ]);
         }
 
@@ -102,7 +100,7 @@ class ListNet extends Page {
 
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
-        $content = View::render("admin/seller/net/$list", [
+        $content = View::render("admin/seller/claro/$list", [
             'itens_qtd'    => self::getMailingsListQtd($request, $list),
             'itens_user'    => self::getMailingsListUser($list),
             'status'   => self::getStatus($request)
@@ -124,14 +122,14 @@ class ListNet extends Page {
      * @param string|null $errorMessage
      * @return string
      */
-    public static function getListNet(Request $request, string $list, string $errorMessage = null): string
+    public static function getListClaro(Request $request, string $list, string $errorMessage = null): string
     {
         //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
         $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
 
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
-        $content = View::render("admin/seller/net/lista", [
+        $content = View::render("admin/seller/claro/lista", [
             'itens_qtd'    => self::getMailingsListQtd($request, $list),
             'itens_user'   => self::getMailingsListUser($list),
             'lista'        => $list,
@@ -142,7 +140,7 @@ class ListNet extends Page {
         return parent::getPage(
             'Mailings',
             "$list",
-            'Lista NET',
+            'Lista Claro',
             $content
         );
     }
@@ -153,25 +151,25 @@ class ListNet extends Page {
      * @param string $list
      * @return string
      */
-    public static function setListNet(Request $request, string $list): string
+    public static function setListClaro(Request $request, string $list): string
     {
 
         //PEGA ID USUÁRIO NA SESSION
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
-        $qtd_mailing_user = EntityNet::getMailingQtdUser($list, $id_user);
+        $qtd_mailing_user = EntityClaro::getMailingQtdUser($list, $id_user);
 
         //VALIDA SE O USUÁRIO JÁ PASSOU DO LIMIT DE MAILING POR USUÁRIO
         if($qtd_mailing_user->qtd >= 5){
-            $request->getRouter()->redirect("/vendedor/net/$list?status=limitExceeded");
+            $request->getRouter()->redirect("/vendedor/claro/$list?status=limitExceeded");
         }
 
         //PEGAR NOVO MAILING VAZIO
-        $obMailing = EntityNet::getNewMailing($list);
+        $obMailing = EntityClaro::getNewMailing($list);
 
         //VALIDA A INSTANCIA
-        if(!$obMailing instanceof EntityNet){
-            $request->getRouter()->redirect("/vendedor/net/$list?status=notMailing");
+        if(!$obMailing instanceof EntityClaro){
+            $request->getRouter()->redirect("/vendedor/claro/$list?status=notMailing");
         }
 
         //ATUALIZA A INSTANCIA
@@ -179,7 +177,7 @@ class ListNet extends Page {
         $obMailing->atualizar();
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect("/vendedor/net/$list?status=newMailing");
+        $request->getRouter()->redirect("/vendedor/claro/$list?status=newMailing");
     }
 
 
@@ -194,11 +192,11 @@ class ListNet extends Page {
     {
 
         //OBTÉM O MAILING DO BANCO DE DADOS
-        $obMailing = EntityNet::getMailingById($id);
+        $obMailing = EntityClaro::getMailingById($id);
 
         //VALIDA A INSTANCIA
-        if(!$obMailing instanceof EntityNet){
-            $request->getRouter()->redirect("/vendedor/net/$obMailing->lista");
+        if(!$obMailing instanceof EntityClaro){
+            $request->getRouter()->redirect("/vendedor/claro/$obMailing->lista");
         }
 
         //POST VARS
@@ -225,7 +223,7 @@ class ListNet extends Page {
         //VERIFICA A LISTA QUE FOI FEITA A TABULAÇÃO
         switch($list) {
             case '':
-                $request->getRouter()->redirect("/vendedor/net/$obMailing->lista?status=statusUpdate");
+                $request->getRouter()->redirect("/vendedor/claro/$obMailing->lista?status=statusUpdate");
                 break;
             case 'follow':
                 $request->getRouter()->redirect("/vendedor/resultados/follow?status=statusUpdate");
