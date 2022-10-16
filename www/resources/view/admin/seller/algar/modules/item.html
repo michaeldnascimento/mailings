@@ -1,13 +1,10 @@
 <tr>
-    <td>{{contrato}}</td>
-    <td>{{ordens}}</td>
-    <td>{{cliente}}<br> {{email}}</td>
-    <td>{{cpf}}</td>
-    <td>{{fone1}}<br> {{fone2}}</td>
-    <td>{{logradouro}}<br> {{num}}<br> {{compl}}</td>
-    <td>{{bairro}}<br> {{cidade}}<br> {{estado}} </td>
-    <td>{{tipo_contrato}}</td>
-    <td>{{plano}}</td>
+    <td>Contrato - {{contrato}}<br> Pedido - {{num_pedido_proposta}}<br> Protocolo - {{num_protocolo}}</td>
+    <td>Nome: {{nome_cliente}}<br> E-mail: {{email}}<br> Tipo: {{tipo_pessoa}}<br> CPF: {{cpf}}</td>
+    <td>Endereço: {{endereco}}<br> Número: {{num}}<br> Compl: {{compl}}</td>
+    <td>Bairro: {{bairro}}<br> Cidade: {{cidade}}<br> UF: {{uf}} </td>
+    <td>{{fone}}<br> {{fone1}}<br> {{fone2}}</td>
+    <td>Motivo: {{motivo_cancelamento}}<br> Data: {{data_cancelamento}}</td>
     <td>{{status_mailing}}</td>
     <td>{{status_obs_mailing}}</td>
     <td>
@@ -31,7 +28,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/desktop/tabula" method="post">
+                <form action="{{URL}}/vendedor/algar/tabula" method="post">
                     <div class="modal-body">
                         <div class="col-md-12 mb-12">
                             <h6>Status</h6>
@@ -43,8 +40,8 @@
                                         <option value="VENDA - UPGRADE"> UPGRADE </option>
                                     </optgroup>
                                     <optgroup label="LIXEIRA">
-                                        <option valeu="LIXEIRA - TELEFONE NAO ATENDE"> TELEFONE NAO ATENDE </option>
-                                        <option valeu="LIXEIRA - NAO TEM INTERESSE EM NOVA ASSINATURA"> NAO TEM INTERESSE </option>
+                                        <option value="LIXEIRA - TELEFONE NAO ATENDE"> TELEFONE NAO ATENDE </option>
+                                        <option value="LIXEIRA - NAO TEM INTERESSE EM NOVA ASSINATURA"> NAO TEM INTERESSE </option>
                                         <option value="LIXEIRA - PROBLEMAS TECNICOS"> PROBLEMAS TECNICOS </option>
                                         <option value="LIXEIRA - NAO TEM COBERTURA VIRTUA"> NAO TEM COBERTURA FIBRA </option>
                                         <option value="LIXEIRA - NAO TEM COBERTURA TV"> CLIENTE NÃO LOCALIZADO </option>

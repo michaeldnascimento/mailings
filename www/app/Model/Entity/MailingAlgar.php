@@ -74,13 +74,9 @@ class MailingAlgar extends ClassAlgar {
             'fone2' => $this->fone2,
             'endereco' => $this->endereco,
             'num' => $this->num,
-            'compl' => $this->compl,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
-            'proposta' => $this->proposta,
             'email' => $this->email,
-            'hp' => $this->hp,
-            'tipo' => $this->tipo,
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
@@ -119,11 +115,11 @@ class MailingAlgar extends ClassAlgar {
      * Método responsável por retornar a quantidade de mailing
      *
      * @param string $list
-     * @return Mailing
+     * @return ClassAlgar|null
      */
-    public static function getMailingQtd(string $list): ?Mailing
+    public static function getMailingQtd(string $list): ?ClassAlgar
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
@@ -137,12 +133,12 @@ class MailingAlgar extends ClassAlgar {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return Mailing
      * @param int $id_user
+     * @return ClassAlgar|null
      */
-    public static function getMailingQtdUser(string $list, int $id_user): ?Mailing
+    public static function getMailingQtdUser(string $list, int $id_user): ?ClassAlgar
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             'count(*) as qtd',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
@@ -160,7 +156,7 @@ class MailingAlgar extends ClassAlgar {
      */
     public static function getMailingByCpf(string $cpf)
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             '*',
             '',
             'cpf = '. " '$cpf' ",
@@ -180,7 +176,7 @@ class MailingAlgar extends ClassAlgar {
      */
     public static function getMailingUserById(string $list, int $id_user)
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             '*',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
@@ -198,7 +194,7 @@ class MailingAlgar extends ClassAlgar {
      */
     public static function getMailingById(int $id)
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             '*',
             '',
             'id = '. " '$id' " ,
@@ -216,7 +212,7 @@ class MailingAlgar extends ClassAlgar {
      */
     public static function getNewMailing(string $list)
     {
-        return self::getMailingDesktop(
+        return self::getMailingAlgar(
             '*',
             '',
             'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL AND status_lista = 1)",
@@ -229,7 +225,7 @@ class MailingAlgar extends ClassAlgar {
     /**
      * Método responsável por retornar mailing
      */
-    public static function getMailingDesktop(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
+    public static function getMailingAlgar(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
     {
         return (new Database('db_mailings', 'mailing_algar'))->select($fields, $join, $where, $order, $group, $limit);
     }
