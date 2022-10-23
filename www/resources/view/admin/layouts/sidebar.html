@@ -57,11 +57,17 @@
                             <span>Algar</span>
                         </a>
                         <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/algar/lista1">Lista 1</a>
+                            <li {{display_seller_algar_desabilitado}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/algar/base">Base</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/algar/lista2">Lista 2</a>
+                            <li {{display_seller_algar_cancelado}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/algar/cancelado">Cancelado</a>
+                            </li>
+                            <li {{display_seller_algar_proposta}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/algar/proposta">Proposta</a>
+                            </li>
+                            <li {{display_seller_algar_instalacao} class="submenu-item">
+                                <a href="{{URL}}/vendedor/algar/pendente-instalacao">Pendente Instalação</a>
                             </li>
                         </ul>
                     </li>

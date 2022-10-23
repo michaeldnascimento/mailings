@@ -114,7 +114,7 @@ class Algar
     /*
     * fone
     */
-    public ?int $fone = null;
+    public ?string $fone = null;
 
     /*
     * fone1
