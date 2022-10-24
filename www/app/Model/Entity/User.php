@@ -58,6 +58,28 @@ class User {
     */
     public ?int $companies = null;
 
+    /*
+    * Lists Algar
+    */
+    public ?string $algar = null;
+
+    /*
+    * Lists Net
+    */
+    public ?string $net = null;
+
+    /*
+    * Lists Net
+    */
+    public ?string $claro = null;
+
+    /*
+    * Lists Desktop
+    */
+    public ?string $desktop = null;
+
+
+
     /**
      * Método responsável por cadastrar a instancia atual no banco de dados
      * @return bool
@@ -74,7 +96,11 @@ class User {
             'cep' => $this->cep,
             'client' => $this->client,
             'nivel' => $this->nivel,
-            'companies' => $this->companies
+            'companies' => $this->companies,
+            'algar' => $this->algar,
+            'net' => $this->net,
+            'claro' => $this->claro,
+            'desktop' => $this->desktop
         ]);
 
         //SUCESSO
@@ -96,7 +122,11 @@ class User {
             'cep' => $this->cep,
             'client' => $this->client,
             'nivel' => $this->nivel,
-            'companies' => $this->companies
+            'companies' => $this->companies,
+            'algar' => $this->algar,
+            'net' => $this->net,
+            'claro' => $this->claro,
+            'desktop' => $this->desktop
         ]);
     }
 

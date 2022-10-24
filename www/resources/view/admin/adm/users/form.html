@@ -1,4 +1,5 @@
 {{status}}
+<form method="post">
 <section class="section">
     <div class="card">
         <div class="card-header">
@@ -6,7 +7,6 @@
         </div>
 
         <div class="card-body">
-            <form method="post">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -66,47 +66,44 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="col-12 d-flex justify-content-end mt-5">
-                    <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
-                    <a href="{{URL}}/adm/usuarios/lista/" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
-                </div>
             </div>
-            </form>
         </div>
     </div>
 </section>
 
-<section id="basic-horizontal-layouts">
+<section>
     <div class="row match-height">
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Horizontal Form</h4>
+                    <h4 class="card-title">Algar</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <p>A switch has the markup of a custom checkbox but uses the <code>.form-switch</code> class to
-                            render a toggle switch. Switches also support the disabled attribute.</p>
+                        <p>Controle de listas Algar</p>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listAlgar[base]" {{status_algar_base}}>
+                                Base
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listAlgar[cancelado]" {{status_algar_cancelado}}>
+                                Cancelado
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
-                            <label class="form-check-label" for="flexSwitchCheckDisabled">Disabled switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listAlgar[proposta]" {{status_algar_proposta}}>
+                                Proposta
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
-                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Disabled checked switch
-                                checkbox input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listAlgar[pendente-instalacao]" {{status_algar_pendente_instalacao}}>
+                                Pendente Instalação
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -115,31 +112,34 @@
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Horizontal Form with Icons</h4>
+                    <h4 class="card-title">Claro</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <p>A switch has the markup of a custom checkbox but uses the <code>.form-switch</code> class to
-                            render a toggle switch. Switches also support the disabled attribute.</p>
+                        <p>Controle de listas Claro</p>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listClaro[cancelado]" {{status_claro_cancelado}}>
+                                Cancelado
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listClaro[desabilitado]" {{status_claro_desabilitado}}>
+                                Desabilitado
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled="">
-                            <label class="form-check-label" for="flexSwitchCheckDisabled">Disabled switch checkbox
-                                input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listClaro[proposta]" {{status_claro_proposta}}>
+                                Proposta
+                            </label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
-                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Disabled checked switch
-                                checkbox input</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listClaro[pendente-instalacao]" {{status_claro_pendente_instalacao}}>
+                                Pendente Instalação
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -147,3 +147,73 @@
         </div>
     </div>
 </section>
+
+<section>
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Desktop</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <p>Controle de listas Desktop</p>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[lista1]" {{status_desktop_lista1}}>
+                                Lista 1
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[lista2]" {{status_desktop_lista2}}>
+                                Lista 2
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Net</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <p>Controle de listas Net</p>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listNet[cancelado]" {{status_net_cancelado}}>
+                                Cancelado
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listNet[desabilitado]" {{status_net_desabilitado}}>
+                                Desabilitado
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listNet[proposta]" {{status_net_proposta}}>
+                                Proposta
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listNet[pendente-instalacao]" {{status_net_pendente_instalacao}}>
+                                Pendente Instalação
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <div class="col-12 d-flex justify-content-end mt-5">
+        <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
+        <a href="{{URL}}/adm/usuarios/lista/" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
+    </div>
+</form>

@@ -140,6 +140,18 @@ class Users extends Page {
             }
         }
 
+        //LIST ALGAR
+        $listAlgar = explode(", ", $obUser->algar);
+
+        //LIST CLARO
+        $listClaro = explode(", ", $obUser->claro);
+
+        //LIST DESKTOP
+        $listDesktop = explode(", ", $obUser->desktop);
+
+        //LIST NET
+        $listNet = explode(", ", $obUser->net);
+
         //RETORNA EMPRESA
         $companies = Companies::getListCompaniesArray($request);
 
@@ -182,6 +194,24 @@ class Users extends Page {
                                       <option value='3' $adm>ADMINISTRADOR</option>",
             'companies' => $select_company,
             'companies_disabled' => $companies_disabled,
+            'status_algar_base' => in_array('base', $listAlgar) ? 'checked' : '',
+            'status_algar_cancelado' => in_array('cancelado', $listAlgar) ? 'checked' : '',
+            'status_algar_proposta' => in_array('proposta', $listAlgar) ? 'checked' : '',
+            'status_algar_pendente_instalacao' => in_array('pendente-instalacao', $listAlgar) ? 'checked' : '',
+
+            'status_claro_desabilitado' => in_array('desabilitado', $listClaro) ? 'checked' : '',
+            'status_claro_cancelado' => in_array('cancelado', $listClaro) ? 'checked' : '',
+            'status_claro_proposta' => in_array('proposta', $listClaro) ? 'checked' : '',
+            'status_claro_pendente_instalacao' => in_array('pendente-instalacao', $listClaro) ? 'checked' : '',
+
+            'status_desktop_lista1' => in_array('lista1', $listDesktop) ? 'checked' : '',
+            'status_desktop_lista2' => in_array('lista2', $listDesktop) ? 'checked' : '',
+
+            'status_net_desabilitado' => in_array('desabilitado', $listNet) ? 'checked' : '',
+            'status_net_cancelado' => in_array('cancelado', $listNet) ? 'checked' : '',
+            'status_net_proposta' => in_array('proposta', $listNet) ? 'checked' : '',
+            'status_net_pendente_instalacao' => in_array('pendente-instalacao', $listNet) ? 'checked' : '',
+
             'status' => self::getStatus($request)
         ]);
 
@@ -227,6 +257,10 @@ class Users extends Page {
         $obUser->client = $postVars['client'] ?? $obUser->client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
+        $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? $obUser->algar;
+        $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? $obUser->net;
+        $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? $obUser->claro;
+        $obUser->desktop = implode(", ", array_keys($postVars['listDesktop'])) ?? $obUser->desktop;
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO
