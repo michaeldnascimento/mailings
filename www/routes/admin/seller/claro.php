@@ -9,6 +9,7 @@ $obRouter->get('/vendedor/claro/cancelado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::getListClaro($request, 'cancelado'));
@@ -21,6 +22,7 @@ $obRouter->post('/vendedor/claro/cancelado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::setListClaro($request, 'cancelado'));
@@ -33,6 +35,7 @@ $obRouter->get('/vendedor/claro/desabilitado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::getListClaro($request, 'desabilitado'));
@@ -45,6 +48,7 @@ $obRouter->post('/vendedor/claro/desabilitado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::setListClaro($request, 'desabilitado'));
@@ -57,6 +61,7 @@ $obRouter->get('/vendedor/claro/proposta/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::getListClaro($request, 'proposta'));
@@ -69,6 +74,7 @@ $obRouter->post('/vendedor/claro/proposta/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::setListClaro($request, 'proposta'));
@@ -81,6 +87,7 @@ $obRouter->get('/vendedor/claro/pendente-instalacao/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::getListClaro($request, 'pendente-instalacao'));
@@ -93,6 +100,7 @@ $obRouter->post('/vendedor/claro/pendente-instalacao/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListClaro::setListClaro($request, 'pendente-instalacao'));

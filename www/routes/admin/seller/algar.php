@@ -3,96 +3,104 @@
 use \App\Http\Response;
 use \App\Http\Controller\Admin\Seller\Algar\ListAlgar;
 
-//ROTA LISTA 1 MAILING
+//ROTA LISTA BASE
 $obRouter->get('/vendedor/algar/base', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::getListAlgar($request, 'base'));
     }
 ]);
 
-//ROTA LISTA 1 MAILING
+//ROTA LISTA BASE
 $obRouter->post('/vendedor/algar/base/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::setListAlgar($request, 'base'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA CANCELADO
 $obRouter->get('/vendedor/algar/cancelado', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::getListAlgar($request, 'cancelado'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA CANCELADO
 $obRouter->post('/vendedor/algar/cancelado/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::setListAlgar($request, 'cancelado'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA PROPOSTA
 $obRouter->get('/vendedor/algar/proposta', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::getListAlgar($request, 'proposta'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA PROPOSTA
 $obRouter->post('/vendedor/algar/proposta/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::setListAlgar($request, 'proposta'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA PENDENTE INSTALAÇÃO
 $obRouter->get('/vendedor/algar/pendente-instalacao', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::getListAlgar($request, 'pendente-instalacao'));
     }
 ]);
 
-//ROTA LISTA 2 MAILING
+//ROTA LISTA PENDENTE INSTALAÇÃO
 $obRouter->post('/vendedor/algar/pendente-instalacao/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAlgar::setListAlgar($request, 'pendente-instalacao'));

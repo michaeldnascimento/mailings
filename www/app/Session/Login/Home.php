@@ -37,7 +37,11 @@ class Home {
             'nivel' => $obUser->nivel,
             'companies' => $obUser->companies,
             'cep'   => $obUser->cep,
-            'client' => $obUser->client
+            'client' => $obUser->client,
+            'algar' => $obUser->algar,
+            'claro' => $obUser->claro,
+            'net' => $obUser->net,
+            'desktop' => $obUser->desktop
         ];
 
         //SUCESSO

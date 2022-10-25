@@ -9,6 +9,7 @@ $obRouter->get('/vendedor/net/cancelado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::getListNet($request, 'cancelado'));
@@ -21,6 +22,7 @@ $obRouter->post('/vendedor/net/cancelado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::setListNet($request, 'cancelado'));
@@ -33,6 +35,7 @@ $obRouter->get('/vendedor/net/desabilitado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::getListNet($request, 'desabilitado'));
@@ -45,6 +48,7 @@ $obRouter->post('/vendedor/net/desabilitado/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::setListNet($request, 'desabilitado'));
@@ -57,6 +61,7 @@ $obRouter->get('/vendedor/net/proposta/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::getListNet($request, 'proposta'));
@@ -69,6 +74,7 @@ $obRouter->post('/vendedor/net/proposta/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::setListNet($request, 'proposta'));
@@ -81,6 +87,7 @@ $obRouter->get('/vendedor/net/pendente-instalacao/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::getListNet($request, 'pendente-instalacao'));
@@ -93,6 +100,7 @@ $obRouter->post('/vendedor/net/pendente-instalacao/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListNet::setListNet($request, 'pendente-instalacao'));

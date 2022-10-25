@@ -39,10 +39,10 @@ class Request {
     public function __construct($router){
         $this->router      = $router;
         $this->queryParams = $_GET ?? [];
-        //$this->postVars    = $_POST ?? [];
+        $this->postVars    = $_POST ?? [];
         $this->headers     = getallheaders();
         $this->httpMethod  = $_SERVER['REQUEST_METHOD'] ?? '';
-        //$this->uri         = $_SERVER['REQUEST_URI'] ?? '';
+        $this->uri         = $_SERVER['REQUEST_URI'] ?? '';
         $this->setUri();
         $this->setPostVars();
     }
@@ -123,6 +123,32 @@ class Request {
     public function getPostVars() : array
     {
         return $this->postVars;
+    }
+
+    /**
+     * Método responsável por retornar o útimo elemento uri
+     */
+    public function getArrayUri() :array
+    {
+        // Analisa a URL:
+        $url = parse_url($this->getUri());
+
+        // Divide o path nas ocorrências de /:
+        return explode('/', trim($url["path"], '/'));
+    }
+
+    /**
+     * Método responsável por retornar o útimo elemento uri
+     */
+    public function getLastWord () {
+
+        // Busca o último elemento:
+        $uri = $this->getArrayUri();
+        $last = end($uri);
+
+        // Se não estiver vazio e não possuir o caractere., retorna o valor, senão retorna index:
+        return $last && false === strpos($last, '.') ? $last : "index";
+
     }
 
 

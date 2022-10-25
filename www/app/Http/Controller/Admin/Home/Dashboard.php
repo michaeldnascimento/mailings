@@ -65,6 +65,12 @@ class Dashboard extends Page {
             case 'clientInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CLIENTE!');
                 break;
+            case 'listInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa lista mailing');
+                break;
+            case 'mailingInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar esse mailing');
+                break;
         }
     }
 

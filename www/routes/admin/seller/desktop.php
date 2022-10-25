@@ -9,6 +9,7 @@ $obRouter->get('/vendedor/desktop/lista1', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListDesktop::getList($request, 'lista1'));
@@ -21,6 +22,7 @@ $obRouter->post('/vendedor/desktop/lista1/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListDesktop::setList($request, 'lista1'));
@@ -33,6 +35,7 @@ $obRouter->get('/vendedor/desktop/lista2', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListDesktop::getList($request, 'lista2'));
@@ -45,6 +48,7 @@ $obRouter->post('/vendedor/desktop/lista2/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListDesktop::setList($request, 'lista2'));

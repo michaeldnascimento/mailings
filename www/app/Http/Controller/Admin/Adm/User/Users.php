@@ -257,10 +257,10 @@ class Users extends Page {
         $obUser->client = $postVars['client'] ?? $obUser->client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
-        $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? $obUser->algar;
-        $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? $obUser->net;
-        $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? $obUser->claro;
-        $obUser->desktop = implode(", ", array_keys($postVars['listDesktop'])) ?? $obUser->desktop;
+        $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
+        $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;
+        $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? null;
+        $obUser->desktop = implode(", ", array_keys($postVars['listDesktop'])) ?? null;
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO

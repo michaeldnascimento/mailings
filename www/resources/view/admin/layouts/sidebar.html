@@ -36,21 +36,6 @@
 
                     <li {{display_seller}} class="sidebar-title">Vendedor</li>
 
-                    <li {{display_seller}} class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-person-lines-fill"></i>
-                            <span>Mailings</span>
-                        </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/mailings/lista1">Lista 1</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="{{URL}}/vendedor/mailings/lista2">Lista 2</a>
-                            </li>
-                        </ul>
-                    </li>
-
                     <li {{display_seller_algar}} class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-lines-fill"></i>
@@ -66,7 +51,7 @@
                             <li {{display_seller_algar_proposta}} class="submenu-item">
                                 <a href="{{URL}}/vendedor/algar/proposta">Proposta</a>
                             </li>
-                            <li {{display_seller_algar_instalacao} class="submenu-item">
+                            <li {{display_seller_algar_pendente_instalacao} class="submenu-item">
                                 <a href="{{URL}}/vendedor/algar/pendente-instalacao">Pendente Instalação</a>
                             </li>
                         </ul>
@@ -87,7 +72,7 @@
                             <li {{display_seller_claro_proposta}} class="submenu-item">
                                 <a href="{{URL}}/vendedor/claro/proposta">Proposta</a>
                             </li>
-                            <li {{display_seller_claro_instalacao} class="submenu-item">
+                            <li {{display_seller_claro_pendente_instalacao}} class="submenu-item">
                                 <a href="{{URL}}/vendedor/claro/pendente-instalacao">Pendente Instalação</a>
                             </li>
                         </ul>
@@ -100,10 +85,10 @@
                             <span>Desktop</span>
                         </a>
                         <ul class="submenu ">
-                            <li class="submenu-item ">
+                            <li {{display_seller_desktop_lista1}} class="submenu-item ">
                                 <a href="{{URL}}/vendedor/desktop/lista1">Lista 1</a>
                             </li>
-                            <li class="submenu-item ">
+                            <li {{display_seller_desktop_lista2}} class="submenu-item ">
                                 <a href="{{URL}}/vendedor/desktop/lista2">Lista 2</a>
                             </li>
                         </ul>

@@ -55,6 +55,7 @@ MiddlewareQueue::setMap([
     'required-nivel-cep'     => \App\Http\Middleware\RequireNivelCep::class,
     'required-nivel-client'  => \App\Http\Middleware\RequireNivelClient::class,
     'api'                    => \App\Http\Middleware\Api::class,
+    'required-nivel-seller-list'  => \App\Http\Middleware\RequireNivelSellerList::class,
     //'user-basic-auth'        => \App\Http\Middleware\UserBasicAuth::class,
     //'jwt-auth'               => \App\Http\Middleware\JWTAuth::class,
     //'cache'              => \App\Http\Middleware\Cache::class
