@@ -14,6 +14,17 @@ $obRouter->post('/api/v1/mailing/desktop/', [
     }
 ]);
 
+//ROTA DE CADASTRO DE MAILING DESKTOP
+$obRouter->post('/api/v1/mailing/desktop2/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingDesktop2($request), 'application/json');
+    }
+]);
+
 //ROTA DE CADASTRO DE MAILING CLARO
 $obRouter->post('/api/v1/mailing/claro/', [
     'middlewares' => [

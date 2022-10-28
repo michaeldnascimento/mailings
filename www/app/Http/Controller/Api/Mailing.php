@@ -6,6 +6,7 @@ use \App\Db\Pagination;
 use \App\Http\Request;
 use \App\Model\Entity\Mailing as EntityMailing;
 use \App\Model\Entity\MailingDesktop as EntityDesktop;
+use \App\Model\Entity\MailingDesktop2 as EntityDesktop2;
 use \App\Model\Entity\MailingAlgar as EntityAlgar;
 use \App\Model\Entity\MailingClaro as EntityClaro;
 use \App\Model\Entity\MailingNet as EntityNet;
@@ -47,6 +48,65 @@ class Mailing extends Api{
         return $items;
     }
 
+    /**
+     * Método responsável por cadastrar um novo mailing desktop
+     * @param Request $request
+     * @throws Exception
+     * @return array
+     */
+    public static function setNewMailingDesktop2(Request $request): array
+    {
+
+        //POST PARAMS
+        $postParams = $request->getQueryParams();
+
+        //VALIDA OS CAMPOS OBRIGATÓRIOS
+        if (!isset($postParams['cpf_cnpj']) OR !isset($postParams['fone1'])){
+            throw new Exception("Os campos 'cpf_cnpj' e 'fone' são obrigatórios.", 400);
+        }
+
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $obDesktop = EntityDesktop2::getMailingByCpf($postParams['cpf_cnpj']);
+
+        //VALIDA A INSTANCIA SE O MAILING EXISTIR
+        if($obDesktop instanceof EntityDesktop2){
+            throw new Exception("Esse mailing já existe", 400);
+        }
+
+        //NOVO MAILING DESKTOP
+        $obDesktop = new EntityDesktop2();
+        $obDesktop->cliente = $postParams['cliente'];
+        $obDesktop->cpf_cnpj =  $postParams['cpf_cnpj'];
+        $obDesktop->rg =   $postParams['rg'];
+        $obDesktop->nascimento = implode('-', array_reverse(explode('/', $postParams['nascimento'])));
+        $obDesktop->email = $postParams['email'];
+        $obDesktop->fone1 = $postParams['fone1'];
+        $obDesktop->fone2 = $postParams['fone2'];
+        $obDesktop->fone3 = $postParams['fone3'];
+        $obDesktop->endereco = $postParams['endereco'];
+        $obDesktop->bairro = $postParams['bairro'];
+        $obDesktop->cidade = $postParams['cidade'];
+        $obDesktop->estado = $postParams['estado'];
+        $obDesktop->cep = $postParams['cep'];
+        $obDesktop->contrato = $postParams['contrato'];
+        $obDesktop->status = $postParams['status'];
+        $obDesktop->subStatus = $postParams['subStatus'];
+        $obDesktop->observacao = $postParams['observacao'];
+        $obDesktop->produto = $postParams['produto'];
+        $obDesktop->ultimaOC = $postParams['ultimaOC'];
+        $obDesktop->lista = $postParams['lista'];
+        $obDesktop->id_mailing = $postParams['id_mailing'];
+        $obDesktop->nome_mailing = $postParams['nome_mailing'];
+        $obDesktop->status_lista = 1;
+        $obDesktop->cadastrar();
+
+        //RETORNA OS DETALHES DO MAILING CADASTRADO
+        return [
+            'id'       => (int)$obDesktop->id,
+            'cliente'  => $obDesktop->cliente,
+            'cpf_cnpj' => $obDesktop->cpf_cnpj
+        ];
+    }
 
     /**
      * Método responsável por cadastrar um novo mailing desktop
