@@ -64,6 +64,7 @@ class ListDesktop extends Page {
                 'cliente' => $obDesktop->cliente,
                 'email' => $obDesktop->email,
                 'cpf' => $obDesktop->cpf,
+                'cep' => $obDesktop->cep,
                 'fone1' => $obDesktop->fone1,
                 'fone2' => $obDesktop->fone2,
                 'doc' => $obDesktop->doc,

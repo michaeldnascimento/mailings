@@ -1,5 +1,13 @@
 //DataTable list system
-let jquery_datatable = $("#table").DataTable()
+$(document).ready(function() {
+    $('#table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ]
+    } );
+} );
+
 
 //pages mailing
 $(document).ready(function(){

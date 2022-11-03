@@ -63,6 +63,7 @@ class ListClaro extends Page {
                 'contrato' => $obClaro->contrato,
                 'nome_cliente' => $obClaro->nome_cliente,
                 'email' => $obClaro->email,
+                'cep' => $obClaro->cep,
                 'cpf' => $obClaro->cpf,
                 'fone' => $obClaro->fone,
                 'fone1' => $obClaro->fone1,

@@ -1,18 +1,33 @@
 <tr>
-    <td>Contrato - {{contrato}}<br> Pedido - {{num_pedido_proposta}}<br> Protocolo - {{num_protocolo}}</td>
-    <td>Nome: {{nome_cliente}}<br> E-mail: {{email}}<br> Tipo: {{tipo_pessoa}}<br> CPF: {{cpf}}</td>
-    <td>Endereço: {{endereco}}<br> Número: {{num}}<br> Compl: {{compl}}</td>
-    <td>Bairro: {{bairro}}<br> Cidade: {{cidade}}<br> UF: {{uf}} </td>
-    <td>{{fone}}<br> {{fone1}}<br> {{fone2}}</td>
-    <td>Motivo: {{motivo_cancelamento}}<br> Data: {{data_cancelamento}}</td>
-    <td>{{status_mailing}}</td>
-    <td>{{status_obs_mailing}}</td>
+    <td>{{nome_cliente}}</td>
+    <td>{{cidade}}</td>
     <td>
-        <a type="button" class="btn btn-primary block selectMailing" data-bs-toggle="modal"
-                data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
-            <i class="bi bi-three-dots-vertical"></i>
+        <a type="button" class="link-primary" href="{{URL}}/consulta/cep/{{cep}}" target="_blank">
+            <b>{{cep}}</b>
         </a>
     </td>
+    <td>{{contrato}}</td>
+    <td>{{num_pedido_proposta}}</td>
+    <td>{{num_protocolo}}</td>
+    <td>{{fone}}<br> {{fone1}}<br> {{fone2}}</td>
+    <td>
+        <a type="button" class="btn btn-primary block selectMailing" data-bs-toggle="modal"
+           data-bs-backdrop="false" data-bs-target="#selectMailing">
+             Tabulação
+        </a>
+    </td>
+    <td>{{tipo_pessoa}}</td>
+    <td>{{cpf}}</td>
+    <td>{{email}}</td>
+    <td>{{endereco}}</td>
+    <td>{{num}}</td>
+    <td>{{compl}}</td>
+    <td>{{bairro}}</td>
+    <td>{{uf}}</td>
+    <td>{{motivo_cancelamento}}</td>
+    <td>{{data_cancelamento}}</td>
+    <td>{{status_mailing}}</td>
+    <td>{{status_obs_mailing}}</td>
 </tr>
 
 <!--Disabled Backdrop Modal -->

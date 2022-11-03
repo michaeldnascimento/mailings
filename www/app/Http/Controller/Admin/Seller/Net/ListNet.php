@@ -64,6 +64,7 @@ class ListNet extends Page {
                 'nome_cliente' => $obNet->nome_cliente,
                 'email' => $obNet->email,
                 'cpf' => $obNet->cpf,
+                'cep' => $obNet->cep,
                 'fone' => $obNet->fone,
                 'fone1' => $obNet->fone1,
                 'fone2' => $obNet->fone2,

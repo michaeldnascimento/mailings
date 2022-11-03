@@ -469,6 +469,64 @@ class Cep extends Page {
     /**
      * Método responsável por retornar a renderização a view de listagem de usuários
      * @param Request $request
+     * @param string|null $errorMessage
+     * @return string
+     */
+    public static function getCepMailing(Request $request, $cep, string $errorMessage = null): string
+    {
+
+        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
+        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
+
+        //VERIFICA SE O CEP NÃO É VAZIO
+        if (empty($cep)){
+            $request->getRouter()->redirect('/consulta/cep?status=notFoundCep');
+        }
+
+        //GET CEP E REMOVE STRINGS
+        $cep = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $cep);
+
+
+        //CONSULTA SE O CEP EXITE NO VIA CEP
+        $address = ViaCep::consultViaCep($cep);
+
+        //VALIDA A INSTANCIA
+        if(empty($address)){
+            $request->getRouter()->redirect('/consulta/cep?status=notFoundCep');
+        }
+
+        //REMOVE CEP QUE COMEÇA COM 0 A ESQUERDA
+        $cep = ltrim($cep, "0");
+
+        //CONTEÚDO DA PÁGINA DE USUÁRIOS
+        $content = View::render('admin/adm/consult/cep_post', [
+            'cep'           => $cep,
+            'net_list'      => self::getCepNet($cep),
+            'vivo_list'     => self::getCepVivo($cep),
+            'tim_list'      => self::getCepTim($cep),
+            'algar_list'    => self::getCepAlgar($cep, $address['localidade']),
+            'desktop_list'  => self::getCepDesktop($cep),
+            'oi_list'       => self::getCepOI($cep),
+            'vip_list'      => self::getCepVIP($cep),
+            'neorede_list'  => self::getCepNeorede($address['localidade']),
+            'webby_list'    => self::getCepWebby($address['localidade']),
+            'vero_list'     => self::getCepVero($address['localidade']),
+            'status'        => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Consulta',
+            'CEP Operadora',
+            'Consulta de CEP',
+            $content
+        );
+
+    }
+
+    /**
+     * Método responsável por retornar a renderização a view de listagem de usuários
+     * @param Request $request
      * @return string
      */
     public static function getCepPage(Request $request): string

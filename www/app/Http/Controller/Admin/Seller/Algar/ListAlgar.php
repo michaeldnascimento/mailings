@@ -56,6 +56,7 @@ class ListAlgar extends Page {
 
         //RENDERIZA O ITEM
         while($obAlgar = $results->fetchObject(EntityAlgar::class)){
+
             $items .=  View::render('/admin/seller/algar/modules/item', [
                 'id' => $obAlgar->id,
                 'num_protocolo' => $obAlgar->num_protocolo,
@@ -68,6 +69,7 @@ class ListAlgar extends Page {
                 'fone1' => $obAlgar->fone1,
                 'fone2' => $obAlgar->fone2,
                 'endereco' => $obAlgar->endereco,
+                'cep' => $obAlgar->cep,
                 'num' => $obAlgar->num,
                 'compl' => $obAlgar->compl,
                 'bairro' => $obAlgar->bairro,
