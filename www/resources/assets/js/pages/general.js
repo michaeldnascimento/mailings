@@ -1,19 +1,9 @@
-//DataTable list system
-$(document).ready(function() {
-    $('#table').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'colvis'
-        ]
-    } );
-} );
-
-
 //pages mailing
 $(document).ready(function(){
     // pra buscar a value do button tem que usar .variavel pra buscar o id tem que se usar #iddooponete
     $('.selectMailing').click(function(){
         let idMailing = $(this).attr('id_mailing');
+        console.log(idMailing);
         $('#id_mailing').val(idMailing);
     });
 
@@ -28,3 +18,10 @@ $(document).ready(function() {
         $('#follow').children(selectValor).show();
     });
 });
+
+//DataTable list system
+let jquery_datatable = $('#table').DataTable( {
+    language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
+    }
+} );

@@ -1,4 +1,11 @@
 <tr>
+    <td></td>
+    <td>
+        <a class="btn btn-outline-primary selectMailing" data-bs-toggle="modal"
+           data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
+            <i class="bi bi-pencil-fill" title="Tabulação"></i>
+        </a>
+    </td>
     <td>{{contrato}}</td>
     <td>{{ordens}}</td>
     <td>{{cliente}}<br> {{email}}</td>
@@ -10,12 +17,6 @@
     <td>{{plano}}</td>
     <td>{{status_mailing}}</td>
     <td>{{status_obs_mailing}}</td>
-    <td>
-        <a type="button" class="btn btn-primary block selectMailing" data-bs-toggle="modal"
-                data-bs-backdrop="false" data-bs-target="#selectMailing" id_mailing="{{id}}">
-            <i class="bi bi-three-dots-vertical"></i>
-        </a>
-    </td>
 </tr>
 
 <!--Disabled Backdrop Modal -->
