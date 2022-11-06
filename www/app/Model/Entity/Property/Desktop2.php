@@ -122,6 +122,11 @@ class Desktop2
     public ?string $datatime_follow = null;
 
     /*
+    * Data e hora follow mailing
+    */
+    public ?string $sublista = null;
+
+    /*
     * Lista
     */
     public string $lista;

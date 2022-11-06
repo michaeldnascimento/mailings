@@ -85,11 +85,47 @@
                             <span>Desktop</span>
                         </a>
                         <ul class="submenu ">
-                            <li {{display_seller_desktop_lista1}} class="submenu-item ">
-                                <a href="{{URL}}/vendedor/desktop/lista1">Lista 1</a>
+                            <li {{display_seller_desktop_get}} class="sidebar-item has-sub">
+                                <a href="#" class='sidebar-link'>GET</a>
+                                <ul class="submenu">
+                                    <li {{display_seller_desktop_get_base}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/get/base">Base</a>
+                                    </li>
+                                    <li {{display_seller_desktop_get_cancelados}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/get/cancelados">Cancelados</a>
+                                    </li>
+                                    <li {{display_seller_desktop_get_pedidos}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/get/pedidos">Pedidos</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li {{display_seller_desktop_lista2}} class="submenu-item ">
-                                <a href="{{URL}}/vendedor/desktop/lista2">Lista 2</a>
+                            <li {{display_seller_desktop_sis}} class="sidebar-item has-sub">
+                                <a href="#" class='sidebar-link'>SIS</a>
+                                <ul class="submenu">
+                                    <li {{display_seller_desktop_sis_base}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/sis/base">Base</a>
+                                    </li>
+                                    <li {{display_seller_desktop_sis_cancelados}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/sis/cancelados">Cancelados</a>
+                                    </li>
+                                    <li {{display_seller_desktop_sis_pedidos}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/sis/pedidos">Pedidos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li {{display_seller_desktop_netbarretos}} class="sidebar-item has-sub">
+                                <a href="#" class='sidebar-link'>NETBarretos</a>
+                                <ul class="submenu">
+                                    <li {{display_seller_desktop_netbarretos_base}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/netbarretos/base">Base</a>
+                                    </li>
+                                    <li {{display_seller_desktop_netbarretos_cancelados}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/netbarretos/cancelados">Cancelados</a>
+                                    </li>
+                                    <li {{display_seller_desktop_netbarretos_pedidos}} class="submenu-item ">
+                                        <a href="{{URL}}/vendedor/desktop/netbarretos/pedidos">Pedidos</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>

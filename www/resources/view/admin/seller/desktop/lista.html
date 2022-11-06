@@ -7,9 +7,10 @@
 
         <div class="card-body">
 
-            <form action="{{URL}}/vendedor/desktop/lista1/" method="post">
+            <form action="{{URL}}/vendedor/desktop/{{sublista}}/{{lista}}" method="post">
 
-                <input type="hidden" name="lista" class="form-control" value="lista1">
+                <input type="hidden" name="sublista" class="form-control" value="{{sublista}}">
+                <input type="hidden" name="lista" class="form-control" value="{{lista}}">
 
                 <div class="col-md-6">
                     <div class="form-group">
@@ -18,21 +19,28 @@
                 </div>
             </form>
 
-            <table class="table" id="table_users">
+            <table class="table display responsive nowrap" style="width:100%" id="table">
                 <thead>
                 <tr>
                     <th></th>
                     <th></th>
+                    <th>Cliente</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
                     <th>Contrato</th>
-                    <th>Ordens</th>
-                    <th>Cliente/Email</th>
-                    <th>CPF</th>
-                    <th>Fone</th>
+                    <th>Telefone</th>
+                    <th>CPF/CNPJ</th>
+                    <th>RG</th>
+                    <th>E-mail</th>
                     <th>Endereço</th>
-                    <th>Bairro/Cidade/UF</th>
-                    <th>Tipo Contrato</th>
-                    <th>Plano</th>
+                    <th>Bairro</th>
+                    <th>UF</th>
                     <th>Status</th>
+                    <th>Sub Status</th>
+                    <th>Produto</th>
+                    <th>Obs</th>
+                    <th>Ultima OC</th>
+                    <th>Status Mailing</th>
                     <th>Status Obs</th>
                 </tr>
                 </thead>

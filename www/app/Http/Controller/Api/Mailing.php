@@ -94,6 +94,7 @@ class Mailing extends Api{
         $obDesktop->observacao = $postParams['observacao'];
         $obDesktop->produto = $postParams['produto'];
         $obDesktop->ultimaOC = $postParams['ultimaOC'];
+        $obDesktop->sublista = $postParams['sublista'];
         $obDesktop->lista = $postParams['lista'];
         $obDesktop->id_mailing = $postParams['id_mailing'];
         $obDesktop->nome_mailing = $postParams['nome_mailing'];

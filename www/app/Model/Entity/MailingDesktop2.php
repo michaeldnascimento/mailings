@@ -37,6 +37,7 @@ class MailingDesktop2 extends ClassDesktop2 {
             'observacao' => $this->observacao,
             'produto' => $this->produto,
             'ultimaOC' => $this->ultimaOC,
+            'sublista' => $this->sublista,
             'lista' => $this->lista,
             'status_lista' => $this->status_lista,
             'id_mailing' => $this->id_mailing,
@@ -77,6 +78,7 @@ class MailingDesktop2 extends ClassDesktop2 {
             'status_lista' => $this->status_lista,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
+            'sublista' => $this->sublista,
             'lista' => $this->lista,
             'id_user' => $this->id_user,
             'status_mailing' => $this->status_mailing,
@@ -106,7 +108,7 @@ class MailingDesktop2 extends ClassDesktop2 {
     public static function setStatusMailingById(int $id_mailing, int $status_lista): bool
     {
         //ATUALIZA O STATUS MAILING NO BANCO DE DADOS
-        return (new Database('db_mailings', 'mailing_desktop'))->update('id_mailing = '.$id_mailing, [
+        return (new Database('db_mailings', 'mailing_desktop2'))->update('id_mailing = '.$id_mailing, [
             'status_lista' => $status_lista,
         ]);
     }
@@ -114,15 +116,16 @@ class MailingDesktop2 extends ClassDesktop2 {
     /**
      * Método responsável por retornar a quantidade de mailing
      *
+     * @param string $sublista
      * @param string $list
-     * @return ClassDesktop
+     * @return ClassDesktop2|null
      */
-    public static function getMailingQtd(string $list): ?ClassDesktop2
+    public static function getMailingQtd(string $sublista, string $list): ?ClassDesktop2
     {
         return self::getMailingDesktop(
             'count(*) as qtd',
             '',
-            'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
+            'sublista =' . " '$sublista' " .  'AND lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
             '',
             '',
             ''
@@ -133,15 +136,15 @@ class MailingDesktop2 extends ClassDesktop2 {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return ClassDesktop
+     * @return ClassDesktop2
      * @param int $id_user
      */
-    public static function getMailingQtdUser(string $list, int $id_user): ?ClassDesktop2
+    public static function getMailingQtdUser(string $sublista, string $list, int $id_user): ?ClassDesktop2
     {
         return self::getMailingDesktop(
             'count(*) as qtd',
             '',
-            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
+            'sublista =' . " '$sublista' " .  'AND lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
             '',
             '',
             ''
