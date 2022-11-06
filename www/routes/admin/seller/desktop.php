@@ -9,7 +9,7 @@ $obRouter->get('/vendedor/desktop/get/base', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -23,7 +23,7 @@ $obRouter->post('/vendedor/desktop/get/base/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -37,7 +37,7 @@ $obRouter->get('/vendedor/desktop/get/cancelados', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -51,7 +51,7 @@ $obRouter->post('/vendedor/desktop/get/cancelados/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -65,7 +65,7 @@ $obRouter->get('/vendedor/desktop/get/pedidos', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -79,7 +79,7 @@ $obRouter->post('/vendedor/desktop/get/pedidos/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -93,7 +93,7 @@ $obRouter->get('/vendedor/desktop/sis/base', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -107,7 +107,7 @@ $obRouter->post('/vendedor/desktop/sis/base/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -121,7 +121,7 @@ $obRouter->get('/vendedor/desktop/sis/cancelados', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -135,7 +135,7 @@ $obRouter->post('/vendedor/desktop/sis/cancelados/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -149,7 +149,7 @@ $obRouter->get('/vendedor/desktop/sis/pedidos', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -163,7 +163,7 @@ $obRouter->post('/vendedor/desktop/sis/pedidos/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -177,7 +177,7 @@ $obRouter->get('/vendedor/desktop/netbarretos/base', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -191,7 +191,7 @@ $obRouter->post('/vendedor/desktop/netbarretos/base/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -205,7 +205,7 @@ $obRouter->get('/vendedor/desktop/netbarretos/cancelados', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -219,7 +219,7 @@ $obRouter->post('/vendedor/desktop/netbarretos/cancelados/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -233,7 +233,7 @@ $obRouter->get('/vendedor/desktop/netbarretos/pedidos', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY
@@ -247,7 +247,7 @@ $obRouter->post('/vendedor/desktop/netbarretos/pedidos/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         $uri = $request->getArrayUri(); //SEPARA URI EM ARRAY

@@ -24,6 +24,21 @@ class RequireNivelSellerList {
         //SELECIONA O INDICE
         $mailing = $arrayUri[1];
 
+        //CONDIÇÃO PARA LISTAS DESKTOP
+        if ($mailing === 'desktop'){
+            switch ($arrayUri[2]) {
+                case 'get';
+                $mailing = 'desktop_get';
+                break;
+                case 'sis';
+                $mailing = 'desktop_sis';
+                break;
+                case 'netbarretos';
+                $mailing = 'desktop_netbarretos';
+                break;
+            }
+        }
+
         //RECEBE DA SESSÃO
         $arrayLists = $_SESSION['mailings']['admin']['user']["$mailing"];
 

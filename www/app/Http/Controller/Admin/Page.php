@@ -152,20 +152,62 @@ class Page {
             $valueDisplayNet = "none";
         }
 
-        /****************** LIST MAILING DESKTOP **********************/
+        /****************** LIST MAILING DESKTOP GET **********************/
         //RECEBE DA SESSÃO DESKTOP
-        $desktop = $_SESSION['mailings']['admin']['user']['desktop'];
+        $desktopGet = $_SESSION['mailings']['admin']['user']['desktop_get'];
 
         //SE FOR DIFERENTE DE VAZIO
-        if (!empty($desktop)){
+        if (!empty($desktopGet)){
             //LISTAS LIBERADAS POR SESSÃO
-            $listDesktop = explode(", ", $desktop);
+            $listDesktopGet = explode(", ", $desktopGet);
 
-            $valueDisplayDesktopLista1 = in_array('lista1', $listDesktop) ? 'block' : 'none';
-            $valueDisplayDesktopLista2 = in_array('lista2', $listDesktop) ? 'block' : 'none';
+            $valueDisplayDesktopGetBase = in_array('base', $listDesktopGet) ? 'block' : 'none';
+            $valueDisplayDesktopGetCancelados = in_array('cancelados', $listDesktopGet) ? 'block' : 'none';
+            $valueDisplayDesktopGetPedidos = in_array('pedidos', $listDesktopGet) ? 'block' : 'none';
         }else{
 
             //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS
+            $valueDisplayDesktopGet = "none";
+        }
+
+        /****************** LIST MAILING DESKTOP SIS **********************/
+        //RECEBE DA SESSÃO DESKTOP
+        $desktopSis = $_SESSION['mailings']['admin']['user']['desktop_sis'];
+
+        //SE FOR DIFERENTE DE VAZIO
+        if (!empty($desktopSis)){
+            //LISTAS LIBERADAS POR SESSÃO
+            $listDesktopSis = explode(", ", $desktopSis);
+
+            $valueDisplayDesktopSisBase = in_array('base', $listDesktopSis) ? 'block' : 'none';
+            $valueDisplayDesktopSisCancelados = in_array('cancelados', $listDesktopSis) ? 'block' : 'none';
+            $valueDisplayDesktopSisPedidos = in_array('pedidos', $listDesktopSis) ? 'block' : 'none';
+        }else{
+
+            //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS
+            $valueDisplayDesktopSis = "none";
+        }
+
+        /****************** LIST MAILING DESKTOP NETBARRETOS **********************/
+        //RECEBE DA SESSÃO DESKTOP
+        $desktopNetbarretos = $_SESSION['mailings']['admin']['user']['desktop_netbarretos'];
+
+        //SE FOR DIFERENTE DE VAZIO
+        if (!empty($desktopNetbarretos)){
+            //LISTAS LIBERADAS POR SESSÃO
+            $listDesktopNetbarretos = explode(", ", $desktopNetbarretos);
+
+            $valueDisplayDesktopNetbarretosBase = in_array('base', $listDesktopNetbarretos) ? 'block' : 'none';
+            $valueDisplayDesktopNetbarretosCancelados = in_array('cancelados', $listDesktopNetbarretos) ? 'block' : 'none';
+            $valueDisplayDesktopNetbarretosPedidos = in_array('pedidos', $listDesktopNetbarretos) ? 'block' : 'none';
+        }else{
+
+            //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS
+            $valueDisplayDesktopNetbarretos = "none";
+        }
+
+        //VERIFICA SE TODAS AS LISTAS DESKTOP ESTÃO VAZIAS
+        if (empty($desktopGet) AND empty($desktopSis) AND empty($desktopNetbarretos)){
             $valueDisplayDesktop = "none";
         }
 
@@ -222,8 +264,20 @@ class Page {
             'display_seller_net_pendente_instalacao' => "style=display:$valueDisplayNetPendenteInstalacao",
 
             'display_seller_desktop' => "style=display:$valueDisplayDesktop",
-            'display_seller_desktop_lista1' => "style=display:$valueDisplayDesktopLista1",
-            'display_seller_desktop_lista2' => "style=display:$valueDisplayDesktopLista2",
+            'display_seller_desktop_get' => "style=display:$valueDisplayDesktopGet",
+            'display_seller_desktop_get_base' => "style=display:$valueDisplayDesktopGetBase",
+            'display_seller_desktop_get_cancelados' => "style=display:$valueDisplayDesktopGetCancelados",
+            'display_seller_desktop_get_pedidos' => "style=display:$valueDisplayDesktopGetPedidos",
+
+            'display_seller_desktop_sis' => "style=display:$valueDisplayDesktopSis",
+            'display_seller_desktop_sis_base' => "style=display:$valueDisplayDesktopSisBase",
+            'display_seller_desktop_sis_cancelados' => "style=display:$valueDisplayDesktopSisCancelados",
+            'display_seller_desktop_sis_pedidos' => "style=display:$valueDisplayDesktopSisPedidos",
+
+            'display_seller_desktop_netbarretos' => "style=display:$valueDisplayDesktopNetbarretos",
+            'display_seller_desktop_netbarretos_base' => "style=display:$valueDisplayDesktopNetbarretosBase",
+            'display_seller_desktop_netbarretos_cancelados' => "style=display:$valueDisplayDesktopNetbarretosCancelados",
+            'display_seller_desktop_netbarretos_pedidos' => "style=display:$valueDisplayDesktopNetbarretosPedidos",
 
 
             'display_cep' => "style=display:$valueDisplayCep",

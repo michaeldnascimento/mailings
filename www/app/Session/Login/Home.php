@@ -41,7 +41,9 @@ class Home {
             'algar' => $obUser->algar,
             'claro' => $obUser->claro,
             'net' => $obUser->net,
-            'desktop' => $obUser->desktop
+            'desktop_get' => $obUser->desktop_get,
+            'desktop_sis' => $obUser->desktop_sis,
+            'desktop_netbarretos' => $obUser->desktop_netbarretos
         ];
 
         //SUCESSO
