@@ -147,7 +147,9 @@ class Users extends Page {
         $listClaro = explode(", ", $obUser->claro);
 
         //LIST DESKTOP
-        $listDesktop = explode(", ", $obUser->desktop);
+        $listDesktopGet = explode(", ", $obUser->desktop_get);
+        $listDesktopSis = explode(", ", $obUser->desktop_sis);
+        $listDesktopNetBarretos = explode(", ", $obUser->desktop_netbarretos);
 
         //LIST NET
         $listNet = explode(", ", $obUser->net);
@@ -204,8 +206,15 @@ class Users extends Page {
             'status_claro_proposta' => in_array('proposta', $listClaro) ? 'checked' : '',
             'status_claro_pendente_instalacao' => in_array('pendente-instalacao', $listClaro) ? 'checked' : '',
 
-            'status_desktop_lista1' => in_array('lista1', $listDesktop) ? 'checked' : '',
-            'status_desktop_lista2' => in_array('lista2', $listDesktop) ? 'checked' : '',
+            'status_desktop_get_base' => in_array('base', $listDesktopGet) ? 'checked' : '',
+            'status_desktop_get_cancelados' => in_array('cancelados', $listDesktopGet) ? 'checked' : '',
+            'status_desktop_get_pedidos' => in_array('pedidos', $listDesktopGet) ? 'checked' : '',
+            'status_desktop_sis_base' => in_array('base', $listDesktopSis) ? 'checked' : '',
+            'status_desktop_sis_cancelados' => in_array('cancelados', $listDesktopSis) ? 'checked' : '',
+            'status_desktop_sis_pedidos' => in_array('pedidos', $listDesktopSis) ? 'checked' : '',
+            'status_desktop_netbarretos_base' => in_array('base', $listDesktopNetBarretos) ? 'checked' : '',
+            'status_desktop_netbarretos_cancelados' => in_array('cancelados', $listDesktopNetBarretos) ? 'checked' : '',
+            'status_desktop_netbarretos_pedidos' => in_array('pedidos', $listDesktopNetBarretos) ? 'checked' : '',
 
             'status_net_desabilitado' => in_array('desabilitado', $listNet) ? 'checked' : '',
             'status_net_cancelado' => in_array('cancelado', $listNet) ? 'checked' : '',
@@ -260,7 +269,9 @@ class Users extends Page {
         $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
         $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;
         $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? null;
-        $obUser->desktop = implode(", ", array_keys($postVars['listDesktop'])) ?? null;
+        $obUser->desktop_get = implode(", ", array_keys($postVars['listDesktop']['get'])) ?? null;
+        $obUser->desktop_sis = implode(", ", array_keys($postVars['listDesktop']['sis'])) ?? null;
+        $obUser->desktop_netbarretos = implode(", ", array_keys($postVars['listDesktop']['netbarretos'])) ?? null;
         $obUser->atualizar();
 
         //REDIRECIONA O USUÁRIO

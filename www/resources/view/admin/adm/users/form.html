@@ -157,17 +157,69 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <p>Controle de listas Desktop</p>
+                        <h6>Lista GET</h6>
                         <div class="form-check form-switch">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="listDesktop[lista1]" {{status_desktop_lista1}}>
-                                Lista 1
+                                <input class="form-check-input" type="checkbox" name="listDesktop[get][base]" {{status_desktop_get_base}}>
+                                Base
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="listDesktop[lista2]" {{status_desktop_lista2}}>
-                                Lista 2
+                                <input class="form-check-input" type="checkbox" name="listDesktop[get][cancelados]" {{status_desktop_get_cancelados}}>
+                                Cancelados
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[get][pedidos]" {{status_desktop_get_pedidos}}>
+                                Pedidos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <h6>Lista SIS</h6>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[sis][base]" {{status_desktop_sis_base}}>
+                                Base
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[sis][cancelados]" {{status_desktop_sis_cancelados}}>
+                                Cancelados
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[sis][pedidos]" {{status_desktop_sis_pedidos}}>
+                                Pedidos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <h6>Lista NETBarretos</h6>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[netbarretos][base]" {{status_desktop_netbarretos_base}}>
+                                Base
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[netbarretos][cancelados]" {{status_desktop_netbarretos_cancelados}}>
+                                Cancelados
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="listDesktop[netbarretos][pedidos]" {{status_desktop_netbarretos_pedidos}}>
+                                Pedidos
                             </label>
                         </div>
                     </div>

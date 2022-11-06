@@ -74,9 +74,19 @@ class User {
     public ?string $claro = null;
 
     /*
-    * Lists Desktop
+    * Lists Desktop GET
     */
-    public ?string $desktop = null;
+    public ?string $desktop_get = null;
+
+    /*
+    * Lists Desktop SIS
+    */
+    public ?string $desktop_sis = null;
+
+    /*
+    * Lists Desktop NET BARRETOS
+    */
+    public ?string $desktop_netbarretos = null;
 
 
 
@@ -100,7 +110,9 @@ class User {
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,
-            'desktop' => $this->desktop
+            'desktop_get' => $this->desktop_get,
+            'desktop_sis' => $this->desktop_sis,
+            '$desktop_netbarretos' => $this->desktop_netbarretos
         ]);
 
         //SUCESSO
@@ -126,7 +138,9 @@ class User {
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,
-            'desktop' => $this->desktop
+            'desktop_get' => $this->desktop_get,
+            'desktop_sis' => $this->desktop_sis,
+            'desktop_netbarretos' => $this->desktop_netbarretos
         ]);
     }
 
