@@ -58,6 +58,17 @@ $obRouter->post('/api/v1/mailing/algar/', [
     }
 ]);
 
+//ROTA DE CADASTRO DE MAILING VERO
+$obRouter->post('/api/v1/mailing/vero/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingVero($request), 'application/json');
+    }
+]);
+
 //ROTA DE ATUALIZAÇÃO DE DEPOIMENTO
 $obRouter->put('/api/v1/testimonies/{id}', [
     'middlewares' => [

@@ -10,6 +10,7 @@ use \App\Model\Entity\MailingDesktop2 as EntityDesktop2;
 use \App\Model\Entity\MailingAlgar as EntityAlgar;
 use \App\Model\Entity\MailingClaro as EntityClaro;
 use \App\Model\Entity\MailingNet as EntityNet;
+use \App\Model\Entity\MailingVero as EntityVero;
 use \Exception;
 
 class Mailing extends Api{
@@ -46,6 +47,69 @@ class Mailing extends Api{
         }
 
         return $items;
+    }
+
+    /**
+     * Método responsável por cadastrar um novo mailing desktop
+     * @param Request $request
+     * @throws Exception
+     * @return array
+     */
+    public static function setNewMailingVero(Request $request): array
+    {
+
+        //POST PARAMS
+        $postParams = $request->getQueryParams();
+
+        //VALIDA OS CAMPOS OBRIGATÓRIOS
+        if (!isset($postParams['cpf_cnpj']) OR !isset($postParams['fone1'])){
+            throw new Exception("Os campos 'cpf_cnpj' e 'fone' são obrigatórios.", 400);
+        }
+
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $obVero = EntityVero::getMailingByCpf($postParams['cpf_cnpj']);
+
+        //VALIDA A INSTANCIA SE O MAILING EXISTIR
+        if($obVero instanceof EntityVero){
+            throw new Exception("Esse mailing já existe", 400);
+        }
+
+        //NOVO MAILING DESKTOP
+        $obVero = new EntityVero();
+        $obVero->cliente = $postParams['cliente'];
+        $obVero->cpf_cnpj =  $postParams['cpf_cnpj'];
+        $obVero->nascimento = implode('-', array_reverse(explode('/', $postParams['nascimento'])));
+        $obVero->data_cadastro = implode('-', array_reverse(explode('/', $postParams['data_cadastro'])));
+        $obVero->data_ultima_alteracao = implode('-', array_reverse(explode('/', $postParams['data_ultima_alteracao'])));
+        $obVero->email = $postParams['email'];
+        $obVero->rg = $postParams['rg'];
+        $obVero->mae = $postParams['mae'];
+        $obVero->fone1 = $postParams['fone1'];
+        $obVero->fone2 = $postParams['fone2'];
+        $obVero->fone3 = $postParams['fone3'];
+        $obVero->cep = $postParams['cep'];
+        $obVero->endereco = $postParams['endereco'];
+        $obVero->num = $postParams['num'];
+        $obVero->complemento = $postParams['complemento'];
+        $obVero->bairro = $postParams['bairro'];
+        $obVero->cidade = $postParams['cidade'];
+        $obVero->estado = $postParams['estado'];
+        $obVero->status = $postParams['status'];
+        $obVero->contrato = $postParams['contrato'];
+        $obVero->pacote = $postParams['pacote'];
+        $obVero->sublista = $postParams['sublista'];
+        $obVero->lista = $postParams['lista'];
+        $obVero->id_mailing = $postParams['id_mailing'];
+        $obVero->nome_mailing = $postParams['nome_mailing'];
+        $obVero->status_lista = 1;
+        $obVero->cadastrar();
+
+        //RETORNA OS DETALHES DO MAILING CADASTRADO
+        return [
+            'id'       => (int)$obVero->id,
+            'cliente'  => $obVero->cliente,
+            'cpf_cnpj' => $obVero->cpf_cnpj
+        ];
     }
 
     /**
