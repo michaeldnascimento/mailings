@@ -17,6 +17,16 @@ class Vero
     public ?string $cliente = null;
 
     /*
+    * Pacote
+    */
+    public ?string $id_cliente = null;
+
+    /*
+    * Pacote
+    */
+    public ?string $tipo_cliente = null;
+
+    /*
     * Doc
     */
     public string $cpf_cnpj;
@@ -121,11 +131,6 @@ class Vero
     * plano
     */
     public ?string $contrato = null;
-
-    /*
-    * Pacote
-    */
-    public ?string $pacote = null;
 
     /*
     * Data e hora follow mailing

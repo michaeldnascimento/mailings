@@ -19,6 +19,8 @@ class MailingVero extends ClassVero {
         //INSERE A INSTANCIA NO BANCO
         $this->id = (new Database('db_mailings', 'mailing_vero'))->insert([
             'cliente'  => $this->cliente,
+            'id_cliente' => $this->id_cliente,
+            'tipo_cliente' => $this->tipo_cliente,
             'cpf_cnpj' => $this->cpf_cnpj,
             'nascimento'  => $this->nascimento,
             'data_cadastro'  => $this->data_cadastro,
@@ -38,7 +40,6 @@ class MailingVero extends ClassVero {
             'estado' => $this->estado,
             'status' => $this->status,
             'contrato' => $this->contrato,
-            'pacote' => $this->pacote,
             'sublista' => $this->sublista,
             'lista' => $this->lista,
             'status_lista' => $this->status_lista,
@@ -60,6 +61,8 @@ class MailingVero extends ClassVero {
         //ATUALIZA O DEPOIMENTO NO BANCO DE DADOS
         return (new Database('db_mailings', 'mailing_vero'))->update('id = '. $this->id, [
             'cliente'  => $this->cliente,
+            'id_cliente' => $this->id_cliente,
+            'tipo_cliente' => $this->tipo_cliente,
             'cpf_cnpj' => $this->cpf_cnpj,
             'nascimento'  => $this->nascimento,
             'data_cadastro'  => $this->data_cadastro,
@@ -79,7 +82,6 @@ class MailingVero extends ClassVero {
             'estado' => $this->estado,
             'status' => $this->status,
             'contrato' => $this->contrato,
-            'pacote' => $this->pacote,
             'status_lista' => $this->status_lista,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,

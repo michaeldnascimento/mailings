@@ -77,6 +77,8 @@ class Mailing extends Api{
         //NOVO MAILING DESKTOP
         $obVero = new EntityVero();
         $obVero->cliente = $postParams['cliente'];
+        $obVero->id_cliente = $postParams['id_cliente'];
+        $obVero->tipo_cliente = $postParams['tipo_cliente'];
         $obVero->cpf_cnpj =  $postParams['cpf_cnpj'];
         $obVero->nascimento = implode('-', array_reverse(explode('/', $postParams['nascimento'])));
         $obVero->data_cadastro = implode('-', array_reverse(explode('/', $postParams['data_cadastro'])));
@@ -96,7 +98,6 @@ class Mailing extends Api{
         $obVero->estado = $postParams['estado'];
         $obVero->status = $postParams['status'];
         $obVero->contrato = $postParams['contrato'];
-        $obVero->pacote = $postParams['pacote'];
         $obVero->sublista = $postParams['sublista'];
         $obVero->lista = $postParams['lista'];
         $obVero->id_mailing = $postParams['id_mailing'];
