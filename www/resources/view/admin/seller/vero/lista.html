@@ -1,0 +1,55 @@
+{{status}}
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Lista {{lista}}</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form action="{{URL}}/vendedor/algar/{{lista}}/" method="post">
+
+                <input type="hidden" name="lista" class="form-control" value="{{lista}}">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary rounded-pill"><span>Gerar 1 de {{itens_qtd}}</span></button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table display responsive nowrap" style="width:100%" id="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>Contrato</th>
+                    <th>Pedido</th>
+                    <th>Protocolo</th>
+                    <th>Telefone</th>
+                    <th>Tipo</th>
+                    <th>CPF/CNPJ</th>
+                    <th>E-mail</th>
+                    <th>Endereço</th>
+                    <th>Num</th>
+                    <th>Compl</th>
+                    <th>Bairro</th>
+                    <th>UF</th>
+                    <th>Motivo</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Status Obs</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{itens_user}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -123,16 +123,15 @@ class MailingVero extends ClassVero {
     /**
      * Método responsável por retornar a quantidade de mailing
      *
-     * @param string $sublista
      * @param string $list
-     * @return ClassDesktop2|null
+     * @return ClassVero|null
      */
-    public static function getMailingQtd(string $sublista, string $list): ?ClassVero
+    public static function getMailingQtd(string $list): ?ClassVero
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             'count(*) as qtd',
             '',
-            'sublista =' . " '$sublista' " .  'AND lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
+            'lista = '. " '$list' " . ' AND (id_user = "" OR id_user is null AND status_lista = 1)',
             '',
             '',
             ''
@@ -143,15 +142,15 @@ class MailingVero extends ClassVero {
      * Método responsável por retornar a quantidade de mailing por usuário
      *
      * @param string $list
-     * @return ClassDesktop2
      * @param int $id_user
+     * @return ClassVero|null
      */
-    public static function getMailingQtdUser(string $sublista, string $list, int $id_user): ?ClassVero
+    public static function getMailingQtdUser(string $list, int $id_user): ?ClassVero
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             'count(*) as qtd',
             '',
-            'sublista =' . " '$sublista' " .  'AND lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
+            'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' AND (status_mailing IS NULL OR status_mailing = '')" ,
             '',
             '',
             ''
@@ -161,15 +160,15 @@ class MailingVero extends ClassVero {
     /**
      * Método responsável por consultar o mailing com base no seu cpf
      *
-     * @param string $cpf_cnpj
+     * @param string $cpf
      * @return false|mixed|object
      */
-    public static function getMailingByCpf(string $cpf_cnpj)
+    public static function getMailingByCpf(string $cpf)
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             '*',
             '',
-            'cpf_cnpj = '. " '$cpf_cnpj' ",
+            'cpf = '. " '$cpf' ",
             '',
             '',
             ''
@@ -186,7 +185,7 @@ class MailingVero extends ClassVero {
      */
     public static function getMailingUserById(string $list, int $id_user)
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             '*',
             '',
             'lista = '. " '$list' " . ' AND id_user = '. " '$id_user' " ,
@@ -204,7 +203,7 @@ class MailingVero extends ClassVero {
      */
     public static function getMailingById(int $id)
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             '*',
             '',
             'id = '. " '$id' " ,
@@ -222,7 +221,7 @@ class MailingVero extends ClassVero {
      */
     public static function getNewMailing(string $list)
     {
-        return self::getMailingDesktop(
+        return self::getMailingVero(
             '*',
             '',
             'lista = '. " '$list' AND (id_user = '' OR id_user IS NULL AND status_lista = 1)",
@@ -235,7 +234,7 @@ class MailingVero extends ClassVero {
     /**
      * Método responsável por retornar mailing
      */
-    public static function getMailingDesktop(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
+    public static function getMailingVero(string $fields = null, string $join = null, string $where = null, string $order = null, string $group = null, string $limit = null): PDOStatement
     {
         return (new Database('db_mailings', 'mailing_vero'))->select($fields, $join, $where, $order, $group, $limit);
     }

@@ -9,6 +9,7 @@ include __DIR__ . '/admin/seller/desktop.php';
 include __DIR__ . '/admin/seller/algar.php';
 include __DIR__ . '/admin/seller/claro.php';
 include __DIR__ . '/admin/seller/net.php';
+include __DIR__ . '/admin/seller/vero.php';
 include __DIR__ . '/admin/seller/result.php';
 
 //INCLUI AS ROTAS ADMINISTRATIVAS
