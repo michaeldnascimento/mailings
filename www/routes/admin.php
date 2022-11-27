@@ -7,6 +7,7 @@ include __DIR__ . '/admin/home.php';
 include __DIR__ . '/admin/seller/mailings.php';
 include __DIR__ . '/admin/seller/desktop.php';
 include __DIR__ . '/admin/seller/algar.php';
+include __DIR__ . '/admin/seller/americanet.php';
 include __DIR__ . '/admin/seller/claro.php';
 include __DIR__ . '/admin/seller/net.php';
 include __DIR__ . '/admin/seller/vero.php';
