@@ -69,6 +69,17 @@ $obRouter->post('/api/v1/mailing/vero/', [
     }
 ]);
 
+//ROTA DE CADASTRO DE MAILING AMERICANET
+$obRouter->post('/api/v1/mailing/americanet/', [
+    'middlewares' => [
+        'api',
+        //'user-basic-auth'
+    ],
+    function($request){
+        return new Response(201, Mailing::setNewMailingAmericanet($request), 'application/json');
+    }
+]);
+
 //ROTA DE ATUALIZAÇÃO DE DEPOIMENTO
 $obRouter->put('/api/v1/testimonies/{id}', [
     'middlewares' => [

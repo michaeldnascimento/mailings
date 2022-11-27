@@ -11,6 +11,7 @@ use \App\Model\Entity\MailingAlgar as EntityAlgar;
 use \App\Model\Entity\MailingClaro as EntityClaro;
 use \App\Model\Entity\MailingNet as EntityNet;
 use \App\Model\Entity\MailingVero as EntityVero;
+use \App\Model\Entity\MailingAmericanet as EntityAmericanet;
 use \Exception;
 
 class Mailing extends Api{
@@ -50,7 +51,76 @@ class Mailing extends Api{
     }
 
     /**
-     * Método responsável por cadastrar um novo mailing desktop
+     * Método responsável por cadastrar um novo mailing americanet
+     * @param Request $request
+     * @throws Exception
+     * @return array
+     */
+    public static function setNewMailingAmericanet(Request $request): array
+    {
+
+        //POST PARAMS
+        $postParams = $request->getQueryParams();
+
+        //VALIDA OS CAMPOS OBRIGATÓRIOS
+        if (!isset($postParams['cpf_cnpj']) OR !isset($postParams['fone1'])){
+            throw new Exception("Os campos 'cpf_cnpj' e 'fone' são obrigatórios.", 400);
+        }
+
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $obAmericanet = EntityAmericanet::getMailingByCpf($postParams['cpf_cnpj']);
+
+        //VALIDA A INSTANCIA SE O MAILING EXISTIR
+        if($obAmericanet instanceof EntityAmericanet){
+            throw new Exception("Esse mailing já existe", 400);
+        }
+
+        $nascimento = str_replace("/", "-", $postParams['nascimento']);
+        $data_cadastro = str_replace("/", "-", $postParams['data_cadastro']);
+        $data_ultima_alteracao = str_replace("/", "-", $postParams['data_ultima_alteracao']);
+
+        //NOVO MAILING DESKTOP
+        $obAmericanet = new EntityAmericanet();
+        $obAmericanet->cliente = $postParams['cliente'];
+        $obAmericanet->id_cliente = $postParams['id_cliente'];
+        $obAmericanet->tipo_cliente = $postParams['tipo_cliente'];
+        $obAmericanet->cpf_cnpj =  $postParams['cpf_cnpj'];
+        $obAmericanet->nascimento = date('Y-m-d', strtotime($nascimento));
+        $obAmericanet->data_cadastro = date('Y-m-d H:i:s', strtotime($data_cadastro));
+        $obAmericanet->data_ultima_alteracao = date('Y-m-d H:i:s', strtotime($data_ultima_alteracao));
+        $obAmericanet->email = $postParams['email'];
+        $obAmericanet->rg = $postParams['rg'];
+        $obAmericanet->mae = $postParams['mae'];
+        $obAmericanet->fone1 = $postParams['fone1'];
+        $obAmericanet->fone2 = $postParams['fone2'];
+        $obAmericanet->fone3 = $postParams['fone3'];
+        $obAmericanet->cep = $postParams['cep'];
+        $obAmericanet->endereco = $postParams['endereco'];
+        $obAmericanet->num = $postParams['num'];
+        $obAmericanet->complemento = $postParams['complemento'];
+        $obAmericanet->bairro = $postParams['bairro'];
+        $obAmericanet->cidade = $postParams['cidade'];
+        $obAmericanet->estado = $postParams['estado'];
+        $obAmericanet->status = $postParams['status'];
+        $obAmericanet->contrato = $postParams['contrato'];
+        $obAmericanet->produto = $postParams['produto'];
+        $obAmericanet->sublista = $postParams['sublista'];
+        $obAmericanet->lista = $postParams['lista'];
+        $obAmericanet->id_mailing = $postParams['id_mailing'];
+        $obAmericanet->nome_mailing = $postParams['nome_mailing'];
+        $obAmericanet->status_lista = 1;
+        $obAmericanet->cadastrar();
+
+        //RETORNA OS DETALHES DO MAILING CADASTRADO
+        return [
+            'id'       => (int)$obAmericanet->id,
+            'cliente'  => $obAmericanet->cliente,
+            'cpf_cnpj' => $obAmericanet->cpf_cnpj
+        ];
+    }
+
+    /**
+     * Método responsável por cadastrar um novo mailing vero
      * @param Request $request
      * @throws Exception
      * @return array
