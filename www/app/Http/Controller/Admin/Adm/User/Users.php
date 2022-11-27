@@ -146,6 +146,12 @@ class Users extends Page {
         //LIST CLARO
         $listClaro = explode(", ", $obUser->claro);
 
+        //LIST AMERICANET
+        $listAmericanet = explode(", ", $obUser->americanet);
+
+        //LIST VERO
+        $listVero = explode(", ", $obUser->vero);
+
         //LIST DESKTOP
         $listDesktopGet = explode(", ", $obUser->desktop_get);
         $listDesktopSis = explode(", ", $obUser->desktop_sis);
@@ -205,6 +211,14 @@ class Users extends Page {
             'status_claro_cancelado' => in_array('cancelado', $listClaro) ? 'checked' : '',
             'status_claro_proposta' => in_array('proposta', $listClaro) ? 'checked' : '',
             'status_claro_pendente_instalacao' => in_array('pendente-instalacao', $listClaro) ? 'checked' : '',
+
+            'status_americanet_base' => in_array('base', $listAmericanet) ? 'checked' : '',
+            'status_americanet_cancelados' => in_array('cancelados', $listAmericanet) ? 'checked' : '',
+            'status_americanet_pedidos' => in_array('pedidos', $listAmericanet) ? 'checked' : '',
+
+            'status_vero_base' => in_array('base', $listVero) ? 'checked' : '',
+            'status_vero_cancelados' => in_array('cancelados', $listVero) ? 'checked' : '',
+            'status_vero_pedidos' => in_array('pedidos', $listVero) ? 'checked' : '',
 
             'status_desktop_get_base' => in_array('base', $listDesktopGet) ? 'checked' : '',
             'status_desktop_get_cancelados' => in_array('cancelados', $listDesktopGet) ? 'checked' : '',
@@ -269,6 +283,8 @@ class Users extends Page {
         $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
         $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;
         $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? null;
+        $obUser->americanet = implode(", ", array_keys($postVars['listAmericanet'])) ?? null;
+        $obUser->vero = implode(", ", array_keys($postVars['listVero'])) ?? null;
         $obUser->desktop_get = implode(", ", array_keys($postVars['listDesktop']['get'])) ?? null;
         $obUser->desktop_sis = implode(", ", array_keys($postVars['listDesktop']['sis'])) ?? null;
         $obUser->desktop_netbarretos = implode(", ", array_keys($postVars['listDesktop']['netbarretos'])) ?? null;

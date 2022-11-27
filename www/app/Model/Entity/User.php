@@ -74,6 +74,16 @@ class User {
     public ?string $claro = null;
 
     /*
+    * Lists Net
+    */
+    public ?string $americanet = null;
+
+    /*
+    * Lists Net
+    */
+    public ?string $vero = null;
+
+    /*
     * Lists Desktop GET
     */
     public ?string $desktop_get = null;
@@ -110,6 +120,8 @@ class User {
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,
+            'americanet' => $this->americanet,
+            'vero' => $this->vero,
             'desktop_get' => $this->desktop_get,
             'desktop_sis' => $this->desktop_sis,
             '$desktop_netbarretos' => $this->desktop_netbarretos
@@ -138,6 +150,8 @@ class User {
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,
+            'americanet' => $this->americanet,
+            'vero' => $this->vero,
             'desktop_get' => $this->desktop_get,
             'desktop_sis' => $this->desktop_sis,
             'desktop_netbarretos' => $this->desktop_netbarretos
