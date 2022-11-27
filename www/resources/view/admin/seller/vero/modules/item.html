@@ -6,7 +6,7 @@
             <i class="bi bi-pencil-fill" title="Tabulação"></i>
         </a>
     </td>
-    <td>{{nome_cliente}}</td>
+    <td>{{cliente}}</td>
     <td>{{cidade}}</td>
     <td>
         <a type="button" class="link-primary" href="{{URL}}/consulta/cep/{{cep}}" target="_blank">
@@ -14,19 +14,19 @@
         </a>
     </td>
     <td>{{contrato}}</td>
-    <td>{{num_pedido_proposta}}</td>
-    <td>{{num_protocolo}}</td>
-    <td>{{fone}}<br> {{fone1}}<br> {{fone2}}</td>
-    <td>{{tipo_pessoa}}</td>
-    <td>{{cpf}}</td>
+    <td>{{nascimento}}</td>
+    <td>{{fone1}}<br> {{fone2}}<br> {{fone3}}</td>
+    <td>{{tipo_cliente}}</td>
+    <td>{{cpf_cnpj}}</td>
+    <td>{{rg}}</td>
     <td>{{email}}</td>
     <td>{{endereco}}</td>
     <td>{{num}}</td>
-    <td>{{compl}}</td>
+    <td>{{complemento}}</td>
     <td>{{bairro}}</td>
-    <td>{{uf}}</td>
-    <td>{{motivo_cancelamento}}</td>
-    <td>{{data_cancelamento}}</td>
+    <td>{{estado}}</td>
+    <td>{{data_cadastro}}</td>
+    <td>{{data_ultima_alteracao}}</td>
     <td>{{status_mailing}}</td>
     <td>{{status_obs_mailing}}</td>
 </tr>
@@ -44,7 +44,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/algar/tabula" method="post">
+                <form action="{{URL}}/vendedor/vero/tabula" method="post">
                     <div class="modal-body">
                         <div class="col-md-12 mb-12">
                             <h6>Status</h6>

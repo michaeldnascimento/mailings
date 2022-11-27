@@ -53,31 +53,36 @@ class ListVero extends Page {
 
 
         //RESULTADOS DA PÁGINA
-        $results = EntityVero::getMailingVero("*", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
+        $results = EntityVero::getMailingVero("*, DATE_FORMAT(nascimento, '%d/%m/%Y') as nascimento, DATE_FORMAT(data_cadastro, '%d/%m/%Y %Hh%i') as data_cadastro, DATE_FORMAT(data_ultima_alteracao, '%d/%m/%Y %Hh%i') as data_ultima_alteracao", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obVero = $results->fetchObject(EntityVero::class)){
 
             $items .=  View::render('/admin/seller/vero/modules/item', [
-                'id' => $obVero->id,
-                'num_protocolo' => $obVero->num_protocolo,
-                'num_pedido_proposta' => $obVero->num_pedido_proposta,
-                'contrato' => $obVero->contrato,
-                'produto' => $obVero->produto,
-                'nome_cliente' => $obVero->nome_cliente,
+                'id'  => $obVero->id,
+                'cliente'  => $obVero->cliente,
+                'id_cliente' => $obVero->id_cliente,
+                'tipo_cliente' => $obVero->tipo_cliente,
+                'cpf_cnpj' => $obVero->cpf_cnpj,
+                'nascimento'  => $obVero->nascimento,
+                'data_cadastro'  => $obVero->data_cadastro,
+                'data_ultima_alteracao'  => $obVero->data_ultima_alteracao,
                 'email' => $obVero->email,
-                'cpf' => $obVero->cpf,
-                'fone' => $obVero->fone,
+                'rg'  => $obVero->rg,
+                'mae'  => $obVero->mae,
                 'fone1' => $obVero->fone1,
                 'fone2' => $obVero->fone2,
-                'endereco' => $obVero->endereco,
+                'fone3' => $obVero->fone3,
                 'cep' => $obVero->cep,
+                'endereco' => $obVero->endereco,
                 'num' => $obVero->num,
-                'compl' => $obVero->compl,
+                'complemento' => $obVero->complemento,
                 'bairro' => $obVero->bairro,
                 'cidade' => $obVero->cidade,
-                'uf' => $obVero->uf,
-                'tipo_pessoa' => $obVero->tipo_pessoa,
+                'estado' => $obVero->estado,
+                'status' => $obVero->status,
+                'contrato' => $obVero->contrato,
+                'produto' => $obVero->produto,
                 'data_cancelamento' => $obVero->data_cancelamento,
                 'motivo_cancelamento' => $obVero->motivo_cancelamento,
                 'status_mailing' => $obVero->status_mailing,

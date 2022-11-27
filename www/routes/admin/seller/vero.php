@@ -30,7 +30,7 @@ $obRouter->post('/vendedor/vero/base/', [
 ]);
 
 //ROTA LISTA CANCELADO
-$obRouter->get('/vendedor/vero/cancelado', [
+$obRouter->get('/vendedor/vero/cancelados', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -38,12 +38,12 @@ $obRouter->get('/vendedor/vero/cancelado', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListVero::getListVero($request, 'cancelado'));
+        return new Response(200, ListVero::getListVero($request, 'cancelados'));
     }
 ]);
 
 //ROTA LISTA CANCELADO
-$obRouter->post('/vendedor/vero/cancelado/', [
+$obRouter->post('/vendedor/vero/cancelados/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -51,12 +51,12 @@ $obRouter->post('/vendedor/vero/cancelado/', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListVero::setListVero($request, 'cancelado'));
+        return new Response(200, ListVero::setListVero($request, 'cancelados'));
     }
 ]);
 
-//ROTA LISTA PROPOSTA
-$obRouter->get('/vendedor/vero/proposta', [
+//ROTA LISTA PEDIDOS
+$obRouter->get('/vendedor/vero/pedidos', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -64,12 +64,12 @@ $obRouter->get('/vendedor/vero/proposta', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListVero::getListVero($request, 'proposta'));
+        return new Response(200, ListVero::getListVero($request, 'pedidos'));
     }
 ]);
 
-//ROTA LISTA PROPOSTA
-$obRouter->post('/vendedor/vero/proposta/', [
+//ROTA LISTA PEDIDOS
+$obRouter->post('/vendedor/vero/pedidos/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
@@ -77,33 +77,7 @@ $obRouter->post('/vendedor/vero/proposta/', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListVero::setListVero($request, 'proposta'));
-    }
-]);
-
-//ROTA LISTA PENDENTE INSTALAÇÃO
-$obRouter->get('/vendedor/vero/pendente-instalacao', [
-    'middlewares' => [
-        //'cache'
-        'required-admin-login',
-        'required-nivel-seller',
-        //'required-nivel-seller-list'
-    ],
-    function($request){
-        return new Response(200, ListVero::getListVero($request, 'pendente-instalacao'));
-    }
-]);
-
-//ROTA LISTA PENDENTE INSTALAÇÃO
-$obRouter->post('/vendedor/vero/pendente-instalacao/', [
-    'middlewares' => [
-        //'cache'
-        'required-admin-login',
-        'required-nivel-seller',
-        'required-nivel-seller-list'
-    ],
-    function($request){
-        return new Response(200, ListVero::setListVero($request, 'pendente-instalacao'));
+        return new Response(200, ListVero::setListVero($request, 'pedidos'));
     }
 ]);
 
