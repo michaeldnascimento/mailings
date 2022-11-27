@@ -133,6 +133,11 @@ class Vero
     public ?string $contrato = null;
 
     /*
+    * Produto
+    */
+    public ?string $produto = null;
+
+    /*
     * Data e hora follow mailing
     */
     public ?string $datatime_follow = null;

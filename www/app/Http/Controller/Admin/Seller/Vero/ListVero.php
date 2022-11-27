@@ -63,6 +63,7 @@ class ListVero extends Page {
                 'num_protocolo' => $obVero->num_protocolo,
                 'num_pedido_proposta' => $obVero->num_pedido_proposta,
                 'contrato' => $obVero->contrato,
+                'produto' => $obVero->produto,
                 'nome_cliente' => $obVero->nome_cliente,
                 'email' => $obVero->email,
                 'cpf' => $obVero->cpf,

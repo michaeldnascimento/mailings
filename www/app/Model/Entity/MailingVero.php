@@ -40,6 +40,7 @@ class MailingVero extends ClassVero {
             'estado' => $this->estado,
             'status' => $this->status,
             'contrato' => $this->contrato,
+            'produto' => $this->produto,
             'sublista' => $this->sublista,
             'lista' => $this->lista,
             'status_lista' => $this->status_lista,
@@ -82,6 +83,7 @@ class MailingVero extends ClassVero {
             'estado' => $this->estado,
             'status' => $this->status,
             'contrato' => $this->contrato,
+            'produto' => $this->produto,
             'status_lista' => $this->status_lista,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
@@ -168,7 +170,7 @@ class MailingVero extends ClassVero {
         return self::getMailingVero(
             '*',
             '',
-            'cpf = '. " '$cpf' ",
+            'cpf_cnpj = '. " '$cpf' ",
             '',
             '',
             ''

@@ -74,15 +74,19 @@ class Mailing extends Api{
             throw new Exception("Esse mailing já existe", 400);
         }
 
+        $nascimento = str_replace("/", "-", $postParams['nascimento']);
+        $data_cadastro = str_replace("/", "-", $postParams['data_cadastro']);
+        $data_ultima_alteracao = str_replace("/", "-", $postParams['data_ultima_alteracao']);
+
         //NOVO MAILING DESKTOP
         $obVero = new EntityVero();
         $obVero->cliente = $postParams['cliente'];
         $obVero->id_cliente = $postParams['id_cliente'];
         $obVero->tipo_cliente = $postParams['tipo_cliente'];
         $obVero->cpf_cnpj =  $postParams['cpf_cnpj'];
-        $obVero->nascimento = implode('-', array_reverse(explode('/', $postParams['nascimento'])));
-        $obVero->data_cadastro = implode('-', array_reverse(explode('/', $postParams['data_cadastro'])));
-        $obVero->data_ultima_alteracao = implode('-', array_reverse(explode('/', $postParams['data_ultima_alteracao'])));
+        $obVero->nascimento = date('Y-m-d', strtotime($nascimento));
+        $obVero->data_cadastro = date('Y-m-d H:i:s', strtotime($data_cadastro));
+        $obVero->data_ultima_alteracao = date('Y-m-d H:i:s', strtotime($data_ultima_alteracao));
         $obVero->email = $postParams['email'];
         $obVero->rg = $postParams['rg'];
         $obVero->mae = $postParams['mae'];
@@ -98,6 +102,7 @@ class Mailing extends Api{
         $obVero->estado = $postParams['estado'];
         $obVero->status = $postParams['status'];
         $obVero->contrato = $postParams['contrato'];
+        $obVero->produto = $postParams['produto'];
         $obVero->sublista = $postParams['sublista'];
         $obVero->lista = $postParams['lista'];
         $obVero->id_mailing = $postParams['id_mailing'];
