@@ -9,7 +9,7 @@ $obRouter->get('/vendedor/vero/base', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::getListVero($request, 'base'));
@@ -22,7 +22,7 @@ $obRouter->post('/vendedor/vero/base/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::setListVero($request, 'base'));
@@ -35,7 +35,7 @@ $obRouter->get('/vendedor/vero/cancelados', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::getListVero($request, 'cancelados'));
@@ -48,7 +48,7 @@ $obRouter->post('/vendedor/vero/cancelados/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::setListVero($request, 'cancelados'));
@@ -61,7 +61,7 @@ $obRouter->get('/vendedor/vero/pedidos', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::getListVero($request, 'pedidos'));
@@ -74,7 +74,7 @@ $obRouter->post('/vendedor/vero/pedidos/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListVero::setListVero($request, 'pedidos'));

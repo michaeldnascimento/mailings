@@ -152,6 +152,43 @@ class Page {
             $valueDisplayNet = "none";
         }
 
+        /****************** LIST MAILING AMERICANET **********************/
+        //RECEBE DA SESSÃO NET
+        $americanet = $_SESSION['mailings']['admin']['user']['americanet'];
+
+        //SE FOR DIFERENTE DE VAZIO
+        if (!empty($americanet)){
+            //LISTAS LIBERADAS POR SESSÃO
+            $listAmericanet = explode(", ", $americanet);
+
+            $valueDisplayAmericanetBase = in_array('base', $listAmericanet) ? 'block' : 'none';
+            $valueDisplayAmericanetCancelados = in_array('cancelados', $listAmericanet) ? 'block' : 'none';
+            $valueDisplayAmericanetPedidos = in_array('pedidos', $listAmericanet) ? 'block' : 'none';
+        }else{
+
+            //SE NÃO ESTIVER LISTAS AMERICANET LIBERADAS
+            $valueDisplayAmericanet = "none";
+        }
+
+        /****************** LIST MAILING VERO **********************/
+        //RECEBE DA SESSÃO NET
+        $vero = $_SESSION['mailings']['admin']['user']['vero'];
+
+        //SE FOR DIFERENTE DE VAZIO
+        if (!empty($vero)){
+            //LISTAS LIBERADAS POR SESSÃO
+            $listVero = explode(", ", $vero);
+
+            $valueDisplayVeroBase = in_array('base', $listVero) ? 'block' : 'none';
+            $valueDisplayVeroCancelados = in_array('cancelados', $listVero) ? 'block' : 'none';
+            $valueDisplayVeroPedidos = in_array('pedidos', $listVero) ? 'block' : 'none';
+        }else{
+
+            //SE NÃO ESTIVER LISTAS VERO LIBERADAS
+            $valueDisplayVero = "none";
+        }
+
+
         /****************** LIST MAILING DESKTOP GET **********************/
         //RECEBE DA SESSÃO DESKTOP
         $desktopGet = $_SESSION['mailings']['admin']['user']['desktop_get'];
@@ -262,6 +299,16 @@ class Page {
             'display_seller_net_desabilitado' => "style=display:$valueDisplayNetDesabilitado",
             'display_seller_net_proposta' => "style=display:$valueDisplayNetProposta",
             'display_seller_net_pendente_instalacao' => "style=display:$valueDisplayNetPendenteInstalacao",
+
+            'display_seller_americanet' => "style=display:$valueDisplayAmericanet",
+            'display_seller_americanet_base' => "style=display:$valueDisplayAmericanetBase",
+            'display_seller_americanet_cancelados' => "style=display:$valueDisplayAmericanetCancelados",
+            'display_seller_americanet_pedidos' => "style=display:$valueDisplayAmericanetPedidos",
+
+            'display_seller_vero' => "style=display:$valueDisplayVero",
+            'display_seller_vero_base' => "style=display:$valueDisplayVeroBase",
+            'display_seller_vero_cancelados' => "style=display:$valueDisplayVeroCancelados",
+            'display_seller_vero_pedidos' => "style=display:$valueDisplayVeroPedidos",
 
             'display_seller_desktop' => "style=display:$valueDisplayDesktop",
             'display_seller_desktop_get' => "style=display:$valueDisplayDesktopGet",

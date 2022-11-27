@@ -9,7 +9,7 @@ $obRouter->get('/vendedor/americanet/base', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::getListAmericanet($request, 'base'));
@@ -22,7 +22,7 @@ $obRouter->post('/vendedor/americanet/base/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::setListAmericanet($request, 'base'));
@@ -35,7 +35,7 @@ $obRouter->get('/vendedor/americanet/cancelados', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::getListAmericanet($request, 'cancelados'));
@@ -48,7 +48,7 @@ $obRouter->post('/vendedor/americanet/cancelados/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::setListAmericanet($request, 'cancelados'));
@@ -61,7 +61,7 @@ $obRouter->get('/vendedor/americanet/pedidos', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::getListAmericanet($request, 'pedidos'));
@@ -74,7 +74,7 @@ $obRouter->post('/vendedor/americanet/pedidos/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListAmericanet::setListAmericanet($request, 'pedidos'));
