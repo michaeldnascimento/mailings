@@ -12,6 +12,7 @@ include __DIR__ . '/admin/seller/claro.php';
 include __DIR__ . '/admin/seller/net.php';
 include __DIR__ . '/admin/seller/vero.php';
 include __DIR__ . '/admin/seller/result.php';
+include __DIR__ . '/admin/seller/call.php';
 
 //INCLUI AS ROTAS ADMINISTRATIVAS
 include __DIR__ . '/admin/adm/input.php';

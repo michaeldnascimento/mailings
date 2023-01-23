@@ -1,0 +1,37 @@
+{{status}}
+<section class="section">
+
+    {{historia_chamados}}
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Novo Chamado</h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="helperText">Assunto</label>
+                        <input type="text" id="helperText" class="form-control" name="assunto" placeholder="Nome Empresa" required>
+                        <p><small class="text-muted">assunto chamado</small></p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-12">
+                    <div class="form-group mb-3">
+                        <label for="descricao" class="form-label">Descrição Chamado</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="10" required></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
+                    <a href="{{URL}}/vendedor/chamados/lista" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
