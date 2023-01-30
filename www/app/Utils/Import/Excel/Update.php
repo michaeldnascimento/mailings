@@ -46,6 +46,55 @@ class Update
         return true;
     }
 
+    /**
+     * Método responsável por importar csv
+     * @param Request $request
+     * @param array $inputCSV
+     * @param string $company
+     * @param string $description
+     * @return string|bool
+     */
+    public static function importFiles(Request $request, array $inputFiles): bool
+    {
+
+        //VERIFICA SE EXISTE O ARQUIVO
+        if ($inputFiles == '') {
+            $request->getRouter()->redirect('/vendedor/chamados/lista/?status=nullAttachment');
+        }
+
+        //PASTA DE ARQUIVOS
+        $dir = "./resources/docs/arquivos/";
+
+        //NOME ORIGINAL DO ARQUIVO
+        $originalFilename = basename($inputFiles["name"]);
+        $fileExtension = pathinfo($originalFilename, PATHINFO_EXTENSION);
+
+        //VERIFICA O TAMANHO DO ARQUIVO
+        if ($inputFiles["error"] === UPLOAD_ERR_OK) {
+            $request->getRouter()->redirect('/vendedor/chamados/lista?status=uploadError');
+        }
+
+
+        //DEFINE O NOME DO ARQUIVO ENVIADO ex: nome_dia-mes-ano_hora-minuto-segundo.csv
+        $dir = $dir . basename($originalFilename, "." . $fileExtension) . "_" . date('d-m-Y_H-i-s') . "." . $fileExtension;
+
+        //move o arquivo para a pasta /csv
+        if(move_uploaded_file($inputFiles["tmp_name"], $dir)) {
+
+
+            $obFiles = new EntityFiles();
+            $obFiles->path = $dir;
+            $obFiles->date_created = date('Y-m-d H:m:s');
+            $obFiles->cadastrar();
+
+
+        } else {
+            $request->getRouter()->redirect('/vendedor/chamados/lista?status=erroMove');
+        }
+
+        return true;
+    }
+
 
     /**
      * Método responsável por importar csv

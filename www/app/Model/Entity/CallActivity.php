@@ -106,7 +106,7 @@ class CallActivity {
      * @param integer $id
      * @return CallActivity
      */
-    public static function getCallById(int $id): CallActivity
+    public static function getCallActivityById(int $id): CallActivity
     {
         return self::getCalledActivity(
             '*',

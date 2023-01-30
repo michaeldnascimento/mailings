@@ -8,6 +8,7 @@ use App\Http\Request;
 use App\Model\Entity\Call as EntityCall;
 use App\Model\Entity\CallActivity as EntityCallActivity;
 use App\Model\Entity\User as EntityUser;
+use App\Utils\Import\Excel\Update;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 use DateTime;
@@ -31,10 +32,31 @@ class Called extends Page {
 
         //RENDERIZA O ITEM
         while($obCall = $results->fetchObject(EntityCall::class)){
+
+            //VERIFICA O STATUS DO CHAMADO E RETORNA NO SELECT
+            switch ($obCall->status) {
+                case "1": {
+                    $status_chamado = "Novo";
+                    break;
+                }
+                case "2": {
+                    $status_chamado = "Em atendimento";
+                    break;
+                }
+                case "3": {
+                    $status_chamado = "Concluído";
+                    break;
+                }
+                case "4": {
+                    $status_chamado = "Cancelado";
+                    break;
+                }
+            }
+
             $items .=  View::render('admin/seller/call/modules/called/item', [
                 'id' => $obCall->id,
                 'assunto' => $obCall->assunto,
-                'status'  => $obCall->status,
+                'status'  => $status_chamado,
             ]);
         }
 
@@ -60,7 +82,7 @@ class Called extends Page {
         }
 
         //RESULTADOS DA PÁGINA
-        $results = EntityCallActivity::getCalledActivity("*, DATE_FORMAT(datahora, '%d/%m/%Y') as datahora,", null, "id_chamado = $id_call", 'id DESC', '');
+        $results = EntityCallActivity::getCalledActivity("*, DATE_FORMAT(datahora, '%d/%m/%Y %Hh%i') as datahora", null, "id_chamado = $id_call", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obCallActivity = $results->fetchObject(EntityCall::class)){
@@ -78,14 +100,10 @@ class Called extends Page {
                 }
             }
 
-            //echo "<pre>";
-            print_r($obCallActivity->datahora);
-            //echo DateTime::createFromFormat('d/m/Y H:m:s', $obCallActivity->datahora);
-            exit;
 
             $items .=  View::render('admin/seller/call/modules/called/historia', [
                 'id' => $obCallActivity->id,
-                'datahora' => DateTime::createFromFormat('d/m/Y H:m:s', $obCallActivity->datahora),
+                'datahora' => $obCallActivity->datahora,
                 'descricao'  => $obCallActivity->descricao,
                 'id_atendimento_chamado'  => $obAtendimento->name ?? null,
                 'id_user'  => $obUser->name ?? null,
@@ -205,7 +223,7 @@ class Called extends Page {
      * @param integer $id
      * @return string
      */
-    public static function getEditCall(Request $request, int $id): string
+    public static function getViewCall(Request $request, int $id): string
     {
 
 
@@ -213,7 +231,7 @@ class Called extends Page {
         $obCall = EntityCall::getCallById($id);
 
         //OBTÉM O CHAMADO DO BANCO DE DADOS
-        $obCallActivity = EntityCallActivity::getCallById($id);
+        $obCallActivity = EntityCallActivity::getCallActivityById($id);
 
         //VALIDA A INSTANCIA
         if(!$obCall instanceof EntityCall){
@@ -226,18 +244,26 @@ class Called extends Page {
         }
 
 
-        //VERIFICA O STATUS DO EMPRESA E RETORNA NO SELECT
+        //VERIFICA O STATUS DO CHAMADO E RETORNA NO SELECT
         switch ($obCall->status) {
             case "1": {
                 $status_chamado = "Novo";
+                $responder = "style='display: block;'";
                 break;
             }
             case "2": {
                 $status_chamado = "Em atendimento";
+                $responder = "style='display: block;'";
                 break;
             }
             case "3": {
                 $status_chamado = "Concluído";
+                $responder = "style='display: none;'";
+                break;
+            }
+            case "4": {
+                $status_chamado = "Cancelado";
+                $responder = "style='display: none;'";
                 break;
             }
         }
@@ -247,7 +273,9 @@ class Called extends Page {
             'id' => $obCall->id,
             'assunto' => $obCall->assunto,
             'status_chamado' => $status_chamado,
+            'datahora_abriu' => $obCall->datahora,
             'historia_chamados'  => self::getListCallHistory($request, $obCall->id, $obCall->id_abriu_chamado),
+            'responder' => $responder,
             'status' => self::getStatus($request)
         ]);
 
@@ -266,26 +294,30 @@ class Called extends Page {
      * @param integer $id
      * @return string
      */
-    public static function setEditCall(Request $request, int $id): string
+    public static function setResponseCall(Request $request, int $id): string
     {
-        //OBTÉM O EMPRESA DO BANCO DE DADOS
-        $obCompany = EntityCall::getCompanyById($id);
 
-        //VALIDA A INSTANCIA
-        if(!$obCompany instanceof EntityCall){
-            $request->getRouter()->redirect('/empresa/lista');
-        }
 
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //ATUALIZA A INSTANCIA
-        $obCompany->company = $postVars['company'] ?? $obCompany->company;
-        $obCompany->status = $postVars['status'] ?? $obCompany->status;
-        $obCompany->atualizar();
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
+        //NOVA INSTANCIA DE CHAMADO ATIVIDADE
+        $obCallActivity = new EntityCallActivity();
+        $obCallActivity->id_chamado = $id;
+        $obCallActivity->descricao = $postVars['descricao'] ;
+        $obCallActivity->datahora = date('Y-m-d H:m:s');
+        $obCallActivity->id_user = $id_user;
+        $obCallActivity->cadastrar();
+
+        if (!empty($_FILES['file-upload']['name'])) {
+            $resultImport = Update::importFiles($request, $postVars['anexo']); //ENVIANDO APENAS NOME ARQUIVO
+        }
 
         //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect('/empresa/lista/'.$obCompany->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/vendedor/chamados/lista/'.$id.'/view?status=updated');
     }
 
 

@@ -48,6 +48,29 @@ class Files extends Page {
         );
     }
 
+    /**
+     * Método responsável por inserir novo arquivo
+     * @param Request $request
+     * @return bool
+     */
+    public static function setNewFiles(Request $request): bool
+    {
+
+        //POST VARS
+        $postVars = $request->getPostVars();
+
+        $resultImport = Update::importFiles($request, $postVars["inputCSV"]); //ENVIANDO APENAS NOME ARQUIVO
+
+
+        //VERIFICA A VALIDAÇÃO DE SENHA
+        if ($resultImport){
+            return true;
+        }
+
+        return false;
+
+    }
+
 
     /**
      * Método responsável por inserir novo arquivo nas empresas

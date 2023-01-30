@@ -83,22 +83,6 @@ class Call {
     }
 
     /**
-     * Método responsável por buscar todas as empresas
-     *
-     * @return false|mixed|object
-     */
-    public static function getAllCompanies()
-    {
-        return self::getCalled(
-            '*',
-            '',
-            '',
-            '',
-            ''
-        )->fetchObject(self::class);
-    }
-
-    /**
      * Método responsável por verifica o nome da empresa
      *
      * @param string $id
@@ -120,12 +104,12 @@ class Call {
      * Método responsável por retornar uma empresa com base no seu ID
      *
      * @param integer $id
-     * @return Call
+     * @return Call|false|object|\stdClass|null
      */
-    public static function getCallById(int $id): Call
+    public static function getCallById(int $id)
     {
         return self::getCalled(
-            '*',
+            '*, DATE_FORMAT(datahora, "%d/%m/%Y %Hh%i") as datahora',
               '',
             'id = '.$id,
              '',

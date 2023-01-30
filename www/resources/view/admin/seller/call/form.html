@@ -1,27 +1,36 @@
 {{status}}
 <section class="section">
 
-    {{historia_chamados}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-row">
+            <h3 class="card-title">{{assunto}}</h3>
+            <h6>{{datahora_abriu}}</h6>
+            <h5>Status Chamado: <b>{{status_chamado}}</b></h5>
+            </div>
+        </div>
+    </div>
 
-    <div class="card">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+            {{historia_chamados}}
+            </div>
+        </div>
+    </div>
+
+    <div class="card" {{responder}}>
         <div class="card-header">
-            <h4 class="card-title">Novo Chamado</h4>
+            <h4 class="card-title">Responder Chamado</h4>
         </div>
 
         <div class="card-body">
             <form method="post">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="helperText">Assunto</label>
-                        <input type="text" id="helperText" class="form-control" name="assunto" placeholder="Nome Empresa" required>
-                        <p><small class="text-muted">assunto chamado</small></p>
-                    </div>
-                </div>
 
                 <div class="col-md-12 mb-12">
                     <div class="form-group mb-3">
-                        <label for="descricao" class="form-label">Descrição Chamado</label>
+                        <label for="descricao" class="form-label">Descrição:</label>
                         <textarea class="form-control" id="descricao" name="descricao" rows="10" required></textarea>
                     </div>
                 </div>

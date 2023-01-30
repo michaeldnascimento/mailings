@@ -40,25 +40,25 @@ $obRouter->post('/vendedor/chamados/novo', [
 ]);
 
 //ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/vendedor/chamados/lista/{id}/edit', [
+$obRouter->get('/vendedor/chamados/lista/{id}/view', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request, $id){
-        return new Response(200, Called::getEditCall($request, $id));
+        return new Response(200, Called::getViewCall($request, $id));
     }
 ]);
 
 //ROTA DE EDIÇÃO DE EMPRESA (POST)
-$obRouter->post('/vendedor/chamados/lista/{id}/edit', [
+$obRouter->post('/vendedor/chamados/lista/{id}/view', [
     'middlewares' => [
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request, $id){
-        return new Response(200, Called::setEditCall($request, $id));
+        return new Response(200, Called::setResponseCall($request, $id));
     }
 ]);
 
