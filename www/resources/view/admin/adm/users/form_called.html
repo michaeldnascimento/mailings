@@ -1,0 +1,52 @@
+{{status}}
+<section class="section">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-row">
+        <h3 class="card-title">{{assunto}}</h3>
+        <h6>{{datahora_abriu}}</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        {{historia_chamados}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card" {{responder}}>
+    <div class="card-header">
+      <h4 class="card-title">Responder Chamado</h4>
+    </div>
+
+    <div class="card-body">
+      <form method="post">
+        <div class="row">
+          <div class="form-group">
+            <label>Status Chamado</label>
+            <select class="choices form-select" name="status" required>
+              <optgroup label="Status">
+                {{status_chamado}}
+              </optgroup>
+            </select>
+          </div>
+          <div class="col-md-12 mb-12">
+            <div class="form-group mb-3">
+              <label for="descricao" class="form-label">Descrição:</label>
+              <textarea class="form-control" id="descricao" name="descricao" rows="10" required></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
+            <a href="{{URL}}/adm/usuarios/chamados/lista" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

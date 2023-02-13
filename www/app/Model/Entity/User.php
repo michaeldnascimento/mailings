@@ -124,7 +124,7 @@ class User {
             'vero' => $this->vero,
             'desktop_get' => $this->desktop_get,
             'desktop_sis' => $this->desktop_sis,
-            '$desktop_netbarretos' => $this->desktop_netbarretos
+            'desktop_netbarretos' => $this->desktop_netbarretos
         ]);
 
         //SUCESSO

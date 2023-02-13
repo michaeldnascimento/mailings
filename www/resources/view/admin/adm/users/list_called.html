@@ -1,0 +1,36 @@
+{{status}}
+<!-- Basic Tables start -->
+<section class="section">
+    <div class="card">
+
+        <div class="card-body">
+            <table class="table" id="table_users">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Assunto</th>
+                    <th>Status</th>
+                    <th style="width: 200px;">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{itens}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+<!-- Basic Tables end -->
+<script src="{{URL}}/resources/assets/vendors/jquery/jquery.min.js"></script>
+<script src="{{URL}}/resources/assets/vendors/jquery-datatables/jquery.dataTables.min.js"></script>
+<script src="{{URL}}/resources/assets/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js"></script>
+<script src="{{URL}}/resources/assets/vendors/fontawesome/all.min.js"></script>
+<script>
+    // Jquery Datatable
+    $(document).ready( function () {
+        $('#table_users').DataTable();
+    } );
+</script>

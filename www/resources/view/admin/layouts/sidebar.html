@@ -233,11 +233,19 @@
                         </ul>
                     </li>
 
-                    <li {{display_adm}} class="sidebar-item  ">
-                        <a href="{{URL}}/adm/usuarios/lista" class='sidebar-link'>
+                    <li {{display_adm}} class="sidebar-item has-sub">
+                        <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-badge-fill"></i>
-                            <span>Usuários</span>
+                            <span>Usuário</span>
                         </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{URL}}/adm/usuarios/lista">Usuários</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{URL}}/adm/usuarios/chamados/lista">Chamados</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li {{display_adm}} class="sidebar-item  ">

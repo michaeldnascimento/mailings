@@ -1,0 +1,33 @@
+{{status}}
+<section class="section">
+
+    <div class="card" {{responder}}>
+        <div class="card-header">
+            <h4 class="card-title">Responder Chamado</h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="basicInput">Assunto</label>
+                    <input type="text" class="form-control" id="basicInput" name="assunto" placeholder="Assunto chamado">
+                </div>
+
+                <div class="col-md-12 mb-12">
+                    <div class="form-group mb-3">
+                        <label for="descricao" class="form-label">Descrição:</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="10" required></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2 mb-2">Salvar</button>
+                    <a href="{{URL}}/vendedor/chamados/lista" class="btn btn-light-secondary me-2 mb-2">Voltar</a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
