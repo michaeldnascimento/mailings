@@ -9,7 +9,7 @@ use App\Model\Entity\User as EntityUser;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
-class Dashboard extends Page {
+class  Dashboard extends Page {
 
     /**
      * Método responsável por retornar a renderização da página de login
@@ -64,6 +64,9 @@ class Dashboard extends Page {
                 break;
             case 'clientInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CLIENTE!');
+                break;
+            case 'callInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota de CHAMADOS!');
                 break;
             case 'listInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa lista mailing');

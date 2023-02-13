@@ -9,6 +9,7 @@ $obRouter->get('/vendedor/chamados/lista', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request){
         return new Response(200, Called::getCalledList($request));
@@ -21,6 +22,7 @@ $obRouter->get('/vendedor/chamados/novo', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request){
         return new Response(200, Called::getNewCall($request));
@@ -33,6 +35,7 @@ $obRouter->post('/vendedor/chamados/novo', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request){
         return new Response(200, Called::setNewCall($request));
@@ -44,7 +47,8 @@ $obRouter->get('/vendedor/chamados/lista/{id}/view', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-admin',
+        'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request, $id){
         return new Response(200, Called::getViewCall($request, $id));
@@ -55,7 +59,8 @@ $obRouter->get('/vendedor/chamados/lista/{id}/view', [
 $obRouter->post('/vendedor/chamados/lista/{id}/view', [
     'middlewares' => [
         'required-admin-login',
-        'required-nivel-admin',
+        'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request, $id){
         return new Response(200, Called::setResponseCall($request, $id));
@@ -66,7 +71,8 @@ $obRouter->post('/vendedor/chamados/lista/{id}/view', [
 $obRouter->post('/vendedor/chamados/lista/{id}/delete', [
     'middlewares' => [
         'required-admin-login',
-        'required-nivel-admin',
+        'required-nivel-seller',
+        'required-nivel-call',
     ],
     function($request, $id){
         return new Response(200, Called::setDeleteCall($request, $id));

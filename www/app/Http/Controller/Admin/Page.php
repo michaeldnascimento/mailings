@@ -87,6 +87,16 @@ class Page {
             $valueDisplayClient  = "none";
         }
 
+        //RECEBE SESSÃO CHAMADO
+        $call = $_SESSION['mailings']['admin']['user']['call'];
+
+        //DISPLAY CALL
+        if ($call == 1){
+            $valueDisplayCalled  = "block";
+        }else{
+            $valueDisplayCalled  = "none";
+        }
+
         //BUSCA EMPRESAS
         $resultsCompanies = Folders::getListCompaniesRouter();
 
@@ -329,6 +339,7 @@ class Page {
 
             'display_cep' => "style=display:$valueDisplayCep",
             'display_client' => "style=display:$valueDisplayClient",
+            'display_called' => "style=display:$valueDisplayCalled",
             'folders' => $folders,
         ]);
     }

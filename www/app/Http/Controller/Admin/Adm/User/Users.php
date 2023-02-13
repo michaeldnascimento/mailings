@@ -124,6 +124,18 @@ class Users extends Page {
             }
         }
 
+        //VERIFICA O STATUS DO CHAMADO USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->call_client) {
+            case "0": {
+                $disabledClientCalled = "selected";
+                break;
+            }
+            case "1": {
+                $activeClientCalled = "selected";
+                break;
+            }
+        }
+
         //VERIFICA O NIVEL DO USUÁRIO E RETORNA NO SELECT
         switch ($obUser->nivel) {
             case "1": {
@@ -197,6 +209,8 @@ class Users extends Page {
                                       <option value='0' $disabledCep>NÃO</option>",
             'options_client_user' => "<option value='1' $activeClient>SIM</option>.
                                       <option value='0' $disabledClient>NÃO</option>",
+            'options_call_user' =>   "<option value='1' $activeClientCalled>SIM</option>.
+                                      <option value='0' $disabledClientCalled>NÃO</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
                                       <option value='2' $company>EMPRESA</option>.
                                       <option value='3' $adm>ADMINISTRADOR</option>",
@@ -278,6 +292,7 @@ class Users extends Page {
         $obUser->status = $postVars['status_user'] ?? $obUser->status;
         $obUser->cep = $postVars['cep'] ?? $obUser->cep;
         $obUser->client = $postVars['client'] ?? $obUser->client;
+        $obUser->call_client = $postVars['call_client'] ?? $obUser->call_client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
         $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
