@@ -1,0 +1,118 @@
+{{status}}
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Lista {{lista}}</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form action="{{URL}}/vendedor/input/{{lista}}/" method="post">
+
+                <input type="hidden" name="lista" class="form-control" value="{{lista}}">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary rounded-pill"><span>Gerar 1 de {{itens_qtd}}</span></button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-backdrop="false" data-bs-target="#NewInputMailing">
+                    <i class="bi bi-pencil-fill" title="Novo Input"> Nova Busca </i>
+                </a>
+                </div>
+            </div>
+
+            <table class="table display responsive nowrap" style="width:100%" id="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>Contrato</th>
+                    <th>Pedido</th>
+                    <th>Protocolo</th>
+                    <th>Telefone</th>
+                    <th>Tipo</th>
+                    <th>CPF/CNPJ</th>
+                    <th>E-mail</th>
+                    <th>Endereço</th>
+                    <th>Num</th>
+                    <th>Compl</th>
+                    <th>Bairro</th>
+                    <th>UF</th>
+                    <th>Motivo</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Status Obs</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{itens_user}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!--Disabled Backdrop Modal -->
+<div class="modal fade text-left" id="NewInputMailing" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel4" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title white" id="myModalLabel160">Novo Input
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <form action="{{URL}}/vendedor/claro/tabula" method="post">
+                    <div class="modal-body">
+                        <div class="col-md-12 mb-12">
+                            <h6>Tipo</h6>
+                            <p>Selecione o tipo de busca!</p>
+                            <div class="form-group mb-3">
+                                <select class="choices form-select" name="status_mailing" id="select" required>
+                                    <optgroup label="Buscar por:">
+                                        <option value="CPF"> CPF </option>
+                                        <option value="CONTRATO"> CONTRATO </option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-12">
+                            <div class="form-group mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Observação Tabulação</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="status_obs_mailing" rows="10" required></textarea>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="id" id="id_mailing" value="">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary"
+                                data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Fechar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Salvar</span>
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
