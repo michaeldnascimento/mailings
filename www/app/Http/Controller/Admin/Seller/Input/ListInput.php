@@ -13,32 +13,6 @@ use DateTime;
 class ListInput extends Page {
 
     /**
-     * Método responsável por obter a renderização da quantidade de mailings
-     * @param Request $request $request
-     * @param string $list
-     * @return string
-     */
-    public static function getStatusMailing(Request $request, string $list): string
-    {
-
-        //QUANTIDADE
-        $qtd_mailing = '';
-
-        //RESULTADOS QUANTIDADE MAILING
-        $qtd_mailing = EntityInput::getMailingQtd($list);
-
-        //POST VARS
-        $postVars = $request->getPostVars();
-
-        //RECEBE QUANTIDADE
-        $qtd_mailing->qtd = $postVars['qtd'] ?? $qtd_mailing->qtd;
-
-        //RETORNA OS USUÁRIOS
-        return $qtd_mailing->qtd;
-
-    }
-
-    /**
      * Método responsável por obter a renderização os mailings do usuário para a página
      * @param string $list
      * @return string
@@ -121,13 +95,8 @@ class ListInput extends Page {
     public static function getListInput(Request $request, string $list, string $errorMessage = null): string
     {
 
-        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
-        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
-
-
         //CONTEÚDO DA PÁGINA DE MAILINGS
         $content = View::render("admin/seller/input/lista", [
-            //'itens_qtd'    => self::getMailingsListQtd($request, $list),
             'itens_user'   => self::getMailingsListUser($list),
             'lista'        => $list,
             'status'       => self::getStatus($request)
@@ -219,9 +188,8 @@ class ListInput extends Page {
      * @param Request $request
      * @param string $list
      * @param int $id
-     * @return string
      */
-    public static function statusMailing(Request $request, string $list, int $id): string
+    public static function statusMailing(Request $request, string $list, int $id)
     {
 
         //OBTÉM O MAILING DO BANCO DE DADOS
