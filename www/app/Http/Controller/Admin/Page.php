@@ -103,6 +103,22 @@ class Page {
         //RECEBE NUMERO EMPRESA NA SESSÃO
         $companies = $_SESSION['mailings']['admin']['user']['companies'];
 
+        /****************** LIST MAILING INPUT **********************/
+        //RECEBE DA SESSÃO ALGAR
+        $input = $_SESSION['mailings']['admin']['user']['input'];
+
+        //SE FOR DIFERENTE DE VAZIO
+        if (!empty($input)){
+            //LISTAS LIBERADAS POR SESSÃO
+            $listInput = explode(", ", $input);
+
+            $valueDisplayInputMailing = in_array('input', $listInput) ? 'block' : 'none';
+        }else{
+
+            //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS
+            $valueDisplayInput = "none";
+        }
+
 
         /****************** LIST MAILING ALGAR **********************/
         //RECEBE DA SESSÃO ALGAR
@@ -291,6 +307,9 @@ class Page {
             'display_adm' => "style=display:$valueDisplayAdm",
             'display_company' => "style=display:$valueDisplayCompany",
             'display_seller' => "style=display:$valueDisplaySeller",
+
+            'display_seller_input' => "style=display:$valueDisplayInput",
+            'display_seller_input_mailing' => "style=display:$valueDisplayInputMailing",
 
             'display_seller_algar' => "style=display:$valueDisplayAlgar",
             'display_seller_algar_base' => "style=display:$valueDisplayAlgarBase",

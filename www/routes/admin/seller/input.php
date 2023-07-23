@@ -9,7 +9,7 @@ $obRouter->get('/vendedor/input/mailing', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::getListInput($request, 'mailing'));
@@ -22,7 +22,7 @@ $obRouter->post('/vendedor/input/mailing/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::setListInput($request, 'mailing'));

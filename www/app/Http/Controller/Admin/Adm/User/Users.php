@@ -152,6 +152,9 @@ class Users extends Page {
             }
         }
 
+        //LIST INPUT
+        $listInput = explode(", ", $obUser->input);
+
         //LIST ALGAR
         $listAlgar = explode(", ", $obUser->algar);
 
@@ -216,6 +219,9 @@ class Users extends Page {
                                       <option value='3' $adm>ADMINISTRADOR</option>",
             'companies' => $select_company,
             'companies_disabled' => $companies_disabled,
+
+            'status_input_mailing' => in_array('mailing', $listInput) ? 'checked' : '',
+
             'status_algar_base' => in_array('base', $listAlgar) ? 'checked' : '',
             'status_algar_cancelado' => in_array('cancelado', $listAlgar) ? 'checked' : '',
             'status_algar_proposta' => in_array('proposta', $listAlgar) ? 'checked' : '',
@@ -295,6 +301,7 @@ class Users extends Page {
         $obUser->call_client = $postVars['call_client'] ?? $obUser->call_client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
+        $obUser->input = implode(", ", array_keys($postVars['listInput'])) ?? null;
         $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
         $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;
         $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? null;

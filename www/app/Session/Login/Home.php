@@ -39,6 +39,7 @@ class Home {
             'cep'   => $obUser->cep,
             'client' => $obUser->client,
             'call' => $obUser->call_client,
+            'input' => $obUser->input,
             'algar' => $obUser->algar,
             'claro' => $obUser->claro,
             'net' => $obUser->net,

@@ -64,6 +64,11 @@ class User {
     public ?int $companies = null;
 
     /*
+    * Lists Input
+    */
+    public ?string $input = null;
+
+    /*
     * Lists Algar
     */
     public ?string $algar = null;
@@ -123,6 +128,7 @@ class User {
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
             'companies' => $this->companies,
+            'input' => $this->input,
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,
@@ -154,6 +160,7 @@ class User {
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
             'companies' => $this->companies,
+            'input' => $this->input,
             'algar' => $this->algar,
             'net' => $this->net,
             'claro' => $this->claro,

@@ -36,6 +36,18 @@
 
                     <li {{display_seller}} class="sidebar-title">Vendedor</li>
 
+                    <li {{display_seller_input}} class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Input</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li {{display_seller_mailing_desabilitado}} class="submenu-item">
+                                <a href="{{URL}}/vendedor/input/mailing">Mailing</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li {{display_seller_algar}} class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-lines-fill"></i>
@@ -51,7 +63,7 @@
                             <li {{display_seller_algar_proposta}} class="submenu-item">
                                 <a href="{{URL}}/vendedor/algar/proposta">Proposta</a>
                             </li>
-                            <li {{display_seller_algar_pendente_instalacao} class="submenu-item">
+                            <li {{display_seller_algar_pendente_instalacao}} class="submenu-item">
                                 <a href="{{URL}}/vendedor/algar/pendente-instalacao">Pendente Instalação</a>
                             </li>
                         </ul>
