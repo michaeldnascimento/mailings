@@ -1,4 +1,4 @@
-<tr>
+<tr class="{{color_status_lista}}">
     <td></td>
     <td>
         <a class="btn btn-outline-primary selectMailing" data-bs-toggle="modal"
@@ -27,7 +27,7 @@
     <td>{{uf}}</td>
     <td>{{motivo_cancelamento}}</td>
     <td>{{data_cancelamento}}</td>
-    <td>{{status_mailing}}</td>
+    <td>{{status_lista}}</td>
     <td>{{status_obs_mailing}}</td>
 </tr>
 
@@ -44,7 +44,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/claro/tabula" method="post">
+                <form action="{{URL}}/vendedor/input/tabula" method="post">
                     <div class="modal-body">
                         <div class="col-md-12 mb-12">
                             <h6>Status</h6>

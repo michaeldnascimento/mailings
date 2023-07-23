@@ -6,6 +6,7 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\MailingInput as EntityInput;
+use App\Model\Entity\StateCity as EntityStateCity;
 use App\Utils\View;
 use DateTime;
 
@@ -17,7 +18,7 @@ class ListInput extends Page {
      * @param string $list
      * @return string
      */
-    public static function getMailingsListQtd(Request $request, string $list): string
+    public static function getStatusMailing(Request $request, string $list): string
     {
 
         //QUANTIDADE
@@ -57,6 +58,27 @@ class ListInput extends Page {
 
         //RENDERIZA O ITEM
         while($obInput = $results->fetchObject(EntityInput::class)){
+
+            //VERIFICA O STATUS DO CHAMADO E RETORNA NO SELECT
+            switch ($obInput->status_lista) {
+                case "1": {
+                    $status_lista = "Concluído";
+                    $color_status_lista = "table-success";
+                    break;
+                }
+                case "2": {
+                    $status_lista = "Aguardando";
+                    $color_status_lista = "table-warning";
+                    break;
+                }
+                case "3": {
+                    $status_lista = "Dados não localizados";
+                    $color_status_lista = "table-danger";
+                    break;
+                }
+            }
+
+
             $items .=  View::render('/admin/seller/input/modules/item', [
                 'id' => $obInput->id,
                 'num_protocolo' => $obInput->num_protocolo,
@@ -78,7 +100,8 @@ class ListInput extends Page {
                 'tipo_pessoa' => $obInput->tipo_pessoa,
                 'data_cancelamento' => $obInput->data_cancelamento,
                 'motivo_cancelamento' => $obInput->motivo_cancelamento,
-                'status_mailing' => $obInput->status_mailing,
+                'status_lista' => $status_lista,
+                'color_status_lista' => $color_status_lista,
                 'status_obs_mailing' => $obInput->status_obs_mailing
             ]);
         }
@@ -89,36 +112,7 @@ class ListInput extends Page {
     }
 
     /**
-     * Método responsável por retornar a renderização da página de login
-     * @param Request $request
-     * @param string $list
-     * @param string|null $errorMessage
-     * @return string
-     */
-    public static function getList(Request $request, string $list, string $errorMessage = null): string
-    {
-        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
-        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
-
-
-        //CONTEÚDO DA PÁGINA DE MAILINGS
-        $content = View::render("admin/seller/input/$list", [
-            'itens_qtd'    => self::getMailingsListQtd($request, $list),
-            'itens_user'    => self::getMailingsListUser($list),
-            'status'   => self::getStatus($request)
-        ]);
-
-        //RETORNA A PÁGINA COMPLETA
-        return parent::getPage(
-            'Mailings',
-            "$list",
-            'Lista de mailing',
-            $content
-        );
-    }
-
-    /**
-     * Método responsável por retornar a renderização da página cancelado
+     * Método responsável por retornar a renderização da página
      * @param Request $request
      * @param string $list
      * @param string|null $errorMessage
@@ -133,7 +127,7 @@ class ListInput extends Page {
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
         $content = View::render("admin/seller/input/lista", [
-            'itens_qtd'    => self::getMailingsListQtd($request, $list),
+            //'itens_qtd'    => self::getMailingsListQtd($request, $list),
             'itens_user'   => self::getMailingsListUser($list),
             'lista'        => $list,
             'status'       => self::getStatus($request)
@@ -160,27 +154,63 @@ class ListInput extends Page {
         //PEGA ID USUÁRIO NA SESSION
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
-        $qtd_mailing_user = EntityInput::getMailingQtdUser($list, $id_user);
+        //POST VARS
+        $postVars = $request->getPostVars();
 
-        //VALIDA SE O USUÁRIO JÁ PASSOU DO LIMIT DE MAILING POR USUÁRIO
-        if($qtd_mailing_user->qtd >= 5){
-            $request->getRouter()->redirect("/vendedor/input/$list?status=limitExceeded");
+        //PEGAR ESTADO E CIDADE
+        $estado = EntityStateCity::getState($postVars['estado']);
+        $cidade = EntityStateCity::getCity($postVars['cidade']);
+
+        //GET CPF/CNPJ E REMOVE STRINGS
+        $cpf_contrato = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postVars['cpf-contrato']);
+
+        //REMOVE CPF/CNPJ QUE COMEÇA COM 0 A ESQUERDA
+        $cpf_contrato = ltrim($cpf_contrato, "0");
+
+        $mailing = EntityInput::getMailingByCpfContrato($cpf_contrato);
+
+        if (!empty($mailing)){
+            //ATUALIZA A STATUS  MAILING
+            $id = EntityInput::setMailingExisting($mailing, $list, $id_user);
+            if (!empty($id)){
+                //REDIRECIONA O USUÁRIO
+                $request->getRouter()->redirect("/vendedor/input/$list?status=mailingExisting");
+            }else{
+                //REDIRECIONA O USUÁRIO
+                $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
+            }
+        }else{
+
+            if(strlen($cpf_contrato) == 11){
+                
+                //SET MAILING CPF
+                $id = EntityInput::setMailingNotExisting($cpf_contrato, 0 , $cidade->nome, $estado->uf, $list, $id_user);
+
+                if (!empty($id)){
+                    //REDIRECIONA O USUÁRIO
+                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingCPF");
+                }else{
+                    //REDIRECIONA O USUÁRIO
+                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
+                }
+            }else{
+
+                //SET MAILING CONTRATO
+                $id = EntityInput::setMailingNotExisting(0, $cpf_contrato , $cidade->nome, $estado->uf, $list, $id_user);
+                
+                if (!empty($id)){
+                    //REDIRECIONA O USUÁRIO
+                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingContrato");
+                }else{
+                    //REDIRECIONA O USUÁRIO
+                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
+                }
+            }
+
+            //REDIRECIONA O USUÁRIO
+            $request->getRouter()->redirect("/vendedor/input/$list?status=mailingErrorCPFContrato");
         }
 
-        //PEGAR NOVO MAILING VAZIO
-        $obMailing = EntityInput::getNewMailing($list);
-
-        //VALIDA A INSTANCIA
-        if(!$obMailing instanceof EntityInput){
-            $request->getRouter()->redirect("/vendedor/input/$list?status=notMailing");
-        }
-
-        //ATUALIZA A INSTANCIA
-        $obMailing->id_user = $id_user;
-        $obMailing->atualizar();
-
-        //REDIRECIONA O USUÁRIO
-        $request->getRouter()->redirect("/vendedor/input/$list?status=newMailing");
     }
 
 
@@ -251,8 +281,11 @@ class ListInput extends Page {
 
         //MENSAGEM DE STATUS
         switch ($queryParams['status']) {
-            case 'invalid':
-                return Alert::getError('Erro :(','E-mail ou senha inválido!');
+            case 'mailingError':
+                return Alert::getError('Erro :(','Não foi possível salvar o novo input!');
+                break;
+            case 'mailingErrorCPFContrato':
+                return Alert::getError('Erro :(','Não foi possível salvar o novo input por contrato ou CPF!');
                 break;
             case 'limitExceeded':
                 return Alert::getWarning('Atenção !','Limite de mailing na lista atingido');
@@ -263,8 +296,14 @@ class ListInput extends Page {
             case 'notMailing':
                 return Alert::getWarning('Atenção :|','Sem mailing disponivel no momento!');
                 break;
-            case 'newMailing':
-                return Alert::getSuccess('Sucesso :)','Novo mailing gerado com sucesso.');
+            case 'mailingExisting':
+                return Alert::getSuccess('Sucesso :)','Novo input ok.');
+                break;
+            case 'newMailingCPF':
+                return Alert::getSuccess('Sucesso :)','Novo input por CPF, aguarde enquanto completamos as informações.');
+                break;
+            case 'newMailingContrato':
+                return Alert::getSuccess('Sucesso :)','Novo input por Contrato, aguarde enquanto completamos as informações.');
                 break;
             case 'statusUpdate':
                 return Alert::getSuccess('Sucesso :)','Status mailing atualizado com sucesso.');

@@ -7,22 +7,10 @@
 
         <div class="card-body">
 
-            <form action="{{URL}}/vendedor/input/{{lista}}/" method="post">
-
-                <input type="hidden" name="lista" class="form-control" value="{{lista}}">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary rounded-pill"><span>Gerar 1 de {{itens_qtd}}</span></button>
-                    </div>
-                </div>
-            </form>
-
-
-            <div class="col-md-6">
+            <div class="col-md-6 mb-5">
                 <div class="form-group">
-                <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-backdrop="false" data-bs-target="#NewInputMailing">
-                    <i class="bi bi-pencil-fill" title="Novo Input"> Nova Busca </i>
+                <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-backdrop="false" data-bs-target="#NewInputMailing">
+                    <b class="bi bi-pencil-fill" title="Novo Input"> Nova Busca </b>
                 </a>
                 </div>
             </div>
@@ -64,12 +52,12 @@
 </section>
 
 
+
 <!--Disabled Backdrop Modal -->
-<div class="modal fade text-left" id="NewInputMailing" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel4" aria-hidden="true">
+<div class="modal fade text-left" id="NewInputMailing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header bg-success">
                     <h5 class="modal-title white" id="myModalLabel160">Novo Input
                     </h5>
                     <button type="button" class="close" data-bs-dismiss="modal"
@@ -77,28 +65,62 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/claro/tabula" method="post">
+                <form action="{{URL}}/vendedor/input/mailing" method="post">
                     <div class="modal-body">
-                        <div class="col-md-12 mb-12">
-                            <h6>Tipo</h6>
-                            <p>Selecione o tipo de busca!</p>
-                            <div class="form-group mb-3">
-                                <select class="choices form-select" name="status_mailing" id="select" required>
-                                    <optgroup label="Buscar por:">
-                                        <option value="CPF"> CPF </option>
-                                        <option value="CONTRATO"> CONTRATO </option>
+                        <div class="col-md-12 mb-3">
+                            <h6>CPF/Contrato</h6>
+                            <fieldset class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="cpf-contrato" required>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <h6>Estado</h6>
+                            <p>Selecione o Estado (UF)</p>
+                            <div class="form-group">
+                                <select class="choices form-select" name="estado" id="estado" required>
+                                    <optgroup label="UF:">
+                                        <option value="1">Acre</option>
+                                        <option value="2">Alagoas</option>
+                                        <option value="3">Amazonas</option>
+                                        <option value="4">Amapá</option>
+                                        <option value="5">Bahia</option>
+                                        <option value="6">Ceará</option>
+                                        <option value="7">Distrito Federal</option>
+                                        <option value="8">Espírito Santo</option>
+                                        <option value="9">Goiás</option>
+                                        <option value="10">Maranhão</option>
+                                        <option value="11">Minas Gerais</option>
+                                        <option value="12">Mato Grosso do Sul</option>
+                                        <option value="13">Mato Grosso</option>
+                                        <option value="14">Pará</option>
+                                        <option value="15">Paraíba</option>
+                                        <option value="16">Pernambuco</option>
+                                        <option value="17">Piauí</option>
+                                        <option value="18">Paraná</option>
+                                        <option value="19">Rio de Janeiro</option>
+                                        <option value="20">Rio Grande do Norte</option>
+                                        <option value="21">Rondônia</option>
+                                        <option value="22">Roraima</option>
+                                        <option value="23">Rio Grande do Sul</option>
+                                        <option value="24">Santa Catarina</option>
+                                        <option value="25">Sergipe</option>
+                                        <option value="26">São Paulo</option>
+                                        <option value="27">Tocantins</option>
                                     </optgroup>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-12">
-                            <div class="form-group mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Observação Tabulação</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" name="status_obs_mailing" rows="10" required></textarea>
+                        <div class="col-md-12 mb-3">
+                            <h6>Cidade</h6>
+                            <p>Selecione a Cidade</p>
+                            <div class="form-group">
+                                <select class="choices form-select" name="cidade" id="cidade" disabled="disabled" required>
+                                    <option value="">Selecione a Cidade</option>
+                                </select>
                             </div>
                         </div>
-
-                        <input type="hidden" name="id" id="id_mailing" value="">
 
                     </div>
                     <div class="modal-footer">
@@ -107,7 +129,7 @@
                             <i class="bx bx-x d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Fechar</span>
                         </button>
-                        <button type="submit" class="btn btn-primary ml-1">
+                        <button type="submit" class="btn btn-success ml-1">
                             <i class="bx bx-check d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Salvar</span>
                         </button>
@@ -116,3 +138,30 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    (function(win,doc){
+    'use strict';
+
+    doc.querySelector('#estado').addEventListener('change',async(e)=>{
+       let reqs = await fetch('../../app/Utils/Ajax/Class/CidadeController.php',{
+           method:'post',
+           headers:{
+               'Content-Type':'application/x-www-form-urlencoded'
+           },
+           body:`estado=${e.target.value}`
+       });
+       let ress = await reqs.json();
+       let selCidades = doc.querySelector('#cidade');
+       selCidades.options.length = 1;
+       ress.map((elem,ind,obj)=>{
+           let opt = doc.createElement('option');
+           opt.value = elem.id;
+           opt.innerHTML = elem.nome;
+           selCidades.appendChild(opt);
+       });
+       selCidades.removeAttribute('disabled');
+    });
+})(window,document);
+</script>

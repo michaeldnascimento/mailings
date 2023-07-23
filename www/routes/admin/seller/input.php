@@ -28,3 +28,15 @@ $obRouter->post('/vendedor/input/mailing/', [
         return new Response(200, ListInput::setListInput($request, 'mailing'));
     }
 ]);
+
+//TABULAÇÃO MAILING
+$obRouter->post('/vendedor/input/tabula/?{list}', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request, $list){
+        return new Response(200, ListInput::statusMailing($request, $list, $_POST['id']));
+    }
+]);

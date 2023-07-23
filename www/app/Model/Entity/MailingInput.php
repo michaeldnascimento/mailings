@@ -54,7 +54,7 @@ class MailingInput extends ClassInput {
             'data_status_venda' => $this->data_status_venda,
             'obs' => $this->obs,
             'lista' => $this->lista,
-            'status_lista' => $this->status_lista,
+            'status_lista' => 1,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
             'status_data_mailing' => $this->status_data_mailing,
@@ -63,6 +63,90 @@ class MailingInput extends ClassInput {
 
         //SUCESSO
         return true;
+    }
+
+        /**
+     * Método responsável por cadastrar a instância atual no banco de dados
+     * @param object $mailing
+     * @param string $list
+     * @param int $id_user
+     * @return int|null
+     */
+    public function setMailingExisting(object $mailing, string $list, int $id_user): int
+    {
+
+        //INSERE A INSTANCIA NO BANCO
+        $id = (new Database('db_mailings', 'mailing_input'))->insert([
+            'tipo_mailing' => $mailing->tipo_mailing,
+            'num_protocolo' => $mailing->num_protocolo,
+            'num_pedido_proposta'  => $mailing->num_pedido_proposta,
+            'contrato'  => $mailing->contrato,
+            'data_venda' => $mailing->data_venda,
+            'nome_cliente'  => $mailing->nome_cliente,
+            'cpf'  => $mailing->cpf,
+            'cod_hp' => $mailing->cod_hp,
+            'endereco' => $mailing->endereco,
+            'rua' => $mailing->rua,
+            'cep' => $mailing->cep,
+            'historico_hp' => $mailing->historico_hp,
+            'num' => $mailing->num,
+            'bairro' => $mailing->bairro,
+            'cidade' => $mailing->cidade,
+            'uf' => $mailing->uf,
+            'motivo_pendencia_venda' => $mailing->motivo_pendencia_venda,
+            'status_proposta' => $mailing->status_proposta,
+            'canal_venda' => $mailing->canal_venda,
+            'fone' => $mailing->fone,
+            'fone1' => $mailing->fone1,
+            'fone2' => $mailing->fone2,
+            'email' => $mailing->email,
+            'tipo_pessoa' => $mailing->tipo_pessoa,
+            'rg' => $mailing->rg,
+            'nome_mae' => $mailing->nome_mae,
+            'base_cluster' => $mailing->base_cluster,
+            'data_atendimento' => $mailing->data_atendimento,
+            'motivo_cancelamento' => $mailing->motivo_cancelamento,
+            'data_cancelamento' => $mailing->data_cancelamento,
+            'data_instalado' => $mailing->data_instalado,
+            'status_contrato' => $mailing->status_contrato,
+            'data_status' => $mailing->data_status,
+            'data_status_venda' => $mailing->data_status_venda,
+            'obs' => $mailing->obs,
+            'id_user' => $id_user,
+            'lista' => $list,
+            'status_lista' => 1
+        ]);
+
+        //SUCESSO
+        return $id;
+    }
+
+    /**
+     * Método responsável por cadastrar a instância atual no banco de dados
+     * @param int|null $cpf
+     * @param int|null $contrato
+     * @param string $cidade
+     * @param string $estado
+     * @param string $list
+     * @param int $id_user
+     * @return int|null
+     */
+    public function setMailingNotExisting(int $cpf, int $contrato, string $cidade, string $estado, string $list, int $id_user): int
+    {
+
+        //INSERE A INSTANCIA NO BANCO
+        $id = (new Database('db_mailings', 'mailing_input'))->insert([
+            'contrato'  => $contrato,
+            'cpf'  => $cpf,
+            'cidade' => $cidade,
+            'uf' => $estado,
+            'id_user' => $id_user,
+            'lista' => $list,
+            'status_lista' => 2
+        ]);
+
+        //SUCESSO
+        return $id;
     }
 
     /**
@@ -155,14 +239,13 @@ class MailingInput extends ClassInput {
      * Método responsável por consultar o mailing com base no seu cpf
      *
      * @param string $cpf
-     * @return false|mixed|object
      */
-    public static function getMailingByCpf(string $cpf)
+    public static function getMailingByCpfContrato(string $cpf_contrato)
     {
         return self::getMailingInput(
             '*',
             '',
-            'cpf = '. " '$cpf' ",
+            'cpf = '. " '$cpf_contrato' " . 'OR contrato = '. " '$cpf_contrato' ",
             '',
             '',
             ''
