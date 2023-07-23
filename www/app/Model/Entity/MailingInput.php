@@ -162,6 +162,7 @@ class MailingInput extends ClassInput {
             'contrato'  => $this->contrato,
             'data_venda' => $this->data_venda,
             'nome_cliente'  => $this->nome_cliente,
+            'nome_mae'  => $this->nome_mae,
             'cpf'  => $this->cpf,
             'cod_hp' => $this->cod_hp,
             'endereco' => $this->endereco,

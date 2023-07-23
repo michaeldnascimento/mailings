@@ -591,6 +591,7 @@ class Mailing extends Api{
         $obInput->contrato = $contrato;
         $obInput->data_venda = $postParams['data_venda'];
         $obInput->nome_cliente = $postParams['nome_cliente'];
+        $obInput->nome_mae = $postParams['nome_mae'];
         $obInput->cpf = $cpf;
         $obInput->cod_hp = $postParams['cod_hp'];
         $obInput->endereco = $postParams['endereco'];

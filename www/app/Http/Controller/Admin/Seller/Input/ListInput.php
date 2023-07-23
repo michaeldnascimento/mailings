@@ -74,6 +74,7 @@ class ListInput extends Page {
                 'tipo_pessoa' => $obInput->tipo_pessoa,
                 'data_cancelamento' => $obInput->data_cancelamento,
                 'motivo_cancelamento' => $obInput->motivo_cancelamento,
+                'nome_mae' => $obInput->nome_mae,
                 'status_lista' => $status_lista,
                 'color_status_lista' => $color_status_lista,
                 'status_obs_mailing' => $obInput->status_obs_mailing
