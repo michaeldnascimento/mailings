@@ -193,7 +193,7 @@ class ListInput extends Page {
     {
 
         //OBTÉM O MAILING DO BANCO DE DADOS
-        $obMailing = EntityInput::getMailingById($id);
+        $obMailing = EntityInput::getInputById($id);
 
         //VALIDA A INSTANCIA
         if(!$obMailing instanceof EntityInput){
