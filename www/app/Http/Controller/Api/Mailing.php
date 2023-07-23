@@ -12,6 +12,7 @@ use \App\Model\Entity\MailingClaro as EntityClaro;
 use \App\Model\Entity\MailingNet as EntityNet;
 use \App\Model\Entity\MailingVero as EntityVero;
 use \App\Model\Entity\MailingAmericanet as EntityAmericanet;
+use \App\Model\Entity\MailingInput as EntityInput;
 use \Exception;
 
 class Mailing extends Api{
@@ -547,6 +548,92 @@ class Mailing extends Api{
         ];
     }
 
+
+        /**
+     * Método responsável por atualizar um depoimento
+     * @param Request $request
+     * @param integer $id
+     * @throws Exception
+     * @return array
+     */
+    public static function setEditInputMailing(Request $request, int $id): array
+    {
+
+        //POST PARAMS
+        $postParams = $request->getQueryParams();
+
+        //VALIDA OS CAMPOS OBRIGATÓRIOS
+        if (!isset($id)){
+            throw new Exception("ID do mailing é obrigatório.", 400);
+        }
+
+        //BUSCAR O DEPOIMENTO NO BANCO
+        $obInput = EntityInput::getInputById($id);
+
+        //VALIDA A INSTANCIA
+        if(!$obInput instanceof EntityInput){
+            throw new Exception("O Mailing ".$id." não foi encontrado.", 404);
+        }
+
+        //GET CPF/CNPJ E REMOVE STRINGS
+        $cpf = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postParams['cpf']);
+        $contrato = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postParams['contrato']);
+
+        //REMOVE CPF/CNPJ QUE COMEÇA COM 0 A ESQUERDA
+        $cpf = ltrim($cpf, "0");
+        $contrato = ltrim($contrato, "0");
+
+        //ATUALIZAR O MAILING
+        $obInput->tipo_mailing = $postParams['tipo_mailing'];
+        $obInput->num_protocolo = $postParams['num_protocolo'];
+        $obInput->num_pedido_proposta = $postParams['num_pedido_proposta'];
+        $obInput->contrato = $contrato;
+        $obInput->data_venda = $postParams['data_venda'];
+        $obInput->nome_cliente = $postParams['nome_cliente'];
+        $obInput->cpf = $cpf;
+        $obInput->cod_hp = $postParams['cod_hp'];
+        $obInput->endereco = $postParams['endereco'];
+        $obInput->rua = $postParams['rua'];
+        $obInput->cep = $postParams['cep'];
+        $obInput->historico_hp = $postParams['historico_hp'];
+        $obInput->num = $postParams['num'];
+        $obInput->bairro = $postParams['bairro'];
+        $obInput->cidade = $postParams['cidade'];
+        $obInput->uf = $postParams['uf'];
+        $obInput->motivo_pendencia_venda = $postParams['motivo_pendencia_venda'];
+        $obInput->status_proposta = $postParams['status_proposta'];
+        $obInput->canal_venda = $postParams['canal_venda'];
+        $obInput->fone = $postParams['fone'];
+        $obInput->fone1 = $postParams['fone1'];
+        $obInput->fone2 = $postParams['fone2'];
+        $obInput->email = $postParams['email'];
+        $obInput->tipo_pessoa = $postParams['tipo_pessoa'];
+        $obInput->rg = $postParams['rg'];
+        $obInput->nome_mae = $postParams['nome_mae'];
+        $obInput->data_atendimento = $postParams['data_atendimento'];
+        $obInput->motivo_cancelamento = $postParams['motivo_cancelamento'];
+        $obInput->data_cancelamento = $postParams['data_cancelamento'];
+        $obInput->data_instalado = $postParams['data_instalado'];
+        $obInput->status_contrato = $postParams['status_contrato'];
+        $obInput->data_status = $postParams['data_status'];
+        $obInput->data_status_venda = $postParams['data_status_venda'];
+        $obInput->obs = $postParams['obs'];
+        $obInput->lista = $postParams['lista'];
+        $obInput->id_mailing = $postParams['id_mailing'];
+        $obInput->nome_mailing = $postParams['nome_mailing'];
+        $obInput->status_lista = $postParams['status_lista'];
+        $obInput->atualizar();
+
+        //RETORNA OS DETALHES DO MAILING ATUALIZADO
+        return [
+            'id'            => (int)$obInput->id,
+            'contrato'      => $obInput->contrato,
+            'cpf'           => $obInput->cpf,
+            'nome cliente'  => $obInput->nome_cliente,
+            'lista'         => $obInput->lista,
+            'status lista'  => $obInput->status_lista
+        ];
+    }
 
 
 }

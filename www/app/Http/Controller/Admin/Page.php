@@ -112,7 +112,7 @@ class Page {
             //LISTAS LIBERADAS POR SESSÃO
             $listInput = explode(", ", $input);
 
-            $valueDisplayInputMailing = in_array('input', $listInput) ? 'block' : 'none';
+            $valueDisplayInputMailing = in_array('mailing', $listInput) ? 'block' : 'none';
         }else{
 
             //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS

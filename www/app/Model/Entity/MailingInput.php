@@ -156,20 +156,45 @@ class MailingInput extends ClassInput {
     {
         //ATUALIZA O DEPOIMENTO NO BANCO DE DADOS
         return (new Database('db_mailings', 'mailing_input'))->update('id = '. $this->id, [
-            'nome_cliente' => $this->nome_cliente,
-            'fone1' => $this->fone1,
-            'fone2' => $this->fone2,
+            'tipo_mailing' => $this->tipo_mailing,
+            'num_protocolo' => $this->num_protocolo,
+            'num_pedido_proposta'  => $this->num_pedido_proposta,
+            'contrato'  => $this->contrato,
+            'data_venda' => $this->data_venda,
+            'nome_cliente'  => $this->nome_cliente,
+            'cpf'  => $this->cpf,
+            'cod_hp' => $this->cod_hp,
             'endereco' => $this->endereco,
+            'rua' => $this->rua,
+            'cep' => $this->cep,
+            'historico_hp' => $this->historico_hp,
             'num' => $this->num,
             'bairro' => $this->bairro,
             'cidade' => $this->cidade,
+            'uf' => $this->uf,
+            'motivo_pendencia_venda' => $this->motivo_pendencia_venda,
+            'status_proposta' => $this->status_proposta,
+            'canal_venda' => $this->canal_venda,
+            'fone' => $this->fone,
+            'fone1' => $this->fone1,
+            'fone2' => $this->fone2,
             'email' => $this->email,
+            'tipo_pessoa' => $this->tipo_pessoa,
+            'rg' => $this->rg,
+            'nome_mae' => $this->nome_mae,
+            'base_cluster' => $this->base_cluster,
+            'data_atendimento' => $this->data_atendimento,
+            'motivo_cancelamento' => $this->motivo_cancelamento,
+            'data_cancelamento' => $this->data_cancelamento,
+            'data_instalado' => $this->data_instalado,
+            'status_contrato' => $this->status_contrato,
+            'data_status' => $this->data_status,
+            'data_status_venda' => $this->data_status_venda,
+            'obs' => $this->obs,
             'lista' => $this->lista,
-            'id_user' => $this->id_user,
-            'status_mailing' => $this->status_mailing,
-            'status_obs_mailing' => $this->status_obs_mailing,
-            'status_data_mailing' => $this->status_data_mailing,
-            'datatime_follow' => $this->datatime_follow
+            'id_mailing' => $this->id_mailing,
+            'nome_mailing' => $this->nome_mailing,
+            'status_lista' => $this->status_lista
         ]);
     }
 
@@ -278,7 +303,7 @@ class MailingInput extends ClassInput {
      * @param int $id
      * @return false|mixed|object
      */
-    public static function getMailingById(int $id)
+    public static function getInputById(int $id)
     {
         return self::getMailingInput(
             '*',

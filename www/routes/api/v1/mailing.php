@@ -80,13 +80,13 @@ $obRouter->post('/api/v1/mailing/americanet/', [
     }
 ]);
 
-//ROTA DE ATUALIZAÇÃO DE DEPOIMENTO
-$obRouter->put('/api/v1/testimonies/{id}', [
+//ROTA DE ATUALIZAÇÃO DE MAILING
+$obRouter->post('/api/v1/mailing/input/{id}', [
     'middlewares' => [
         'api',
-        'user-basic-auth'
+        //'user-basic-auth'
     ],
     function($request, $id){
-        return new Response(200, Api\Testimony::setEditTestimony($request, $id), 'application/json');
+        return new Response(200, Mailing::setEditInputMailing($request, $id), 'application/json');
     }
 ]);
