@@ -52,3 +52,16 @@ $obRouter->post('/adm/input/empresas', [
         return new Response(200, Input\Files::setNewFilesCompanies($request));
     }
 ]);
+
+
+//ROTA INPUT LISTA BOT
+$obRouter->get('/adm/input/fila-bot', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Input\Bot::getListInput($request, 'mailing'));
+    }
+]);
