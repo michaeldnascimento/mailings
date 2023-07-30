@@ -91,6 +91,11 @@ class Input
     public ?string $uf = null;
 
     /*
+    * Cod Cidade
+    */
+    public ?string $codigo_cidade = null;
+
+    /*
     * motivo pendencia venda
     */
     public ?string $motivo_pendencia_venda = null;

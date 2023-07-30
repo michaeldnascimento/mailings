@@ -23,11 +23,11 @@
                     <th>Nome</th>
                     <th>Cidade</th>
                     <th>UF</th>
+                    <th>Cod Cidade</th>
                     <th>Contrato</th>
                     <th>CPF/CNPJ</th>
+                    <th>RG</th>
                     <th>CEP</th>
-                    <th>Pedido</th>
-                    <th>Protocolo</th>
                     <th>Telefone</th>
                     <th>Tipo</th>
                     <th>E-mail</th>
@@ -35,9 +35,10 @@
                     <th>Num</th>
                     <th>Compl</th>
                     <th>Bairro</th>
-                    <th>Motivo</th>
-                    <th>Data</th>
-                    <th>Nome</th>
+                    <th>Data instalação</th>
+                    <th>Tipo Mailing</th>
+                    <th>Nome Mãe</th>
+                    <th>Cluster</th>
                     <th>Status</th>
                     <th>Status Obs</th>
                 </tr>
@@ -59,7 +60,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title white" id="myModalLabel160">Novo Input
+                    <h5 class="modal-title white" id="myModalLabel160">Novo Input/Busca
                     </h5>
                     <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
@@ -68,19 +69,40 @@
                 </div>
                 <form action="{{URL}}/vendedor/input/mailing" method="post">
                     <div class="modal-body">
-                        <div class="col-md-12 mb-3">
-                            <h6>CPF/Contrato</h6>
+                        <h5>1º - Busca por CPF ou contrato</h5>
+                    <div class="row mt-5">
+                        <div class="col-md-5 mb-3">
+                            <h6>CPF</h6>
                             <fieldset class="form-group">
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="cpf-contrato" required>
+                                    <input class="form-control" type="text" name="cpf" maxlength="15" placeholder="Digite o CPF">
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-2 mb-3">
+                            <fieldset class="form-group">
+                                <div class="mt-5">
+                                    <h6 class="text-center">OU</h6>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <h6>Contrato</h6>
+                            <fieldset class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="contrato" maxlength="7" placeholder="Digite o Contrato">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <hr />
+                    <h5>2º - Busca por estado/cidade ou código cidade</h5>
+                    <div class="row mt-5">
+                        <div class="col-md-6 mb-5">
                             <h6>Estado</h6>
                             <p>Selecione o Estado (UF)</p>
-                            <div class="form-group">
-                                <select class="choices form-select" name="estado" id="estado" required>
+                                <select class="choices form-select" name="estado" id="estado">
+                                    <option value="">Selecione Estado...</option>
                                     <optgroup label="UF:">
                                         <option value="1">Acre</option>
                                         <option value="2">Alagoas</option>
@@ -111,18 +133,26 @@
                                         <option value="27">Tocantins</option>
                                     </optgroup>
                                 </select>
-                            </div>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-5">
                             <h6>Cidade</h6>
                             <p>Selecione a Cidade</p>
-                            <div class="form-group">
-                                <select class="choices form-select" name="cidade" id="cidade" disabled="disabled" required>
-                                    <option value="">Selecione a Cidade</option>
+                                <select class="choices form-select" name="cidade" id="cidade" disabled="disabled">
+                                    <option value="">Selecione a Cidade...</option>
                                 </select>
-                            </div>
                         </div>
 
+                        <h6 class="text-center">OU</h6>
+
+                        <div class="col-md-12 mb-3">
+                            <h6>Código Cidade Claro (C.C.C)</h6>
+                            <fieldset class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="codigo_cidade" maxlength="15" placeholder="Código Cidade">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"
@@ -132,7 +162,7 @@
                         </button>
                         <button type="submit" class="btn btn-success ml-1">
                             <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Salvar</span>
+                            <span class="d-none d-sm-block">Salvar & Buscar</span>
                         </button>
                     </div>
                 </form>

@@ -57,7 +57,8 @@ class MailingInput extends ClassInput {
             'status_lista' => 1,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
-            'status_data_mailing' => $this->status_data_mailing,
+            'status_mailing' => $this->status_mailing,
+            'datatime_follow' => $this->datatime_follow,
             'status_obs_mailing' => $this->status_obs_mailing
         ]);
 
@@ -72,7 +73,7 @@ class MailingInput extends ClassInput {
      * @param int $id_user
      * @return int|null
      */
-    public function setMailingExisting(object $mailing, string $list, int $id_user): int
+    public static function setMailingExisting(object $mailing, string $list, int $id_user): int
     {
 
         //INSERE A INSTANCIA NO BANCO
@@ -84,6 +85,7 @@ class MailingInput extends ClassInput {
             'data_venda' => $mailing->data_venda,
             'nome_cliente'  => $mailing->nome_cliente,
             'cpf'  => $mailing->cpf,
+            'rg'  => $mailing->rg,
             'cod_hp' => $mailing->cod_hp,
             'endereco' => $mailing->endereco,
             'rua' => $mailing->rua,
@@ -93,6 +95,7 @@ class MailingInput extends ClassInput {
             'bairro' => $mailing->bairro,
             'cidade' => $mailing->cidade,
             'uf' => $mailing->uf,
+            'codigo_cidade' => $mailing->codigo_cidade,
             'motivo_pendencia_venda' => $mailing->motivo_pendencia_venda,
             'status_proposta' => $mailing->status_proposta,
             'canal_venda' => $mailing->canal_venda,
@@ -123,25 +126,27 @@ class MailingInput extends ClassInput {
 
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
-     * @param int|null $cpf
-     * @param int|null $contrato
-     * @param string $cidade
-     * @param string $estado
+     * @param string|null $cpf
+     * @param string|null $contrato
+     * @param string|null $cidade
+     * @param string|null $estado
+     * @param string|null $codigo_cidade
      * @param string $list
      * @param int $id_user
      * @return int|null
      */
-    public function setMailingNotExisting(int $cpf, int $contrato, string $cidade, string $estado, string $list, int $id_user): int
+    public static function setMailingNotExisting($cpf, $contrato, $cidade, $estado, $codigo_cidade, $list, $id_user): int
     {
 
         //INSERE A INSTANCIA NO BANCO
         $id = (new Database('db_mailings', 'mailing_input'))->insert([
-            'contrato'  => $contrato,
             'cpf'  => $cpf,
+            'contrato'  => $contrato,
             'cidade' => $cidade,
             'uf' => $estado,
-            'id_user' => $id_user,
+            'codigo_cidade' => $codigo_cidade,
             'lista' => $list,
+            'id_user' => $id_user,
             'status_lista' => 2
         ]);
 
@@ -195,7 +200,10 @@ class MailingInput extends ClassInput {
             'lista' => $this->lista,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
-            'status_lista' => $this->status_lista
+            'status_lista' => $this->status_lista,
+            'status_mailing' => $this->status_mailing,
+            'datatime_follow' => $this->datatime_follow,
+            'status_obs_mailing' => $this->status_obs_mailing
         ]);
     }
 
@@ -265,6 +273,7 @@ class MailingInput extends ClassInput {
      * Método responsável por consultar o mailing com base no seu cpf
      *
      * @param string $cpf
+     * @param string $contrato
      */
     public static function getMailingByCpfContrato(string $cpf_contrato)
     {

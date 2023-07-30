@@ -13,6 +13,20 @@ use DateTime;
 class ListInput extends Page {
 
     /**
+     * Método responsável por remover a string dos números
+     * @param string $list
+     * @return string
+     */
+    public static function removeStringNumber(string $value): string
+    {
+
+        $value = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $value);
+
+        return ltrim($value, "0");
+
+    }
+
+    /**
      * Método responsável por obter a renderização os mailings do usuário para a página
      * @param string $list
      * @return string
@@ -28,7 +42,7 @@ class ListInput extends Page {
 
 
         //RESULTADOS DA PÁGINA
-        $results = EntityInput::getMailingInput("*, DATE_FORMAT(data_cancelamento, '%d/%m/%Y') as data_cancelamento", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
+        $results = EntityInput::getMailingInput("*, DATE_FORMAT(data_instalado, '%d/%m/%Y') as data_instalado", null, "lista = '$list' AND id_user = $id_user AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obInput = $results->fetchObject(EntityInput::class)){
@@ -62,6 +76,7 @@ class ListInput extends Page {
                 'email' => $obInput->email,
                 'cep' => $obInput->cep,
                 'cpf' => $obInput->cpf,
+                'rg' => $obInput->rg,
                 'fone' => $obInput->fone,
                 'fone1' => $obInput->fone1,
                 'fone2' => $obInput->fone2,
@@ -71,10 +86,14 @@ class ListInput extends Page {
                 'bairro' => $obInput->bairro,
                 'cidade' => $obInput->cidade,
                 'uf' => $obInput->uf,
+                'codigo_cidade' => $obInput->codigo_cidade,
                 'tipo_pessoa' => $obInput->tipo_pessoa,
+                'data_instalacao' => $obInput->data_instalado,
                 'data_cancelamento' => $obInput->data_cancelamento,
                 'motivo_cancelamento' => $obInput->motivo_cancelamento,
                 'nome_mae' => $obInput->nome_mae,
+                'tipo_mailing' => $obInput->tipo_mailing,
+                'base_cluster' => $obInput->base_cluster,
                 'status_lista' => $status_lista,
                 'color_status_lista' => $color_status_lista,
                 'status_obs_mailing' => $obInput->status_obs_mailing
@@ -127,17 +146,35 @@ class ListInput extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //PEGAR ESTADO E CIDADE
-        $estado = EntityStateCity::getState($postVars['estado']);
-        $cidade = EntityStateCity::getCity($postVars['cidade']);
+        if(empty($postVars['cpf']) AND empty($postVars['contrato'])){
+            $request->getRouter()->redirect("/vendedor/input/$list?status=CPFContratoExisting");
+        }
+
+        if((empty($postVars['estado']) OR empty($postVars['cidade'])) AND empty($postVars['codigo_cidade'])){
+            $request->getRouter()->redirect("/vendedor/input/$list?status=CityExisting");
+        }
+
+        if(!empty($postVars['estado'])){
+            //PEGAR ESTADO
+            $estado = EntityStateCity::getState($postVars['estado']);
+        }
+
+        if(!empty($postVars['cidade'])){
+            //PEGAR CIDADE
+            $cidade = EntityStateCity::getCity($postVars['cidade']);
+        }
 
         //GET CPF/CNPJ E REMOVE STRINGS
-        $cpf_contrato = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postVars['cpf-contrato']);
+        $cpf = self::removeStringNumber($postVars['cpf']);
+        $contrato = self::removeStringNumber($postVars['contrato']);
 
-        //REMOVE CPF/CNPJ QUE COMEÇA COM 0 A ESQUERDA
-        $cpf_contrato = ltrim($cpf_contrato, "0");
-
-        $mailing = EntityInput::getMailingByCpfContrato($cpf_contrato);
+        //VERIFICA SE O CPF OU CONTRATO ESTÁ VAZIO PARA AI SIM FAZER A CONSULTA SE JÁ EXISTE
+        if(!empty($cpf)){
+            //VERFICAR SE EXISTE CPF/CONTRATO
+            $mailing = EntityInput::getMailingByCpfContrato($cpf);
+        }else{
+            $mailing = EntityInput::getMailingByCpfContrato($contrato);
+        }
 
         if (!empty($mailing)){
             //ATUALIZA A STATUS  MAILING
@@ -151,31 +188,17 @@ class ListInput extends Page {
             }
         }else{
 
-            if(strlen($cpf_contrato) == 11){
-                
-                //SET MAILING CPF
-                $id = EntityInput::setMailingNotExisting($cpf_contrato, 0 , $cidade->nome, $estado->uf, $list, $id_user);
+            //SET MAILING CPF OU CONTRATO
+            $id = EntityInput::setMailingNotExisting($cpf, $contrato , $cidade->nome, $estado->uf, $postVars['codigo_cidade'], $list, $id_user);
 
-                if (!empty($id)){
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingCPF");
-                }else{
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
-                }
+            if (!empty($id)){
+                //REDIRECIONA O USUÁRIO
+                $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingCPF");
             }else{
-
-                //SET MAILING CONTRATO
-                $id = EntityInput::setMailingNotExisting(0, $cpf_contrato , $cidade->nome, $estado->uf, $list, $id_user);
-                
-                if (!empty($id)){
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingContrato");
-                }else{
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
-                }
+                //REDIRECIONA O USUÁRIO
+                $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
             }
+            
 
             //REDIRECIONA O USUÁRIO
             $request->getRouter()->redirect("/vendedor/input/$list?status=mailingErrorCPFContrato");
@@ -264,6 +287,12 @@ class ListInput extends Page {
                 break;
             case 'notMailing':
                 return Alert::getWarning('Atenção :|','Sem mailing disponivel no momento!');
+                break;
+            case 'CPFContratoExisting':
+                return Alert::getWarning('Atenção :|','Necessário ter CPF ou Contrato para busca!');
+                break;
+            case 'CityExisting':
+                return Alert::getWarning('Atenção :|','Cidade/Estado ou Código cidade necessário para busca!');
                 break;
             case 'mailingExisting':
                 return Alert::getSuccess('Sucesso :)','Novo input ok.');

@@ -53,6 +53,7 @@ class Bot extends Page {
                 'cpf' => $obInput->cpf,
                 'cidade' => $obInput->cidade,
                 'uf' => $obInput->uf,
+                'codigo_cidade' => $obInput->codigo_cidade,
                 'status_lista' => $status_lista,
                 'color_status_lista' => $color_status_lista,
             ]);
