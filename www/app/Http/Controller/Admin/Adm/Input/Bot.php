@@ -6,6 +6,7 @@ use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\MailingInput as EntityInput;
 use App\Model\Entity\StateCity as EntityStateCity;
+use App\Model\Entity\User as EntityUser;
 use App\Utils\View;
 
 class Bot extends Page {
@@ -46,6 +47,8 @@ class Bot extends Page {
                 }
             }
 
+            //OBTÉM O USUÁRIO DO BANCO DE DADOS
+            $obUserName = EntityUser::getUserByIdReturnName($obInput->id_user);
 
             $items .=  View::render('admin/adm/input/bot/modules/item', [
                 'id' => $obInput->id,
@@ -54,6 +57,7 @@ class Bot extends Page {
                 'cidade' => $obInput->cidade,
                 'uf' => $obInput->uf,
                 'codigo_cidade' => $obInput->codigo_cidade,
+                'user' => $obUserName->name,
                 'status_lista' => $status_lista,
                 'color_status_lista' => $color_status_lista,
             ]);
@@ -88,77 +92,5 @@ class Bot extends Page {
             $content
         );
     }
-
-    /**
-     * Método responsável gerar novo mailing lista1
-     * @param Request $request
-     * @param string $list
-     * @return string
-     */
-    public static function setListInput(Request $request, string $list): string
-    {
-
-        //PEGA ID USUÁRIO NA SESSION
-        $id_user = $_SESSION['mailings']['admin']['user']['id'];
-
-        //POST VARS
-        $postVars = $request->getPostVars();
-
-        //PEGAR ESTADO E CIDADE
-        $estado = EntityStateCity::getState($postVars['estado']);
-        $cidade = EntityStateCity::getCity($postVars['cidade']);
-
-        //GET CPF/CNPJ E REMOVE STRINGS
-        $cpf_contrato = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $postVars['cpf-contrato']);
-
-        //REMOVE CPF/CNPJ QUE COMEÇA COM 0 A ESQUERDA
-        $cpf_contrato = ltrim($cpf_contrato, "0");
-
-        $mailing = EntityInput::getMailingByCpfContrato($cpf_contrato);
-
-        if (!empty($mailing)){
-            //ATUALIZA A STATUS  MAILING
-            $id = EntityInput::setMailingExisting($mailing, $list, $id_user);
-            if (!empty($id)){
-                //REDIRECIONA O USUÁRIO
-                $request->getRouter()->redirect("/vendedor/input/$list?status=mailingExisting");
-            }else{
-                //REDIRECIONA O USUÁRIO
-                $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
-            }
-        }else{
-
-            if(strlen($cpf_contrato) == 11){
-                
-                //SET MAILING CPF
-                $id = EntityInput::setMailingNotExisting($cpf_contrato, 0 , $cidade->nome, $estado->uf, $list, $id_user);
-
-                if (!empty($id)){
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingCPF");
-                }else{
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
-                }
-            }else{
-
-                //SET MAILING CONTRATO
-                $id = EntityInput::setMailingNotExisting(0, $cpf_contrato , $cidade->nome, $estado->uf, $list, $id_user);
-                
-                if (!empty($id)){
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=newMailingContrato");
-                }else{
-                    //REDIRECIONA O USUÁRIO
-                    $request->getRouter()->redirect("/vendedor/input/$list?status=mailingError");
-                }
-            }
-
-            //REDIRECIONA O USUÁRIO
-            $request->getRouter()->redirect("/vendedor/input/$list?status=mailingErrorCPFContrato");
-        }
-
-    }
-
 
 }

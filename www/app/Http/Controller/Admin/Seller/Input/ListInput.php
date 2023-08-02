@@ -172,9 +172,10 @@ class ListInput extends Page {
         if(!empty($cpf)){
             //VERFICAR SE EXISTE CPF/CONTRATO
             $mailing = EntityInput::getMailingByCpfContrato($cpf);
-        }else{
-            $mailing = EntityInput::getMailingByCpfContrato($contrato);
         }
+        //else{
+            //$mailing = EntityInput::getMailingByCpfContrato($contrato);
+        //}
 
         if (!empty($mailing)){
             //ATUALIZA A STATUS  MAILING

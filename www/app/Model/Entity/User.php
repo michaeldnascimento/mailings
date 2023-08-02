@@ -200,6 +200,23 @@ class User {
         )->fetchObject(self::class);
     }
 
+    /**
+     * Método responsável por retornar o nome usuário com base no seu ID 
+     *
+     * @param integer $id
+     * @return User
+     */
+    public static function getUserByIdReturnName(int $id): User
+    {
+        return self::getUsers(
+            'name, email',
+              '',
+            'id = '.$id,
+             '',
+              ''
+        )->fetchObject(self::class);
+    }
+
 
     /**
      * Método responsavel por retornar um usuário com base em seu e-mail

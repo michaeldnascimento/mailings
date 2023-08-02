@@ -20,26 +20,22 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Nome</th>
+                    <th>Contrato</th>
                     <th>Cidade</th>
                     <th>UF</th>
-                    <th>Cod Cidade</th>
-                    <th>Contrato</th>
-                    <th>CPF/CNPJ</th>
-                    <th>RG</th>
+                    <th>Nome</th>
+                    <th>Logradouro</th>
                     <th>CEP</th>
                     <th>Telefone</th>
-                    <th>Tipo</th>
                     <th>E-mail</th>
-                    <th>Endereço</th>
-                    <th>Num</th>
-                    <th>Compl</th>
-                    <th>Bairro</th>
+                    <th>Status</th>
+                    <th>Cod Cidade</th>
+                    <th>RG</th>
+                    <th>Tipo</th>
                     <th>Data instalação</th>
                     <th>Tipo Mailing</th>
                     <th>Nome Mãe</th>
                     <th>Cluster</th>
-                    <th>Status</th>
                     <th>Status Obs</th>
                 </tr>
                 </thead>
@@ -67,7 +63,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/input/mailing" method="post">
+                <form action="{{URL}}/vendedor/input/mailing" method="post" class="bg-light">
                     <div class="modal-body">
                         <h5>1º - Busca por CPF ou contrato</h5>
                     <div class="row mt-5">
@@ -90,7 +86,7 @@
                             <h6>Contrato</h6>
                             <fieldset class="form-group">
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="contrato" maxlength="7" placeholder="Digite o Contrato">
+                                    <input class="form-control" type="text" name="contrato" maxlength="9" placeholder="Digite o Contrato">
                                 </div>
                             </fieldset>
                         </div>
