@@ -9,7 +9,7 @@ $obRouter->get('/vendedor/input/solarbot1', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::getListInput($request, 'solarbot1'));
@@ -22,7 +22,7 @@ $obRouter->post('/vendedor/input/solarbot1/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::setListInput($request, 'solarbot1'));
@@ -35,7 +35,7 @@ $obRouter->get('/vendedor/input/solarbot2', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::getListInput($request, 'solarbot2'));
@@ -48,7 +48,7 @@ $obRouter->post('/vendedor/input/solarbot2/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::setListInput($request, 'solarbot2'));
@@ -61,7 +61,7 @@ $obRouter->get('/vendedor/input/solarbot3', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::getListInput($request, 'solarbot3'));
@@ -74,7 +74,7 @@ $obRouter->post('/vendedor/input/solarbot3/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListInput::setListInput($request, 'solarbot3'));

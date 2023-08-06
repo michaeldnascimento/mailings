@@ -220,7 +220,9 @@ class Users extends Page {
             'companies' => $select_company,
             'companies_disabled' => $companies_disabled,
 
-            'status_input_mailing' => in_array('mailing', $listInput) ? 'checked' : '',
+            'status_input_solarbot1' => in_array('solarbot1', $listInput) ? 'checked' : '',
+            'status_input_solarbot2' => in_array('solarbot2', $listInput) ? 'checked' : '',
+            'status_input_solarbot3' => in_array('solarbot3', $listInput) ? 'checked' : '',
 
             'status_algar_base' => in_array('base', $listAlgar) ? 'checked' : '',
             'status_algar_cancelado' => in_array('cancelado', $listAlgar) ? 'checked' : '',

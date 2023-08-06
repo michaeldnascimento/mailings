@@ -104,7 +104,7 @@ class Page {
         $companies = $_SESSION['mailings']['admin']['user']['companies'];
 
         /****************** LIST MAILING INPUT **********************/
-        //RECEBE DA SESSÃO ALGAR
+        //RECEBE DA SESSÃO INPUT
         $input = $_SESSION['mailings']['admin']['user']['input'];
 
         //SE FOR DIFERENTE DE VAZIO
@@ -112,10 +112,12 @@ class Page {
             //LISTAS LIBERADAS POR SESSÃO
             $listInput = explode(", ", $input);
 
-            $valueDisplayInputMailing = in_array('mailing', $listInput) ? 'block' : 'none';
+            $valueDisplayInputSolarbot1 = in_array('solarbot1', $listInput) ? 'block' : 'none';
+            $valueDisplayInputSolarbot2 = in_array('solarbot2', $listInput) ? 'block' : 'none';
+            $valueDisplayInputSolarbot3 = in_array('solarbot3', $listInput) ? 'block' : 'none';
         }else{
 
-            //SE NÃO ESTIVER LISTAS ALGAR LIBERADAS
+            //SE NÃO ESTIVER LISTAS INPUT LIBERADAS
             $valueDisplayInput = "none";
         }
 
@@ -309,7 +311,9 @@ class Page {
             'display_seller' => "style=display:$valueDisplaySeller",
 
             'display_seller_input' => "style=display:$valueDisplayInput",
-            'display_seller_input_mailing' => "style=display:$valueDisplayInputMailing",
+            'display_seller_input_solarbot1' => "style=display:$valueDisplayInputSolarbot1",
+            'display_seller_input_solarbot2' => "style=display:$valueDisplayInputSolarbot2",
+            'display_seller_input_solarbot3' => "style=display:$valueDisplayInputSolarbot3",
 
             'display_seller_algar' => "style=display:$valueDisplayAlgar",
             'display_seller_algar_base' => "style=display:$valueDisplayAlgarBase",
