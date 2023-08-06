@@ -215,6 +215,11 @@ class Input
      */
     public ?int $status_lista = null;
 
+    /**
+     * Status list date
+     */
+    public ?string $status_lista_datetime = null;
+
     /*
     * id do mailing salvo
     */

@@ -65,3 +65,15 @@ $obRouter->get('/adm/input/fila-bot', [
         return new Response(200, Input\Bot::getListInput($request, 'mailing'));
     }
 ]);
+
+//ROTA DE EDIÇÃO DE UMA EMPRESA
+$obRouter->get('/adm/input/fila-bot/{id}/edit', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request, $id){
+        return new Response(200, Input\Bot::editStatusInput($request, $id));
+    }
+]);

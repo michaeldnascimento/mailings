@@ -207,6 +207,7 @@ class MailingInput extends ClassInput {
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
             'status_lista' => $this->status_lista,
+            'status_lista_datetime' => $this->status_lista_datetime,
             'status_mailing' => $this->status_mailing,
             'datatime_follow' => $this->datatime_follow,
             'status_obs_mailing' => $this->status_obs_mailing

@@ -15,7 +15,7 @@ class ListInput extends Page {
     /**
      * Método responsável por remover a string dos números
      * @param string|null $value
-     * @return string|null
+     * @return string|int
      */
     public static function removeStringNumber($value)
     {
@@ -25,7 +25,7 @@ class ListInput extends Page {
             return ltrim($value, "0");
         }
 
-        return null;
+        return 0;
     }
 
     /**

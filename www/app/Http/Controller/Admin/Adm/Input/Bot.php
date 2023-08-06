@@ -16,14 +16,14 @@ class Bot extends Page {
      * @param string $list
      * @return string
      */
-    public static function getMailingsListUser(string $list): string
+    public static function getListBot(string $list): string
     {
 
         //MAILING
         $items = '';
 
         //RESULTADOS DA PÁGINA
-        $results = EntityInput::getMailingInput("*, DATE_FORMAT(data_cancelamento, '%d/%m/%Y') as data_cancelamento", null, "lista = '$list' AND status_lista = 2 AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
+        $results = EntityInput::getMailingInput("*", null, "(lista = '$list') AND (status_lista = 2 OR status_lista = 4) AND (status_mailing IS NULL OR status_mailing = '' OR status_mailing LIKE '%OPORTUNIDADE%')", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obInput = $results->fetchObject(EntityInput::class)){
@@ -32,17 +32,26 @@ class Bot extends Page {
             switch ($obInput->status_lista) {
                 case "1": {
                     $status_lista = "Concluído";
+                    $color_status_button = "btn-success";
                     $color_status_lista = "table-success";
                     break;
                 }
                 case "2": {
                     $status_lista = "Aguardando";
+                    $color_status_button = "btn-warning";
                     $color_status_lista = "table-warning";
                     break;
                 }
                 case "3": {
                     $status_lista = "Dados não localizados";
+                    $color_status_button = "btn-danger";
                     $color_status_lista = "table-danger";
+                    break;
+                }
+                case "4": {
+                    $status_lista = "Processando";
+                    $color_status_button = "btn-primary disabled";
+                    $color_status_lista = "table-primary";
                     break;
                 }
             }
@@ -60,6 +69,7 @@ class Bot extends Page {
                 'user' => $obUserName->name,
                 'status_lista' => $status_lista,
                 'color_status_lista' => $color_status_lista,
+                'color_status_button' => $color_status_button,
             ]);
         }
 
@@ -80,17 +90,45 @@ class Bot extends Page {
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
         $content = View::render("admin/adm/input/bot/lista", [
-            'itens_user'   => self::getMailingsListUser($list),
+            'itens_bot'   => self::getListBot($list),
             'lista'        => $list
         ]);
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
-            'Mailings',
+            'Fila Bot Solar',
             "$list",
             'Lista Input',
             $content
         );
+    }
+
+
+        /**
+     * Método responsável gerenciar o status do mailing
+     * @param Request $request
+     * @param string $list
+     * @param int $id
+     */
+    public static function editStatusInput(Request $request, int $id)
+    {
+
+        //OBTÉM O MAILING DO BANCO DE DADOS
+        $obInput = EntityInput::getInputById($id);
+
+        //VALIDA A INSTANCIA
+        if(!$obInput instanceof EntityInput){
+            $request->getRouter()->redirect("/adm/input/fila-bot/");
+        }
+
+        //ATUALIZA A INSTANCIA
+        $obInput->id = $id;
+        $obInput->status_lista = 4;
+        $obInput->status_lista_datetime = date('Y-m-d H:m:s');
+        $obInput->atualizar();
+
+
+        $request->getRouter()->redirect("/adm/input/fila-bot/");
     }
 
 }
