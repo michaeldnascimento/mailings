@@ -14,16 +14,18 @@ class ListInput extends Page {
 
     /**
      * Método responsável por remover a string dos números
-     * @param string $list
-     * @return string
+     * @param string|null $value
+     * @return string|null
      */
-    public static function removeStringNumber(string $value): string
+    public static function removeStringNumber($value)
     {
 
-        $value = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $value);
+        if (!empty($value)){
+            $value = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $value);
+            return ltrim($value, "0");
+        }
 
-        return ltrim($value, "0");
-
+        return null;
     }
 
     /**
@@ -146,27 +148,34 @@ class ListInput extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
+        //echo "<pre>";
+        //print_r($postVars);
+        //exit;
+
         if(empty($postVars['cpf']) AND empty($postVars['contrato'])){
             $request->getRouter()->redirect("/vendedor/input/$list?status=CPFContratoExisting");
         }
 
-        if((empty($postVars['estado']) OR empty($postVars['cidade'])) AND empty($postVars['codigo_cidade'])){
-            $request->getRouter()->redirect("/vendedor/input/$list?status=CityExisting");
-        }
+        //if((empty($postVars['estado']) OR empty($postVars['cidade'])) AND empty($postVars['codigo_cidade'])){
+            //$request->getRouter()->redirect("/vendedor/input/$list?status=CityExisting");
+        //}
 
-        if(!empty($postVars['estado'])){
+        //if(!empty($postVars['estado'])){
             //PEGAR ESTADO
-            $estado = EntityStateCity::getState($postVars['estado']);
-        }
+            //$estado = EntityStateCity::getState($postVars['estado']);
+        //}
 
-        if(!empty($postVars['cidade'])){
+        //if(!empty($postVars['cidade'])){
             //PEGAR CIDADE
-            $cidade = EntityStateCity::getCity($postVars['cidade']);
-        }
+            //$cidade = EntityStateCity::getCity($postVars['cidade']);
+        //}
 
         //GET CPF/CNPJ E REMOVE STRINGS
         $cpf = self::removeStringNumber($postVars['cpf']);
         $contrato = self::removeStringNumber($postVars['contrato']);
+
+        // Formata o código da cidade com zeros à esquerda
+        $codigo_cidade = str_pad($postVars['codigo_cidade'], 3, '0', STR_PAD_LEFT);
 
         //VERIFICA SE O CPF OU CONTRATO ESTÁ VAZIO PARA AI SIM FAZER A CONSULTA SE JÁ EXISTE
         if(!empty($cpf)){
@@ -190,7 +199,7 @@ class ListInput extends Page {
         }else{
 
             //SET MAILING CPF OU CONTRATO
-            $id = EntityInput::setMailingNotExisting($cpf, $contrato , $cidade->nome, $estado->uf, $postVars['codigo_cidade'], $list, $id_user);
+            $id = EntityInput::setMailingNotExisting($cpf, $contrato , $postVars['cidade'], $postVars['estado'], $codigo_cidade, $postVars['regiao'], $postVars['cluster'], $list, $id_user);
 
             if (!empty($id)){
                 //REDIRECIONA O USUÁRIO

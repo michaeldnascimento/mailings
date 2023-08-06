@@ -45,6 +45,7 @@ class MailingInput extends ClassInput {
             'rg' => $this->rg,
             'nome_mae' => $this->nome_mae,
             'base_cluster' => $this->base_cluster,
+            'regiao' => $this->regiao,
             'data_atendimento' => $this->data_atendimento,
             'motivo_cancelamento' => $this->motivo_cancelamento,
             'data_cancelamento' => $this->data_cancelamento,
@@ -107,6 +108,7 @@ class MailingInput extends ClassInput {
             'rg' => $mailing->rg,
             'nome_mae' => $mailing->nome_mae,
             'base_cluster' => $mailing->base_cluster,
+            'regiao' => $mailing->regiao,
             'data_atendimento' => $mailing->data_atendimento,
             'motivo_cancelamento' => $mailing->motivo_cancelamento,
             'data_cancelamento' => $mailing->data_cancelamento,
@@ -117,7 +119,7 @@ class MailingInput extends ClassInput {
             'obs' => $mailing->obs,
             'id_user' => $id_user,
             'lista' => $list,
-            'status_lista' => 1
+            'status_lista' => 2
         ]);
 
         //SUCESSO
@@ -130,12 +132,14 @@ class MailingInput extends ClassInput {
      * @param string|null $contrato
      * @param string|null $cidade
      * @param string|null $estado
+     * @param string|null $regiao
+     * @param string|null $cluster
      * @param string|null $codigo_cidade
      * @param string $list
      * @param int $id_user
      * @return int|null
      */
-    public static function setMailingNotExisting($cpf, $contrato, $cidade, $estado, $codigo_cidade, $list, $id_user): int
+    public static function setMailingNotExisting($cpf, $contrato, $cidade, $estado, $codigo_cidade, $regiao, $cluster, $list, $id_user): int
     {
 
         //INSERE A INSTANCIA NO BANCO
@@ -145,6 +149,8 @@ class MailingInput extends ClassInput {
             'cidade' => $cidade,
             'uf' => $estado,
             'codigo_cidade' => $codigo_cidade,
+            'regiao' => $regiao,
+            'base_cluster' => $cluster,
             'lista' => $list,
             'id_user' => $id_user,
             'status_lista' => 2

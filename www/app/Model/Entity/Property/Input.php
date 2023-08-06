@@ -151,6 +151,11 @@ class Input
     public ?string $base_cluster = null;
 
     /*
+    * base cluster
+    */
+    public ?string $regiao = null;
+
+    /*
     * data atendimento
     */
     public ?string $data_atendimento = null;

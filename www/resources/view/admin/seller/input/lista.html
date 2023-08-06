@@ -65,36 +65,42 @@
                 </div>
                 <form action="{{URL}}/vendedor/input/mailing" method="post" class="bg-light">
                     <div class="modal-body">
-                        <h5>1º - Busca por CPF ou contrato</h5>
-                    <div class="row mt-5">
-                        <div class="col-md-5 mb-3">
-                            <h6>CPF</h6>
-                            <fieldset class="form-group">
-                                <div class="mb-3">
-                                    <input class="form-control" type="text" name="cpf" maxlength="15" placeholder="Digite o CPF">
-                                </div>
-                            </fieldset>
+                    <div class="mt-3 mb-4">
+
+                        <h5 class="mt-3 mb-4">1º - Buscar por CPF/Contrato</h5>
+
+                        <div class="row">
+                            <div class="col-auto">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf" checked>
+                                <label class="form-check-label" for="buscarPorCpf">
+                                  Buscar por CPF
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorContrato" value="contrato">
+                                <label class="form-check-label" for="buscarPorContrato">
+                                  Buscar por Contrato
+                                </label>
+                              </div>
+                            </div>
                         </div>
-                        <div class="col-md-2 mb-3">
-                            <fieldset class="form-group">
-                                <div class="mt-5">
-                                    <h6 class="text-center">OU</h6>
-                                </div>
-                            </fieldset>
+
+                        <!-- Campo único para buscar CPF ou Contrato -->
+                        <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscar">
+                            <h6 for="buscar">Buscar por CPF:</h6>
+                            <div class="mb-3">
+                            <input type="text" class="form-control" id="buscar" name="cpf" placeholder="Digite o CPF" required>
+                            </div>
                         </div>
-                        <div class="col-md-5 mb-3">
-                            <h6>Contrato</h6>
-                            <fieldset class="form-group">
-                                <div class="mb-3">
-                                    <input class="form-control" type="text" name="contrato" maxlength="9" placeholder="Digite o Contrato">
-                                </div>
-                            </fieldset>
-                        </div>
+
                     </div>
                     <hr />
-                    <h5>2º - Busca por estado/cidade ou código cidade</h5>
-                    <div class="row mt-5">
-                        <div class="col-md-6 mb-5">
+                    <div class="row mt-3">
+                        <h5 class="mt-3 mb-4">2º - Código cidade</h5>
+                        <!--<div class="col-md-6 mb-5">
                             <h6>Estado</h6>
                             <p>Selecione o Estado (UF)</p>
                                 <select class="choices form-select" name="estado" id="estado">
@@ -139,15 +145,35 @@
                         </div>
 
                         <h6 class="text-center">OU</h6>
+                        -->
 
-                        <div class="col-md-12 mb-3">
-                            <h6>Código Cidade Claro (C.C.C)</h6>
+                        <div class="col-md-4 mb-3">
+                            <h6>Código Cidade</h6>
                             <fieldset class="form-group">
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="codigo_cidade" maxlength="15" placeholder="Código Cidade">
+                                    <input class="form-control" type="text" name="codigo_cidade" id="codigo_cidade" maxlength="15" placeholder="Digite Código Cidade..." required>
                                 </div>
                             </fieldset>
                         </div>
+
+
+                        <div class="col-md-2 mt-3">
+                            <small>ou nome da cidade</small>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6>Nome Cidade</h6>
+                            <fieldset class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Digite Nome Cidade..." required>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <input class="form-control" type="hidden" name="estado" id="estado">
+                        <input class="form-control" type="hidden" name="regiao" id="regiao">
+                        <input class="form-control" type="hidden" name="cluster" id="cluster">
+                      
                     </div>
                     </div>
                     <div class="modal-footer">
@@ -167,28 +193,3 @@
 </div>
 
 
-<script>
-    (function(win,doc){
-    'use strict';
-
-    doc.querySelector('#estado').addEventListener('change',async(e)=>{
-       let reqs = await fetch('../../app/Utils/Ajax/Class/CidadeController.php',{
-           method:'post',
-           headers:{
-               'Content-Type':'application/x-www-form-urlencoded'
-           },
-           body:`estado=${e.target.value}`
-       });
-       let ress = await reqs.json();
-       let selCidades = doc.querySelector('#cidade');
-       selCidades.options.length = 1;
-       ress.map((elem,ind,obj)=>{
-           let opt = doc.createElement('option');
-           opt.value = elem.id;
-           opt.innerHTML = elem.nome;
-           selCidades.appendChild(opt);
-       });
-       selCidades.removeAttribute('disabled');
-    });
-})(window,document);
-</script>
