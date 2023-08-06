@@ -33,7 +33,7 @@ class ListInput extends Page {
      * @param string $list
      * @return string
      */
-    public static function getMailingsListUser(string $list): string
+    public static function getInputListUser(string $list): string
     {
 
         //MAILING
@@ -64,6 +64,11 @@ class ListInput extends Page {
                 case "3": {
                     $status_lista = "Dados não localizados";
                     $color_status_lista = "table-danger";
+                    break;
+                }
+                case "4": {
+                    $status_lista = "Processando";
+                    $color_status_lista = "table-primary";
                     break;
                 }
             }
@@ -119,14 +124,14 @@ class ListInput extends Page {
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
         $content = View::render("admin/seller/input/lista", [
-            'itens_user'   => self::getMailingsListUser($list),
+            'itens_user'   => self::getInputListUser($list),
             'lista'        => $list,
             'status'       => self::getStatus($request)
         ]);
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
-            'Mailings',
+            'Solar Bot',
             "$list",
             'Lista Input',
             $content

@@ -55,25 +55,49 @@ $obRouter->post('/adm/input/empresas', [
 
 
 //ROTA INPUT LISTA BOT
-$obRouter->get('/adm/input/fila-bot', [
+$obRouter->get('/adm/input/solarbot1', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-admin',
     ],
     function($request){
-        return new Response(200, Input\Bot::getListInput($request, 'mailing'));
+        return new Response(200, Input\Bot::getListInput($request, 'solarbot1'));
     }
 ]);
 
-//ROTA DE EDIÇÃO DE UMA EMPRESA
-$obRouter->get('/adm/input/fila-bot/{id}/edit', [
+//ROTA INPUT LISTA BOT
+$obRouter->get('/adm/input/solarbot2', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
         'required-nivel-admin',
     ],
-    function($request, $id){
-        return new Response(200, Input\Bot::editStatusInput($request, $id));
+    function($request){
+        return new Response(200, Input\Bot::getListInput($request, 'solarbot2'));
+    }
+]);
+
+//ROTA INPUT LISTA BOT
+$obRouter->get('/adm/input/solarbot3', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Input\Bot::getListInput($request, 'solarbot3'));
+    }
+]);
+
+//ROTA DE EDIÇÃO DE UMA EMPRESA
+$obRouter->get('/adm/input/{lista}/{id}/edit', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request, $lista, $id){
+        return new Response(200, Input\Bot::editStatusInput($request, $lista, $id));
     }
 ]);

@@ -5,7 +5,6 @@ namespace App\Http\Controller\Admin\Adm\Input;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\MailingInput as EntityInput;
-use App\Model\Entity\StateCity as EntityStateCity;
 use App\Model\Entity\User as EntityUser;
 use App\Utils\View;
 
@@ -68,6 +67,7 @@ class Bot extends Page {
                 'codigo_cidade' => $obInput->codigo_cidade,
                 'user' => $obUserName->name,
                 'status_lista' => $status_lista,
+                'lista' => $list,
                 'color_status_lista' => $color_status_lista,
                 'color_status_button' => $color_status_button,
             ]);
@@ -104,13 +104,13 @@ class Bot extends Page {
     }
 
 
-        /**
+    /**
      * Método responsável gerenciar o status do mailing
      * @param Request $request
      * @param string $list
      * @param int $id
      */
-    public static function editStatusInput(Request $request, int $id)
+    public static function editStatusInput(Request $request, string $list, int $id)
     {
 
         //OBTÉM O MAILING DO BANCO DE DADOS
@@ -118,7 +118,7 @@ class Bot extends Page {
 
         //VALIDA A INSTANCIA
         if(!$obInput instanceof EntityInput){
-            $request->getRouter()->redirect("/adm/input/fila-bot/");
+            $request->getRouter()->redirect("/adm/input/$obInput->lista/");
         }
 
         //ATUALIZA A INSTANCIA
@@ -127,8 +127,8 @@ class Bot extends Page {
         $obInput->status_lista_datetime = date('Y-m-d H:m:s');
         $obInput->atualizar();
 
-
-        $request->getRouter()->redirect("/adm/input/fila-bot/");
+        //VERIFICA A LISTA QUE FOI FEITA A TABULAÇÃO
+        $request->getRouter()->redirect("/adm/input/$list");
     }
 
 }
