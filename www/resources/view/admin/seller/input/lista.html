@@ -71,18 +71,18 @@
 
                         <div class="row">
                             <div class="col-auto">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf" checked>
-                                <label class="form-check-label" for="buscarPorCpf">
-                                  Buscar por CPF
-                                </label>
-                              </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorContrato" value="contrato" checked>
+                                  <label class="form-check-label" for="buscarPorContrato">
+                                    Buscar por Contrato
+                                  </label>
+                                </div>
                             </div>
                             <div class="col-auto">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorContrato" value="contrato">
-                                <label class="form-check-label" for="buscarPorContrato">
-                                  Buscar por Contrato
+                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf">
+                                <label class="form-check-label" for="buscarPorCpf">
+                                  Buscar por CPF
                                 </label>
                               </div>
                             </div>
@@ -90,9 +90,9 @@
 
                         <!-- Campo único para buscar CPF ou Contrato -->
                         <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscar">
-                            <h6 for="buscar">Buscar por CPF:</h6>
+                            <h6 for="buscar">Buscar por Contrato:</h6>
                             <div class="mb-3">
-                            <input type="text" class="form-control" id="buscar" name="cpf" placeholder="Digite o CPF" required>
+                            <input type="text" class="form-control" id="buscar" name="contrato" placeholder="Digite o número do Contrato" required pattern="\d{1,9}" maxlength="9">
                             </div>
                         </div>
 
@@ -147,6 +147,19 @@
                         <h6 class="text-center">OU</h6>
                         -->
 
+                        <div class="col-md-6 mb-3">
+                            <h6>Nome Cidade</h6>
+                            <fieldset class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Digite Nome Cidade..." required>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-2 mt-3">
+                            <small>ou nome cod cidade</small>
+                        </div>
+
                         <div class="col-md-4 mb-3">
                             <h6>Código Cidade</h6>
                             <fieldset class="form-group">
@@ -156,19 +169,6 @@
                             </fieldset>
                         </div>
 
-
-                        <div class="col-md-2 mt-3">
-                            <small>ou nome da cidade</small>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <h6>Nome Cidade</h6>
-                            <fieldset class="form-group">
-                                <div class="mb-3">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Digite Nome Cidade..." required>
-                                </div>
-                            </fieldset>
-                        </div>
 
                         <input class="form-control" type="hidden" name="estado" id="estado">
                         <input class="form-control" type="hidden" name="regiao" id="regiao">

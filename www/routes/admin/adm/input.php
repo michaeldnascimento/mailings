@@ -90,6 +90,18 @@ $obRouter->get('/adm/input/solarbot3', [
     }
 ]);
 
+//ROTA LISTA HISTORICO BOT
+$obRouter->get('/adm/input/{lista}/resultados/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request, $lista){
+        return new Response(200, Input\Bot::getListInputResults($request, $lista));
+    }
+]);
+
 //ROTA DE EDIÇÃO DE UMA EMPRESA
 $obRouter->get('/adm/input/{lista}/{id}/edit', [
     'middlewares' => [
