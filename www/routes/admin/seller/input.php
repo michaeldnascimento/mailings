@@ -81,6 +81,18 @@ $obRouter->post('/vendedor/input/solarbot3/', [
     }
 ]);
 
+//ROTA LISTA HISTORICO INPUT
+$obRouter->get('/vendedor/input/{lista}/resultados/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+    ],
+    function($request, $lista){
+        return new Response(200, ListInput::getListInputResults($request, $lista));
+    }
+]);
+
 //TABULAÇÃO MAILING
 $obRouter->post('/vendedor/input/tabula/?{list}', [
     'middlewares' => [

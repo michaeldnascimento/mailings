@@ -1,11 +1,20 @@
-{{status}}
-<!-- Basic Tables start -->
 <section class="section">
     <div class="card">
         <div class="card-header">
-            Lista Vendas
+            <div class="row">
+                <div class="col-11">
+                    <h4 class="card-title">Lista de Resultado - {{lista}}</h4>
+                </div>
+                <div class="col-1">
+                    <a href="/vendedor/input/{{lista}}/">
+                        <button type="button" class="btn btn-sm btn-light-secondary">Voltar</button>
+                    </a>
+                </div>
+            </div>
         </div>
+
         <div class="card-body">
+
             <table class="table display responsive nowrap" style="width:100%" id="table">
                 <thead>
                 <tr>
@@ -19,7 +28,7 @@
                     <th>CEP</th>
                     <th>Telefone</th>
                     <th>E-mail</th>
-                    <th>Status</th>
+                    <th>Status Bot</th>
                     <th>Cod Cidade</th>
                     <th>RG</th>
                     <th>Tipo</th>
@@ -28,18 +37,17 @@
                     <th>Nome Mãe</th>
                     <th>Cluster</th>
 
-                    <th>Status</th>
+                    <th>Status Mailing</th>
                     <th>Data</th>
                     <th>Status Obs</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                {{itens}}
+                {{itens_bot}}
 
                 </tbody>
             </table>
         </div>
     </div>
-
 </section>
