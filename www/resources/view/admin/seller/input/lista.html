@@ -3,10 +3,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-11">
+                <div class="col-12 col-sm-10 col-md-11">
                     <h4 class="card-title">Lista {{lista}}</h4>
                 </div>
-                <div class="col-1">
+                <div class="col-12 col-sm-2 col-md-1">
                     <a href="/vendedor/input/{{lista}}/resultados/">
                         <button type="button" class="btn btn-sm btn-success">Resultados</button>
                     </a>
@@ -74,41 +74,8 @@
                 </div>
                 <form action="{{URL}}/vendedor/input/{{lista}}" method="post" class="bg-light">
                     <div class="modal-body">
-                    <div class="mt-3 mb-4">
-
-                        <h5 class="mt-3 mb-4">1º - Buscar por CPF/Contrato</h5>
-
-                        <div class="row">
-                            <div class="col-auto">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorContrato" value="contrato" checked>
-                                  <label class="form-check-label" for="buscarPorContrato">
-                                    Buscar por Contrato
-                                  </label>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf">
-                                <label class="form-check-label" for="buscarPorCpf">
-                                  Buscar por CPF
-                                </label>
-                              </div>
-                            </div>
-                        </div>
-
-                        <!-- Campo único para buscar CPF ou Contrato -->
-                        <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscar">
-                            <h6 for="buscar">Buscar por Contrato:</h6>
-                            <div class="mb-3">
-                            <input type="text" class="form-control" id="buscar" name="contrato" placeholder="Digite o número do Contrato" required pattern="\d{1,9}" maxlength="9">
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr />
                     <div class="row mt-3">
-                        <h5 class="mt-3 mb-4">2º - Código cidade</h5>
+                        <h5 class="mt-3 mb-4">1º - Código cidade</h5>
                         <!--<div class="col-md-6 mb-5">
                             <h6>Estado</h6>
                             <p>Selecione o Estado (UF)</p>
@@ -184,6 +151,40 @@
                         <input class="form-control" type="hidden" name="cluster" id="cluster">
                       
                     </div>
+                    <hr />
+                    <div class="mt-5 mb-4">
+
+                        <h5 class="mt-3 mb-4">2º - Buscar por CPF/Contrato</h5>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorContrato" value="contrato" checked>
+                                  <label class="form-check-label" for="buscarPorContrato">
+                                    Buscar por Contrato
+                                  </label>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf">
+                                <label class="form-check-label" for="buscarPorCpf">
+                                  Buscar por CPF
+                                </label>
+                              </div>
+                            </div>
+                        </div>
+
+                        <!-- Campo único para buscar CPF ou Contrato -->
+                        <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscar">
+                            <h6 for="buscar">Buscar por Contrato:</h6>
+                            <div class="mb-3">
+                            <input type="text" class="form-control" id="buscar" name="contrato" placeholder="Digite o número do Contrato" required pattern="\d{1,9}" maxlength="9">
+                            </div>
+                        </div>
+
+                    </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"
