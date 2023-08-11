@@ -33,10 +33,10 @@ define('URL', getenv('URL'));
 define("MAIL", [
     "host" => "smtp.titan.email",
     "port" => "587",
-    "username" => "contato@geniosales.net.br",
-    "password" => "kL7FX7R5FA",
+    "username" => "naoresponder@geniosales.net.br",
+    "password" => "n56f}Y1h3%O{Wr%",
     "from_name" => "Genio Sales",
-    "from_email" => "contato@geniosales.net.br"
+    "from_email" => "naoresponder@geniosales.net.br"
 ]);
 
 //DEFINE O VALOR PADRÃO DAS VARIAVEIS
