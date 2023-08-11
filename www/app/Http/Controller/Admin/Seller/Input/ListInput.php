@@ -39,8 +39,12 @@ class ListInput extends Page {
         //MAILING
         $items = '';
 
+
+        //PEGA ID USUÁRIO NA SESSION
+        $id_user = $_SESSION['mailings']['admin']['user']['id'];
+
         //RESULTADOS DA PÁGINA
-        $results = EntityInput::getMailingInput("*", null, "lista = '$list'", 'id DESC', '');
+        $results = EntityInput::getMailingInput("*", null, "lista = '$list' AND id_user = $id_user", 'id DESC', '');
 
         //RENDERIZA O ITEM
         while($obInput = $results->fetchObject(EntityInput::class)){
