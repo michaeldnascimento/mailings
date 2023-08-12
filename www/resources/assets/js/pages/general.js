@@ -30,7 +30,7 @@ let jquery_datatable = $('#table').DataTable( {
 $(document).ready(function () {
     var typingTimerCode;
     var typingTimerName;
-    var doneTypingInterval = 1000; // Tempo de pausa após a digitação (em milissegundos)
+    var doneTypingInterval = 10000; // Tempo de pausa após a digitação (em milissegundos)
 
     function searchByCode() {
         var cityCode = $("#codigo_cidade").val();
@@ -101,6 +101,16 @@ $(document).ready(function () {
             $("#regiao").val("");
             $("#cluster").val("");
         }
+    });
+
+    // Evento blur para o campo cityCode
+    $("#codigo_cidade").on('blur', function () {
+        searchByCode();
+    });
+
+    // Evento blur para o campo cidade
+    $("#cidade").on('blur', function () {
+        searchByName();
     });
 });
 

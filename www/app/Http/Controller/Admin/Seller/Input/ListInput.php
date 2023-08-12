@@ -271,10 +271,6 @@ class ListInput extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        //echo "<pre>";
-        //print_r($postVars);
-        //exit;
-
         if(empty($postVars['cpf']) AND empty($postVars['contrato'])){
             $request->getRouter()->redirect("/vendedor/input/$list?status=CPFContratoExisting");
         }
