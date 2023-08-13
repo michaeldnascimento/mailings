@@ -223,8 +223,8 @@ class ListInput extends Page {
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
-            "Fila Bot Solar",
-            "Resultados - $list",
+            "Input",
+            "Resultados",
             "Lista",
             $content
         );
@@ -249,9 +249,9 @@ class ListInput extends Page {
 
         //RETORNA A PÁGINA COMPLETA
         return parent::getPage(
-            'Solar Bot',
-            "$list",
-            'Lista Input',
+            'Input',
+            "Consulta",
+            '',
             $content
         );
     }

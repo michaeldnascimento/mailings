@@ -55,8 +55,10 @@ class Bot extends Page {
                 }
             }
 
-            //OBTÉM O USUÁRIO DO BANCO DE DADOS
-            $obUserName = EntityUser::getUserByIdReturnName($obInput->id_user);
+            if(!empty($obInput->id_user)){
+                //OBTÉM O USUÁRIO DO BANCO DE DADOS
+                $obUserName = EntityUser::getUserByIdReturnName($obInput->id_user);
+            }
 
             $items .=  View::render('admin/adm/input/bot/modules/item_results', [
                 'id' => $obInput->id,
@@ -65,7 +67,7 @@ class Bot extends Page {
                 'cidade' => $obInput->cidade,
                 'uf' => $obInput->uf,
                 'codigo_cidade' => $obInput->codigo_cidade,
-                'user' => $obUserName->name,
+                'user' => $obUserName->name ?? 'Livre',
                 'status_lista' => $status_lista,
                 'lista' => $list,
                 'color_status_lista' => $color_status_lista,
@@ -123,8 +125,10 @@ class Bot extends Page {
                 }
             }
 
-            //OBTÉM O USUÁRIO DO BANCO DE DADOS
-            $obUserName = EntityUser::getUserByIdReturnName($obInput->id_user);
+            if(!empty($obInput->id_user)){
+                //OBTÉM O USUÁRIO DO BANCO DE DADOS
+                $obUserName = EntityUser::getUserByIdReturnName($obInput->id_user);
+            }
 
             $items .=  View::render('admin/adm/input/bot/modules/item', [
                 'id' => $obInput->id,
@@ -133,7 +137,7 @@ class Bot extends Page {
                 'cidade' => $obInput->cidade,
                 'uf' => $obInput->uf,
                 'codigo_cidade' => $obInput->codigo_cidade,
-                'user' => $obUserName->name,
+                'user' => $obUserName->name ?? 'Livre',
                 'status_lista' => $status_lista,
                 'lista' => $list,
                 'color_status_lista' => $color_status_lista,

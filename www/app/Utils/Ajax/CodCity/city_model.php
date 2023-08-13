@@ -35,6 +35,16 @@ class CityModel
 
     public function getCityDataByName($cityName)
     {
+
+        if(empty($cityName)){
+            return array(
+                'cidade' => "",
+                'uf' => "",
+                'regiao' => "",
+                'cluster' => ""
+            );
+        }
+
         $sql = "SELECT cod_cidade, cidade, uf, regiao, cluster FROM cod_cid_solar WHERE cidade LIKE :cityName";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(":cityName", "%{$cityName}%");
@@ -47,7 +57,7 @@ class CityModel
         } else {
             return array(
                 'cod_cidade' => "Codigo não encontrado!",
-                'cidade' => "",
+                'cidade' => "Cidade não encontrada!",
                 'uf' => "",
                 'regiao' => "",
                 'cluster' => ""
