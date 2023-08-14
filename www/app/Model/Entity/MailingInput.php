@@ -55,7 +55,7 @@ class MailingInput extends ClassInput {
             'data_status_venda' => $this->data_status_venda,
             'obs' => $this->obs,
             'lista' => $this->lista,
-            'status_lista' => 1,
+            'status_lista' => $this->status_lista,
             'id_mailing' => $this->id_mailing,
             'nome_mailing' => $this->nome_mailing,
             'status_mailing' => $this->status_mailing,

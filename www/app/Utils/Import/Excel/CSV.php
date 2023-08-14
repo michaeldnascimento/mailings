@@ -45,7 +45,6 @@ class CSV {
                 $entityInput->id_mailing = $id_mailing;
                 $entityInput->cadastrar();
 
-                
             }
 
             fclose($arquivo);

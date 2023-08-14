@@ -62,3 +62,27 @@ $obRouter->post('/consulta/cliente/', [
         return new Response(200, Client::getClient($request));
     }
 ]);
+
+//ROTA CONSULTA INPUT
+$obRouter->get('/consulta/input/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-client',
+    ],
+    function($request){
+        return new Response(200, Client::getClientPage($request));
+    }
+]);
+
+//ROTA CONSULT CEP OPERADORA
+$obRouter->post('/consulta/input/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-client',
+    ],
+    function($request){
+        return new Response(200, Client::getClient($request));
+    }
+]);
