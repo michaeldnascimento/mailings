@@ -38,6 +38,7 @@ class Home {
             'companies' => $obUser->companies,
             'cep'   => $obUser->cep,
             'client' => $obUser->client,
+            'solar' => $obUser->solar,
             'call' => $obUser->call_client,
             'input' => $obUser->input,
             'algar' => $obUser->algar,

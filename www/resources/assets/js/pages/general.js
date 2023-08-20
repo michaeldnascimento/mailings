@@ -115,7 +115,34 @@ $(document).ready(function () {
 });
 
 
-//get cities for state
+//Switch to input filder CPF and Contract
+document.addEventListener("DOMContentLoaded", function() {
+    const buscarPorCpf = document.getElementById("buscarPorCpf");
+    const buscarPorContrato = document.getElementById("buscarPorContrato");
+    const campoBuscar = document.getElementById("campoBuscar");
+    const inputBuscar = campoBuscar.querySelector("input");
+  
+    buscarPorCpf.addEventListener("change", function() {
+      campoBuscar.style.display = "block";
+      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o CPF ou CNPJ");
+      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{11,15}"); // Alterado para aceitar de 11 a 15 dígitos numéricos (CPF ou CNPJ)
+      campoBuscar.querySelector("input").setAttribute("maxlength", "15"); // Ajustado para permitir até 15 caracteres
+      campoBuscar.querySelector("input").setAttribute("name", "cpf"); // Definir o name do input como "cpfcnpj" para a submissão do formulário
+      document.querySelector('h6[for="buscar"]').textContent = "Buscar por CPF ou CNPJ:"; // Atualizado o texto do label
+    });
+  
+    buscarPorContrato.addEventListener("change", function() {
+      campoBuscar.style.display = "block";
+      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o número do Contrato");
+      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{1,9}"); // Adicionar pattern para aceitar no máximo 9 dígitos numéricos (Contrato)
+      campoBuscar.querySelector("input").setAttribute("maxlength", "9");
+      campoBuscar.querySelector("input").setAttribute("name", "contrato"); // Definir o name do input como "contrato" para a submissão do formulário
+      document.querySelector('h6[for="buscar"]').textContent = "Buscar por Contrato:";
+    });
+});
+
+
+/** get cities for state
 (function(win,doc){
     'use strict';
 
@@ -139,30 +166,4 @@ $(document).ready(function () {
        selCidades.removeAttribute('disabled');
     });
 })(window,document);
-
-
-//Switch to input filder CPF and Contract
-document.addEventListener("DOMContentLoaded", function() {
-    const buscarPorCpf = document.getElementById("buscarPorCpf");
-    const buscarPorContrato = document.getElementById("buscarPorContrato");
-    const campoBuscar = document.getElementById("campoBuscar");
-    const inputBuscar = campoBuscar.querySelector("input");
-  
-    buscarPorCpf.addEventListener("change", function() {
-      campoBuscar.style.display = "block";
-      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o CPF");
-      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{15}"); // Adicionar pattern para aceitar somente 11 dígitos numéricos (CPF)
-      campoBuscar.querySelector("input").setAttribute("maxlength", "15");
-      campoBuscar.querySelector("input").setAttribute("name", "cpf"); // Definir o name do input como "cpf" para a submissão do formulário
-      document.querySelector('h6[for="buscar"]').textContent = "Buscar por CPF:";
-    });
-  
-    buscarPorContrato.addEventListener("change", function() {
-      campoBuscar.style.display = "block";
-      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o número do Contrato");
-      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{1,9}"); // Adicionar pattern para aceitar no máximo 9 dígitos numéricos (Contrato)
-      campoBuscar.querySelector("input").setAttribute("maxlength", "9");
-      campoBuscar.querySelector("input").setAttribute("name", "contrato"); // Definir o name do input como "contrato" para a submissão do formulário
-      document.querySelector('h6[for="buscar"]').textContent = "Buscar por Contrato:";
-    });
-});
+**/

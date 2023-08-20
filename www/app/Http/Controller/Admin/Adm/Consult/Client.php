@@ -6,10 +6,93 @@ use App\Http\Controller\Admin\Alert;
 use App\Http\Controller\Admin\Page;
 use App\Http\Request;
 use App\Model\Entity\Client as EntityClient;
+use App\Model\Entity\MailingInput as EntityInput;
 use App\Utils\View;
 use App\Session\Login\Home as SessionLogin;
 
 class Client extends Page {
+
+    /**
+     * Método responsável por remover a string dos números
+     * @param string|null $value
+     * @return string|int
+     */
+    public static function removeStringNumber($value)
+    {
+
+        if (!empty($value)){
+            $value = preg_replace('/[A-Z a-z\@\.\;\-\" "]+/', '', $value);
+            return $value;
+        }
+
+        return false;
+    }
+
+        /**
+     * Método responsável por obter e renderização o resultado do CPF/CNPJ
+     * @param Request $request
+     * @param string $cpf_cnpj
+     * @return string
+     */
+    public static function getCpfContratoSolar(Request $request, string $cpfContrato): string
+    {
+
+        //USUÁRIOS
+        $itens = '';
+
+        //RESULTADOS CPF/CNPJ
+        $results = EntityInput::getMailingInput("*, date_format(status_lista_datetime, '%d/%m/%Y %Hh%i') as status_lista_datetime, date_format(data_instalado, '%d/%m/%Y') as data_instalado", null, "cpf = '$cpfContrato' OR contrato = '$cpfContrato'", '', '', '');
+
+        //RENDERIZA O ITEM
+        while($mailing = $results->fetchObject(EntityClient::class)){
+
+            $itens .=  View::render('admin/adm/consult/modules/solar/item', [
+                'tipo_mailing' => $mailing->tipo_mailing,
+                'num_protocolo' => $mailing->num_protocolo,
+                'num_pedido_proposta'  => $mailing->num_pedido_proposta,
+                'contrato'  => $mailing->contrato,
+                'data_venda' => $mailing->data_venda,
+                'nome_cliente'  => $mailing->nome_cliente,
+                'cpf'  => $mailing->cpf,
+                'rg'  => $mailing->rg,
+                'cod_hp' => $mailing->cod_hp,
+                'endereco' => $mailing->endereco,
+                'rua' => $mailing->rua,
+                'cep' => $mailing->cep,
+                'historico_hp' => $mailing->historico_hp,
+                'num' => $mailing->num,
+                'bairro' => $mailing->bairro,
+                'cidade' => $mailing->cidade,
+                'uf' => $mailing->uf,
+                'codigo_cidade' => $mailing->codigo_cidade,
+                'motivo_pendencia_venda' => $mailing->motivo_pendencia_venda,
+                'status_proposta' => $mailing->status_proposta,
+                'canal_venda' => $mailing->canal_venda,
+                'fone' => $mailing->fone,
+                'fone1' => $mailing->fone1,
+                'fone2' => $mailing->fone2,
+                'email' => $mailing->email,
+                'tipo_pessoa' => $mailing->tipo_pessoa,
+                'rg' => $mailing->rg,
+                'nome_mae' => $mailing->nome_mae,
+                'base_cluster' => $mailing->base_cluster,
+                'regiao' => $mailing->regiao,
+                'data_atendimento' => $mailing->data_atendimento,
+                'motivo_cancelamento' => $mailing->motivo_cancelamento,
+                'data_cancelamento' => $mailing->data_cancelamento,
+                'data_instalado' => $mailing->data_instalado,
+                'status_contrato' => $mailing->status_contrato,
+                'data_status' => $mailing->data_status,
+                'data_status_venda' => $mailing->data_status_venda,
+                'status_lista_datetime' => $mailing->status_lista_datetime,
+                'color' => 'primary'
+            ]);
+        }
+
+        //RETORNA OS ITENS
+        return $itens;
+
+    }
 
     /**
      * Método responsável por obter e renderização o resultado do CPF/CNPJ
@@ -71,9 +154,6 @@ class Client extends Page {
     public static function getClient(Request $request, string $errorMessage = null): string
     {
 
-        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
-        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
-
         //POST VARS
         $postVars = $request->getPostVars();
 
@@ -113,6 +193,61 @@ class Client extends Page {
 
     }
 
+
+    /**
+     * Método responsável por retornar a renderização a view de listagem de cpf e cpnj
+     * @param Request $request
+     * @param string|null $errorMessage
+     * @return string
+     */
+    public static function getClientSolar(Request $request, string $errorMessage = null): string
+    {
+
+        //POST VARS
+        $postVars = $request->getPostVars();
+
+        //VERIFICA SE O INPUT NÃO ESTÁ VAZIO
+        if(empty($postVars['contrato']) AND empty($postVars['cpf'])){
+            $request->getRouter()->redirect('/consulta/solar?status=emptyClient');
+        }
+
+        //VERIFICA SE O CPF OU CONTRATO ESTÁ VAZIO PARA AI SIM FAZER A CONSULTA SE JÁ EXISTE
+        if(!empty($postVars['cpf'])){
+            //VERFICAR SE EXISTE CPF
+            $cpf = self::removeStringNumber($postVars['cpf']);
+            $result_client = self::getCpfContratoSolar($request, $cpf);
+        }
+
+        //VERIFICA SE O CPF OU CONTRATO ESTÁ VAZIO PARA AI SIM FAZER A CONSULTA SE JÁ EXISTE
+        if(!empty($postVars['contrato'])){
+            //VERFICAR SE EXISTE CPF/CONTRATO
+            $contrato = self::removeStringNumber($postVars['contrato']);
+            $result_client = self::getCpfContratoSolar($request, $contrato);
+        }
+
+        //VERIFICA SE O RESULTADO NÃO ESTÁ VAZIO
+        if(empty($result_client)){
+            $request->getRouter()->redirect('/consulta/solar?status=notFoundClient');
+        }
+
+        //CONTEÚDO DA PÁGINA DE USUÁRIOS
+        $content = View::render('admin/adm/consult/solar_post', [
+        'tipo_busca'    => $postVars['tipo_busca'],
+        'cpf_contrato'  => $cpf ?? $contrato,
+        'result_client' => $result_client,
+        'status'        => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Consulta',
+            'Cliente',
+            'Consulta de Client',
+            $content
+        );
+
+    }
+
     /**
      * Método responsável por retornar a renderização a view de listagem de usuários
      * @param Request $request
@@ -132,6 +267,30 @@ class Client extends Page {
             'Consulta',
             'Cliente',
             'Consulta de Client',
+            $content
+        );
+
+    }
+
+        /**
+     * Método responsável por retornar a renderização a view de listagem de usuários
+     * @param Request $request
+     * @return string
+     */
+    public static function getClientPageSolar(Request $request): string
+    {
+
+        //CONTEÚDO DA PÁGINA DE USUÁRIOS
+        $content = View::render('admin/adm/consult/solar', [
+            'cpf_cnpj'      => '',
+            'status'        => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Consulta',
+            'Cliente',
+            'Consulta Solar',
             $content
         );
 

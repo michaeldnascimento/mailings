@@ -49,6 +49,11 @@ class User {
     public ?string $client = null;
 
     /*
+    * Status User CLIENTE
+    */
+    public ?string $solar = null;
+
+    /*
     * Status User CALLED
     */
     public ?string $call_client = null;
@@ -125,6 +130,7 @@ class User {
             'status' => $this->status,
             'cep' => $this->cep,
             'client' => $this->client,
+            'solar' => $this->solar,
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
             'companies' => $this->companies,
@@ -157,6 +163,7 @@ class User {
             'status' => $this->status,
             'cep' => $this->cep,
             'client' => $this->client,
+            'solar' => $this->solar,
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
             'companies' => $this->companies,

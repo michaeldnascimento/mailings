@@ -63,26 +63,26 @@ $obRouter->post('/consulta/cliente/', [
     }
 ]);
 
-//ROTA CONSULTA INPUT
-$obRouter->get('/consulta/input/', [
+//ROTA CONSULTA SOLAR
+$obRouter->get('/consulta/solar/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-client',
+        'required-nivel-solar',
     ],
     function($request){
-        return new Response(200, Client::getClientPage($request));
+        return new Response(200, Client::getClientPageSolar($request));
     }
 ]);
 
-//ROTA CONSULT CEP OPERADORA
-$obRouter->post('/consulta/input/', [
+//ROTA CONSULT SOLAR
+$obRouter->post('/consulta/solar/', [
     'middlewares' => [
         //'cache'
         'required-admin-login',
-        'required-nivel-client',
+        'required-nivel-solar',
     ],
     function($request){
-        return new Response(200, Client::getClient($request));
+        return new Response(200, Client::getClientSolar($request));
     }
 ]);

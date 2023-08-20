@@ -124,6 +124,18 @@ class Users extends Page {
             }
         }
 
+        //VERIFICA O STATUS DO CLIENTE USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->solar) {
+            case "0": {
+                $disabledSolar = "selected";
+                break;
+            }
+            case "1": {
+                $activeSolar = "selected";
+                break;
+            }
+        }
+
         //VERIFICA O STATUS DO CHAMADO USUÁRIO E RETORNA NO SELECT
         switch ($obUser->call_client) {
             case "0": {
@@ -212,6 +224,8 @@ class Users extends Page {
                                       <option value='0' $disabledCep>NÃO</option>",
             'options_client_user' => "<option value='1' $activeClient>SIM</option>.
                                       <option value='0' $disabledClient>NÃO</option>",
+            'options_solar_user'  => "<option value='1' $activeSolar>SIM</option>.
+                                      <option value='0' $disabledSolar>NÃO</option>",
             'options_call_user' =>   "<option value='1' $activeClientCalled>SIM</option>.
                                       <option value='0' $disabledClientCalled>NÃO</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
@@ -300,6 +314,7 @@ class Users extends Page {
         $obUser->status = $postVars['status_user'] ?? $obUser->status;
         $obUser->cep = $postVars['cep'] ?? $obUser->cep;
         $obUser->client = $postVars['client'] ?? $obUser->client;
+        $obUser->solar = $postVars['solar'] ?? $obUser->solar;
         $obUser->call_client = $postVars['call_client'] ?? $obUser->call_client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;

@@ -65,6 +65,9 @@ class  Dashboard extends Page {
             case 'clientInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CLIENTE!');
                 break;
+            case 'solarInvalid';
+                return Alert::getError('Erro :(','Não é possivel acessar essa rota SOLAR!');
+                break;
             case 'callInvalid';
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota de CHAMADOS!');
                 break;

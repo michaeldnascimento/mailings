@@ -87,6 +87,16 @@ class Page {
             $valueDisplayClient  = "none";
         }
 
+        //RECEBE SESSÃO SOLAR
+        $solar = $_SESSION['mailings']['admin']['user']['solar'];
+
+        //DISPLAY SOLAR
+        if ($solar == 1){
+            $valueDisplaySolar  = "block";
+        }else{
+            $valueDisplaySolar  = "none";
+        }
+
         //RECEBE SESSÃO CHAMADO
         $call = $_SESSION['mailings']['admin']['user']['call'];
 
@@ -362,6 +372,7 @@ class Page {
 
             'display_cep' => "style=display:$valueDisplayCep",
             'display_client' => "style=display:$valueDisplayClient",
+            'display_solar' => "style=display:$valueDisplaySolar",
             'display_called' => "style=display:$valueDisplayCalled",
             'folders' => $folders,
         ]);
