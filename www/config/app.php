@@ -54,7 +54,7 @@ MiddlewareQueue::setMap([
     'required-nivel-admin'   => \App\Http\Middleware\RequireNivelAdmin::class,
     'required-nivel-cep'     => \App\Http\Middleware\RequireNivelCep::class,
     'required-nivel-client'  => \App\Http\Middleware\RequireNivelClient::class,
-    'required-nivel-solar'  => \App\Http\Middleware\RequireNivelSolar::class,
+    'required-nivel-solar'   => \App\Http\Middleware\RequireNivelSolar::class,
     'required-nivel-call'    => \App\Http\Middleware\RequireNivelCall::class,
     'api'                    => \App\Http\Middleware\Api::class,
     'required-nivel-seller-list'  => \App\Http\Middleware\RequireNivelSellerList::class,
