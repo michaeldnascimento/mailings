@@ -53,25 +53,25 @@ class ListInput extends Page {
             switch ($obInput->status_lista) {
                 case "1": {
                     $status_lista = "Concluído";
-                    $color_status_button = "btn-success disabled";
+                    $color_status_button = "btn-success";
                     $color_status_lista = "table-success";
                     break;
                 }
                 case "2": {
                     $status_lista = "Aguardando";
-                    $color_status_button = "btn-warning disabled";
+                    $color_status_button = "btn-warning";
                     $color_status_lista = "table-warning";
                     break;
                 }
                 case "3": {
                     $status_lista = "Dados não localizados";
-                    $color_status_button = "btn-danger disabled";
+                    $color_status_button = "btn-danger";
                     $color_status_lista = "table-danger";
                     break;
                 }
                 case "4": {
                     $status_lista = "Processando";
-                    $color_status_button = "btn-primary disabled";
+                    $color_status_button = "btn-primary";
                     $color_status_lista = "table-primary";
                     break;
                 }
@@ -105,7 +105,6 @@ class ListInput extends Page {
                 'base_cluster' => $obInput->base_cluster,
                 'lista' => $list,
                 'status_lista' => $status_lista,
-                'color_status_lista' => $color_status_lista,
 
                 'status_mailing' => $obInput->status_mailing,
                 'status_data_mailing' => $obInput->status_data_mailing,
@@ -146,21 +145,25 @@ class ListInput extends Page {
             switch ($obInput->status_lista) {
                 case "1": {
                     $status_lista = "Concluído";
+                    $color_status_button = "btn-success";
                     $color_status_lista = "table-success";
                     break;
                 }
                 case "2": {
                     $status_lista = "Aguardando";
+                    $color_status_button = "btn-warning";
                     $color_status_lista = "table-warning";
                     break;
                 }
                 case "3": {
                     $status_lista = "Dados não localizados";
+                    $color_status_button = "btn-danger";
                     $color_status_lista = "table-danger";
                     break;
                 }
                 case "4": {
                     $status_lista = "Processando";
+                    $color_status_button = "btn-primary";
                     $color_status_lista = "table-primary";
                     break;
                 }
@@ -195,8 +198,10 @@ class ListInput extends Page {
                 'tipo_mailing' => $obInput->tipo_mailing,
                 'base_cluster' => $obInput->base_cluster,
                 'status_lista' => $status_lista,
+                'status_obs_mailing' => $obInput->status_obs_mailing,
+
                 'color_status_lista' => $color_status_lista,
-                'status_obs_mailing' => $obInput->status_obs_mailing
+                'color_status_button' => $color_status_button,
             ]);
         }
 
@@ -289,6 +294,7 @@ class ListInput extends Page {
             //$cidade = EntityStateCity::getCity($postVars['cidade']);
         //}
 
+
         //GET CPF/CNPJ E REMOVE STRINGS
         $cpf = self::removeStringNumber($postVars['cpf']);
         $contrato = self::removeStringNumber($postVars['contrato']);
@@ -301,9 +307,15 @@ class ListInput extends Page {
             //VERFICAR SE EXISTE CPF/CONTRATO
             $mailing = EntityInput::getMailingByCpfContrato($cpf);
         }
-        //else{
-            //$mailing = EntityInput::getMailingByCpfContrato($contrato);
-        //}
+
+        if(!empty($contrato)){
+            $mailing = EntityInput::getMailingByCpfContrato($contrato);
+        }
+
+        //echo "<pre>";
+        //print_r($postVars);
+        //print_r($mailing);
+        //exit();
 
         if (!empty($mailing)){
             //ATUALIZA A STATUS  MAILING

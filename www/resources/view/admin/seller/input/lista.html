@@ -3,10 +3,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-12 col-sm-10 col-md-11">
+                <div class="col-12 col-sm-10 col-md-10">
                     <h4 class="card-title">Lista de Busca</h4>
                 </div>
-                <div class="col-12 col-sm-2 col-md-1">
+                <div class="col-12 col-sm-2 col-md-2">
                     <a href="/vendedor/input/{{lista}}/resultados/">
                         <button type="button" class="btn btn-sm btn-success">Resultados</button>
                     </a>
@@ -28,7 +28,8 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th></th>
+                    <th>Status</th>
+                    <th>Tabulação</th>
                     <th>Contrato</th>
                     <th>Cidade</th>
                     <th>UF</th>
@@ -37,7 +38,6 @@
                     <th>CEP</th>
                     <th>Telefone</th>
                     <th>E-mail</th>
-                    <th>Status</th>
                     <th>Cod Cidade</th>
                     <th>RG</th>
                     <th>Tipo</th>
@@ -72,7 +72,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{URL}}/vendedor/input/{{lista}}" method="post" class="bg-light">
+                <form action="{{URL}}/vendedor/input/{{lista}}" method="post">
                     <div class="modal-body">
                     <div class="row mt-3">
                         <h5 class="mt-3 mb-4">1º - Código cidade</h5>

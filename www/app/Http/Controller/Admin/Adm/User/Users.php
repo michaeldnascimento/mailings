@@ -52,10 +52,6 @@ class Users extends Page {
     public static function getUsersList(Request $request, string $errorMessage = null): string
     {
 
-        //STATUS > Se o errorMessage não for nulo, ele vai exibir a msg, se não ele não vai exibir nada
-        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
-
-
         //CONTEÚDO DA PÁGINA DE USUÁRIOS
         $content = View::render('admin/adm/users/list', [
             'itens'       => self::getListUsersItems($request),
@@ -339,7 +335,7 @@ class Users extends Page {
      * @param Request $request
      * @param integer $id
      * @return string
-     */
+     
     public static function getDeleteUser(Request $request, int $id): string
     {
         //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
@@ -358,6 +354,7 @@ class Users extends Page {
 
         return parent::getPanel('Excluir depoimento > WDEV', $content, 'testimonies');
     }
+    */
 
 
     /**
@@ -365,7 +362,7 @@ class Users extends Page {
      * @param Request $request
      * @param integer $id
      * @return string
-     */
+     
     public static function setDeleteUser(Request $request, int $id): string
     {
         //OBTÉM O DEPOIMENTO DO BANCO DE DADOS
@@ -382,6 +379,7 @@ class Users extends Page {
         //REDIRECIONA O USUÁRIO
         $request->getRouter()->redirect('/admin/testimonies?status=deleted');
     }
+    */
 
 
     /**
