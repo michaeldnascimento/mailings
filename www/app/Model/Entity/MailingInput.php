@@ -5,10 +5,19 @@ namespace App\Model\Entity;
 use \App\Db\Database;
 use \PDO;
 use PDOStatement;
+use DateTime;
 use \App\Model\Entity\Property\Input as ClassInput;
 
 class MailingInput extends ClassInput {
 
+    private function convertToAmericanDateFormat(string $date): string
+    {
+        $dateTime = DateTime::createFromFormat('d/m/Y', $date);
+        if ($dateTime !== false) {
+            return $dateTime->format('Y-m-d');
+        }
+        return $date; // Manter o valor original em caso de erro de formatação
+    }
 
     /**
      * Método responsável por cadastrar a instância atual no banco de dados
@@ -16,6 +25,14 @@ class MailingInput extends ClassInput {
      */
     public function cadastrar():bool
     {
+
+        // Convertendo as datas para o formato americano (YYYY-MM-DD)
+        $this->data_nascimento = $this->convertToAmericanDateFormat($this->data_nascimento);
+        $this->data_atendimento = $this->convertToAmericanDateFormat($this->data_atendimento);
+        $this->data_cancelamento = $this->convertToAmericanDateFormat($this->data_cancelamento);
+        $this->data_instalado = $this->convertToAmericanDateFormat($this->data_instalado);
+
+
         //INSERE A INSTANCIA NO BANCO
         $this->id = (new Database('db_mailings', 'mailing_input'))->insert([
             'tipo_mailing' => $this->tipo_mailing,
@@ -25,6 +42,7 @@ class MailingInput extends ClassInput {
             'data_venda' => $this->data_venda,
             'nome_cliente'  => $this->nome_cliente,
             'cpf'  => $this->cpf,
+            'data_nascimento' => $this->data_nascimento,
             'cod_hp' => $this->cod_hp,
             'endereco' => $this->endereco,
             'rua' => $this->rua,

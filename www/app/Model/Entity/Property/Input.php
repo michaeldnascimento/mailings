@@ -176,6 +176,11 @@ class Input
     public ?string $data_instalado = null;
 
     /*
+    * data Nascimento
+    */
+    public ?string $data_nascimento = null;
+
+    /*
     * status contrato
     */
     public ?string $status_contrato = null;
