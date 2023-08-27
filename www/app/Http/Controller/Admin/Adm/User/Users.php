@@ -34,6 +34,7 @@ class Users extends Page {
                 'email' => $obUsers->email,
                 'status_user' => $obUsers->status,
                 'nivel' => $obUsers->nivel,
+                'team' => $obUsers->team,
                 'companies' => $obUsers->companies
             ]);
         }
@@ -160,6 +161,23 @@ class Users extends Page {
             }
         }
 
+
+        //VERIFICA O EQUIPE DO USUÁRIO E RETORNA NO SELECT
+        switch ($obUser->team) {
+            case "1": {
+                $team1 = "selected";
+                break;
+            }
+            case "2": {
+                $team2 = "selected";
+                break;
+            }
+            case "3": {
+                $team3 = "selected";
+                break;
+            }
+        }
+
         //LIST INPUT
         $listInput = explode(", ", $obUser->input);
 
@@ -227,6 +245,9 @@ class Users extends Page {
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
                                       <option value='2' $company>EMPRESA</option>.
                                       <option value='3' $adm>ADMINISTRADOR</option>",
+            'team_user' =>           "<option value='1' $team1>Equipe 1</option>.
+                                      <option value='2' $team2>Equipe 2</option>.
+                                      <option value='3' $team3>Equipe 3</option>",
             'companies' => $select_company,
             'companies_disabled' => $companies_disabled,
 
@@ -314,6 +335,7 @@ class Users extends Page {
         $obUser->call_client = $postVars['call_client'] ?? $obUser->call_client;
         $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
         $obUser->companies = $postVars['companies'] ?? $obUser->companies;
+        $obUser->team = $postVars['team'] ?? $obUser->team;
         $obUser->input = implode(", ", array_keys($postVars['listInput'])) ?? null;
         $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
         $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;

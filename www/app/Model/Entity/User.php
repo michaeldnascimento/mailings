@@ -64,6 +64,11 @@ class User {
     public string $nivel;
 
     /*
+    * Equipe User
+    */
+    public ?string $team = null;
+
+    /*
     * ID Companies
     */
     public ?int $companies = null;
@@ -133,6 +138,7 @@ class User {
             'solar' => $this->solar,
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
+            'team' => $this->team,
             'companies' => $this->companies,
             'input' => $this->input,
             'algar' => $this->algar,
@@ -166,6 +172,7 @@ class User {
             'solar' => $this->solar,
             'call_client' => $this->call_client,
             'nivel' => $this->nivel,
+            'team' => $this->team,
             'companies' => $this->companies,
             'input' => $this->input,
             'algar' => $this->algar,
