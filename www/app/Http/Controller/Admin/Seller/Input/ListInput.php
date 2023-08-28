@@ -39,8 +39,7 @@ class ListInput extends Page {
         //MAILING
         $items = '';
 
-
-        //PEGA ID USUÁRIO NA SESSION
+        //PEGA ID USUÁRIO E ID EQUIPE NA SESSION
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
 
         //RESULTADOS DA PÁGINA
@@ -272,6 +271,7 @@ class ListInput extends Page {
 
         //PEGA ID USUÁRIO NA SESSION
         $id_user = $_SESSION['mailings']['admin']['user']['id'];
+        $id_team = $_SESSION['mailings']['admin']['user']['team'];
 
         //POST VARS
         $postVars = $request->getPostVars();
@@ -319,7 +319,7 @@ class ListInput extends Page {
 
         if (!empty($mailing)){
             //ATUALIZA A STATUS  MAILING
-            $id = EntityInput::setMailingExisting($mailing, $list, $id_user);
+            $id = EntityInput::setMailingExisting($mailing, $list, $id_user, $id_team);
             if (!empty($id)){
                 //REDIRECIONA O USUÁRIO
                 $request->getRouter()->redirect("/vendedor/input/$list?status=mailingExisting");
@@ -330,7 +330,7 @@ class ListInput extends Page {
         }else{
 
             //SET MAILING CPF OU CONTRATO
-            $id = EntityInput::setMailingNotExisting($cpf, $contrato , $postVars['cidade'], $postVars['estado'], $codigo_cidade, $postVars['regiao'], $postVars['cluster'], $list, $id_user);
+            $id = EntityInput::setMailingNotExisting($cpf, $contrato , $postVars['cidade'], $postVars['estado'], $codigo_cidade, $postVars['regiao'], $postVars['cluster'], $list, $id_user, $id_team);
 
             if (!empty($id)){
                 //REDIRECIONA O USUÁRIO

@@ -210,6 +210,11 @@ class Input
      */
     public ?int $id_user = null;
 
+    /**
+     * id Equipe
+     */
+    public ?int $id_team = null;
+
     /*
     * Lista
     */

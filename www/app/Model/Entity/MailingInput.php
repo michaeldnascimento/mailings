@@ -90,9 +90,10 @@ class MailingInput extends ClassInput {
      * @param object $mailing
      * @param string $list
      * @param int $id_user
+     * @param int $id_team
      * @return int|null
      */
-    public static function setMailingExisting(object $mailing, string $list, int $id_user): int
+    public static function setMailingExisting(object $mailing, string $list, int $id_user, $id_team): int
     {
 
         //INSERE A INSTANCIA NO BANCO
@@ -136,6 +137,7 @@ class MailingInput extends ClassInput {
             'data_status_venda' => $mailing->data_status_venda,
             'obs' => $mailing->obs,
             'id_user' => $id_user,
+            'id_team' => $id_team,
             'lista' => $list,
             'status_lista' => 2
         ]);
@@ -155,9 +157,10 @@ class MailingInput extends ClassInput {
      * @param string|null $codigo_cidade
      * @param string $list
      * @param int $id_user
+     * @param int $id_team
      * @return int|null
      */
-    public static function setMailingNotExisting($cpf, $contrato, $cidade, $estado, $codigo_cidade, $regiao, $cluster, $list, $id_user): int
+    public static function setMailingNotExisting($cpf, $contrato, $cidade, $estado, $codigo_cidade, $regiao, $cluster, $list, $id_user, $id_team): int
     {
 
         //INSERE A INSTANCIA NO BANCO
@@ -171,6 +174,7 @@ class MailingInput extends ClassInput {
             'base_cluster' => $cluster,
             'lista' => $list,
             'id_user' => $id_user,
+            'id_team' => $id_team,
             'status_lista' => 2
         ]);
 

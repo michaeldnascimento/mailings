@@ -21,6 +21,15 @@ class Bot extends Page {
         //MAILING
         $items = '';
 
+        //BUSCAR RESULTADO EQUIPE
+        $id_team = $_SESSION['mailings']['admin']['user']['team'];
+
+        if ($id_team != 0) {
+            $team = "AND id_team = $id_team";
+        }else{
+            $team = '';
+        } 
+
         //RESULTADOS DA PÁGINA
         $results = EntityInput::getMailingInput("*", null, "lista = '$list'", 'id DESC', '');
 
