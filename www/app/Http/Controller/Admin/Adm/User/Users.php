@@ -156,6 +156,10 @@ class Users extends Page {
                 break;
             }
             case "3": {
+                $supervisor = "selected";
+                break;
+            }
+            case "4": {
                 $adm = "selected";
                 break;
             }
@@ -244,7 +248,8 @@ class Users extends Page {
                                       <option value='0' $disabledClientCalled>NÃO</option>",
             'options_nivel_user' =>  "<option value='1' $seller>VENDEDOR</option>.
                                       <option value='2' $company>EMPRESA</option>.
-                                      <option value='3' $adm>ADMINISTRADOR</option>",
+                                      <option value='3' $supervisor>SUPERVISOR</option>.
+                                      <option value='4' $adm>ADMINISTRADOR</option>",
             'team_user' =>           "<option value='1' $team1>Equipe 1</option>.
                                       <option value='2' $team2>Equipe 2</option>.
                                       <option value='3' $team3>Equipe 3</option>",
@@ -319,7 +324,7 @@ class Users extends Page {
         //POST VARS
         $postVars = $request->getPostVars();
 
-        if ($postVars['nivel'] == 0 OR $postVars['nivel'] == 1 OR $postVars['nivel'] == 3){
+        if ($postVars['nivel'] == 0 OR $postVars['nivel'] == 1 OR $postVars['nivel'] == 4){
             $postVars['companies'] = null;
             $obUser->companies = null;
         }

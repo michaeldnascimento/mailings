@@ -15,6 +15,9 @@ include __DIR__ . '/admin/seller/vero.php';
 include __DIR__ . '/admin/seller/result.php';
 include __DIR__ . '/admin/seller/call.php';
 
+//INCLUI AS ROTAS SUPERVISOR
+include __DIR__ . '/admin/supervisor/result.php';
+
 //INCLUI AS ROTAS ADMINISTRATIVAS
 include __DIR__ . '/admin/adm/input.php';
 include __DIR__ . '/admin/adm/users.php';

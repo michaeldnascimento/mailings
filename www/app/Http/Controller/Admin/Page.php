@@ -43,28 +43,40 @@ class Page {
     {
 
         //VERIFICA O NIVEL DE ACESSO
+        if (SessionNivel::getNivelSession() == 4){
+            $valueDisplayAdm        = "block";
+            $valueDisplaySupervisor = "block";
+            $valueDisplayCompany    = "block";
+            $valueDisplaySeller     = "block";
+        }
+
+        //VERIFICA O NIVEL DE ACESSO
         if (SessionNivel::getNivelSession() == 3){
-            $valueDisplayAdm     = "block";
-            $valueDisplayCompany = "block";
-            $valueDisplaySeller  = "block";
+            $valueDisplayAdm        = "none";
+            $valueDisplaySupervisor = "block";
+            $valueDisplayCompany    = "block";
+            $valueDisplaySeller     = "block";
         }
 
         if (SessionNivel::getNivelSession() == 2){
-            $valueDisplayAdm     = "none";
-            $valueDisplayCompany = "block";
-            $valueDisplaySeller  = "none";
+            $valueDisplayAdm        = "none";
+            $valueDisplaySupervisor = "none";
+            $valueDisplayCompany    = "block";
+            $valueDisplaySeller     = "none";
         }
 
         if (SessionNivel::getNivelSession() == 1){
-            $valueDisplayAdm     = "none";
-            $valueDisplayCompany = "none";
-            $valueDisplaySeller  = "block";
+            $valueDisplayAdm        = "none";
+            $valueDisplaySupervisor = "none";
+            $valueDisplayCompany    = "none";
+            $valueDisplaySeller     = "block";
         }
 
         if (SessionNivel::getNivelSession() == 0 OR SessionNivel::getNivelSession() == null){
-            $valueDisplayAdm     = "none";
-            $valueDisplayCompany = "none";
-            $valueDisplaySeller  = "none";
+            $valueDisplayAdm        = "none";
+            $valueDisplaySupervisor = "none";
+            $valueDisplayCompany    = "none";
+            $valueDisplaySeller     = "none";
         }
 
         //RECEBE SESSÃO CEP
@@ -317,6 +329,7 @@ class Page {
         //CARREGA SIDEBAR
         return View::render('admin/layouts/sidebar',[
             'display_adm' => "style=display:$valueDisplayAdm",
+            'display_supervisor' => "style=display:$valueDisplaySupervisor",
             'display_company' => "style=display:$valueDisplayCompany",
             'display_seller' => "style=display:$valueDisplaySeller",
 
