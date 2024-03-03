@@ -81,6 +81,32 @@ $obRouter->post('/vendedor/input/solarbot3/', [
     }
 ]);
 
+//ROTA INPUT MAILING
+$obRouter->get('/vendedor/input/finder', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+        //'required-nivel-seller-list'
+    ],
+    function($request){
+        return new Response(200, ListInput::getListInputFinder($request, 'finder'));
+    }
+]);
+
+//ROTA INPUT MAILING
+$obRouter->post('/vendedor/input/finder/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+        //'required-nivel-seller-list'
+    ],
+    function($request){
+        return new Response(200, ListInput::setListInput($request, 'finder'));
+    }
+]);
+
 //ROTA LISTA HISTORICO INPUT
 $obRouter->get('/vendedor/input/{lista}/resultados/', [
     'middlewares' => [

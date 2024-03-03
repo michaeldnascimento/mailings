@@ -16,6 +16,17 @@
       <path value="$PROJECT_DIR$/www/vendor/composer" />
       <path value="$PROJECT_DIR$/www/vendor/datatables/datatables" />
       <path value="$PROJECT_DIR$/www/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/www/vendor/guzzlehttp/streams" />
+      <path value="$PROJECT_DIR$/www/vendor/guzzlehttp/ringphp" />
+      <path value="$PROJECT_DIR$/www/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/www/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/www/vendor/jansenfelipe/cidades-gratis" />
+      <path value="$PROJECT_DIR$/www/vendor/react/promise" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

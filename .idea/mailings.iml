@@ -6,6 +6,17 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/datatables/datatables" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/fabpot/goutte" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/guzzlehttp/ringphp" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/guzzlehttp/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/jansenfelipe/cidades-gratis" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/browser-kit" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/polyfill-mbstring" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

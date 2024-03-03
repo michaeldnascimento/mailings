@@ -1,0 +1,53 @@
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 col-sm-10 col-md-11">
+                    <h4 class="card-title">Lista de Resultado</h4>
+                </div>
+                <div class="col-12 col-sm-2 col-md-1">
+                    <a href="/vendedor/input/{{lista}}/">
+                        <button type="button" class="btn btn-sm btn-light-secondary">Voltar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table display responsive nowrap" style="width:100%" id="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Contrato</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>Nome</th>
+                    <th>Logradouro</th>
+                    <th>CEP</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Cod Cidade</th>
+                    <th>RG</th>
+                    <th>Tipo</th>
+                    <th>Data instalação</th>
+                    <th>Tipo Mailing</th>
+                    <th>Nome Mãe</th>
+                    <th>Cluster</th>
+
+                    <th>Status Mailing</th>
+                    <th>Data</th>
+                    <th>Status Obs</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{itens_bot}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

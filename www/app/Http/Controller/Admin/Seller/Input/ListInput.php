@@ -241,6 +241,32 @@ class ListInput extends Page {
      * @param string|null $errorMessage
      * @return string
      */
+    public static function getListInputFinder(Request $request, string $list, string $errorMessage = null): string
+    {
+
+        //CONTEÚDO DA PÁGINA DE MAILINGS
+        $content = View::render("admin/seller/input/finder/lista", [
+            'itens_user'   => self::getInputListUser($list),
+            'lista'        => $list,
+            'status'       => self::getStatus($request)
+        ]);
+
+        //RETORNA A PÁGINA COMPLETA
+        return parent::getPage(
+            'Input',
+            "Consulta",
+            '',
+            $content
+        );
+    }
+
+    /**
+     * Método responsável por retornar a renderização da página
+     * @param Request $request
+     * @param string $list
+     * @param string|null $errorMessage
+     * @return string
+     */
     public static function getListInput(Request $request, string $list, string $errorMessage = null): string
     {
 
