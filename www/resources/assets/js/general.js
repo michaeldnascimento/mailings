@@ -120,27 +120,88 @@ document.addEventListener("DOMContentLoaded", function() {
     const buscarPorCpf = document.getElementById("buscarPorCpf");
     const buscarPorContrato = document.getElementById("buscarPorContrato");
     const campoBuscar = document.getElementById("campoBuscar");
-    const inputBuscar = campoBuscar.querySelector("input");
-  
-    buscarPorCpf.addEventListener("change", function() {
-      campoBuscar.style.display = "block";
-      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o CPF ou CNPJ");
-      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{11,15}"); // Alterado para aceitar de 11 a 15 dígitos numéricos (CPF ou CNPJ)
-      campoBuscar.querySelector("input").setAttribute("maxlength", "15"); // Ajustado para permitir até 15 caracteres
-      campoBuscar.querySelector("input").setAttribute("name", "cpf"); // Definir o name do input como "cpfcnpj" para a submissão do formulário
-      document.querySelector('h6[for="buscar"]').textContent = "Buscar por CPF ou CNPJ:"; // Atualizado o texto do label
-    });
-  
-    buscarPorContrato.addEventListener("change", function() {
-      campoBuscar.style.display = "block";
-      campoBuscar.querySelector("input").setAttribute("placeholder", "Digite o número do Contrato");
-      campoBuscar.querySelector("input").setAttribute("pattern", "\\d{1,9}"); // Adicionar pattern para aceitar no máximo 9 dígitos numéricos (Contrato)
-      campoBuscar.querySelector("input").setAttribute("maxlength", "9");
-      campoBuscar.querySelector("input").setAttribute("name", "contrato"); // Definir o name do input como "contrato" para a submissão do formulário
-      document.querySelector('h6[for="buscar"]').textContent = "Buscar por Contrato:";
-    });
+
+    if(campoBuscar) { // Verifica se campoBuscar não é null
+        const inputBuscar = campoBuscar.querySelector("input");
+
+        buscarPorCpf.addEventListener("change", function() {
+            if(this.checked) {
+                campoBuscar.style.display = "block";
+                inputBuscar.setAttribute("placeholder", "Digite o CPF ou CNPJ");
+                inputBuscar.setAttribute("pattern", "\\d{11,15}");
+                inputBuscar.setAttribute("maxlength", "15");
+                inputBuscar.setAttribute("name", "cpfcnpj");
+                document.querySelector('h6[for="buscar"]').textContent = "Buscar por CPF ou CNPJ:";
+            }
+        });
+
+        buscarPorContrato.addEventListener("change", function() {
+            if(this.checked) {
+                campoBuscar.style.display = "block";
+                inputBuscar.setAttribute("placeholder", "Digite o número do Contrato");
+                inputBuscar.setAttribute("pattern", "\\d{1,9}");
+                inputBuscar.setAttribute("maxlength", "9");
+                inputBuscar.setAttribute("name", "contrato");
+                document.querySelector('h6[for="buscar"]').textContent = "Buscar por Contrato:";
+            }
+        });
+    }
+
+    const buscarFinderCpf = document.getElementById("buscarFinderCpf");
+    const buscarFinderCnpj = document.getElementById("buscarFinderCnpj");
+    const campoBuscarFinder = document.getElementById("campoBuscarFinder");
+
+    if(campoBuscarFinder) { // Verifica se campoBuscarFinder não é null
+        const inputBuscarFinder = campoBuscarFinder.querySelector("input");
+
+        buscarFinderCpf.addEventListener("change", function() {
+            if(this.checked) {
+                inputBuscarFinder.setAttribute("maxlength", "14"); // 11 dígitos + 3 caracteres de máscara (###.###.###-##)
+                inputBuscarFinder.setAttribute("pattern", "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}");
+                inputBuscarFinder.setAttribute("name", "cpf");
+                document.querySelector('h6[for="buscarFinder"]').textContent = "Buscar por CPF:";
+                aplicaMascaraCpfCnpj(inputBuscarFinder, 'CPF');
+            }
+        });
+
+        buscarFinderCnpj.addEventListener("change", function() {
+            if(this.checked) {
+                inputBuscarFinder.setAttribute("maxlength", "18"); // 14 dígitos + 4 caracteres de máscara (##.###.###/####-##)
+                inputBuscarFinder.setAttribute("pattern", "\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}");
+                inputBuscarFinder.setAttribute("name", "cnpj");
+                document.querySelector('h6[for="buscarFinder"]').textContent = "Buscar por CNPJ:";
+                aplicaMascaraCpfCnpj(inputBuscarFinder, 'CNPJ');
+            }
+        });
+    }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const inputBuscarFinder = document.getElementById("campoBuscarFinder").querySelector("input");
+
+    if(inputBuscarFinder) {
+        inputBuscarFinder.addEventListener("input", function() {
+            aplicaMascaraCpfCnpj(this);
+        });
+    }
+});
+
+function aplicaMascaraCpfCnpj(input) {
+    let valor = input.value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+    if (valor.length <= 11) {
+        // Aplica máscara de CPF
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    } else {
+        // Aplica máscara de CNPJ
+        valor = valor.replace(/^(\d{2})(\d)/, '$1.$2');
+        valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+        valor = valor.replace(/\.(\d{3})(\d)/, '.$1/$2');
+        valor = valor.replace(/(\d{4})(\d)/, '$1-$2');
+    }
+    input.value = valor;
+}
 
 /** get cities for state
 (function(win,doc){

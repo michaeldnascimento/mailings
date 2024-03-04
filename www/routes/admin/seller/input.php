@@ -2,6 +2,7 @@
 
 use \App\Http\Response;
 use App\Http\Controller\Admin\Seller\Input\ListInput;
+use App\Http\Controller\Admin\Seller\Finder\ListFinder;
 
 //ROTA INPUT MAILING
 $obRouter->get('/vendedor/input/solarbot1', [
@@ -90,7 +91,7 @@ $obRouter->get('/vendedor/input/finder', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListInput::getListInputFinder($request, 'finder'));
+        return new Response(200, ListFinder::getListInputFinder($request, 'finder'));
     }
 ]);
 
@@ -103,7 +104,7 @@ $obRouter->post('/vendedor/input/finder/', [
         //'required-nivel-seller-list'
     ],
     function($request){
-        return new Response(200, ListInput::setListInput($request, 'finder'));
+        return new Response(200, ListFinder::setListInput($request, 'finder'));
     }
 ]);
 

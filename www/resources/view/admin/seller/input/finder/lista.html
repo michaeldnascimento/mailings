@@ -4,7 +4,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-12 col-sm-10 col-md-10">
-                    <h4 class="card-title">Lista de Busca CPF</h4>
+                    <h4 class="card-title">Busca de CPF/CNPJ</h4>
                 </div>
                 <div class="col-12 col-sm-2 col-md-2">
                     <a href="/vendedor/input/{{lista}}/resultados/">
@@ -30,7 +30,7 @@
                     <th></th>
                     <th>Status</th>
                     <th>Tabulação</th>
-                    <th>Contrato</th>
+                    <th>CPF/CNPJ</th>
                     <th>Cidade</th>
                     <th>UF</th>
                     <th>Nome</th>
@@ -76,24 +76,32 @@
                     <div class="modal-body">
                     <div class="mt-5 mb-4">
 
-                        <h5 class="mt-3 mb-4">Buscar por CPF</h5>
+                        <h5 class="mt-3 mb-4">Buscar por CPF/CNPJ</h5>
 
                         <div class="row">
                             <div class="col-auto">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tipo_busca" id="buscarPorCpf" value="cpf" checked>
-                                <label class="form-check-label" for="buscarPorCpf">
-                                  Buscar por CPF
-                                </label>
-                              </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_busca" id="buscarFinderCpf" value="cpf" checked>
+                                    <label class="form-check-label" for="buscarPorCpf">
+                                        Buscar por CPF
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_busca" id="buscarFinderCnpj" value="cnpj">
+                                    <label class="form-check-label" for="buscarPorCnpj">
+                                        Buscar por CNPJ
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Campo único para buscar CPF ou Contrato -->
-                        <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscar">
-                            <h6 for="buscar">Buscar por CPF:</h6>
+                        <!-- Campo único para buscar CPF ou CNPJ -->
+                        <div class="form-group col-md-6 mt-3 mb-3" id="campoBuscarFinder">
+                            <h6 for="buscarFinder">Buscar por CPF:</h6>
                             <div class="mb-3">
-                            <input type="text" class="form-control" id="buscar" name="cpf" placeholder="Digite o CPF" required pattern="\d{11,15}" maxlength="15">
+                            <input type="text" class="form-control" id="buscarFinder" name="cpf" placeholder="Digite o CPF" required pattern="\d{11,14}" maxlength="18">
                             </div>
                         </div>
 
