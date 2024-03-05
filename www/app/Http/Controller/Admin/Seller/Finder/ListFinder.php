@@ -233,7 +233,7 @@ class ListFinder extends Page {
      * @param string|null $errorMessage
      * @return string
      */
-    public static function getListInputResults(Request $request, string $list): string
+    public static function getListFinderResults(Request $request, string $list): string
     {
 
         //CONTEÚDO DA PÁGINA DE MAILINGS
