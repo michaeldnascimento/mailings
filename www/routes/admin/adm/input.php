@@ -90,6 +90,33 @@ $obRouter->get('/adm/input/solarbot3', [
     }
 ]);
 
+
+//ROTA INPUT LISTA BOT
+$obRouter->get('/adm/input/finder', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Input\Bot::getListFinder($request, 'finder'));
+    }
+]);
+
+//ROTA LISTA HISTORICO BOT
+$obRouter->get('/adm/input/finder/resultados/', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request){
+        return new Response(200, Input\Bot::getListInputFinderResults($request, 'finder'));
+    }
+]);
+
+
+
 //ROTA LISTA HISTORICO BOT
 $obRouter->get('/adm/input/{lista}/resultados/', [
     'middlewares' => [
@@ -99,6 +126,18 @@ $obRouter->get('/adm/input/{lista}/resultados/', [
     ],
     function($request, $lista){
         return new Response(200, Input\Bot::getListInputResults($request, $lista));
+    }
+]);
+
+//ROTA DE EDIÇÃO DE UMA EMPRESA
+$obRouter->get('/adm/input/finder/{id}/edit', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-admin',
+    ],
+    function($request, $id){
+        return new Response(200, Input\Bot::editStatusFinder($request, 'finder', $id));
     }
 ]);
 
