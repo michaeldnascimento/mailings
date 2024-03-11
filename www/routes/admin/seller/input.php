@@ -88,7 +88,7 @@ $obRouter->get('/vendedor/input/finder', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListFinder::getListInputFinder($request, 'finder'));
@@ -101,7 +101,7 @@ $obRouter->post('/vendedor/input/finder/', [
         //'cache'
         'required-admin-login',
         'required-nivel-seller',
-        //'required-nivel-seller-list'
+        'required-nivel-seller-list'
     ],
     function($request){
         return new Response(200, ListFinder::setListInput($request, 'finder'));

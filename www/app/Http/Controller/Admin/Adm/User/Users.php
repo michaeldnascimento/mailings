@@ -259,6 +259,7 @@ class Users extends Page {
             'status_input_solarbot1' => in_array('solarbot1', $listInput) ? 'checked' : '',
             'status_input_solarbot2' => in_array('solarbot2', $listInput) ? 'checked' : '',
             'status_input_solarbot3' => in_array('solarbot3', $listInput) ? 'checked' : '',
+            'status_input_finder'    => in_array('finder', $listInput) ? 'checked' : '',
 
             'status_algar_base' => in_array('base', $listAlgar) ? 'checked' : '',
             'status_algar_cancelado' => in_array('cancelado', $listAlgar) ? 'checked' : '',
@@ -330,25 +331,25 @@ class Users extends Page {
         }
 
         //ATUALIZA A INSTANCIA
-        $obUser->name = $postVars['name'] ?? $obUser->name;
-        $obUser->email = $postVars['email'] ?? $obUser->email;
-        $obUser->company = 1;
-        $obUser->status = $postVars['status_user'] ?? $obUser->status;
-        $obUser->cep = $postVars['cep'] ?? $obUser->cep;
-        $obUser->client = $postVars['client'] ?? $obUser->client;
-        $obUser->solar = $postVars['solar'] ?? $obUser->solar;
-        $obUser->call_client = $postVars['call_client'] ?? $obUser->call_client;
-        $obUser->nivel = $postVars['nivel'] ?? $obUser->nivel;
-        $obUser->companies = $postVars['companies'] ?? $obUser->companies;
-        $obUser->team = $postVars['team'] ?? $obUser->team;
-        $obUser->input = implode(", ", array_keys($postVars['listInput'])) ?? null;
-        $obUser->algar = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
-        $obUser->net = implode(", ", array_keys($postVars['listNet'])) ?? null;
-        $obUser->claro = implode(", ", array_keys($postVars['listClaro'])) ?? null;
-        $obUser->americanet = implode(", ", array_keys($postVars['listAmericanet'])) ?? null;
-        $obUser->vero = implode(", ", array_keys($postVars['listVero'])) ?? null;
-        $obUser->desktop_get = implode(", ", array_keys($postVars['listDesktop']['get'])) ?? null;
-        $obUser->desktop_sis = implode(", ", array_keys($postVars['listDesktop']['sis'])) ?? null;
+        $obUser->name                = $postVars['name'] ?? $obUser->name;
+        $obUser->email               = $postVars['email'] ?? $obUser->email;
+        $obUser->company             = 1;
+        $obUser->status              = $postVars['status_user'] ?? $obUser->status;
+        $obUser->cep                 = $postVars['cep'] ?? $obUser->cep;
+        $obUser->client              = $postVars['client'] ?? $obUser->client;
+        $obUser->solar               = $postVars['solar'] ?? $obUser->solar;
+        $obUser->call_client         = $postVars['call_client'] ?? $obUser->call_client;
+        $obUser->nivel               = $postVars['nivel'] ?? $obUser->nivel;
+        $obUser->companies           = $postVars['companies'] ?? $obUser->companies;
+        $obUser->team                = $postVars['team'] ?? $obUser->team;
+        $obUser->input               = implode(", ", array_keys($postVars['listInput'])) ?? null;
+        $obUser->algar               = implode(", ", array_keys($postVars['listAlgar'])) ?? null;
+        $obUser->net                 = implode(", ", array_keys($postVars['listNet'])) ?? null;
+        $obUser->claro               = implode(", ", array_keys($postVars['listClaro'])) ?? null;
+        $obUser->americanet          = implode(", ", array_keys($postVars['listAmericanet'])) ?? null;
+        $obUser->vero                = implode(", ", array_keys($postVars['listVero'])) ?? null;
+        $obUser->desktop_get         = implode(", ", array_keys($postVars['listDesktop']['get'])) ?? null;
+        $obUser->desktop_sis         = implode(", ", array_keys($postVars['listDesktop']['sis'])) ?? null;
         $obUser->desktop_netbarretos = implode(", ", array_keys($postVars['listDesktop']['netbarretos'])) ?? null;
         $obUser->atualizar();
 

@@ -137,6 +137,7 @@ class Page {
             $valueDisplayInputSolarbot1 = in_array('solarbot1', $listInput) ? 'block' : 'none';
             $valueDisplayInputSolarbot2 = in_array('solarbot2', $listInput) ? 'block' : 'none';
             $valueDisplayInputSolarbot3 = in_array('solarbot3', $listInput) ? 'block' : 'none';
+            $valueDisplayInputFinder    = in_array('finder', $listInput) ? 'block' : 'none';
         }else{
 
             //SE NÃO ESTIVER LISTAS INPUT LIBERADAS
@@ -337,6 +338,7 @@ class Page {
             'display_seller_input_solarbot1' => "style=display:$valueDisplayInputSolarbot1",
             'display_seller_input_solarbot2' => "style=display:$valueDisplayInputSolarbot2",
             'display_seller_input_solarbot3' => "style=display:$valueDisplayInputSolarbot3",
+            'display_seller_input_finder'    => "style=display:$valueDisplayInputFinder",
 
             'display_seller_algar' => "style=display:$valueDisplayAlgar",
             'display_seller_algar_base' => "style=display:$valueDisplayAlgarBase",
