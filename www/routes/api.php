@@ -14,3 +14,6 @@ include __DIR__. '/api/v1/client.php';
 
 //INCLUI ROTAS DE MAILING
 include __DIR__. '/api/v1/mailing.php';
+
+//INCLUI ROTAS DE MAILING
+include __DIR__. '/api/v1/finder.php';
