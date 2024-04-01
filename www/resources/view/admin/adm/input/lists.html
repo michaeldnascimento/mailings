@@ -1,66 +1,118 @@
 {{status}}
 <section class="section">
-        <div class="card">
+    <div class="card">
 
-            <section class="bootstrap-select">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title"></h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <form method="post" action="{{URL}}/adm/input/mailings" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <h6>Lista Mailings</h6>
-                                            <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="inputList" required>
-                                                    <option value="">Selecione a lista</option>
-                                                    <option value="solarbase">Solar base</option>
-                                                    <option value="solarbot1">Solar Bot 1</option>
-                                                    <option value="solarbot2">Solar Bot 2</option>
-                                                    <option value="solarbot3">Solar Bot 3</option>
-                                                </select>
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <h6>Nome Mailing</h6>
-                                            <fieldset class="form-group">
-                                                <div class="mb-3">
-                                                    <input class="form-control" type="text" name="nomeMailing" required>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-md-12 mb-4">
-                                            <h6>.CSV</h6>
-                                            <fieldset class="form-group">
-                                                <div class="mb-3">
-                                                    <input type="hidden" name="MAX_FILE_SIZE" value="300000">
-                                                    <input class="form-control" type="file" name="inputCSV" required>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-md-12 mb-4">
-                                            <h6>Modelos CSV: </h6> 
-                                            <li><a href="/resources/docs/excel/modelos/solar_bot.csv">Solar Bot</a></li>
-                                            <li><a href="/resources/docs/excel/modelos/solar_base.csv">Solar Base</a></li>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-2 mb-2">Enviar</button>
-                                            <button type="reset" class="btn btn-light-secondary me-2 mb-2">Limpar</button>
-                                        </div>
+        <section class="bootstrap-select">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title"></h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form method="post" action="{{URL}}/adm/input/mailings" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <h6>Lista Mailings</h6>
+                                        <fieldset class="form-group">
+                                            <select class="form-select" id="basicSelect" name="inputList" required>
+                                                <option value="">Selecione a lista</option>
+                                                <option value="solarbase">Solar base</option>
+                                                <option value="solarbot1">Solar Bot 1</option>
+                                                <option value="solarbot2">Solar Bot 2</option>
+                                                <option value="solarbot3">Solar Bot 3</option>
+                                                <option value="claro">Claro</option>
+                                                <option value="net">NET</option>
+                                                <option value="algar">Algar</option>
+                                            </select>
+                                        </fieldset>
                                     </div>
-                                    </form>
+                                    <!-- Segundo Select -->
+                                    <div class="col-md-6 mb-4">
+                                        <h6>Status</h6>
+                                        <fieldset class="form-group">
+                                            <select class="form-select" id="statusSelect" name="list" required disabled>
+                                                <option value="">Selecione a Lista</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <h6>Nome Mailing</h6>
+                                        <fieldset class="form-group">
+                                            <div class="mb-3">
+                                                <input class="form-control" type="text" name="nomeMailing" required>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12 mb-4">
+                                        <h6>.CSV</h6>
+                                        <fieldset class="form-group">
+                                            <div class="mb-3">
+                                                <input type="hidden" name="MAX_FILE_SIZE" value="300000">
+                                                <input class="form-control" type="file" name="inputCSV" required>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12 mb-4">
+                                        <h6>Modelos CSV: </h6>
+                                        <li><a href="/resources/docs/excel/modelos/solar_bot.csv">Solar Bot</a></li>
+                                        <li><a href="/resources/docs/excel/modelos/solar_base.csv">Solar Base</a></li>
+                                        <li><a href="/resources/docs/excel/modelos/mailing.csv">Mailing Claro/Net/Algar</a></li>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-2 mb-2">Enviar</button>
+                                        <button type="reset" class="btn btn-light-secondary me-2 mb-2">Limpar</button>
+                                    </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- Bootstrap Select end -->
+            </div>
+        </section>
+        <!-- Bootstrap Select end -->
 
-        </div>
-    </section>
-    <!-- Input with Icons end -->
+    </div>
+</section>
+<!-- Input with Icons end -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var listaSelect = document.getElementById('basicSelect');
+        var statusSelect = document.getElementById('statusSelect');
+
+        var statusOptions = {
+            '': [],
+            'claro': ['Cancelado', 'Desabilitado', 'Proposta', 'Pendente Instalação'],
+            'net': ['Cancelado', 'Desabilitado', 'Proposta', 'Pendente Instalação'],
+            'algar': ['Base', 'Cancelado', 'Proposta', 'Pendente Instalação'],
+            'americanet': ['Base', 'Cancelados', 'Pedidos'],
+            'vero': ['Base', 'Cancelados', 'Pedidos'],
+        };
+
+        function normalizeValue(text) {
+            return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+        }
+
+        listaSelect.addEventListener('change', function() {
+            var selectedOption = listaSelect.value;
+            var options = statusOptions[selectedOption];
+
+            statusSelect.innerHTML = '<option value="">Selecione o status</option>'; // Limpa o select
+            if (options) {
+                options.forEach(function(option) {
+                    var optionElement = document.createElement('option');
+                    optionElement.value = normalizeValue(option); // Usando função de normalização para o valor
+                    optionElement.textContent = option;
+                    statusSelect.appendChild(optionElement);
+                });
+                statusSelect.disabled = false; // Habilita o select de status se houver opções
+            } else {
+                statusSelect.disabled = true; // Desabilita o select se não houver opções
+            }
+        });
+    });
+</script>
+

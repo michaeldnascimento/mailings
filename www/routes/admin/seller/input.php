@@ -108,6 +108,19 @@ $obRouter->post('/vendedor/input/finder/', [
     }
 ]);
 
+//ROTA INPUT MAILING
+$obRouter->post('/vendedor/input/finder/?{list}', [
+    'middlewares' => [
+        //'cache'
+        'required-admin-login',
+        'required-nivel-seller',
+        'required-nivel-seller-list'
+    ],
+    function($request, $list){
+        return new Response(200, ListFinder::setListInput($request, $list));
+    }
+]);
+
 //ROTA LISTA HISTORICO INPUT
 $obRouter->get('/vendedor/input/finder/resultados/', [
     'middlewares' => [

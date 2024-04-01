@@ -390,12 +390,19 @@ class Mailing extends Api{
         $obClaro->status_lista = 1;
         $obClaro->cadastrar();
 
-        //RETORNA OS DETALHES DO MAILING CADASTRADO
+        if ($obClaro->id != ''){
+            //RETORNA OS DETALHES DO MAILING CADASTRADO
+            return [
+                'id'       => (int)$obClaro->id,
+                'nome_cliente'  => $obClaro->nome_cliente,
+                'cpf'      => $obClaro->cpf
+            ];
+        }
+
         return [
-            'id'       => (int)$obClaro->id,
-            'nome_cliente'  => $obClaro->nome_cliente,
-            'cpf'      => $obClaro->cpf
+            'mensagem' => 'erro ao salvar'
         ];
+
     }
 
     /**

@@ -335,10 +335,10 @@ class ListFinder extends Page {
             $finder = EntityFinder::getFinderByCpfCnpj($cpf_cnpj);
         }
 
-        //echo "<pre>";
-        //print_r($postVars);
-        //print_r($finder);
-        //exit();
+        echo "<pre>";
+        print_r($postVars);
+        print_r($finder);
+        exit();
 
         if (!empty($finder)){
             //ATUALIZA A STATUS  MAILING

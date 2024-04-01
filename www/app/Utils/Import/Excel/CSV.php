@@ -5,6 +5,11 @@ namespace App\Utils\Import\Excel;
 use App\Http\Request;
 use App\Model\Entity\Mailing as EntityMailing;
 use App\Model\Entity\MailingInput as EntityInput;
+use App\Model\Entity\MailingClaro as EntityClaro;
+use App\Model\Entity\MailingNet as EntityNet;
+use App\Model\Entity\MailingVero as EntityVero;
+use App\Model\Entity\MailingAlgar as EntityAlgar;
+use App\Model\Entity\MailingAmericanet as EntityAmericanet;
 
 class CSV {
 
@@ -56,11 +61,12 @@ class CSV {
      * @param array $inputCSV
      * @param string $nome_mailing
      * @param string $lista
+     * @param string $listaMaling
      * @param string $dir
      * @param int $id_mailing
      * @return bool
      */
-    public function importCSVSolarBase(Request $request, array $inputCSV, string $nome_mailing, string $lista, string $dir, int $id_mailing): bool
+    public function importCSVBase(Request $request, array $inputCSV, string $nome_mailing, string $lista, string $listaMaling, string $dir, int $id_mailing): bool
     {
         if (!self::moveFileToCsvFolder($inputCSV, $dir)) {
             $request->getRouter()->redirect('/adm/input/mailings?status=erroMove');
@@ -73,7 +79,7 @@ class CSV {
             return false;
         }
 
-        self::importCsvData($arquivo, $nome_mailing, $lista, $id_mailing);
+        self::importCsvData($arquivo, $nome_mailing, $lista, $listaMaling, $id_mailing);
 
         fclose($arquivo);
         return true;
@@ -84,45 +90,6 @@ class CSV {
         return move_uploaded_file($inputCSV["tmp_name"], $dir);
     }
 
-    private function importCsvData($arquivo, string $nome_mailing, string $lista, int $id_mailing): void
-    {
-        $first = true;
-        while (($linha = fgetcsv($arquivo, 0, ",")) !== false) {
-            if ($first) {
-                $first = false;
-                continue;
-            }
-
-            self::processCsvLine($linha, $nome_mailing, $lista, $id_mailing);
-        }
-    }
-
-    private function processCsvLine(array $linha, string $nome_mailing, string $lista, int $id_mailing): void
-    {
-        $entityInput = new EntityInput();
-
-        foreach ($linha as $index => $valor) {
-            $colunaNome = self::getColumnName($index);
-            if ($colunaNome === 'unknown') {
-                continue;
-            }
-
-            $campoEntidade = self::getEntityField($colunaNome);
-            $entityInput->{$campoEntidade} = $valor;
-        }
-
-        $entityInput->lista = $lista;
-        $entityInput->status_lista = 2;
-        $entityInput->nome_mailing = $nome_mailing;
-        $entityInput->id_mailing = $id_mailing;
-        $entityInput->cadastrar();
-    }
-
-    private function getColumnName(int $index): string
-    {
-        $linhaCabecalho = array_keys(self::COLUMN_MAPPING);
-        return isset($linhaCabecalho[$index]) ? $linhaCabecalho[$index] : 'unknown';
-    }
 
     private function getEntityField(string $colunaNome): string
     {
@@ -130,6 +97,59 @@ class CSV {
             return self::COLUMN_MAPPING[$colunaNome];
         }
         return 'campo_desconhecido';
+    }
+
+    private function importCsvData($arquivo, string $nome_mailing, string $lista, string $listaMaling, int $id_mailing): void
+    {
+        // Ler o cabeçalho do arquivo
+        $cabecalho = fgetcsv($arquivo, 0, ",");
+        // Cria um mapeamento de nome da coluna para índice
+        $mapeamentoColunas = array_flip($cabecalho);
+
+        switch ($lista) {
+            case 'claro':
+                $entity = new EntityClaro();
+                break;
+            case 'net':
+                $entity = new EntityNet();
+                break;
+            case 'algar':
+                $entity = new EntityAlgar();
+                break;
+            case 'americanet':
+                $entity = new EntityAmericanet();
+                break;
+            case 'vero':
+                $entity = new EntityVero();
+                break;
+            default:
+                $entity = new EntityInput();
+        }
+
+        while (($linha = fgetcsv($arquivo, 0, ",")) !== false) {
+
+            // Mapeia cada valor para a propriedade correspondente
+            foreach ($mapeamentoColunas as $nomeColuna => $index) {
+                $campoEntidade = self::getEntityField($nomeColuna);
+                if ($campoEntidade !== 'campo_desconhecido' && isset($linha[$index])) {
+                    $entity->{$campoEntidade} = $linha[$index];
+                }
+            }
+
+            if (!empty($listaMaling)) {
+                $lista = $listaMaling;
+                $status =  1;
+            }else{
+                $status =  2;
+            }
+
+            // Define propriedades adicionais
+            $entity->lista = $lista;
+            $entity->status_lista = $status;
+            $entity->nome_mailing = $nome_mailing;
+            $entity->id_mailing = $id_mailing;
+            $entity->cadastrar();
+        }
     }
 
 
@@ -252,7 +272,7 @@ class CSV {
      * @param string $lista
      * @return string|bool
      */
-    public function importCSVMailings(Request $request, array $inputCSV, string $nome_mailing, string $lista): bool
+    public function importCSVMailings(Request $request, array $inputCSV, string $nome_mailing, string $list, string $listMailing): bool
     {
 
         //VERIFICA SE EXISTE O ARQUIVO
@@ -277,16 +297,36 @@ class CSV {
         $id_mailing = crc32(date('d-m-Y_H-i-s'));
 
 
-        if($lista == 'lista1' OR $lista == 'lista2'){
-            self::importCSVMailing($request, $inputCSV, $nome_mailing, $lista, $dir, $id_mailing);
+        if($list == 'lista1' OR $list == 'lista2'){
+            self::importCSVMailing($request, $inputCSV, $nome_mailing, $list, $dir, $id_mailing);
         }
 
-        if($lista == 'solarbase'){
-            self::importCSVSolarBase($request, $inputCSV, $nome_mailing, $lista, $dir, $id_mailing);
+        if($list == 'solarbase'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing = '', $dir, $id_mailing);
         }
         
-        if($lista == 'solarbot1' OR $lista == 'solarbot2' OR $lista == 'solarbot3'){
-            self::importCSVSolarBot($request, $inputCSV, $nome_mailing, $lista, $dir, $id_mailing);
+        if($list == 'solarbot1' OR $list == 'solarbot2' OR $list == 'solarbot3'){
+            self::importCSVSolarBot($request, $inputCSV, $nome_mailing, $list, $dir, $id_mailing);
+        }
+
+        if($list == 'claro'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing, $dir, $id_mailing);
+        }
+
+        if($list == 'net'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing, $dir, $id_mailing);
+        }
+
+        if($list == 'algar'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing,  $dir, $id_mailing);
+        }
+
+        if($list == 'americanet'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing, $dir, $id_mailing);
+        }
+
+        if($list == 'vero'){
+            self::importCSVBase($request, $inputCSV, $nome_mailing, $list, $listMailing, $dir, $id_mailing);
         }
 
 
