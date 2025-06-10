@@ -56,25 +56,25 @@ class  Dashboard extends Page {
             case 'routeInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota!');
                 break;
-            case 'companyInvalid';
+            case 'companyInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota da empresa!');
                 break;
-            case 'cepInvalid';
+            case 'cepInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CEP!');
                 break;
-            case 'clientInvalid';
+            case 'clientInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota CLIENTE!');
                 break;
-            case 'solarInvalid';
+            case 'solarInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota SOLAR!');
                 break;
-            case 'callInvalid';
+            case 'callInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa rota de CHAMADOS!');
                 break;
-            case 'listInvalid';
+            case 'listInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar essa lista mailing');
                 break;
-            case 'mailingInvalid';
+            case 'mailingInvalid':
                 return Alert::getError('Erro :(','Não é possivel acessar esse mailing');
                 break;
         }
