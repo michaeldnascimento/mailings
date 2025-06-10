@@ -78,13 +78,13 @@ class Response{
 
         //IMPRIME O CONTEUDO
         switch ($this->contentType) {
-            case 'text/html';
+            case 'text/html':
                 echo $this->content;
             exit;
-            case 'text/csv';
+            case 'text/csv':
                 echo $this->content;
             exit;
-            case 'application/json';
+            case 'application/json':
                 echo json_encode($this->content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 exit;
         }

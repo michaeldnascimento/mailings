@@ -27,13 +27,13 @@ class RequireNivelSellerList {
         //CONDIÇÃO PARA LISTAS DESKTOP
         if ($mailing === 'desktop'){
             switch ($arrayUri[2]) {
-                case 'get';
+                case 'get':
                 $mailing = 'desktop_get';
                 break;
-                case 'sis';
+                case 'sis':
                 $mailing = 'desktop_sis';
                 break;
-                case 'netbarretos';
+                case 'netbarretos':
                 $mailing = 'desktop_netbarretos';
                 break;
             }
